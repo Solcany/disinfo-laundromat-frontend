@@ -7,38 +7,9 @@
 	import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
 	import TextArea from '$components/TextArea.svelte';
 	import { Label, Select } from 'bits-ui';
-	import type { LabeledValue } from '$types';
-
-	const dropdown_dummy_region: LabeledValue[] = [
-		{ label: 'US', value: 'US' },
-		{ label: 'NL', value: 'NL' }
-	];
-
-	const dropdown_dummy_language: LabeledValue[] = [
-		{ label: 'english', value: 'english' },
-		{ label: 'dutch', value: 'dutch' }
-	];
-
-	const dropdown_dummy_browser: LabeledValue[] = [
-		{ label: 'all browsers', value: 'all'},
-		{ label: 'Google', value: 'Google' },
-		{ label: 'Bing', value: 'Bing' }
-	];
-
-	interface FormData {
-		region: LabeledValue;
-		language: LabeledValue;
-		browser: LabeledValue;
-		content: string;
-		[index: string]: string | LabeledValue;
-	}
-
-	let formData: FormData = {
-		region: dropdown_dummy_region[0],
-		language: dropdown_dummy_language[0],
-		browser: dropdown_dummy_browser[0],
-		content: '',
-	};
+	import type { FormData, LabeledValue } from '$types';
+	import {region_data, language_data, browser_data} from '$dummy_data';	
+  import { formData } from '$stores/input.ts';
 
 	function handleSubmit() {
 		console.log(formData);
@@ -77,10 +48,10 @@
 							<Label.Root for="region">region</Label.Root>
 							<DropdownSelect
 								name="region"
-								items={dropdown_dummy_region}
+								items={region_data}
 								bind:value={formData.region}
 								required>
-								{#each dropdown_dummy_region as item}
+								{#each region_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
 							</DropdownSelect>
@@ -91,7 +62,7 @@
 								bind:value={formData.language}
 								required
 							>
-								{#each dropdown_dummy_language as item}
+								{#each language_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
 							</DropdownSelect>
@@ -103,7 +74,7 @@
 								multiple={true}
 								required
 							>
-								{#each dropdown_dummy_browser as item}
+								{#each browser_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
 							</DropdownSelect>
