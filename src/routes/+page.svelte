@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte'; 
+	import { get } from 'svelte/store'; 
 	import TabsRoot from '$components/TabsRoot.svelte';
 	import TabsList from '$components/TabsList.svelte';
 	import TabsTrigger from '$components/TabsTrigger.svelte';
@@ -9,12 +11,24 @@
 	import { Label, Select } from 'bits-ui';
 	import type { FormData, LabeledValue } from '$types';
 	import {region_data, language_data, browser_data} from '$dummy_data';	
-  import { formData } from '$stores/input.ts';
+  import { formDataStore } from '$stores/form.ts';
+
+
+	let formData : FormData;
+
+	const unsubscribe = formDataStore.subscribe((data : FormData) => formData = data);
 
 	function handleSubmit() {
-		console.log(formData);
-		
+		formDataStore.set(formData);	
 	}
+
+	onMount(()=> {
+		return() => {
+			unsubscribe();
+		};
+	});
+
+
 </script>
 
 <main class="w-100">
