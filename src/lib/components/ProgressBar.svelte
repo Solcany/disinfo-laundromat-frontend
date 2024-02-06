@@ -2,15 +2,28 @@
   import { onMount } from 'svelte';
   import { Progress } from 'bits-ui';
 	import { cn } from '$utils';
+	import { loadingStore } from '$stores/loading.ts'; 
 
 	let value = 0;
 
 	let className: string = '';
 	export {className as class};
+
+
+	function handleLoadingChange(isLoading : boolean) {
+		if(isLoading) {
+			console.log("something is loading!");
+		}
+	}
+
+	let unsubscribe = loadingStore.subscribe(handleLoadingChange);
  
   onMount(() => {
     const timer = setTimeout(() => { value = 100; } , 2000);
-    return () => clearTimeout(timer);
+    return () => {
+			clearTimeout(timer);
+			unsubscribe();
+		};
   });
 </script>
  
