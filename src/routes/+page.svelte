@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
-	import { get } from 'svelte/store'; 
+	import { goto } from '$app/navigation';
+	import { get } from 'svelte/store';
 	import TabsRoot from '$components/TabsRoot.svelte';
 	import TabsList from '$components/TabsList.svelte';
 	import TabsTrigger from '$components/TabsTrigger.svelte';
@@ -11,31 +11,28 @@
 	import TextArea from '$components/TextArea.svelte';
 	import { Label } from 'bits-ui';
 	import type { FormData, LabeledValue } from '$types';
-	import {region_data, language_data, browser_data} from '$dummy_data';	
-  import { formDataStore } from '$stores/form.ts';
+	import { region_data, language_data, browser_data } from '$dummy_data';
+	import { formDataStore } from '$stores/form.ts';
 	import { loadingStore } from '$stores/loading.ts';
 
+	let formData: FormData;
 
-	let formData : FormData;
-
-	const unsubscribeFormDataStore = formDataStore.subscribe((data : FormData) => formData = data);
+	const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
 
 	function handleSubmit() {
 		formDataStore.set(formData);
 		loadingStore.set(true);
 		setTimeout(() => {
-			goto("/search");
+			goto('/search');
 			loadingStore.set(false);
 		}, 1000);
 	}
 
-	onMount(()=> {
-		return() => {
+	onMount(() => {
+		return () => {
 			unsubscribeFormDataStore();
 		};
 	});
-
-
 </script>
 
 <main class="w-100">
@@ -56,12 +53,9 @@
 						</p>
 						<form on:submit|preventDefault={handleSubmit}>
 							<div class="flex">
-								<div> 
+								<div>
 									<Label.Root for="content">Content</Label.Root>
-									<TextArea 
-										name="content" 
-										bind:value={formData.content}
-										required/>
+									<TextArea name="content" bind:value={formData.content} required />
 								</div>
 								<button type="submit">Submit</button>
 							</div>
@@ -70,28 +64,20 @@
 								name="region"
 								items={region_data}
 								bind:value={formData.region}
-								required>
+								required
+							>
 								{#each region_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
 							</DropdownSelect>
 
-							<DropdownSelect
-								name="language"
-								bind:value={formData.language}
-								required
-							>
+							<DropdownSelect name="language" bind:value={formData.language} required>
 								{#each language_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
 							</DropdownSelect>
 
-							<DropdownSelect
-								name="browser"
-								bind:value={formData.browser}
-								multiple={true}
-								required
-							>
+							<DropdownSelect name="browser" bind:value={formData.browser} multiple={true} required>
 								{#each browser_data as item}
 									<DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
 								{/each}
@@ -100,7 +86,7 @@
 							<form></form>
 						</form>
 						<a href="search"> advanced search </a>
-						</TabsContent>
+					</TabsContent>
 					<TabsContent value="metadata similarity">test 2 test 2</TabsContent>
 				</TabsRoot>
 			</div>

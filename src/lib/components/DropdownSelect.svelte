@@ -1,45 +1,44 @@
 <!-- Wrapper component based on https://www.bits-ui.com/docs/components/select -->
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
 	import { Select, Label, type Selected, type SelectProps } from 'bits-ui';
-	import type { LabeledValue } from "$types";
+	import type { LabeledValue } from '$types';
 	export let name: string;
 	export let value: LabeledValue;
 	let className: string | undefined = undefined;
 	export { className as class };
 
-//	let isOpen = false;
-	
-//	function handleLabelClick(_: MouseEvent) {
-//		if(!isOpen) {
-//			isOpen = true;
-//		}
-//	}
-//
-//	function handleOpenChange(open: boolean) {
-//		isOpen = open;
-//	}
+	//	let isOpen = false;
 
-//	function handleSelectedChange(value: Selected<unknown> | undefined) {
-//		if (value  && onSelectedChange) {
-//			if (Array.isArray(value)) {
-//				let str = value
-//					.filter((v: Selected<unknown>) => v.value)
-//					.map((v: Selected<unknown>) => v.value)
-//					.join(',');
-//				onSelectedChange(str, name);
-//			} else if (value.value) {
-//				onSelectedChange(value.value as string, name);
-//			} else {
-//				console.warn('Dropdown value(s) are undefined');
-//			}
-//		}
-//	}
+	//	function handleLabelClick(_: MouseEvent) {
+	//		if(!isOpen) {
+	//			isOpen = true;
+	//		}
+	//	}
+	//
+	//	function handleOpenChange(open: boolean) {
+	//		isOpen = open;
+	//	}
 
+	//	function handleSelectedChange(value: Selected<unknown> | undefined) {
+	//		if (value  && onSelectedChange) {
+	//			if (Array.isArray(value)) {
+	//				let str = value
+	//					.filter((v: Selected<unknown>) => v.value)
+	//					.map((v: Selected<unknown>) => v.value)
+	//					.join(',');
+	//				onSelectedChange(str, name);
+	//			} else if (value.value) {
+	//				onSelectedChange(value.value as string, name);
+	//			} else {
+	//				console.warn('Dropdown value(s) are undefined');
+	//			}
+	//		}
+	//	}
 </script>
 
 <div class={className}>
-	<Label.Root for={name}> {name}</Label.Root>
+	<Label.Root for={name}>{name}</Label.Root>
 	<Select.Root {name} bind:selected={value} {...$$restProps}>
 		<Select.Trigger
 			class="h-input border-border-input bg-background placeholder:text-foreground-alt/50 focus:ring-foreground focus:ring-offset-background inline-flex items-center border px-[11px]  text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"

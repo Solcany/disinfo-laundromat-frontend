@@ -19,7 +19,7 @@ const config = {
 			$types: 'src/lib/types.ts',
 			$config: 'src/lib/config.ts',
 			$stores: 'src/lib/stores',
-			$dummy_data: 'src/lib/dummy_data.ts',
+			$dummy_data: 'src/lib/dummy_data.ts'
 		}
 	}
 };
