@@ -4,9 +4,9 @@
 	import { cn } from '$utils';
 	import { loadingStore } from '$stores/loading.ts';
 
-	let progressValue = 0;
+	let progressValue = 100; // 0;
 	let isLoading = false;
-	let timer: number;
+	//let timer: number;
 
 	let className: string = '';
 	export { className as class };
@@ -14,19 +14,19 @@
 	let unsubscribe = loadingStore.subscribe((value: boolean) => {
 		if (value) {
 			isLoading = true;
-			timer = setTimeout(() => {
-				console.log('timeout');
-				progressValue = 100;
-			}, 1000);
+			//timer = setTimeout(() => {
+			//	console.log('timeout');
+			//	progressValue = 100;
+			//}, 1000);
 		} else {
 			isLoading = false;
-			clearTimeout(timer);
+			//clearTimeout(timer);
 		}
 	});
 
 	onMount(() => {
 		return () => {
-			clearTimeout(timer);
+			//clearTimeout(timer);
 			unsubscribe();
 		};
 	});
