@@ -8,7 +8,7 @@
 	import DropdownSelect from '$components/DropdownSelect.svelte';
 	import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
 	import TextArea from '$components/TextArea.svelte';
-	import { Label, Select } from 'bits-ui';
+	import { Label } from 'bits-ui';
 	import type { FormData, LabeledValue } from '$types';
 	import {region_data, language_data, browser_data} from '$dummy_data';	
   import { formDataStore } from '$stores/form.ts';
@@ -59,7 +59,6 @@
 								<button type="submit">Submit</button>
 							</div>
 
-							<Label.Root for="region">region</Label.Root>
 							<DropdownSelect
 								name="region"
 								items={region_data}
@@ -70,7 +69,6 @@
 								{/each}
 							</DropdownSelect>
 
-							<Label.Root for="language">language</Label.Root>
 							<DropdownSelect
 								name="language"
 								bind:value={formData.language}
@@ -81,7 +79,6 @@
 								{/each}
 							</DropdownSelect>
 
-							<Label.Root for="browser">browser</Label.Root>
 							<DropdownSelect
 								name="browser"
 								bind:value={formData.browser}
