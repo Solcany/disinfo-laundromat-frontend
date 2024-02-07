@@ -4,36 +4,43 @@
 	import { cn } from '$utils';
 	import { loadingStore } from '$stores/loading.ts'; 
 
-	let value = 0;
+	let progressValue = 0;
+	let isLoading = false;
+	let timer : number;
 
 	let className: string = '';
 	export {className as class};
 
-
-	function handleLoadingChange(isLoading : boolean) {
-		if(isLoading) {
-			console.log("something is loading!");
-		}
-	}
-
-	let unsubscribe = loadingStore.subscribe(handleLoadingChange);
+	let unsubscribe = loadingStore.subscribe((value : boolean) => {
+		if(value) {
+				isLoading = true;
+			  timer = setTimeout(() => {
+					console.log("timeout");
+					progressValue = 100;
+				}, 1000);
+			} else {
+				isLoading = false;
+				clearTimeout(timer);
+			}
+	});
  
   onMount(() => {
-    const timer = setTimeout(() => { value = 100; } , 2000);
     return () => {
 			clearTimeout(timer);
 			unsubscribe();
 		};
   });
 </script>
- 
+
+{#if isLoading}
 <Progress.Root
-  {value}
+	value={progressValue} 
   max={100}
   class={cn("relative h-[15px] w-screen overflow-hidden shadow-mini-inset", className)}
 >
   <div
-    class="absolute h-full w-full flex-1 bg-blue-500 shadow-mini-inset transition-all duration-500 ease-linear"
-    style={`transform: translateX(-${100 - (100 * (value ?? 0)) / (100 ?? 1)}%)`}
+    class="absolute h-full w-full flex-1 bg-blue-500 shadow-mini-inset transition-all duration-1000 ease-linear"
+    style={`transform: translateX(-${100 - (100 * (progressValue ?? 0)) / (100 ?? 1)}%)`}
   />
 </Progress.Root>
+{/if}

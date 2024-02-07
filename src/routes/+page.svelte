@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte'; 
+	import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
 	import { get } from 'svelte/store'; 
 	import TabsRoot from '$components/TabsRoot.svelte';
 	import TabsList from '$components/TabsList.svelte';
@@ -12,19 +13,25 @@
 	import type { FormData, LabeledValue } from '$types';
 	import {region_data, language_data, browser_data} from '$dummy_data';	
   import { formDataStore } from '$stores/form.ts';
+	import { loadingStore } from '$stores/loading.ts';
 
 
 	let formData : FormData;
 
-	const unsubscribe = formDataStore.subscribe((data : FormData) => formData = data);
+	const unsubscribeFormDataStore = formDataStore.subscribe((data : FormData) => formData = data);
 
 	function handleSubmit() {
-		formDataStore.set(formData);	
+		formDataStore.set(formData);
+		loadingStore.set(true);
+		setTimeout(() => {
+			goto("/search");
+			loadingStore.set(false);
+		}, 1000);
 	}
 
 	onMount(()=> {
 		return() => {
-			unsubscribe();
+			unsubscribeFormDataStore();
 		};
 	});
 
