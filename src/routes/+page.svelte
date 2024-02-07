@@ -2,10 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { get } from 'svelte/store';
-	import TabsRoot from '$components/TabsRoot.svelte';
-	import TabsList from '$components/TabsList.svelte';
-	import TabsTrigger from '$components/TabsTrigger.svelte';
-	import TabsContent from '$components/TabsContent.svelte';
+	import Tabs from '$components/Tabs.svelte';
 	import DropdownSelect from '$components/DropdownSelect.svelte';
 	import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
 	import TextArea from '$components/TextArea.svelte';
@@ -40,12 +37,12 @@
 		<div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
 			<div class="bg-blue-300">Explanation</div>
 			<div class="">
-				<TabsRoot value="content similarity">
-					<TabsList>
-						<TabsTrigger value="content similarity">Content similarity</TabsTrigger>
-						<TabsTrigger value="metadata similarity">Metadata similarity</TabsTrigger>
-					</TabsList>
-					<TabsContent value="content similarity">
+				<Tabs value="content similarity" let:C>
+					<C.List>
+						<C.Trigger value="content similarity">Content similarity</C.Trigger>
+						<C.Trigger value="metadata similarity">Metadata similarity</C.Trigger>
+					</C.List>
+					<C.Content value="content similarity">
 						<p>
 							Search for similar content shared across the internet. Laundromat uses popular search
 							engines to find related websites. Discover networks of malicious actors/websites
@@ -86,9 +83,9 @@
 							<form></form>
 						</form>
 						<a href="search"> advanced search </a>
-					</TabsContent>
-					<TabsContent value="metadata similarity">test 2 test 2</TabsContent>
-				</TabsRoot>
+					</C.Content>
+					<C.Content value="metadata similarity">test 2 test 2</C.Content>
+				</Tabs>
 			</div>
 		</div>
 		<div>
