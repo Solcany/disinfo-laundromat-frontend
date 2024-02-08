@@ -20,7 +20,7 @@
 		formDataStore.set(formData);
 		loadingStore.set(true);
 		setTimeout(() => {
-			goto('/search');
+			goto('/content_search');
 			loadingStore.set(false);
 		}, 1000);
 	}

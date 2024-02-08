@@ -5,9 +5,9 @@
 	import ProgressBar from '$components/ProgressBar.svelte';
 </script>
 
-<div class="relative flex min-h-screen w-full flex-col bg-red-500 px-3 md:px-16">
-	<ProgressBar class="absolute left-0 top-0" />
-	<Header />
+<div class="flex relative min-h-screen w-full flex-col bg-red-500">
+	<ProgressBar class="absolute top-0 left-0"/>
+	<Header class="px-3 md:px-16"/>
 	<slot />
-	<Footer class="mt-auto" />
+	<Footer class="mt-auto px-3 md:px-16" />
 </div>
