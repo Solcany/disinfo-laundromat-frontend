@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Dialog } from 'bits-ui';
+  import { Dialog } from 'bits-ui';
 </script>
 
 <Dialog.Portal {...$$restProps}>
-	<slot />
+  <slot />
 </Dialog.Portal>
