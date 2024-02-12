@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
+  import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
 </script>
@@ -30,8 +31,7 @@
           <C.Content>
             <C.Title>Batch Download</C.Title>
             <C.Description class="text-foreground-alt text-sm">
-              Create and manage API keys. You can create multiple keys to organize your
-              applications.
+                text 
             </C.Description>
             <div class="flex flex-col items-start gap-1 pb-11 pt-7">
               <Label for="apiKey" class="text-sm font-medium">API Key</Label>
@@ -62,6 +62,16 @@
           </C.Content>
         </C.Portal>
       </Dialog>
+      
+      <h2> Refine Result </h2>
+
+      <Button onClick={() => {return 0}} ariaLabel="Open select metadata modal"> Filter Metadata </Button>
+      <div>
+        <Label for="filter_result"> Filter Result </Label>
+        <InputText name="filter result" id="filter_result"> </InputText>
+      </div>
+      <Button onClick={() => {return 0}} ariaLabel="Download result as csv"> Download CSV </Button>
+
     </section>
 
     <section class="h-[400px] w-full bg-pink-500">
