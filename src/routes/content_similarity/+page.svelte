@@ -76,6 +76,7 @@
 
     <section class="h-[400px] w-full bg-pink-500">
       <div>
+        <span> searched term: result </span>
         <!-- searched term bar-->
       </div>
 
