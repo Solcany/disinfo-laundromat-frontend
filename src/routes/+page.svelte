@@ -6,7 +6,7 @@
 	import DropdownSelect from '$components/DropdownSelect.svelte';
 	import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
 	import Label from '$components/Label.svelte';
-	import TextArea from '$components/TextArea.svelte';
+	import InputTextArea from '$components/InputTextArea.svelte';
 	import type { FormData, LabeledValue } from '$types';
 	import { region_data, language_data, browser_data } from '$dummy_data';
 	import { formDataStore } from '$stores/form.ts';
@@ -52,7 +52,7 @@
 							<div class="flex">
 								<div>
 									<Label for="content">Content</Label>
-									<TextArea name="content" bind:value={formData.content} required />
+									<InputTextArea name="content" bind:value={formData.content} required />
 								</div>
 								<button type="submit">Submit</button>
 							</div>
