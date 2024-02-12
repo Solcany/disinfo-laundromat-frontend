@@ -5,8 +5,8 @@
 	import Tabs from '$components/Tabs.svelte';
 	import DropdownSelect from '$components/DropdownSelect.svelte';
 	import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
+	import Label from '$components/Label.svelte';
 	import TextArea from '$components/TextArea.svelte';
-	import { Label } from 'bits-ui';
 	import type { FormData, LabeledValue } from '$types';
 	import { region_data, language_data, browser_data } from '$dummy_data';
 	import { formDataStore } from '$stores/form.ts';
@@ -51,7 +51,7 @@
 						<form on:submit|preventDefault={handleSubmit}>
 							<div class="flex">
 								<div>
-									<Label.Root for="content">Content</Label.Root>
+									<Label for="content">Content</Label>
 									<TextArea name="content" bind:value={formData.content} required />
 								</div>
 								<button type="submit">Submit</button>
@@ -89,7 +89,7 @@
 			</div>
 		</div>
 		<div>
-			<Label.Root for="use case list" class="bg-green-300">Label!</Label.Root>
+			<Label for="use case list" class="bg-green-300">Label!</Label>
 			<ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
 				<li class="bg-pink-500">test1</li>
 				<li class="bg-pink-500">test2</li>
