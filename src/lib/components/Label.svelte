@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Label } from 'bits-ui';
 	import { cn } from '$utils';
-	let className : string = '';
-	export { className as class } 
+	let className: string = '';
+	export { className as class };
 </script>
 
 <Label.Root class={cn('', className)} {...$$restProps}>
-	<slot/> 
+	<slot />
 </Label.Root>

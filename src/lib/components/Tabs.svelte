@@ -6,20 +6,19 @@
 	import Content from '$components/TabsContent.svelte';
 	import { cn } from '$utils';
 	let restProps = $$restProps as TabsProps;
-	let className: TabsProps['class'] = undefined;
+	let className: TabsProps['class'] = '';
 	export { className as class };
-	
+
 	const C = {
 		List,
 		Trigger,
 		Content
-	}
-
+	};
 </script>
 
 <Tabs.Root
 	{...restProps}
 	class={cn('w-100 h-100 border-muted shadow-card border bg-blue-500', className)}
 >
-	<slot {C}/>
+	<slot {C} />
 </Tabs.Root>
