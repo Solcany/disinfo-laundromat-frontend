@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from '$utils';
+  export let id: string;
   export let name: string;
   export let value: string = '';
   export let placeholder: string = '';
@@ -22,7 +23,8 @@
 </script>
 
 <textarea
-  id={name}
+  {id}
+  {name}
   bind:value
   {placeholder}
   {rows}

@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { Select, Label, type Selected, type SelectProps } from 'bits-ui';
   import type { LabeledValue } from '$types';
+  export let id: string;
   export let name: string;
   export let value: LabeledValue;
   let className: string | undefined = undefined;
@@ -37,8 +38,7 @@
   //	}
 </script>
 
-<div class={className}>
-  <Label.Root for={name}>{name}</Label.Root>
+<div {id} class={className}>
   <Select.Root {name} bind:selected={value} {...$$restProps}>
     <Select.Trigger
       class="h-input border-border-input bg-background placeholder:text-foreground-alt/50 focus:ring-foreground focus:ring-offset-background inline-flex items-center border px-[11px]  text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
