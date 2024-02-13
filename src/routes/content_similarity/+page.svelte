@@ -5,6 +5,7 @@
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
+  import { apiTest } from '$api';
 </script>
 
 <main class="w-full">
