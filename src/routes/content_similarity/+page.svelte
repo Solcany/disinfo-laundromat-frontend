@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import {apiTest} from '$api';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
-  import { apiTest } from '$api';
 </script>
 
 <main class="w-full">
@@ -71,7 +71,7 @@
         <Label for="filter_result"> Filter Result </Label>
         <InputText name="filter result" id="filter_result"> </InputText>
       </div>
-      <Button onClick={() => {return 0}} ariaLabel="Download result as csv"> Download CSV </Button>
+      <Button onClick={apiTest} ariaLabel="Download result as csv"> Download CSV </Button>
 
     </section>
 

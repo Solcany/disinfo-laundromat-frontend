@@ -2,8 +2,10 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { get } from 'svelte/store';
+  import { enhance } from '$app/forms';
   import DropdownSelect from '$components/DropdownSelect.svelte';
   import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
+  import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
   import InputTextArea from '$components/InputTextArea.svelte';
   import type { FormData, LabeledValue } from '$types';
@@ -15,19 +17,22 @@
 
   const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
 
-  function handleSubmit(event : Event) {
-    formDataStore.set(formData);
-    const d = event.target as HTMLFormElement;
-    const formDataEntries = new FormData(d).entries();
-    for (const [name, value] of formDataEntries) {
-        console.log(name,':', value);
-      }
-    loadingStore.set(true);
-    setTimeout(() => {
-      //goto('/content_search');
-      loadingStore.set(false);
-    }, 1000);
-  }
+// function handleSubmit(event : Event) {
+//   formDataStore.set(formData);
+//   const d = event.target as HTMLFormElement;
+//   const formDataEntries = new FormData(d).entries();
+//   for (const [name, value] of formDataEntries) {
+//       console.log(name,':', value);
+//     }
+//   loadingStore.set(true);
+//   setTimeout(() => {
+//     //goto('/content_search');
+//     loadingStore.set(false);
+//   }, 1000);
+// }
+
+
+
 
   onMount(() => {
     return () => {
@@ -36,13 +41,13 @@
   });
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form method="POST" action="/content_similarity?/parse_url" use:enhance>
   <div class="flex">
     <div>
       <Label for="content_input">Content</Label>
       <InputTextArea name="content" id="content_input" bind:value={formData.content} required />
     </div>
-    <button type="submit">Submit</button>
+    <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>
 
   <Label for="region_input">Region</Label>

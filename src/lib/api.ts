@@ -1,9 +1,8 @@
 export async function apiTest() {
-    //event.preventDefault();
 
     const formData = {
       url: "https://www.breitbart.com/politics/2024/02/12/sens-vance-lee-and-johnson-join-elon-and-vivek-to-slam-endless-funding-for-ukraine/",
-      engines : ['google'],
+      //engines : ['google'],
     };
 
     try {
