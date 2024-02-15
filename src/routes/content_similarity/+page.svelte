@@ -1,11 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import {apiTest} from '$api';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
+ // import DataTable from '$components/DataTable.svete';
+  import type { ActionData } from './$types.js';
+  import {content_result_data} from '$dummy_data';
+  let headers = Object.keys(content_result_data[0]);
+  import {queryApi} from '$api';
+
 </script>
 
 <main class="w-full">
@@ -71,8 +76,7 @@
         <Label for="filter_result"> Filter Result </Label>
         <InputText name="filter result" id="filter_result"> </InputText>
       </div>
-      <Button onClick={apiTest} ariaLabel="Download result as csv"> Download CSV </Button>
-
+      <Button onClick={() => {return 0}} ariaLabel="Download result as csv"> Download CSV </Button>
     </section>
 
     <section class="h-[400px] w-full bg-pink-500">
@@ -82,7 +86,9 @@
       </div>
 
       <div>
+      <!-- <DataTable headers={headers} rows={content_result_data} rowBorder={true}/> -->
         <!-- result table-->
+
       </div>
     </section>
   </div>

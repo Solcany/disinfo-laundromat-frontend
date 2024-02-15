@@ -1,4 +1,4 @@
-import type { LabeledValue } from '$types';
+import type { LabeledValue, ContentQueryResult } from '$types';
 
 export const region_data: LabeledValue[] = [
   { label: 'US', value: 'US' },
@@ -17,18 +17,9 @@ export const browser_data: LabeledValue[] = [
 ];
 
 
-interface Result {
-  domain: string;
-  associations: string[];
-  title: string;
-  snippet: string,
-  engines: string[];
-  match_score: string;
-}
-
-export const content_result_data: Result[] = [
+export const content_result_data: ContentQueryResult[] = [
   {
-    domain: "catalog.libraries.psu.edu",
+   domain: "catalog.libraries.psu.edu",
    associations: [],
    title: "We Are the Ones We Have Been Waiting For : the Promise of Civic …",
    snippet: "WebLanguage Note: English. Contents: Cover -- Contents -- 1. Overview: The Public and Our Problems -- 2. How to Think About Politics: Values, Facts, and Strategies -- 3.",

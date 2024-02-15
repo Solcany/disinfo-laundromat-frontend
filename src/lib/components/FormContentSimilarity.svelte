@@ -41,11 +41,15 @@
   });
 </script>
 
-<form method="POST" action="/content_similarity?/parse_url" use:enhance>
+<form method="POST" action="/content_similarity?/parse_url" use:enhance={({formElement, formData, action, cancel, submitter}) => {
+  return async ({result, update}) => {
+    console.log(result);
+  }
+}}>
   <div class="flex">
     <div>
-      <Label for="content_input">Content</Label>
-      <InputTextArea name="content" id="content_input" bind:value={formData.content} required />
+      <Label for="url_input">Content</Label>
+      <InputTextArea name="url" id="url_input" bind:value={formData.content} required />
     </div>
     <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>
