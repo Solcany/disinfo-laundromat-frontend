@@ -2,7 +2,7 @@
   import Tabs from '$components/Tabs.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import Label from '$components/Label.svelte';
-  import type { FormData, LabeledValue } from '$types';
+  import type { LabeledValue } from '$types';
 </script>
 
 <main class="w-100">

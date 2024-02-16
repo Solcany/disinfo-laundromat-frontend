@@ -5,12 +5,11 @@
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
- // import DataTable from '$components/DataTable.svete';
+  // import DataTable from '$components/DataTable.svete';
   import type { ActionData } from './$types.js';
-  import {content_result_data} from '$dummy_data';
+  import { content_result_data } from '$dummy_data';
   let headers = Object.keys(content_result_data[0]);
-  import {queryApi} from '$api';
-
+  import { queryApi } from '$api';
 </script>
 
 <main class="w-full">
@@ -36,9 +35,7 @@
           <C.Overlay />
           <C.Content>
             <C.Title>Batch Download</C.Title>
-            <C.Description class="text-foreground-alt text-sm">
-                text 
-            </C.Description>
+            <C.Description class="text-foreground-alt text-sm">text</C.Description>
             <div class="flex flex-col items-start gap-1 pb-11 pt-7">
               <Label for="apiKey" class="text-sm font-medium">API Key</Label>
               <div class="relative w-full">
@@ -68,15 +65,29 @@
           </C.Content>
         </C.Portal>
       </Dialog>
-      
-      <h2> Refine Result </h2>
 
-      <Button onClick={() => {return 0}} ariaLabel="Open select metadata modal"> Filter Metadata </Button>
+      <h2>Refine Result</h2>
+
+      <Button
+        onClick={() => {
+          return 0;
+        }}
+        ariaLabel="Open select metadata modal"
+      >
+        Filter Metadata
+      </Button>
       <div>
-        <Label for="filter_result"> Filter Result </Label>
-        <InputText name="filter result" id="filter_result"> </InputText>
+        <Label for="filter_result">Filter Result</Label>
+        <InputText name="filter result" id="filter_result"></InputText>
       </div>
-      <Button onClick={() => {return 0}} ariaLabel="Download result as csv"> Download CSV </Button>
+      <Button
+        onClick={() => {
+          return 0;
+        }}
+        ariaLabel="Download result as csv"
+      >
+        Download CSV
+      </Button>
     </section>
 
     <section class="h-[400px] w-full bg-pink-500">
@@ -86,9 +97,8 @@
       </div>
 
       <div>
-      <!-- <DataTable headers={headers} rows={content_result_data} rowBorder={true}/> -->
+        <!-- <DataTable headers={headers} rows={content_result_data} rowBorder={true}/> -->
         <!-- result table-->
-
       </div>
     </section>
   </div>

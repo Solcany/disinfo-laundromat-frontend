@@ -8,68 +8,54 @@
   import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
   import InputTextArea from '$components/InputTextArea.svelte';
-  import type { FormData, LabeledValue } from '$types';
-  import { region_data, language_data, browser_data } from '$dummy_data';
-  import { formDataStore } from '$stores/form.ts';
+  import type { LabeledValue } from '$types';
+  import { content_query_data, region_data, language_data, browser_data } from '$dummy_data';
+  //import { formDataStore } from '$stores/form.ts';
   import { loadingStore } from '$stores/loading.ts';
 
-  let formData: FormData;
-
-  const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
-
-// function handleSubmit(event : Event) {
-//   formDataStore.set(formData);
-//   const d = event.target as HTMLFormElement;
-//   const formDataEntries = new FormData(d).entries();
-//   for (const [name, value] of formDataEntries) {
-//       console.log(name,':', value);
-//     }
-//   loadingStore.set(true);
-//   setTimeout(() => {
-//     //goto('/content_search');
-//     loadingStore.set(false);
-//   }, 1000);
-// }
+  //let formData : FormData;
 
 
+  export let onResponse: (response: any) => void = () => {};
 
+ // const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
 
-  onMount(() => {
-    return () => {
-      unsubscribeFormDataStore();
-    };
-  });
+ // onMount(() => {
+ //   return () => {
+ //     unsubscribeFormDataStore();
+ //   };
+ // });
 </script>
 
 <form method="POST" action="/content_similarity?/parse_url" use:enhance={({formElement, formData, action, cancel, submitter}) => {
   return async ({result, update}) => {
-    console.log(result);
+    onResponse(result);
   }
 }}>
   <div class="flex">
     <div>
       <Label for="url_input">Content</Label>
-      <InputTextArea name="url" id="url_input" bind:value={formData.content} required />
+      <InputTextArea name="url" id="url_input" required />
     </div>
     <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>
 
   <Label for="region_input">Region</Label>
-  <DropdownSelect id="region_input" name="region" items={region_data} bind:value={formData.region} required>
+  <DropdownSelect id="region_input" name="region" value={content_query_data.region} items={region_data} required>
     {#each region_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
   </DropdownSelect>
 
   <Label for="language_input">Language</Label>
-  <DropdownSelect id="language_input" name="language" bind:value={formData.language} required>
+  <DropdownSelect id="language_input" name="language" value={content_query_data.language} required>
     {#each language_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
   </DropdownSelect>
 
   <Label for="region_input">Browser</Label>
-  <DropdownSelect id="language_input" name="browser" bind:value={formData.browser} multiple={true} required>
+  <DropdownSelect id="language_input" name="browser" value={content_query_data.browser} multiple={true} required>
     {#each browser_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
