@@ -1,9 +1,9 @@
 import { API_URL } from '$config';
 
-export async function queryApi(query: string, data: FormData) {
+export async function queryApi(endpoint: string, data: FormData) {
   try {
-    const q = API_URL.concat(query);
-    const response = await fetch(q, {
+    const query = API_URL.concat(endpoint);
+    const response = await fetch(query, {
       method: 'POST',
       body: data
     });
@@ -17,3 +17,19 @@ export async function queryApi(query: string, data: FormData) {
     console.error('Error fetching data:', error);
   }
 }
+
+
+export async function parseUrl(data: FormData) {
+    return queryApi('parse-url', data); 
+}	
+
+//export async parseUrl: async ({ request }) => {
+//    const data = await request.formData();
+//    const responseData = await queryApi('parse-url', data);
+//    if(responseData) {
+//      return { props: { data: responseData }};
+//    } else {
+//      return { props: { }};
+//    }
+//  }
+//} satisfies Actions;

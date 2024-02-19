@@ -2,21 +2,19 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { get } from 'svelte/store';
-  import { enhance } from '$app/forms';
+  import { enhance ,applyAction} from '$app/forms';
   import DropdownSelect from '$components/DropdownSelect.svelte';
   import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
   import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
   import InputTextArea from '$components/InputTextArea.svelte';
-  import type { LabeledValue } from '$types';
+  import type { LabeledValue } from '$models';
   import { content_query_data, region_data, language_data, browser_data } from '$dummy_data';
-  //import { formDataStore } from '$stores/form.ts';
+  import { contentStore } from '$stores/content.ts';
   import { loadingStore } from '$stores/loading.ts';
 
-  //let formData : FormData;
 
-
-  export let onResponse: (response: any) => void = () => {};
+  export let onSubmit: (event: Event) => void = () => {};
 
  // const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
 
@@ -27,11 +25,7 @@
  // });
 </script>
 
-<form method="POST" action="/content_similarity?/parse_url" use:enhance={({formElement, formData, action, cancel, submitter}) => {
-  return async ({result, update}) => {
-    onResponse(result);
-  }
-}}>
+<form on:submit={(event) => onSubmit(event)}>
   <div class="flex">
     <div>
       <Label for="url_input">Content</Label>

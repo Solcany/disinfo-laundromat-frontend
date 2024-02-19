@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
@@ -7,9 +6,7 @@
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   // import DataTable from '$components/DataTable.svete';
   import type { ActionData } from './$types.js';
-  import { content_result_data } from '$dummy_data';
-  let headers = Object.keys(content_result_data[0]);
-  import { queryApi } from '$api';
+  //let headers = Object.keys(content_result_data[0]);
 </script>
 
 <main class="w-full">
@@ -27,7 +24,7 @@
     <section class="h-[400px] w-full bg-yellow-500">
       <!-- toolbar -->
       <h2>Content Similarity</h2>
-      <FormContentSimilarity />
+     <!-- <FormContentSimilarity /> -->
 
       <Dialog let:C>
         <C.Trigger>New API key</C.Trigger>

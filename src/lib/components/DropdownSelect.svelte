@@ -2,7 +2,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Select, Label, type Selected, type SelectProps } from 'bits-ui';
-  import type { LabeledValue } from '$types';
+  import type { LabeledValue } from '$models';
   export let id: string;
   export let name: string;
   export let value: LabeledValue;

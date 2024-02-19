@@ -2,7 +2,18 @@
   import Tabs from '$components/Tabs.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import Label from '$components/Label.svelte';
-  import type { LabeledValue } from '$types';
+  import type { LabeledValue, ContentResult } from '$models';
+  import { parseUrl } from '$api';
+  import { contentStore } from '$stores/content';
+
+  async function handleSubmit (event: Event) { 
+    event.preventDefault();
+    const target = event.target as HTMLFormElement;
+    const formData = new FormData(target);
+    let content : ContentResult = await parseUrl(formData) as ContentResult;
+    $contentStore.set({formData, content});
+  }
+
 </script>
 
 <main class="w-100">
@@ -21,7 +32,7 @@
               engines to find related websites. Discover networks of malicious actors/websites
               collectively sharing disinformation.
             </p>
-            <FormContentSimilarity />
+            <FormContentSimilarity onSubmit={handleSubmit}/>
             <a href="search"> advanced search </a>
           </C.Content>
           <C.Content value="metadata similarity">test 2 test 2</C.Content>

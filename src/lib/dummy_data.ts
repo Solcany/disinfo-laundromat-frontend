@@ -1,4 +1,4 @@
-import type { LabeledValue, ContentQueryData, ContentQueryResult } from '$types';
+import type { LabeledValue, ContentQueryData } from '$models';
 
 export const region_data: LabeledValue[] = [
   { label: 'US', value: 'US' },
@@ -23,23 +23,3 @@ export const content_query_data: ContentQueryData = {
   content: ''
 };
 
-export const content_result_data: ContentQueryResult[] = [
-  {
-    domain: 'catalog.libraries.psu.edu',
-    associations: [],
-    title: 'We Are the Ones We Have Been Waiting For : the Promise of Civic …',
-    snippet:
-      'WebLanguage Note: English. Contents: Cover -- Contents -- 1. Overview: The Public and Our Problems -- 2. How to Think About Politics: Values, Facts, and Strategies -- 3.',
-    engines: ['bing'],
-    match_score: '26.1'
-  },
-  {
-    domain: 'constitutionallawenforcement.us',
-    associations: ['R'],
-    title: 'U.S. Constitutional Law Enforcement',
-    snippet:
-      'In RED-HANDED, six-time New York Times bestselling investigator Peter Schweizer presents his most alarming findings to date by revealing the secret deals wealthy Americans have cut to help China build its military, technological, and economic might.',
-    engines: ['yandex'],
-    match_score: '13.1'
-  }
-];

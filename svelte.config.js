@@ -17,7 +17,7 @@ const config = {
       $components: 'src/lib/components',
       $api: 'src/lib/api.ts',
       $utils: 'src/lib/utils.ts',
-      $types: 'src/lib/types.ts',
+      $models: 'src/lib/models.ts',
       $config: 'src/lib/config.ts',
       $stores: 'src/lib/stores',
       $dummy_data: 'src/lib/dummy_data.ts'
