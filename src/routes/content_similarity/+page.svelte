@@ -4,7 +4,8 @@
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
-  // import DataTable from '$components/DataTable.svete';
+  import DataTable from '$components/DataTable.svelte';
+  import { UI_CONTENT_HEADER } from '$config';
   import type { ActionData } from './$types.js';
   //let headers = Object.keys(content_result_data[0]);
 </script>
@@ -94,7 +95,7 @@
       </div>
 
       <div>
-        <!-- <DataTable headers={headers} rows={content_result_data} rowBorder={true}/> -->
+        <DataTable caption='' headers={UI_CONTENT_HEADER} rowBorder={true}/>
         <!-- result table-->
       </div>
     </section>

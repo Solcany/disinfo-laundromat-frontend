@@ -41,9 +41,31 @@ export interface ContentResult {
   }
 }
 
-export interface ContentData {
-  form: FormData;
-  content: ContentResult;
+export class ContentData {
+    private content: ContentResult;
+
+    constructor(content: ContentResult) {
+        this.content = content;
+    }
+    
+    get() {
+        return this.content;
+    }
+
+    set(content: ContentResult) {
+        this.content = content;
+    }
+
+    isEmpty() {
+        const { countries, csv_data, indicator_metadata, languages, results } = this.content;
+        return Object.keys(countries).length === 0 &&
+               csv_data === '' &&
+               Object.keys(indicator_metadata).length === 0 &&
+               Object.keys(languages).length === 0 &&
+               Object.keys(results).length === 0;
+    }
 }
+
+
 
 

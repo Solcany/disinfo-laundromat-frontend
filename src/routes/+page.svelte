@@ -1,17 +1,23 @@
 <script lang="ts">
+  import {goto} from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import Label from '$components/Label.svelte';
-  import type { LabeledValue, ContentResult } from '$models';
+  import { ContentData, type LabeledValue, type ContentResult } from '$models';
   import { parseUrl } from '$api';
+  import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
 
   async function handleSubmit (event: Event) { 
     event.preventDefault();
+    loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
-    let content : ContentResult = await parseUrl(formData) as ContentResult;
-    $contentStore.set({formData, content});
+    let contentResult: ContentResult = await parseUrl(formData);
+    let content = new ContentData(contentResult);
+    contentStore.set(content);
+    loadingStore.set(false);
+    goto("/content_similarity");
   }
 
 </script>

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { ContentData, ContentResult } from '$models';
+import{ ContentData, type ContentResult } from '$models';
 
 const initialResult: ContentResult = {
     countries: {},
@@ -8,10 +8,7 @@ const initialResult: ContentResult = {
     languages: {},
     results: {},
 }
-const initialContent: ContentData = {
-  form: new FormData(),
-  content: initialResult,
-}
+const initialContent: ContentData = new ContentData(initialResult);
 
 export const contentStore = writable<ContentData>(initialContent);
 
