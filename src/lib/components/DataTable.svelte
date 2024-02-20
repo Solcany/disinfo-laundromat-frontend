@@ -3,7 +3,7 @@
     import { ascending, descending } from 'd3-array';
 
     export let headers: LabeledValue[];
-    //export let rows: any[][];
+    export let rows: any[];
     export let rowHeaders: boolean = false;
     export let sort: boolean = true;
     export let rowBorder: boolean = false;

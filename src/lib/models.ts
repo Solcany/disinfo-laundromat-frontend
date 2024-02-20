@@ -48,12 +48,8 @@ export class ContentData {
         this.content = content;
     }
     
-    get() {
-        return this.content;
-    }
-
-    set(content: ContentResult) {
-        this.content = content;
+    getResults() {
+        return this.content.results;
     }
 
     isEmpty() {

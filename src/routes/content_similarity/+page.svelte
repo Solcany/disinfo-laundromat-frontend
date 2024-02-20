@@ -6,8 +6,9 @@
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import type { ActionData } from './$types.js';
-  //let headers = Object.keys(content_result_data[0]);
+  import { contentStore } from '$stores/content.ts';
+  let rows = $contentStore.isEmpty() ? [] : $contentStore.getResults();
+  console.log(rows);
 </script>
 
 <main class="w-full">
@@ -95,7 +96,8 @@
       </div>
 
       <div>
-        <DataTable caption='' headers={UI_CONTENT_HEADER} rowBorder={true}/>
+        <DataTable caption='' rows={rows} headers={UI_CONTENT_HEADER} rowBorder={true}/>
+
         <!-- result table-->
       </div>
     </section>
