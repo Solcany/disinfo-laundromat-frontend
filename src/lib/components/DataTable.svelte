@@ -3,7 +3,8 @@
   import { ascending, descending } from 'd3-array';
 
   export let headers: LabeledValue[];
-  export let rows: ContentResult[];
+  export let rows: any[];
+  export let rowsComplementary: any[];
   export let rowHeaders: boolean = false;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
@@ -11,6 +12,12 @@
 
   let sortStatus: Record<string, string> = {};
   let sortDirection: string = 'ascending';
+
+  $: {
+    if (rows.length !== rowsComplementary.length) {
+      throw new Error('rows and rowComplementary must have the same length');
+    }
+  }
   // let sortNumber: boolean[] = rows[0].map((d: any) => !isNaN(d));
 
   // function updateSortStatus(column: string, index: number): void {

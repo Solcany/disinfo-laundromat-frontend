@@ -9,16 +9,11 @@
   import { UI_CONTENT_HEADER } from '$config';
   import type { ContentResult } from '$models';
   import { contentStore } from '$stores/content.ts';
-  let rows: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
+  let results: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   let allowed_keys = UI_CONTENT_HEADER.map(v => v.value);
-
-  let separated = (() => {
-    let incl = rows.map((row) => includeObjectKeys(row, allowed_keys));
-    let excl = rows.map((row) => excludeObjectKeys(row, allowed_keys));
-    return zip(incl, excl);
-  })();
+  let rows = results.map((row) => includeObjectKeys(row, allowed_keys));
+  let rowsComplementary = results.map((row) => excludeObjectKeys(row, allowed_keys));
  
- console.log(separated[0]);
 </script>
 
 <main class="w-full">
@@ -106,7 +101,7 @@
       </div>
 
       <div>
-        <DataTable caption="" {rows} headers={UI_CONTENT_HEADER} rowBorder={true} />
+        <DataTable caption="" {rows} {rowsComplementary} headers={UI_CONTENT_HEADER} rowBorder={true} />
 
         <!-- result table-->
       </div>
