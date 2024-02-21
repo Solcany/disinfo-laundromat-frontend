@@ -22,4 +22,3 @@ export const content_api_input: ContentApiInput = {
   browser: browser_data[0],
   content: ''
 };
-

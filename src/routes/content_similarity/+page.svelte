@@ -8,7 +8,7 @@
   import { UI_CONTENT_HEADER } from '$config';
   import type { ContentResult } from '$models';
   import { contentStore } from '$stores/content.ts';
-  let rows : [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
+  let rows: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   console.log(rows);
 </script>
 
@@ -27,7 +27,7 @@
     <section class="h-[400px] w-full bg-yellow-500">
       <!-- toolbar -->
       <h2>Content Similarity</h2>
-     <!-- <FormContentSimilarity /> -->
+      <!-- <FormContentSimilarity /> -->
 
       <Dialog let:C>
         <C.Trigger>New API key</C.Trigger>
@@ -97,7 +97,7 @@
       </div>
 
       <div>
-        <DataTable caption='' rows={rows} headers={UI_CONTENT_HEADER} rowBorder={true}/>
+        <DataTable caption="" {rows} headers={UI_CONTENT_HEADER} rowBorder={true} />
 
         <!-- result table-->
       </div>

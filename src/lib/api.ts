@@ -18,10 +18,9 @@ export async function queryApi(endpoint: string, data: FormData) {
   }
 }
 
-
 export async function parseUrl(data: FormData) {
-    return queryApi('parse-url', data); 
-}	
+  return queryApi('parse-url', data);
+}
 
 //export async parseUrl: async ({ request }) => {
 //    const data = await request.formData();

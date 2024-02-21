@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {goto} from '$app/navigation';
+  import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import Label from '$components/Label.svelte';
@@ -8,7 +8,7 @@
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
 
-  async function handleSubmit (event: Event) { 
+  async function handleSubmit(event: Event) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
@@ -17,9 +17,8 @@
     let content = new ContentData(contentResponse);
     contentStore.set(content);
     loadingStore.set(false);
-    goto("/content_similarity");
+    goto('/content_similarity');
   }
-
 </script>
 
 <main class="w-100">
@@ -38,7 +37,7 @@
               engines to find related websites. Discover networks of malicious actors/websites
               collectively sharing disinformation.
             </p>
-            <FormContentSimilarity onSubmit={handleSubmit}/>
+            <FormContentSimilarity onSubmit={handleSubmit} />
             <a href="search"> advanced search </a>
           </C.Content>
           <C.Content value="metadata similarity">test 2 test 2</C.Content>

@@ -1,164 +1,154 @@
 <script lang="ts">
-    import type {LabeledValue, ContentResult} from '$models';
-    import { ascending, descending } from 'd3-array';
+  import type { LabeledValue, ContentResult } from '$models';
+  import { ascending, descending } from 'd3-array';
 
-    export let headers: LabeledValue[];
-    export let rows: ContentResult[];
-    export let rowHeaders: boolean = false;
-    export let sort: boolean = true;
-    export let rowBorder: boolean = false;
-    export let caption: string;
+  export let headers: LabeledValue[];
+  export let rows: ContentResult[];
+  export let rowHeaders: boolean = false;
+  export let sort: boolean = true;
+  export let rowBorder: boolean = false;
+  export let caption: string;
 
-    let sortStatus: Record<string, string> = {};
-    let sortDirection: string = 'ascending';
-   // let sortNumber: boolean[] = rows[0].map((d: any) => !isNaN(d));
+  let sortStatus: Record<string, string> = {};
+  let sortDirection: string = 'ascending';
+  // let sortNumber: boolean[] = rows[0].map((d: any) => !isNaN(d));
 
-   // function updateSortStatus(column: string, index: number): void {
-   //     // reset all to "none"
-   //     headers.forEach((d: string) => {
-   //         sortStatus[d] = "none";
-   //     });
+  // function updateSortStatus(column: string, index: number): void {
+  //     // reset all to "none"
+  //     headers.forEach((d: string) => {
+  //         sortStatus[d] = "none";
+  //     });
 
-   //     sortDirection === 'ascending' ? sortDirection = 'descending' : sortDirection = 'ascending';
-   //     sortStatus[column] = sortDirection;
-   // }
+  //     sortDirection === 'ascending' ? sortDirection = 'descending' : sortDirection = 'ascending';
+  //     sortStatus[column] = sortDirection;
+  // }
 
-   // let sortIcons: Record<string, { direction: string, icon: string }> = {
-   //     'none': {
-   //         direction: 'n',
-   //         icon: 'list'
-   //     },
-   //     'ascending': {
-   //         direction: 'w',
-   //         icon: 'arrow'
-   //     },
-   //     'descending': {
-   //         direction: 'e',
-   //         icon: 'arrow'
-   //     }
-   // };
+  // let sortIcons: Record<string, { direction: string, icon: string }> = {
+  //     'none': {
+  //         direction: 'n',
+  //         icon: 'list'
+  //     },
+  //     'ascending': {
+  //         direction: 'w',
+  //         icon: 'arrow'
+  //     },
+  //     'descending': {
+  //         direction: 'e',
+  //         icon: 'arrow'
+  //     }
+  // };
 
-   // headers.forEach((d: string) => {
-   //     sortStatus[d] = "none";
-   // });
+  // headers.forEach((d: string) => {
+  //     sortStatus[d] = "none";
+  // });
 
-    let sortBy: number = 0;
+  let sortBy: number = 0;
 
-   // let sortedRows: any[] = rows;
+  // let sortedRows: any[] = rows;
 
-   // $: {
-   //     if (sortBy !== 'none' && sortNumber[sortBy] === false) {
-   //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
-   //         else sortedRows = rows.sort((a, b) => descending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
-   //     }
-   // }
+  // $: {
+  //     if (sortBy !== 'none' && sortNumber[sortBy] === false) {
+  //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
+  //         else sortedRows = rows.sort((a, b) => descending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
+  //     }
+  // }
 
-   // $: {
-   //     if (sortBy !== 'none' && sortNumber[sortBy] === true) {
-   //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy], b[sortBy]));
-   //         else sortedRows = rows.sort((a, b) => descending(a[sortBy], b[sortBy]));
-   //     }
-   // }
+  // $: {
+  //     if (sortBy !== 'none' && sortNumber[sortBy] === true) {
+  //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy], b[sortBy]));
+  //         else sortedRows = rows.sort((a, b) => descending(a[sortBy], b[sortBy]));
+  //     }
+  // }
 </script>
 
 <div>
-    <table class:rowBorder>
-			{#if caption}
-			<caption>{caption}</caption>
-			{/if}
+  <table class:rowBorder>
+    {#if caption}
+      <caption>{caption}</caption>
+    {/if}
     <tbody>
-        <tr>
-            {#each headers as header, i (header)}
-                <th role="columnheader" scope="col">
-                    {header.label}
-                    {#if sort}
-                <button class={i === sortBy ? 'sort selected' : 'sort'} 
-                    on:click={() => {
-                            sortBy = i
-                            //updateSortStatus(header, i)
-                        }}
-                    >
-                        <span class='sr-only'>Sort by {header}</span>
-                    </button>
-									{/if}
-                </th>
-            {/each}
-        </tr>
-<!--
-        {#each sortedRows as row (row)}
-            <tr>
-                {#each row as column, i}
-									{#if rowHeaders && i === 0}
-										<th scope="row">
-											{column}
-										</th>
-									{:else}
-                    <td>{column}</td>
-									{/if}
-                {/each}
-            </tr>
-	
+      <tr>
+        {#each headers as header, i (header)}
+          <th role="columnheader" scope="col">
+            {header.label}
+            {#if sort}
+              <button
+                class={i === sortBy ? 'sort selected' : 'sort'}
+                on:click={() => {
+                  sortBy = i;
+                  //updateSortStatus(header, i)
+                }}
+              >
+                <span class="sr-only">Sort by {header}</span>
+              </button>
+            {/if}
+          </th>
         {/each}
--->
+      </tr>
+        {#each rows as row (row)}
+            <tr>
+                {#each Object.entries(row) as [_, value], i}
+                    <td>{value}</td>
+                {/each}
+            </tr>	
+        {/each}
+
     </tbody>
-</table>
+  </table>
 </div>
 
-
 <style>
-    .sr-only {
-      position: absolute;
-      clip: rect(1px, 1px, 1px, 1px);
-      padding: 0;
-      border: 0;
-      height: 1px;
-      width: 1px;
-      overflow: hidden;
-    }
-    
-    table {
-  border-collapse: collapse;
-  margin-bottom: 10px;
-  width: 100%;
-  table-layout: fixed;
-}
-table caption,
-td,
-th {
-  text-align: left;
-}
-	caption {
-		font-size: 1.2em;
-		font-weight: bold;
-	}
-	td,
-th {
-  padding: 6px;
-  vertical-align: top;
-  word-wrap: break-word;
-	border-bottom: none;
-}
-	.rowBorder td {
-		border-bottom: 1px solid #eee
-	}
-	td {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  .sr-only {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
 
-}
-thead {
-  border-bottom: 1px solid var(--border);
-}
-tfoot {
-  border-top: 1px solid var(--border);
-}
-tbody tr:nth-child(2n) {
-  background-color: var(--background-alt);
-}
+  table {
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    width: 100%;
+    table-layout: fixed;
+  }
+  table caption,
+  td,
+  th {
+    text-align: left;
+  }
+  caption {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  td,
+  th {
+    padding: 6px;
+    vertical-align: top;
+    word-wrap: break-word;
+    border-bottom: none;
+  }
+  .rowBorder td {
+    border-bottom: 1px solid #eee;
+  }
+  td {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  thead {
+    border-bottom: 1px solid var(--border);
+  }
+  tfoot {
+    border-top: 1px solid var(--border);
+  }
+  tbody tr:nth-child(2n) {
+    background-color: var(--background-alt);
+  }
 
-    .selected {
-        background-color: var(--accent-color)
-    }
-
+  .selected {
+    background-color: var(--accent-color);
+  }
 </style>

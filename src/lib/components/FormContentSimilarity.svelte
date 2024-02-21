@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { get } from 'svelte/store';
-  import { enhance ,applyAction} from '$app/forms';
+  import { enhance, applyAction } from '$app/forms';
   import DropdownSelect from '$components/DropdownSelect.svelte';
   import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
   import Button from '$components/Button.svelte';
@@ -13,16 +13,15 @@
   import { contentStore } from '$stores/content.ts';
   import { loadingStore } from '$stores/loading.ts';
 
-
   export let onSubmit: (event: Event) => void = () => {};
 
- // const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
+  // const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
 
- // onMount(() => {
- //   return () => {
- //     unsubscribeFormDataStore();
- //   };
- // });
+  // onMount(() => {
+  //   return () => {
+  //     unsubscribeFormDataStore();
+  //   };
+  // });
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>
@@ -35,7 +34,13 @@
   </div>
 
   <Label for="region_input">Region</Label>
-  <DropdownSelect id="region_input" name="region" value={content_api_input.region} items={region_data} required>
+  <DropdownSelect
+    id="region_input"
+    name="region"
+    value={content_api_input.region}
+    items={region_data}
+    required
+  >
     {#each region_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
@@ -49,7 +54,13 @@
   </DropdownSelect>
 
   <Label for="region_input">Browser</Label>
-  <DropdownSelect id="language_input" name="browser" value={content_api_input.browser} multiple={true} required>
+  <DropdownSelect
+    id="language_input"
+    name="browser"
+    value={content_api_input.browser}
+    multiple={true}
+    required
+  >
     {#each browser_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
