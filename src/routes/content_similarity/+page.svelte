@@ -5,11 +5,20 @@
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
+  import { includeObjectKeys, excludeObjectKeys, zip} from '$utils';
   import { UI_CONTENT_HEADER } from '$config';
   import type { ContentResult } from '$models';
   import { contentStore } from '$stores/content.ts';
   let rows: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
-  console.log(rows);
+  let allowed_keys = UI_CONTENT_HEADER.map(v => v.value);
+
+  let separated = (() => {
+    let incl = rows.map((row) => includeObjectKeys(row, allowed_keys));
+    let excl = rows.map((row) => excludeObjectKeys(row, allowed_keys));
+    return zip(incl, excl);
+  })();
+ 
+ console.log(separated[0]);
 </script>
 
 <main class="w-full">
