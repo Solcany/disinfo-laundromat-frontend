@@ -3,7 +3,7 @@ export interface LabeledValue {
   value: any;
 }
 
-export interface ContentQueryData {
+export interface ContentApiInput {
   region: LabeledValue;
   language: LabeledValue;
   browser: LabeledValue;
@@ -11,23 +11,8 @@ export interface ContentQueryData {
   [index: string]: string | LabeledValue;
 }
 
+
 export interface ContentResult {
-  countries: {
-    [key: string]: string;
-  };
-  csv_data: string;
-  indicator_metadata: {
-    [key: string]: {
-      description: string;
-      interpretation: string;
-      name: string;
-    }
-  };
-  languages: {
-    [key: string]: string;
-  }
-  results: {
-    [key: number]: {
       domain: string;
       domain_count: number;
       engines: string[];
@@ -37,14 +22,32 @@ export interface ContentResult {
       source: string[];
       title: string;
       url: string;
-    }
+}
+
+export interface IndicatorMetadata {
+  description: string;
+  interpretation: string;
+  name: string;
+}
+
+export interface ContentResponse {
+  countries: {
+    [key: string]: string;
+  };
+  csv_data: string;
+  indicator_metadata: {
+    [key: string] : IndicatorMetadata;
+  };
+  languages: {
+    [key: string]: string;
   }
+  results: ContentResult[];
 }
 
 export class ContentData {
-    private content: ContentResult;
+    private content: ContentResponse;
 
-    constructor(content: ContentResult) {
+    constructor(content: ContentResponse) {
         this.content = content;
     }
     

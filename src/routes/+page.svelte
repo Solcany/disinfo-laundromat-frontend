@@ -3,7 +3,7 @@
   import Tabs from '$components/Tabs.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import Label from '$components/Label.svelte';
-  import { ContentData, type LabeledValue, type ContentResult } from '$models';
+  import { ContentData, type LabeledValue, type ContentResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
@@ -13,8 +13,8 @@
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
-    let contentResult: ContentResult = await parseUrl(formData);
-    let content = new ContentData(contentResult);
+    let contentResponse: ContentResponse = await parseUrl(formData);
+    let content = new ContentData(contentResponse);
     contentStore.set(content);
     loadingStore.set(false);
     goto("/content_similarity");

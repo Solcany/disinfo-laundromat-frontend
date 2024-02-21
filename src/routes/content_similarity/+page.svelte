@@ -6,8 +6,9 @@
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
   import { UI_CONTENT_HEADER } from '$config';
+  import type { ContentResult } from '$models';
   import { contentStore } from '$stores/content.ts';
-  let rows = $contentStore.isEmpty() ? [] : $contentStore.getResults();
+  let rows : [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   console.log(rows);
 </script>
 

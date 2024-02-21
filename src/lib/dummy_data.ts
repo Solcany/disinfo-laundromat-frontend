@@ -1,4 +1,4 @@
-import type { LabeledValue, ContentQueryData } from '$models';
+import type { LabeledValue, ContentApiInput } from '$models';
 
 export const region_data: LabeledValue[] = [
   { label: 'US', value: 'US' },
@@ -16,7 +16,7 @@ export const browser_data: LabeledValue[] = [
   { label: 'Bing', value: 'Bing' }
 ];
 
-export const content_query_data: ContentQueryData = {
+export const content_api_input: ContentApiInput = {
   region: region_data[0],
   language: language_data[0],
   browser: browser_data[0],

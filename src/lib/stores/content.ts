@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store';
-import{ ContentData, type ContentResult } from '$models';
+import{ ContentData, type ContentResponse } from '$models';
 
-const initialResult: ContentResult = {
+const initialResult: ContentResponse = {
     countries: {},
     csv_data: '',
     indicator_metadata: {},
     languages: {},
-    results: {},
+    results: [],
 }
 const initialContent: ContentData = new ContentData(initialResult);
 
