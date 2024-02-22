@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { LabeledValue, ContentResult } from '$models';
   import { ascending, descending } from 'd3-array';
+  import Button from '$components/Button.svelte';
 
   export let headers: LabeledValue[];
   export let rows: any[];
@@ -79,37 +80,43 @@
           <th role="columnheader" scope="col">
             {header.label}
             {#if sort}
-            <button
-              class={i === sortBy ? 'sort selected' : 'sort'}
-              on:click={() => {
-                sortBy = i;
-                //updateSortStatus(header, i)
-              }}>
-              <span>^</span>
-            </button>
+              <button
+                class={i === sortBy ? 'sort selected' : 'sort'}
+                on:click={() => {
+                  sortBy = i;
+                  //updateSortStatus(header, i)
+                }}
+              >
+                <span>^</span>
+              </button>
             {/if}
           </th>
         {/each}
       </tr>
-        {#each rows as row, i (row)}
-            <tr>
-                {#each Object.entries(row) as [_, value]}
-                    <td>
-                    {value}
-                    </td>
-                {/each}
-            </tr>
-            <tr>
-              <td colSpan={3}>   
-                <div class="w-full h-[100px] bg-blue-100">
-                </div>
-              </td>
-            </tr>
-        {/each}
+      {#each rows as row, i (row)}
+        <tr>
+          <!-- row data -->
+          {#each Object.entries(row) as [_, value]}
+            <td>
+              {value}
+            </td>
+          {/each}
+          <!-- expand row button -->
+          <td>
+            <Button ariaLabel="expand row">^</Button>
+          </td>
+        </tr>
 
+        <!-- expanded row data -->
+        <tr>
+          <td colSpan={headers.length}>
+            <div class="h-[100px] w-full bg-blue-100"></div>
+          </td>
+        </tr>
+      {/each}
     </tbody>
   </table>
 </div>
 
 <style>
-  </style>
+</style>

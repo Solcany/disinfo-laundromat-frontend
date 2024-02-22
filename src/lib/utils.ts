@@ -6,36 +6,48 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function includeObjectKeys(obj: Record<string, any>, allowed: string[]): Record<string, any> {
-    const filtered = Object.keys(obj)
-        .filter(key => allowed.includes(key))
-        .reduce((newObj, key) => {
-            key = key as keyof typeof newObj;
-            newObj[key] = obj[key];
-            return newObj;
-        }, {} as Record<string, any>);
-    return filtered;
+export function includeObjectKeys(
+  obj: Record<string, any>,
+  allowed: string[]
+): Record<string, any> {
+  const filtered = Object.keys(obj)
+    .filter((key) => allowed.includes(key))
+    .reduce(
+      (newObj, key) => {
+        key = key as keyof typeof newObj;
+        newObj[key] = obj[key];
+        return newObj;
+      },
+      {} as Record<string, any>
+    );
+  return filtered;
 }
 
-export function excludeObjectKeys(obj: Record<string, any>, allowed: string[]): Record<string, any> {
-    const filtered = Object.keys(obj)
-        .filter(key => !allowed.includes(key))
-        .reduce((newObj, key) => {
-            key = key as keyof typeof newObj;
-            newObj[key] = obj[key];
-            return newObj;
-        }, {} as Record<string, any>);
-    return filtered;
+export function excludeObjectKeys(
+  obj: Record<string, any>,
+  allowed: string[]
+): Record<string, any> {
+  const filtered = Object.keys(obj)
+    .filter((key) => !allowed.includes(key))
+    .reduce(
+      (newObj, key) => {
+        key = key as keyof typeof newObj;
+        newObj[key] = obj[key];
+        return newObj;
+      },
+      {} as Record<string, any>
+    );
+  return filtered;
 }
 
 export function zip(...arrays: any[][]): any[][] {
-    const length = arrays.length > 0 ? arrays[0].length : 0;
+  const length = arrays.length > 0 ? arrays[0].length : 0;
 
-    for (const arr of arrays) {
-        if (arr.length !== length) {
-            throw new Error('Arrays must have the same length');
-        }
+  for (const arr of arrays) {
+    if (arr.length !== length) {
+      throw new Error('Arrays must have the same length');
     }
+  }
 
-    return Array.from({ length }, (_, index) => arrays.map(array => array[index]));
+  return Array.from({ length }, (_, index) => arrays.map((array) => array[index]));
 }
