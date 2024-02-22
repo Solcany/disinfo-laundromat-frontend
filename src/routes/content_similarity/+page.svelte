@@ -11,8 +11,8 @@
   import { contentStore } from '$stores/content.ts';
   let results: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   let allowed_keys = UI_CONTENT_HEADER.map((v) => v.value);
-  let rows = results.map((row) => includeObjectKeys(row, allowed_keys));
-  let rowsComplementary = results.map((row) => excludeObjectKeys(row, allowed_keys));
+  let rows = results.map((row) => Object.entries(includeObjectKeys(row, allowed_keys)));
+  let rowsComplementary = results.map((row) => Object.entries(excludeObjectKeys(row, allowed_keys)));
 </script>
 
 <main class="w-full">

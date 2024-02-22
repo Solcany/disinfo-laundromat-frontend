@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { LabeledValue, ContentResult } from '$models';
   import { ascending, descending } from 'd3-array';
+  import DataTableRow from "$components/DataTableRow.svelte";
   import Button from '$components/Button.svelte';
 
   export let headers: LabeledValue[];
-  export let rows: any[];
-  export let rowsComplementary: any[];
+  export let rows: [string, (string|number)][][];
+  export let rowsComplementary: [string, (string|number)][][];
   export let rowHeaders: boolean = false;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
@@ -94,25 +95,7 @@
         {/each}
       </tr>
       {#each rows as row, i (row)}
-        <tr>
-          <!-- row data -->
-          {#each Object.entries(row) as [_, value]}
-            <td>
-              {value}
-            </td>
-          {/each}
-          <!-- expand row button -->
-          <td>
-            <Button ariaLabel="expand row">^</Button>
-          </td>
-        </tr>
-
-        <!-- expanded row data -->
-        <tr>
-          <td colSpan={headers.length}>
-            <div class="h-[100px] w-full bg-blue-100"></div>
-          </td>
-        </tr>
+        <DataTableRow {row} rowComplementary={rowsComplementary[i]}/>
       {/each}
     </tbody>
   </table>

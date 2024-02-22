@@ -1,21 +1,44 @@
 <script lang="ts">
+  import Button from '$components/Button.svelte';
+  import type { LabeledValue } from '$models';
+  export let row: [string, (string|number)][];
+  export let rowComplementary: [string, (string|number)][];
+  
+  let isExpanded = true;
+  
+  function handleClick() {
+    isExpanded = !isExpanded;
+  }
+
 </script>
 
 <tr>
   <!-- row data -->
-  {#each Object.entries(row) as [_, value]}
+  {#each row as [_, value]}
     <td>
       {value}
     </td>
   {/each}
   <!-- expand row button -->
   <td>
-    <Button ariaLabel="expand row">^</Button>
+    <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
   </td>
 </tr>
 <!-- expanded row data -->
+{#if isExpanded}
 <tr>
-  <td colSpan={headers.length}>
-    <div class="h-[100px] w-full bg-blue-100"></div>
+  <td colSpan={row.length}>
+    <table class="w-full bg-blue-100">
+      <tbody>
+        <tr>
+          {#each rowComplementary as [_, value]}
+            <td>
+              {value}
+            </td>
+          {/each}
+        </tr>
+      </tbody>
+    </table>
   </td>
 </tr>
+{/if}
