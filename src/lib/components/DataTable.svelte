@@ -79,25 +79,32 @@
           <th role="columnheader" scope="col">
             {header.label}
             {#if sort}
-              <button
-                class={i === sortBy ? 'sort selected' : 'sort'}
-                on:click={() => {
-                  sortBy = i;
-                  //updateSortStatus(header, i)
-                }}
-              >
-                <span class="sr-only">Sort by {header}</span>
-              </button>
+            <button
+              class={i === sortBy ? 'sort selected' : 'sort'}
+              on:click={() => {
+                sortBy = i;
+                //updateSortStatus(header, i)
+              }}>
+              <span>^</span>
+            </button>
             {/if}
           </th>
         {/each}
       </tr>
-        {#each rows as row (row)}
+        {#each rows as row, i (row)}
             <tr>
-                {#each Object.entries(row) as [_, value], i}
-                    <td>{value}</td>
+                {#each Object.entries(row) as [_, value]}
+                    <td>
+                    {value}
+                    </td>
                 {/each}
-            </tr>	
+            </tr>
+            <tr>
+              <td colSpan={3}>   
+                <div class="w-full h-[100px] bg-blue-100">
+                </div>
+              </td>
+            </tr>
         {/each}
 
     </tbody>
@@ -105,57 +112,4 @@
 </div>
 
 <style>
-  .sr-only {
-    position: absolute;
-    clip: rect(1px, 1px, 1px, 1px);
-    padding: 0;
-    border: 0;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-  }
-
-  table {
-    border-collapse: collapse;
-    margin-bottom: 10px;
-    width: 100%;
-    table-layout: fixed;
-  }
-  table caption,
-  td,
-  th {
-    text-align: left;
-  }
-  caption {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  td,
-  th {
-    padding: 6px;
-    vertical-align: top;
-    word-wrap: break-word;
-    border-bottom: none;
-  }
-  .rowBorder td {
-    border-bottom: 1px solid #eee;
-  }
-  td {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  thead {
-    border-bottom: 1px solid var(--border);
-  }
-  tfoot {
-    border-top: 1px solid var(--border);
-  }
-  tbody tr:nth-child(2n) {
-    background-color: var(--background-alt);
-  }
-
-  .selected {
-    background-color: var(--accent-color);
-  }
-</style>
+  </style>
