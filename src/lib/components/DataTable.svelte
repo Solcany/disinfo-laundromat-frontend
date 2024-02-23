@@ -1,16 +1,23 @@
 <script lang="ts">
-  import type { LabeledValue, ContentResult } from '$models';
   import { ascending, descending } from 'd3-array';
+  import { includeObjectKeys, excludeObjectKeys } from '$utils';
+  import type { LabeledValue, ContentResult } from '$models';
   import DataTableRow from "$components/DataTableRow.svelte";
   import Button from '$components/Button.svelte';
 
-  export let headers: LabeledValue[];
-  export let rows: [string, (string|number)][][];
-  export let rowsComplementary: [string, (string|number)][][];
-  export let rowHeaders: boolean = false;
+  export let header: LabeledValue[];
+  export let data: ContentResult[];
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
+
+  let header_keys : string[] = header.map((v) => v.value);
+  let rows: [string, (string | number)][][] = data.map((entry) =>
+    Object.entries(includeObjectKeys(entry, header_keys))
+  );
+  let rowsComplementary : [string, (string|number)][][] = data.map((entry) => 
+    Object.entries(excludeObjectKeys(entry, header_keys))
+  );
 
   let sortStatus: Record<string, string> = {};
   let sortDirection: string = 'ascending';
@@ -76,10 +83,11 @@
       <caption>{caption}</caption>
     {/if}
     <tbody>
+      <!-- main header -->
       <tr>
-        {#each headers as header, i (header)}
+        {#each header as header_item, i (header_item)}
           <th role="columnheader" scope="col">
-            {header.label}
+            {header_item.label}
             {#if sort}
               <button
                 class={i === sortBy ? 'sort selected' : 'sort'}

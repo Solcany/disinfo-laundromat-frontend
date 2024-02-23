@@ -30,13 +30,18 @@
   <td colSpan={row.length}>
     <table class="w-full bg-blue-100">
       <tbody>
+        {#each rowComplementary as [label, value]}
         <tr>
-          {#each rowComplementary as [_, value]}
+          <th>
+            {label}
+          </th>
+        </tr>
+        <tr>
             <td>
               {value}
             </td>
-          {/each}
         </tr>
+        {/each}
       </tbody>
     </table>
   </td>

@@ -5,14 +5,12 @@
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
-  import { includeObjectKeys, excludeObjectKeys, zip } from '$utils';
   import { UI_CONTENT_HEADER } from '$config';
   import type { ContentResult } from '$models';
   import { contentStore } from '$stores/content.ts';
-  let results: [] | ContentResult[] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
-  let allowed_keys = UI_CONTENT_HEADER.map((v) => v.value);
-  let rows = results.map((row) => Object.entries(includeObjectKeys(row, allowed_keys)));
-  let rowsComplementary = results.map((row) => Object.entries(excludeObjectKeys(row, allowed_keys)));
+  let results:  ContentResult[] | [] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
+  let header_items = UI_CONTENT_HEADER.map((v) => v.value);
+
 </script>
 
 <main class="w-full">
@@ -100,14 +98,14 @@
       </div>
 
       <div>
-        <DataTable
-          caption=""
-          {rows}
-          {rowsComplementary}
-          headers={UI_CONTENT_HEADER}
-          rowBorder={true}
-        />
-
+        {#if results.length > 0}
+          <DataTable
+            caption=""
+            data={results}
+            header={UI_CONTENT_HEADER}
+            rowBorder={true}
+          />
+        {/if}
         <!-- result table-->
       </div>
     </section>
