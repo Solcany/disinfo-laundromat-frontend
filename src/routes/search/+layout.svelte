@@ -3,6 +3,9 @@
   import Header from '$components/Header.svelte';
   import Footer from '$components/Footer.svelte';
   import ProgressBar from '$components/ProgressBar.svelte';
+  import { page } from '$app/stores';
+  // WIP: highlight current page tab
+  // console.log($page.route.id);
 </script>
 
 <nav class="outline outline-1">
