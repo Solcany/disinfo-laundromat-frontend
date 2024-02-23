@@ -29,14 +29,6 @@
 </script>
 
 <main class="w-full">
-  <nav class="outline outline-1">
-    <ul class="flex w-full">
-      <li class="px-3"><a href="."> Url </a></li>
-      <li class="px-3"><a href="."> Content </a></li>
-      <li class="px-3"><a href="."> Metadata </a></li>
-    </ul>
-  </nav>
-
   <div class="grid grid-cols-1 md:grid-cols-2">
     <!-- search bar nav -->
 

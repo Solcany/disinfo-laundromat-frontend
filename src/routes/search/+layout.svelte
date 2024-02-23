@@ -5,10 +5,11 @@
   import ProgressBar from '$components/ProgressBar.svelte';
 </script>
 
-<div class="relative flex min-h-screen w-full flex-col">
-HELLO WORLD
-  <ProgressBar class="absolute left-0 top-0" />
-  <Header class="px-3 md:px-16" />
-  <slot />
-  <Footer class="mt-auto px-3 md:px-16" />
-</div>
+<nav class="outline outline-1">
+  <ul class="flex w-full">
+    <li class="px-3"><a href="./url"> Url </a></li>
+    <li class="px-3"><a href="./content"> Content </a></li>
+    <li class="px-3"><a href="./metadata"> Metadata </a></li>
+  </ul>
+</nav>
+<slot/>
