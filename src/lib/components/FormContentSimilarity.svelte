@@ -11,13 +11,14 @@
   import type { LabeledValue } from '$models';
   import { content_api_input, region_data, language_data, browser_data } from '$dummy_data';
   export let onSubmit: (event: Event) => void = () => {};
+  export let value: string = '';
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>
   <div class="flex">
     <div>
       <Label for="url_input">Url</Label>
-      <InputTextArea name="url" id="url_input" class="outline outline-1" required />
+      <InputTextArea {value} name="url" id="url_input" class="outline outline-1" required />
     </div>
     <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>

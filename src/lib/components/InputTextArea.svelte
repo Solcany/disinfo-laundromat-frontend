@@ -23,9 +23,9 @@
 </script>
 
 <textarea
+  bind:value
   {id}
   {name}
-  bind:value
   {placeholder}
   {rows}
   {cols}

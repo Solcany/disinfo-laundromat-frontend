@@ -7,9 +7,10 @@
   import DataTable from '$components/DataTable.svelte';
   import { UI_CONTENT_HEADER } from '$config';
   import {ContentData, type ContentResponse, type ContentResult } from '$models';
-  import {parseUrl} from '$api';
+  import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { contentStore } from '$stores/content.ts';
+  import { contentStore } from '$stores/content.ts'; 
+  import { inputStore } from '$stores/input.ts';
   let results:  ContentResult[] | [] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   let header_items = UI_CONTENT_HEADER.map((v) => v.value);
 
@@ -18,11 +19,13 @@
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
+    inputStore.set(formData);
     let contentResponse: ContentResponse = await parseUrl(formData);
     let content = new ContentData(contentResponse);
     contentStore.set(content);
     loadingStore.set(false);
   }
+
 </script>
 
 <main class="w-full">

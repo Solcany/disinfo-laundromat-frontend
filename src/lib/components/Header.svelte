@@ -9,7 +9,7 @@
   <h1><a href="/">{APP_TITLE}</a></h1>
   <nav>
     <ul class="flex list-none">
-      <li class="px-3"><a href="/Search">Search</a></li>
+      <li class="px-3"><a href="/search/url">Search</a></li>
       <li class="px-3"><a href=".">About</a></li>
       <li class="px-3"><a href=".">login</a></li>
       <ul></ul>

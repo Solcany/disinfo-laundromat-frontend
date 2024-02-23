@@ -5,6 +5,7 @@
   import Label from '$components/Label.svelte';
   import { ContentData, type LabeledValue, type ContentResponse } from '$models';
   import { parseUrl } from '$api';
+  import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
 
@@ -13,11 +14,12 @@
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
+    inputStore.set(formData);
     let contentResponse: ContentResponse = await parseUrl(formData);
     let content = new ContentData(contentResponse);
     contentStore.set(content);
     loadingStore.set(false);
-    goto('/content_similarity');
+    goto('/search/url');
   }
 </script>
 
