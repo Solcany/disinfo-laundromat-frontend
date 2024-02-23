@@ -4,7 +4,7 @@
   export let row: [string, (string|number)][];
   export let rowComplementary: [string, (string|number)][];
   
-  let isExpanded = true;
+  let isExpanded = false;
   
   function handleClick() {
     isExpanded = !isExpanded;

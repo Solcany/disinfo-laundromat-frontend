@@ -10,25 +10,14 @@
   import InputTextArea from '$components/InputTextArea.svelte';
   import type { LabeledValue } from '$models';
   import { content_api_input, region_data, language_data, browser_data } from '$dummy_data';
-  import { contentStore } from '$stores/content.ts';
-  import { loadingStore } from '$stores/loading.ts';
-
   export let onSubmit: (event: Event) => void = () => {};
-
-  // const unsubscribeFormDataStore = formDataStore.subscribe((data: FormData) => (formData = data));
-
-  // onMount(() => {
-  //   return () => {
-  //     unsubscribeFormDataStore();
-  //   };
-  // });
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>
   <div class="flex">
     <div>
-      <Label for="url_input">Content</Label>
-      <InputTextArea name="url" id="url_input" required />
+      <Label for="url_input">Url</Label>
+      <InputTextArea name="url" id="url_input" class="outline outline-1" required />
     </div>
     <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>

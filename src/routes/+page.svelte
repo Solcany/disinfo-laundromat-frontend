@@ -24,9 +24,9 @@
 <main class="w-100">
   <section class="grid grid-rows-2 gap-4">
     <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
-      <div class="bg-blue-300">Explanation</div>
+      <div class="outline outline-1">Explanation</div>
       <div class="">
-        <Tabs value="content similarity" let:C>
+        <Tabs value="content similarity" class="outline outline-1" let:C>
           <C.List>
             <C.Trigger value="content similarity">Content similarity</C.Trigger>
             <C.Trigger value="metadata similarity">Metadata similarity</C.Trigger>
@@ -45,11 +45,10 @@
       </div>
     </div>
     <div>
-      <Label for="use case list" class="bg-green-300">Label!</Label>
       <ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
-        <li class="bg-pink-500">test1</li>
-        <li class="bg-pink-500">test2</li>
-        <li class="bg-pink-500">test3</li>
+        <li class="outline outline-1">test1</li>
+        <li class="outline outline-1">test2</li>
+        <li class="outline outline-1">test3</li>
       </ul>
     </div>
   </section>

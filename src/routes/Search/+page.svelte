@@ -6,29 +6,41 @@
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import type { ContentResult } from '$models';
+  import {ContentData, type ContentResponse, type ContentResult } from '$models';
+  import {parseUrl} from '$api';
+  import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   let results:  ContentResult[] | [] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   let header_items = UI_CONTENT_HEADER.map((v) => v.value);
 
+  async function handleSubmit(event: Event) {
+    event.preventDefault();
+    loadingStore.set(true);
+    const target = event.target as HTMLFormElement;
+    const formData = new FormData(target);
+    let contentResponse: ContentResponse = await parseUrl(formData);
+    let content = new ContentData(contentResponse);
+    contentStore.set(content);
+    loadingStore.set(false);
+  }
 </script>
 
 <main class="w-full">
-  <nav class="bg-purple-500">
+  <nav class="outline outline-1">
     <ul class="flex w-full">
-      <li><a href="."> Content </a></li>
-      <li><a href="."> Url </a></li>
-      <li><a href="."> Metadata </a></li>
+      <li class="px-3"><a href="."> Url </a></li>
+      <li class="px-3"><a href="."> Content </a></li>
+      <li class="px-3"><a href="."> Metadata </a></li>
     </ul>
   </nav>
 
   <div class="grid grid-cols-1 md:grid-cols-2">
     <!-- search bar nav -->
 
-    <section class="h-[400px] w-full bg-yellow-500">
+    <section class=" w-full outline outline-1">
       <!-- toolbar -->
-      <h2>Content Similarity</h2>
-      <!-- <FormContentSimilarity /> -->
+      <!-- <h2>Url</h2> -->
+      <FormContentSimilarity onSubmit={handleSubmit} />
 
       <Dialog let:C>
         <C.Trigger>New API key</C.Trigger>
@@ -42,7 +54,7 @@
               <div class="relative w-full">
                 <input
                   id="apiKey"
-                  class="h-input rounded-card-sm border-border-input bg-background placeholder:text-foreground-alt/50 hover:border-dark-40 focus:ring-foreground focus:ring-offset-background inline-flex w-full items-center border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  class="h-input rounded-card-sm border-border-input placeholder:text-foreground-alt/50 hover:border-dark-40 focus:ring-foreground focus:ring-offset-background inline-flex w-full items-center border px-4 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
                   placeholder="secret_api_key"
                   type="password"
                   autocomplete="off"
@@ -91,7 +103,7 @@
       </Button>
     </section>
 
-    <section class="h-[400px] w-full bg-pink-500">
+    <section class="w-full">
       <div>
         <span> searched term: result </span>
         <!-- searched term bar-->
