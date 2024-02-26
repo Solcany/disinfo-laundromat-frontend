@@ -40,6 +40,10 @@ export function excludeObjectKeys(
   return filtered;
 }
 
+export function isNumber(value: any): value is number {
+  return typeof value === 'number' && !isNaN(value);
+}
+
 export function zip(...arrays: any[][]): any[][] {
   const length = arrays.length > 0 ? arrays[0].length : 0;
 

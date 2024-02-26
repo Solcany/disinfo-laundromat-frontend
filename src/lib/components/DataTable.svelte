@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
-  import { includeObjectKeys, excludeObjectKeys } from '$utils';
-  import type { LabeledValue, ContentResult } from '$models';
+  import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
+  import { SortDirection, type LabeledValue, type ContentResult } from '$models';
   import DataTableRow from "$components/DataTableRow.svelte";
   import Button from '$components/Button.svelte';
 
@@ -12,6 +12,8 @@
   export let caption: string;
 
   let header_keys : string[] = header.map((v) => v.value);
+  let header_labels: string[] = header.map((v) => v.label);
+
   let rows: [string, (string | number)][][] = data.map((entry) =>
     Object.entries(includeObjectKeys(entry, header_keys))
   );
@@ -19,21 +21,30 @@
     Object.entries(excludeObjectKeys(entry, header_keys))
   );
 
-  let sortStatus: Record<string, string> = {};
-  let sortDirection: string = 'ascending';
+  let sortStatus: Record<string, SortDirection> = {};
+  let sortDirection: SortDirection = SortDirection.Ascending;
+  let sortNumber: boolean[] = rows[0].map((d: any) => isNumber(d));
 
   $: {
     if (rows.length !== rowsComplementary.length) {
       throw new Error('rows and rowComplementary must have the same length');
     }
   }
-  // let sortNumber: boolean[] = rows[0].map((d: any) => !isNaN(d));
 
-  // function updateSortStatus(column: string, index: number): void {
-  //     // reset all to "none"
-  //     headers.forEach((d: string) => {
-  //         sortStatus[d] = "none";
-  //     });
+  $: header_labels.forEach(label : string => {
+      sortStatus[label] = SortDirection.None;
+  })
+
+    function updateSortStatus(column_label): void{
+        // reset all to "none"
+        header_labels.forEach(d => {
+            sortStatus[d] = SortDirection.None;
+        })
+
+        sortDirection === SortDirection.Ascending ? sortDirection = SortDirection.Descending : sortDirection = SortDirection.Ascending;
+        sortStatus[column_label] = sortDirection
+    }
+
 
   //     sortDirection === 'ascending' ? sortDirection = 'descending' : sortDirection = 'ascending';
   //     sortStatus[column] = sortDirection;
@@ -85,17 +96,16 @@
     <tbody>
       <!-- main header -->
       <tr>
-        {#each header as header_item, i (header_item)}
+        {#each header_labels as label, i (label)}
           <th role="columnheader" scope="col">
-            {header_item.label}
+            {label}
             {#if sort}
               <button
                 class={i === sortBy ? 'sort selected' : 'sort'}
                 on:click={() => {
                   sortBy = i;
-                  //updateSortStatus(header, i)
-                }}
-              >
+                  updateSortStatus(header)
+                }}>
                 <span>^</span>
               </button>
             {/if}
