@@ -1,54 +1,48 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-  import { SortDirection, type LabeledValue, type ContentResult } from '$models';
-  import DataTableRow from "$components/DataTableRow.svelte";
+  import { SortDirection, ContentData, type LabeledValue, type ContentResult } from '$models';
+  import DataTableRow from '$components/DataTableRow.svelte';
   import Button from '$components/Button.svelte';
 
   export let header: LabeledValue[];
-  export let data: ContentResult[];
+  export let data: ContentData;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
 
-  let header_keys : string[] = header.map((v) => v.value);
-  let header_labels: string[] = header.map((v) => v.label);
-
-  let rows: [string, (string | number)][][] = data.map((entry) =>
-    Object.entries(includeObjectKeys(entry, header_keys))
+  let header_keys: string[] = header.map((v) => v.value);
+  let rows: any /*[string, string | number][][]*/ = data.getResults().map((entry) => {
+    let row = Object.entries(includeObjectKeys(entry, header_keys))
+    let rowComplementary = Object.entries(excludeObjectKeys(entry, header_keys))
+    return [row, rowComplementary];
+    }
   );
-  let rowsComplementary : [string, (string|number)][][] = data.map((entry) => 
-    Object.entries(excludeObjectKeys(entry, header_keys))
-  );
+  console.log(rows[0]);
 
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
-  let sortNumber: boolean[] = rows[0].map((d: any) => isNumber(d));
+  let areColumnsNumber: boolean[] = rows[0].map((d: any) => isNumber(d));
+  let sortColumnIndex: number = -1;
+  
+  function updateSortStatus(column_label: string): void {
+    // reset all to "none"
+    header.forEach((item) => {
+      sortStatus[item.label] = SortDirection.None;
+    });
 
-  $: {
-    if (rows.length !== rowsComplementary.length) {
-      throw new Error('rows and rowComplementary must have the same length');
-    }
+    sortDirection === SortDirection.Ascending
+      ? (sortDirection = SortDirection.Descending)
+      : (sortDirection = SortDirection.Ascending);
+    sortStatus[column_label] = sortDirection;
   }
 
-  $: header_labels.forEach(label : string => {
-      sortStatus[label] = SortDirection.None;
-  })
+ // $: {
+ //   if (rows.length !== rowsComplementary.length) {
+ //     throw new Error('rows and rowComplementary must have the same length');
+ //   }
+ // }
 
-    function updateSortStatus(column_label): void{
-        // reset all to "none"
-        header_labels.forEach(d => {
-            sortStatus[d] = SortDirection.None;
-        })
-
-        sortDirection === SortDirection.Ascending ? sortDirection = SortDirection.Descending : sortDirection = SortDirection.Ascending;
-        sortStatus[column_label] = sortDirection
-    }
-
-
-  //     sortDirection === 'ascending' ? sortDirection = 'descending' : sortDirection = 'ascending';
-  //     sortStatus[column] = sortDirection;
-  // }
 
   // let sortIcons: Record<string, { direction: string, icon: string }> = {
   //     'none': {
@@ -65,20 +59,29 @@
   //     }
   // };
 
-  // headers.forEach((d: string) => {
-  //     sortStatus[d] = "none";
-  // });
-
-  let sortBy: number = 0;
-
-  // let sortedRows: any[] = rows;
-
-  // $: {
-  //     if (sortBy !== 'none' && sortNumber[sortBy] === false) {
-  //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
-  //         else sortedRows = rows.sort((a, b) => descending(a[sortBy].toLowerCase(), b[sortBy].toLowerCase()));
-  //     }
-  // }
+  //$: sortColumnIndex = -1;
+//  $: header.forEach((item) => {
+//    sortStatus[item.label] = SortDirection.None;
+//  });
+//
+//  $: sortedRows = rows;
+//
+//  $: rows.forEach((row) => { console.log(row) });
+//
+//
+//  $: {
+//    if (sortColumnIndex !== -1 && areColumnsNumber[sortColumnIndex] === false) {
+//      if (sortDirection === SortDirection.Ascending) {
+//        sortedRows = rows.sort((a, b) =>
+//          ascending((a[sortColumnIndex][1] as string).toLowerCase(), (b[sortColumnIndex][1] as string).toLowerCase())
+//        );
+//      } else {
+//        sortedRows = rows.sort((a, b) =>
+//          descending((a[sortColumnIndex][1] as string).toLowerCase(), (b[sortColumnIndex][1] as string).toLowerCase())
+//        );
+//      }
+//    }
+//  }
 
   // $: {
   //     if (sortBy !== 'none' && sortNumber[sortBy] === true) {
@@ -96,16 +99,16 @@
     <tbody>
       <!-- main header -->
       <tr>
-        {#each header_labels as label, i (label)}
+        {#each header as item, i (item)}
           <th role="columnheader" scope="col">
-            {label}
+            {item.label}
             {#if sort}
               <button
-                class={i === sortBy ? 'sort selected' : 'sort'}
                 on:click={() => {
-                  sortBy = i;
-                  updateSortStatus(header)
-                }}>
+                  sortColumnIndex = i;
+                  updateSortStatus(item.label);
+                }}
+              >
                 <span>^</span>
               </button>
             {/if}
@@ -113,7 +116,7 @@
         {/each}
       </tr>
       {#each rows as row, i (row)}
-        <DataTableRow {row} rowComplementary={rowsComplementary[i]}/>
+        <!-- <DataTableRow {row} rowComplementary={rowsComplementary[i]} /> -->
       {/each}
     </tbody>
   </table>

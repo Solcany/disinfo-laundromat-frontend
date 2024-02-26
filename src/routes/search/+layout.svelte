@@ -15,4 +15,4 @@
     <li class="px-3"><a href="./metadata"> Metadata </a></li>
   </ul>
 </nav>
-<slot/>
+<slot />

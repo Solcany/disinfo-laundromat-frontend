@@ -16,9 +16,6 @@
   };
 </script>
 
-<Tabs.Root
-  {...restProps}
-  class={cn('w-100 h-100 border-muted shadow-card border', className)}
->
+<Tabs.Root {...restProps} class={cn('w-100 h-100 border-muted shadow-card border', className)}>
   <slot {C} />
 </Tabs.Root>

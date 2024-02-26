@@ -6,12 +6,11 @@
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
   import DataTable from '$components/DataTable.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import {ContentData, type ContentResponse, type ContentResult } from '$models';
+  import { ContentData, type ContentResponse} from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { contentStore } from '$stores/content.ts'; 
+  import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
-  let results:  ContentResult[] | [] = $contentStore.isEmpty() ? [] : $contentStore.getResults();
   let header_items = UI_CONTENT_HEADER.map((v) => v.value);
 
   async function handleSubmit(event: Event) {
@@ -25,12 +24,11 @@
     contentStore.set(content);
     loadingStore.set(false);
   }
-
 </script>
 
-<div class="w-full grid grid-cols-1 md:grid-cols-6 pr-4">
+<div class="grid w-full grid-cols-1 pr-4 md:grid-cols-6">
   <!-- search bar nav -->
-  <section class="w-full col-span-1 outline outline-1">
+  <section class="col-span-1 w-full outline outline-1">
     <!-- toolbar -->
     <!-- <h2>Url</h2> -->
     <FormContentSimilarity onSubmit={handleSubmit} />
@@ -96,20 +94,15 @@
     </Button>
   </section>
 
-  <section class="col-span-5 w-full col-start-auto">
+  <section class="col-span-5 col-start-auto w-full">
     <div>
       <span> searched term: result </span>
       <!-- searched term bar-->
     </div>
 
     <div>
-      {#if results.length > 0}
-        <DataTable
-          caption=""
-          data={results}
-          header={UI_CONTENT_HEADER}
-          rowBorder={true}
-        />
+      {#if !$contentStore.isEmpty()}
+        <DataTable caption="" data={$contentStore} header={UI_CONTENT_HEADER} rowBorder={true} />
       {/if}
       <!-- result table-->
     </div>
