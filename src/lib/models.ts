@@ -66,6 +66,11 @@ export class ContentData {
   }
 }
 
+export interface RowData {
+  data: (string | number)[]
+  dataComplementary: (string | number)[]
+}
+
 export enum SortDirection {
   Ascending = 'ascending',
   Descending = 'descending',

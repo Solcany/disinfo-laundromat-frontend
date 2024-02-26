@@ -1,7 +1,12 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-  import { SortDirection, ContentData, type LabeledValue, type ContentResult } from '$models';
+  import { 
+    SortDirection, 
+    ContentData, 
+    type LabeledValue, 
+    type RowData, 
+  } from '$models';
   import DataTableRow from '$components/DataTableRow.svelte';
   import Button from '$components/Button.svelte';
 
@@ -12,13 +17,18 @@
   export let caption: string;
 
   let header_keys: string[] = header.map((v) => v.value);
-  let rows: any /*[string, string | number][][]*/ = data.getResults().map((entry) => {
-    let row = Object.entries(includeObjectKeys(entry, header_keys))
-    let rowComplementary = Object.entries(excludeObjectKeys(entry, header_keys))
-    return [row, rowComplementary];
+
+  let rows: RowData[] = data.getResults().map((entry) => {
+    let data = Object.values(includeObjectKeys(entry, header_keys))
+    let dataComplementary = Object.values(excludeObjectKeys(entry, header_keys))
+    return {data, dataComplementary}
     }
   );
-  console.log(rows[0]);
+
+  /* 
+    WIP: pass RowData to the DataTableItem
+    , sort the table based on data property of RowData
+  */
 
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
