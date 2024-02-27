@@ -1,13 +1,16 @@
 <script lang="ts">
+  import type { TableRowData } from '$models';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
-  import type { TableRowData } from '$models';
+  import Tooltip from '$components/Tooltip.svelte';
+
   export let data: TableRowData;
   let className: string = '';
   export {className as class};
 
+  let domainAssociations = (data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []) as string[];
   let isExpanded = false;
-
+  
   function handleClick() {
     isExpanded = !isExpanded;
   }
@@ -16,10 +19,22 @@
 {#if data.data.length > 0}
   <tr class={cn('', className)}>
     <!-- row data -->
-    {#each data.data as value}
-      <td>
-        {value}
-      </td>
+    {#each data.data as [key, value]}
+      {#if key === 'domain' && domainAssociations.length > 0} 
+        <td>
+          {value}
+          {#each domainAssociations as association}
+            <Tooltip>
+              <svelte:fragment slot="icon">i</svelte:fragment>
+              <svelte:fragment slot="content">{association}</svelte:fragment>
+            </Tooltip>
+          {/each}
+        </td>
+      {:else}
+        <td>
+          {value}
+        </td>
+      {/if}
     {/each}
     <!-- expand row button -->
     <td>
@@ -32,15 +47,15 @@
       <td colSpan={data.data.length}>
         <table class="w-full bg-blue-100">
           <tbody>
-            {#each data.dataComplementary as [label, value]}
+            {#each data.dataComplementary as [key, value]}
               <tr>
                 <th>
-                  {label}
+                  {key}
                 </th>
               </tr>
               <tr>
                 <td>
-                  {value}
+                  {key}
                 </td>
               </tr>
             {/each}

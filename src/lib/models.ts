@@ -42,7 +42,7 @@ export interface ContentResponse {
 }
 
 export interface TableRowData {
-  data: (string | number)[];
+  data:[string, (string | number)][];
   dataComplementary: [string, (string | number)][];
   domainAssociations?: string[];
 }

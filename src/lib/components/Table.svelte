@@ -12,40 +12,30 @@
   export let rowBorder: boolean = false;
   export let caption: string;
 
-
-  let headerKeys: string[] = headerData.map((v) => v.key);
-//  let rows: TableRowData[] = data.getResults().map((entry) => {
-//    let data = Object.values(includeObjectKeys(entry, header_keys));
-//    let d = excludeObjectKeys(entry, header_keys);
-//    if (d.hasOwnProperty('source')) {
-//      const {source, ...rest} = d;
-//      d = rest;
-//    }
-//    let dataComplementary = Object.entries(d);
-//    if (entry.hasOwnProperty('source')) {
-//      let domainAssociations = Object.values(entry.source);
-//      return { data, dataComplementary, domainAssociations }
-//    } else {
-//      return { data, dataComplementary};
-//    }
-//  });
+  const headerKeys: string[] = headerData.map(({ key }) => key);
 
   const rows: TableRowData[] = data.getResults().map(entry => {
-    const data = includeObjectKeys(entry, headerKeys);
+    const includedData = includeObjectKeys(entry, headerKeys);
     const complementaryData = excludeObjectKeys(entry, headerKeys);
-    
-    // Remove 'source' property if present
-    const { source, ...rest } = complementaryData;
-    const cleanedData = Object.entries(rest);
-    
+  
     // Check if 'source' property exists in entry
     const domainAssociations = entry.hasOwnProperty('source') ? Object.values(entry.source) : undefined;
-    
-    return { data: Object.values(data), 
-             dataComplementary: cleanedData, 
-             domainAssociations };
-  });
 
+    // Remove 'source' property if present
+    const { source, ...rest } = complementaryData;
+    const cleanedComplementaryData = Object.entries(rest);
+    
+    const resultObject: TableRowData = {
+      data: Object.entries(includedData),
+      dataComplementary: cleanedComplementaryData
+    };
+    
+    if (domainAssociations !== undefined) {
+      resultObject.domainAssociations = domainAssociations;
+    }
+    
+    return resultObject;
+  });
   /* 
     WIP: pass RowData to the DataTableItem
     , sort the table based on data property of RowData
@@ -91,15 +81,15 @@
       if (sortDirection === SortDirection.Ascending) {
         sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           ascending(
-            (a.data[sortColumnIndex] as string).toLowerCase(),
-            (b.data[sortColumnIndex] as string).toLowerCase()
+            (a.data[sortColumnIndex][1] as string).toLowerCase(),
+            (b.data[sortColumnIndex][1] as string).toLowerCase()
           )
         );
       } else {
         sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           descending(
-            (a.data[sortColumnIndex] as string).toLowerCase(),
-            (b.data[sortColumnIndex] as string).toLowerCase()
+            (a.data[sortColumnIndex][1] as string).toLowerCase(),
+            (b.data[sortColumnIndex][1] as string).toLowerCase()
           )
         );
       }
@@ -112,15 +102,15 @@
       if (sortDirection === SortDirection.Ascending) {
         sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           ascending(
-            (a.data[sortColumnIndex] as number),
-            (b.data[sortColumnIndex] as number)
+            (a.data[sortColumnIndex][1] as number),
+            (b.data[sortColumnIndex][1] as number)
           )
         );
       } else {
         sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           descending(
-            (a.data[sortColumnIndex] as number),
-            (b.data[sortColumnIndex] as number)
+            (a.data[sortColumnIndex][1] as number),
+            (b.data[sortColumnIndex][1] as number)
           )
         );
       }
