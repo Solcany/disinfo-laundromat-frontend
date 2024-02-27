@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { cn } from '$utils';
   import Button from '$components/Button.svelte';
   import type { TableRowData } from '$models';
   export let data: TableRowData;
+  let className: string = '';
+  export {className as class};
 
   let isExpanded = false;
 
@@ -11,7 +14,7 @@
 </script>
 
 {#if data.data.length > 0}
-  <tr>
+  <tr class={cn('', className)}>
     <!-- row data -->
     {#each data.data as value}
       <td>

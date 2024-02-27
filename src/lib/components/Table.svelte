@@ -12,6 +12,8 @@
   export let rowBorder: boolean = false;
   export let caption: string;
 
+  console.log(data.getResults());
+
   let header_keys: string[] = headerData.map((v) => v.key);
   let rows: TableRowData[] = data.getResults().map((entry) => {
     let data = Object.values(includeObjectKeys(entry, header_keys));
@@ -132,7 +134,11 @@
         {/each}
       </tr>
       {#each sortedRows as row, i (row)}
-        <TableRow data={row}/>
+        {#if i === 0}
+          <TableRow data={row} class="bg-red-500"/>
+        {:else}
+          <TableRow data={row}/>
+        {/if}
       {/each}
     </tbody>
   </table>
