@@ -41,12 +41,6 @@
     sortStatus[column_label] = sortDirection;
   }
 
-  // $: {
-  //   if (rows.length !== rowsComplementary.length) {
-  //     throw new Error('rows and rowComplementary must have the same length');
-  //   }
-  // }
-
   // let sortIcons: Record<string, { direction: string, icon: string }> = {
   //     'none': {
   //         direction: 'n',
@@ -62,15 +56,10 @@
   //     }
   // };
 
-  //$: sortColumnIndex = -1;
-  //  $: header.forEach((item) => {
-  //    sortStatus[item.label] = SortDirection.None;
-  //  });
-  //
     $: sortedRows = rows;
 
   $: {
-    // sort string data
+    // sort strings 
     if (sortColumnIndex > -1 && areColumnsNumber[sortColumnIndex] === false) {
       if (sortDirection === SortDirection.Ascending) {
         sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
@@ -90,12 +79,26 @@
     }
   }
 
-  // $: {
-  //     if (sortBy !== 'none' && sortNumber[sortBy] === true) {
-  //         if (sortDirection === 'ascending') sortedRows = rows.sort((a, b) => ascending(a[sortBy], b[sortBy]));
-  //         else sortedRows = rows.sort((a, b) => descending(a[sortBy], b[sortBy]));
-  //     }
-  // }
+  $: {
+    // sort numbers
+    if (sortColumnIndex > -1 && areColumnsNumber[sortColumnIndex] === true) {
+      if (sortDirection === SortDirection.Ascending) {
+        sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
+          ascending(
+            (a.data[sortColumnIndex] as number),
+            (b.data[sortColumnIndex] as number)
+          )
+        );
+      } else {
+        sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
+          descending(
+            (a.data[sortColumnIndex] as number),
+            (b.data[sortColumnIndex] as number)
+          )
+        );
+      }
+    }
+  }
 </script>
 
 <div>

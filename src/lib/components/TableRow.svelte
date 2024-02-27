@@ -10,38 +10,40 @@
   }
 </script>
 
-<tr>
-  <!-- row data -->
-  {#each data.data as value}
-    <td>
-      {value}
-    </td>
-  {/each}
-  <!-- expand row button -->
-  <td>
-    <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
-  </td>
-</tr>
-<!-- expanded row data -->
-{#if isExpanded}
+{#if data.data.length > 0}
   <tr>
-    <td colSpan={data.data.length}>
-      <table class="w-full bg-blue-100">
-        <tbody>
-          {#each data.dataComplementary as [label, value]}
-            <tr>
-              <th>
-                {label}
-              </th>
-            </tr>
-            <tr>
-              <td>
-                {value}
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
+    <!-- row data -->
+    {#each data.data as value}
+      <td>
+        {value}
+      </td>
+    {/each}
+    <!-- expand row button -->
+    <td>
+      <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
     </td>
   </tr>
+  <!-- expanded row data -->
+  {#if isExpanded && data.dataComplementary.length > 0}
+    <tr>
+      <td colSpan={data.data.length}>
+        <table class="w-full bg-blue-100">
+          <tbody>
+            {#each data.dataComplementary as [label, value]}
+              <tr>
+                <th>
+                  {label}
+                </th>
+              </tr>
+              <tr>
+                <td>
+                  {value}
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  {/if}
 {/if}
