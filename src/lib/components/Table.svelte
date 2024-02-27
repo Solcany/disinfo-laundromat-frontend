@@ -4,6 +4,7 @@
   import { SortDirection, ContentData, type TableHeaderItemData, type TableRowData } from '$models';
   import TableRow from '$components/TableRow.svelte';
   import Button from '$components/Button.svelte';
+  import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
   export let data: ContentData;
@@ -121,7 +122,10 @@
                 <span>^</span>
               </button>
              {#if item.tooltip}
-                <span>item.tooltip</span>
+                <Tooltip>
+                  <span slot="icon">i</span>
+                  <svelte:fragment slot="content">item.tooltip</svelte:fragment>
+                </Tooltip>
              {/if}
             {/if}
           </th>
