@@ -12,13 +12,38 @@
   export let rowBorder: boolean = false;
   export let caption: string;
 
-  console.log(data.getResults());
 
-  let header_keys: string[] = headerData.map((v) => v.key);
-  let rows: TableRowData[] = data.getResults().map((entry) => {
-    let data = Object.values(includeObjectKeys(entry, header_keys));
-    let dataComplementary = Object.entries(excludeObjectKeys(entry, header_keys));
-    return { data, dataComplementary };
+  let headerKeys: string[] = headerData.map((v) => v.key);
+//  let rows: TableRowData[] = data.getResults().map((entry) => {
+//    let data = Object.values(includeObjectKeys(entry, header_keys));
+//    let d = excludeObjectKeys(entry, header_keys);
+//    if (d.hasOwnProperty('source')) {
+//      const {source, ...rest} = d;
+//      d = rest;
+//    }
+//    let dataComplementary = Object.entries(d);
+//    if (entry.hasOwnProperty('source')) {
+//      let domainAssociations = Object.values(entry.source);
+//      return { data, dataComplementary, domainAssociations }
+//    } else {
+//      return { data, dataComplementary};
+//    }
+//  });
+
+  const rows: TableRowData[] = data.getResults().map(entry => {
+    const data = includeObjectKeys(entry, headerKeys);
+    const complementaryData = excludeObjectKeys(entry, headerKeys);
+    
+    // Remove 'source' property if present
+    const { source, ...rest } = complementaryData;
+    const cleanedData = Object.entries(rest);
+    
+    // Check if 'source' property exists in entry
+    const domainAssociations = entry.hasOwnProperty('source') ? Object.values(entry.source) : undefined;
+    
+    return { data: Object.values(data), 
+             dataComplementary: cleanedData, 
+             domainAssociations };
   });
 
   /* 
@@ -134,11 +159,11 @@
         {/each}
       </tr>
       {#each sortedRows as row, i (row)}
-        {#if i === 0}
+       <!-- {#if i === 0}
           <TableRow data={row} class="bg-red-500"/>
-        {:else}
+        {:else} -->
           <TableRow data={row}/>
-        {/if}
+        <!-- {/if} -->
       {/each}
     </tbody>
   </table>

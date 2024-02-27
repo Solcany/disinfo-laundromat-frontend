@@ -44,6 +44,7 @@ export interface ContentResponse {
 export interface TableRowData {
   data: (string | number)[];
   dataComplementary: [string, (string | number)][];
+  domainAssociations?: string[];
 }
 
 export interface TableHeaderItemData {
