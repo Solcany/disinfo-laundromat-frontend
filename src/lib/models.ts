@@ -23,19 +23,17 @@ export interface ContentResult {
   url: string;
 }
 
-export interface IndicatorMetadata {
-  description: string;
-  interpretation: string;
-  name: string;
-}
-
 export interface ContentResponse {
   countries: {
     [key: string]: string;
   };
   csv_data: string;
   indicator_metadata: {
-    [key: string]: IndicatorMetadata;
+    [key: string]: {
+      description: string;
+      interpretation: string;
+      name: string;
+    };
   };
   languages: {
     [key: string]: string;
@@ -66,9 +64,9 @@ export class ContentData {
   }
 }
 
-export interface RowData {
-  data: (string | number)[]
-  dataComplementary: (string | number)[]
+export interface TableRowData {
+  data: (string | number)[];
+  dataComplementary: (string | number)[];
 }
 
 export enum SortDirection {

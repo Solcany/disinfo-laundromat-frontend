@@ -1,5 +1,5 @@
 <script lang="ts">
-  import DataTableHeaderItem from '$components/DataTableHeaderItem.svelte';
+  import TableHeaderItem from '$components/TableHeaderItem.svelte';
 
   enum HeaderVariant {
     Content,

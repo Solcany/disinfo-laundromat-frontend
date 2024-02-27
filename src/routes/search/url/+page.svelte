@@ -4,9 +4,9 @@
   import InputText from '$components/InputText.svelte';
   import Button from '$components/Button.svelte';
   import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
-  import DataTable from '$components/DataTable.svelte';
+  import Table from '$components/Table.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import { ContentData, type ContentResponse} from '$models';
+  import { ContentData, type ContentResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
@@ -102,7 +102,7 @@
 
     <div>
       {#if !$contentStore.isEmpty()}
-        <DataTable caption="" data={$contentStore} header={UI_CONTENT_HEADER} rowBorder={true} />
+        <Table caption="" data={$contentStore} header={UI_CONTENT_HEADER} rowBorder={true} />
       {/if}
       <!-- result table-->
     </div>
