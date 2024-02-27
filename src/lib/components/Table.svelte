@@ -5,14 +5,13 @@
   import TableRow from '$components/TableRow.svelte';
   import Button from '$components/Button.svelte';
 
-  export let header: TableHeaderItemData[];
+  export let headerData: TableHeaderItemData[];
   export let data: ContentData;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
 
-  let header_keys: string[] = header.map((v) => v.key);
-
+  let header_keys: string[] = headerData.map((v) => v.key);
   let rows: TableRowData[] = data.getResults().map((entry) => {
     let data = Object.values(includeObjectKeys(entry, header_keys));
     let dataComplementary = Object.entries(excludeObjectKeys(entry, header_keys));
@@ -31,7 +30,7 @@
 
   function updateSortStatus(column_label: string): void {
     // reset all to "none"
-    header.forEach((item) => {
+    headerData.forEach((item : TableHeaderItemData) => {
       sortStatus[item.label] = SortDirection.None;
     });
 
@@ -109,7 +108,7 @@
     <tbody>
       <!-- main header -->
       <tr>
-        {#each header as item, i (item)}
+        {#each headerData as item, i (item)}
           <th role="columnheader" scope="col">
             {item.label}
             {#if sort}
@@ -121,6 +120,9 @@
               >
                 <span>^</span>
               </button>
+             {#if item.tooltip}
+                <span>item.tooltip</span>
+             {/if}
             {/if}
           </th>
         {/each}

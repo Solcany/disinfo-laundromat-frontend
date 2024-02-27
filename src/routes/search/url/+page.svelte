@@ -101,7 +101,7 @@
 
     <div>
       {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} header={UI_CONTENT_HEADER} rowBorder={true} />
+        <Table caption="" data={$contentStore} headerData={UI_CONTENT_HEADER} rowBorder={true} />
       {/if}
       <!-- result table-->
     </div>
