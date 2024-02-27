@@ -41,6 +41,17 @@ export interface ContentResponse {
   results: ContentResult[];
 }
 
+export interface TableRowData {
+  data: (string | number)[];
+  dataComplementary: [string, (string | number)][];
+}
+
+export enum SortDirection {
+  Ascending = 'ascending',
+  Descending = 'descending',
+  None = 'none'
+}
+
 export class ContentData {
   private content: ContentResponse;
 
@@ -64,13 +75,3 @@ export class ContentData {
   }
 }
 
-export interface TableRowData {
-  data: (string | number)[];
-  dataComplementary: (string | number)[];
-}
-
-export enum SortDirection {
-  Ascending = 'ascending',
-  Descending = 'descending',
-  None = 'none'
-}

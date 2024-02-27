@@ -15,7 +15,7 @@
 
   let rows: TableRowData[] = data.getResults().map((entry) => {
     let data = Object.values(includeObjectKeys(entry, header_keys));
-    let dataComplementary = Object.values(excludeObjectKeys(entry, header_keys));
+    let dataComplementary = Object.entries(excludeObjectKeys(entry, header_keys));
     return { data, dataComplementary };
   });
 
@@ -67,23 +67,20 @@
   //    sortStatus[item.label] = SortDirection.None;
   //  });
   //
-  //  $: sortedRows = rows;
-  //
-  //  $: rows.forEach((row) => { console.log(row) });
-  //
-  //
+    $: sortedRows = rows;
+
   $: {
     // sort string data
     if (sortColumnIndex > -1 && areColumnsNumber[sortColumnIndex] === false) {
       if (sortDirection === SortDirection.Ascending) {
-        let sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
+        sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           ascending(
-            a.data[sortColumnIndex].toLowerCase(),
+            (a.data[sortColumnIndex] as string).toLowerCase(),
             (b.data[sortColumnIndex] as string).toLowerCase()
           )
         );
       } else {
-        let sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
+        sortedRows = rows.sort((a: TableRowData, b: TableRowData) =>
           descending(
             (a.data[sortColumnIndex] as string).toLowerCase(),
             (b.data[sortColumnIndex] as string).toLowerCase()
@@ -125,8 +122,8 @@
           </th>
         {/each}
       </tr>
-      {#each rows as row, i (row)}
-        <!-- <DataTableRow {row} rowComplementary={rowsComplementary[i]} /> -->
+      {#each sortedRows as row, i (row)}
+        <TableRow data={row}/>
       {/each}
     </tbody>
   </table>

@@ -1,8 +1,7 @@
 <script lang="ts">
   import Button from '$components/Button.svelte';
-  import type { LabeledValue } from '$models';
-  export let row: [string, string | number][];
-  export let rowComplementary: [string, string | number][];
+  import type { TableRowData } from '$models';
+  export let data: TableRowData;
 
   let isExpanded = false;
 
@@ -13,7 +12,7 @@
 
 <tr>
   <!-- row data -->
-  {#each row as [_, value]}
+  {#each data.data as value}
     <td>
       {value}
     </td>
@@ -26,10 +25,10 @@
 <!-- expanded row data -->
 {#if isExpanded}
   <tr>
-    <td colSpan={row.length}>
+    <td colSpan={data.data.length}>
       <table class="w-full bg-blue-100">
         <tbody>
-          {#each rowComplementary as [label, value]}
+          {#each data.dataComplementary as [label, value]}
             <tr>
               <th>
                 {label}
