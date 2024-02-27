@@ -11,7 +11,6 @@
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
-  let header_items = UI_CONTENT_HEADER.map((v) => v.value);
 
   async function handleSubmit(event: Event) {
     event.preventDefault();

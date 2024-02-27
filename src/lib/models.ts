@@ -46,6 +46,12 @@ export interface TableRowData {
   dataComplementary: [string, (string | number)][];
 }
 
+export interface TableHeaderItemData {
+  label: string,
+  key: string,
+  tooltip?: string
+}
+
 export enum SortDirection {
   Ascending = 'ascending',
   Descending = 'descending',

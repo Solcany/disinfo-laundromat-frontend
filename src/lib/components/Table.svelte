@@ -1,17 +1,17 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-  import { SortDirection, ContentData, type LabeledValue, type TableRowData } from '$models';
+  import { SortDirection, ContentData, type TableHeaderItemData, type TableRowData } from '$models';
   import TableRow from '$components/TableRow.svelte';
   import Button from '$components/Button.svelte';
 
-  export let header: LabeledValue[];
+  export let header: TableHeaderItemData[];
   export let data: ContentData;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
 
-  let header_keys: string[] = header.map((v) => v.value);
+  let header_keys: string[] = header.map((v) => v.key);
 
   let rows: TableRowData[] = data.getResults().map((entry) => {
     let data = Object.values(includeObjectKeys(entry, header_keys));
