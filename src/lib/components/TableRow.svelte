@@ -15,7 +15,6 @@
     isExpanded = !isExpanded;
   }
 </script>
-
 {#if data.data.length > 0}
   <tr class={cn('', className)}>
     <!-- row data -->

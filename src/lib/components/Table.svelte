@@ -43,7 +43,8 @@
 
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
-  let areColumnsNumber: boolean[] = rows[0].data.map((d: any) => isNumber(d));
+  let areColumnsNumber: boolean[] = rows[0].data.map((d: any) => isNumber(d[1]));
+  console.log(areColumnsNumber);
   let sortColumnIndex: number = -1;
 
   function updateSortStatus(column_label: string): void {
