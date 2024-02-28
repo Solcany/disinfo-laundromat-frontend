@@ -23,7 +23,6 @@
   }
 </script>
 
-<main class="w-100">
   <section class="grid grid-rows-2 gap-4">
     <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
       <div class="outline outline-1">Explanation</div>
@@ -54,4 +53,3 @@
       </ul>
     </div>
   </section>
-</main>

@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config}*/
 const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
-
   theme: {
   colors:  {
     'gray-1': '#53504c',

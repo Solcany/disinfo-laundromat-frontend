@@ -7,7 +7,7 @@
 </script>
 
 <Header />
-<main class="relative flex min-h-screen w-full flex-col">
+<main class="relative bg-grey-1 flex min-h-screen w-full flex-col">
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
 </main>
