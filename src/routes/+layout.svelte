@@ -1,5 +1,6 @@
 <script>
-  import '../app.pcss';
+  import '../styles/app.pcss';
+  import '../styles/fonts.css';
   import Header from '$components/Header.svelte';
   import Footer from '$components/Footer.svelte';
   import ProgressBar from '$components/ProgressBar.svelte';

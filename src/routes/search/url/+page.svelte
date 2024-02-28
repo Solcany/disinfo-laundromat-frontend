@@ -49,7 +49,7 @@
                 placeholder="Your Email"
                 type="email"
                 autocomplete="off"/>
-              <InputFile/>
+              <InputFile onSubmit={(f) => console.log(f)}/>
           </div>
           <div class="flex w-full justify-end">
             <C.Close>
