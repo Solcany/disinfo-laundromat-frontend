@@ -6,7 +6,7 @@
   export { className as class };
 </script>
 
-<header class={cn('w-100 flex justify-between py-1', className)}>
+<header class={cn('w-100 px-3 py-1 flex justify-between', className)}>
   <H1><a href="/">{APP_TITLE}</a></H1>
   <nav>
     <ul class="flex list-none">

@@ -25,7 +25,7 @@
 
   <section class="grid grid-rows-2 gap-4">
     <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
-      <div class="sans outline outline-1 bg-grey-1 red-500 bg-red-500">Explanation</div>
+      <div class="sans outline outline-1">Explanation</div>
       <div class="">
         <Tabs value="content similarity" class="outline outline-1" let:C>
           <C.List>

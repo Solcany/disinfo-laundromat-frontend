@@ -18,7 +18,8 @@ const config = {
       sans: ['Outfit', 'sans-serif'],
     },
   },
-  plugins: []
+  plugins: [],
+  darkMode: 'selector',
 };
 
 module.exports = config;
