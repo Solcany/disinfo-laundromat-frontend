@@ -39,9 +39,8 @@
         <C.Overlay/>
         <C.Content>
           <C.Title>Batch Download</C.Title>
-          <C.Description>Download multiple csvs</C.Description>
+          <C.Description>Batch Parse description</C.Description>
           <div class="flex flex-col items-start gap-1 pb-11 pt-7">
-            <div class="relative w-full">
               <Label for="emailInput" class="text-sm font-medium">Email</Label>
               <InputText
                 name="email input"
@@ -49,21 +48,14 @@
                 class=""
                 placeholder="Your Email"
                 type="email"
-                autocomplete="off"
-              />
+                autocomplete="off"/>
               <InputFile/>
-            </div>
           </div>
           <div class="flex w-full justify-end">
             <C.Close>
-              Save
+             X 
             </C.Close>
           </div>
-          <C.Close>
-            <div>
-              <span class="sr-only">Close</span>
-            </div>
-          </C.Close>
         </C.Content>
       </C.Portal>
     </Dialog>
