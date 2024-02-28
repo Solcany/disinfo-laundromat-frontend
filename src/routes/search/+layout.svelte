@@ -1,17 +1,16 @@
-<script>
-  import Header from '$components/Header.svelte';
-  import Footer from '$components/Footer.svelte';
-  import ProgressBar from '$components/ProgressBar.svelte';
+<script lang="ts">
   import { page } from '$app/stores';
-  // WIP: highlight current page tab
-  // console.log($page.route.id);
+  import {UI_SEARCH_NAV} from '$config';
+  function isActive(path: string) {
+    return $page.route.id === path;
+  }
 </script>
 
 <nav class="outline outline-1">
   <ul class="flex w-full">
-    <li class="px-3"><a href="./url"> Url </a></li>
-    <li class="px-3"><a href="./content"> Content </a></li>
-    <li class="px-3"><a href="./metadata"> Metadata </a></li>
+  {#each UI_SEARCH_NAV as {label, path}}
+    <li class="px-3 {isActive(path) ? 'bg-red-500' : ''}"><a href={path}>{label}</a></li>
+  {/each}
   </ul>
 </nav>
 <slot />

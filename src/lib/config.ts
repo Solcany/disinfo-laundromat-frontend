@@ -6,3 +6,9 @@ export const UI_CONTENT_HEADER: TableHeaderItemData[] = [
   { label: 'Similar Content', key: 'snippet', tooltip: 'test'},
   { label: 'Similarity Score', key: 'score' }
 ];
+
+export const UI_SEARCH_NAV = [
+  {label: 'Url', path: '/search/url'},
+  {label: 'Content', path: '/search/content'},
+  {label: 'Metadata', path: '/search/content'},
+];
