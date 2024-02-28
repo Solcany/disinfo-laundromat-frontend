@@ -7,10 +7,9 @@
 
 <Dialog.Overlay
   class={cn(
-    'rounded-card-lg bg-background shadow-popover fixed left-[50%] top-[50%] z-50 w-full max-w-[94%] translate-x-[-50%] translate-y-[-50%] border p-5 outline-none sm:max-w-[490px] md:w-full',
+    'fixed inset-0 z-50 bg-black/80',
     className
   )}
   {...$$restProps}
->
-  <slot />
-</Dialog.Overlay>
+/>
+
