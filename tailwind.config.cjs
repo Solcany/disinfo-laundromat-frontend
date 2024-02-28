@@ -3,17 +3,16 @@ const config = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
 
   theme: {
-    colors: {
-      'blue': '#1fb6ff',
-      'purple': '#7e5bef',
-      'pink': '#ff49db',
-      'orange': '#ff7849',
-      'green': '#13ce66',
-      'yellow': '#ffc82c',
-      'gray-dark': '#273444',
-      'gray': '#8492a6',
-      'gray-light': '#d3dce6',
-    },
+  colors:  {
+    'gray-1': '#53504c',
+    'gray-2': '#454341',
+    'gray-3': '#383635',
+    'gray-4': '#2c2a29',
+    'gray-5': '#1f1e1d',
+    'gray-6': '#131212',
+    'black': '#000000',
+    'bright-orange': '#FF6320',
+  },
     extend: {}
   },
   fontFamily: {
