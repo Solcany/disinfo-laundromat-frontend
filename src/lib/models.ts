@@ -53,6 +53,11 @@ export interface TableHeaderItemData {
   tooltip?: string
 }
 
+export interface NavItemData {
+  label: string,
+  path: string
+}
+
 export enum SortDirection {
   Ascending = 'ascending',
   Descending = 'descending',
