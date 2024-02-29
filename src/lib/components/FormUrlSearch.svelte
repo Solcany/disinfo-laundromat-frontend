@@ -1,15 +1,11 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { goto } from '$app/navigation';
-  import { get } from 'svelte/store';
-  import { enhance, applyAction } from '$app/forms';
   import DropdownSelect from '$components/DropdownSelect.svelte';
   import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
   import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
-  import InputTextArea from '$components/InputTextArea.svelte';
+  import InputText from '$components/InputText.svelte';
   import type { LabeledValue } from '$models';
-  import { content_api_input, region_data, language_data, browser_data } from '$dummy_data';
+  import { content_api_input, region_data, language_data, browser_data, operator_data} from '$dummy_data';
   export let onSubmit: (event: Event) => void = () => {};
   export let value: string = '';
 </script>
@@ -18,7 +14,7 @@
   <div class="flex">
     <div>
       <Label for="url_input">Url</Label>
-      <InputTextArea {value} name="url" id="url_input" class="outline outline-1" required />
+      <InputText {value} name="url" id="url_input" class="outline outline-1" required />
     </div>
     <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>
@@ -43,15 +39,26 @@
     {/each}
   </DropdownSelect>
 
-  <Label for="region_input">Browser</Label>
+  <Label for="browser_input">Browser</Label>
   <DropdownSelect
-    id="language_input"
+    id="browser_input"
     name="browser"
     value={content_api_input.browser}
     multiple={true}
     required
   >
     {#each browser_data as item}
+      <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
+    {/each}
+  </DropdownSelect>
+  <Label for="operator_input">Operator</Label>
+  <DropdownSelect
+    id="operator_input"
+    name="combineOperator"
+    value={content_api_input.browser}
+    multiple={true}
+    required>
+    {#each operator_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
   </DropdownSelect>

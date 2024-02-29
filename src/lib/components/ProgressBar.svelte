@@ -36,7 +36,7 @@
   <Progress.Root
     value={progressValue}
     max={100}
-    class={cn('shadow-mini-inset relative h-[15px] w-screen overflow-hidden', className)}
+    class={cn('shadow-mini-inset relative h-[2px] w-screen overflow-hidden', className)}
   >
     <div
       class="shadow-mini-inset absolute h-full w-full flex-1 bg-blue-500 transition-all duration-1000 ease-linear"

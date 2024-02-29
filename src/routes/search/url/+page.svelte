@@ -4,7 +4,7 @@
   import InputText from '$components/InputText.svelte';
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
-  import FormContentSimilarity from '$components/FormContentSimilarity.svelte';
+  import FormUrlSearch from '$components/FormUrlSearch.svelte';
   import Table from '$components/Table.svelte';
   import { UI_CONTENT_HEADER } from '$config';
   import { ContentData, type ContentResponse } from '$models';
@@ -17,9 +17,11 @@
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
+    const formData = new FormData(target); 
+    console.log(formData);
     inputStore.set(formData);
     let contentResponse: ContentResponse = await parseUrl(formData);
+    console.log(contentResponse);
     let content = new ContentData(contentResponse);
     contentStore.set(content);
     loadingStore.set(false);
@@ -31,7 +33,7 @@
   <section class="col-span-1 w-full outline outline-1">
     <!-- toolbar -->
     <!-- <h2>Url</h2> -->
-    <FormContentSimilarity onSubmit={handleSubmit} />
+    <FormUrlSearch onSubmit={handleSubmit} />
 
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>

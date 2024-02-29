@@ -16,6 +16,11 @@ export const browser_data: LabeledValue[] = [
   { label: 'Bing', value: 'Bing' }
 ];
 
+export const operator_data: LabeledValue[] = [
+  { label: 'AND', value: 'AND' },
+  { label: 'OR', value: 'OR' },
+];
+
 export const content_api_input: ContentApiInput = {
   region: region_data[0],
   language: language_data[0],

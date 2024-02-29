@@ -74,7 +74,6 @@ export class ContentData {
 
 
   getResults() {
-    console.log(typeof this.content.results[0].score)
     return this.content.results;
   }
 
