@@ -25,5 +25,6 @@ export const content_api_input: ContentApiInput = {
   region: region_data[0],
   language: language_data[0],
   browser: browser_data[0],
+  operator: operator_data[0],
   content: ''
 };

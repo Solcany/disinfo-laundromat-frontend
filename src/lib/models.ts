@@ -7,6 +7,7 @@ export interface ContentApiInput {
   region: LabeledValue;
   language: LabeledValue;
   browser: LabeledValue;
+  operator: LabeledValue;
   content: string;
   [index: string]: string | LabeledValue;
 }

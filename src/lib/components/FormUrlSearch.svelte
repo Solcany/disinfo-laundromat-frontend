@@ -22,7 +22,7 @@
   <Label for="region_input">Region</Label>
   <DropdownSelect
     id="region_input"
-    name="region"
+    name="country"
     value={content_api_input.region}
     items={region_data}
     required
@@ -42,20 +42,20 @@
   <Label for="browser_input">Browser</Label>
   <DropdownSelect
     id="browser_input"
-    name="browser"
+    name="search_engines"
     value={content_api_input.browser}
     multiple={true}
-    required
-  >
+    required>
     {#each browser_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
   </DropdownSelect>
+
   <Label for="operator_input">Operator</Label>
   <DropdownSelect
     id="operator_input"
     name="combineOperator"
-    value={content_api_input.browser}
+    value={content_api_input.operator}
     multiple={true}
     required>
     {#each operator_data as item}
