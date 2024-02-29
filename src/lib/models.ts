@@ -3,6 +3,12 @@ export interface LabeledValue {
   value: any;
 }
 
+export interface ApiResponse<T> {
+  data?: T;
+  error?: string;
+  status: number;
+}
+
 export interface ContentApiInput {
   region: LabeledValue;
   language: LabeledValue;
