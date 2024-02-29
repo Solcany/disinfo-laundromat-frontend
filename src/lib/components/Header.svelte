@@ -9,5 +9,5 @@
 
 <header class={cn('w-100 px-2 md:px-3 py-1 flex justify-between', className)}>
   <H1><a href="/">{APP_TITLE}</a></H1>
-  <Nav/>
+  <slot/>
 </header>
