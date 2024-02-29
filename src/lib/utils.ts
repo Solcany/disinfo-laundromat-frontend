@@ -40,6 +40,14 @@ export function excludeObjectKeys(
   return filtered;
 }
 
+
+export function getPathRoot(path : string): string {
+  const segments = path.split('/');
+  const root = segments[1];  
+  return '/' + root;
+}
+
+
 export function isNumber(value: any): value is number {
   return typeof value === 'number' && !isNaN(value);
 }

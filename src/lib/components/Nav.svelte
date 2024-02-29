@@ -1,18 +1,22 @@
 <script lang="ts">
   import {UI_NAV} from '$config';
-  import { cn } from '$utils'; 
+  import { onMount } from 'svelte';
+  import { cn, getPathRoot } from '$utils'; 
   import { page } from '$app/stores';
   let className: string | undefined = undefined;
   export { className as class };
-  function isActive(path: string) {
-    return $page.route.id === path;
+
+  let activePath: string = getPathRoot($page.route.id || '');
+
+  $: {
+    activePath = getPathRoot($page.route.id || '');
   }
-</script>
+  </script>
 
 <nav class={cn('', className)}>
   <ul class="flex list-none">
   {#each UI_NAV as {label, path}}
-    <li class="px-3 {isActive(path) ? 'bg-red-500' : ''}"><a href={path}>{label}</a></li>
+    <li class="px-3 {activePath === getPathRoot(path) ? 'bg-red-500' : ''}"><a href={path}>{label}</a></li>
   {/each}
   </ul>
 </nav>
