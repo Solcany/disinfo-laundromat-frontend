@@ -3,7 +3,7 @@
   import Tabs from '$components/Tabs.svelte';
   import FormUrlSearch from '$components/FormUrlSearch.svelte';
   import Label from '$components/Label.svelte';
-  import { ContentData, type LabeledValue, type ContentResponse } from '$models';
+  import { Content, type LabeledValue, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
@@ -15,11 +15,16 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
     inputStore.set(formData);
-    let contentResponse: ContentResponse = await parseUrl(formData);
-    let content = new ContentData(contentResponse);
-    contentStore.set(content);
-    loadingStore.set(false);
-    goto('/search/url');
+    let response: ApiResponse<any> = await parseUrl(formData);
+
+    if (response.error) {
+      console.log(response.error)
+    } else {
+      let content = new Content(response.data as ResponseData);
+      contentStore.set(content);
+      loadingStore.set(false);
+      goto('/search/url');
+    }
   }
 </script>
 

@@ -1,13 +1,13 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-  import { SortDirection, ContentData, type TableHeaderItemData, type TableRowData } from '$models';
+  import { SortDirection, Content, type TableHeaderItemData, type TableRowData } from '$models';
   import TableRow from '$components/TableRow.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: ContentData;
+  export let data: Content;
   export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
@@ -18,10 +18,7 @@
     const includedData = includeObjectKeys(entry, headerKeys);
     const complementaryData = excludeObjectKeys(entry, headerKeys);
   
-    // Check if 'source' property exists in entry
     const domainAssociations = entry.hasOwnProperty('source') ? Object.values(entry.source) : undefined;
-
-    // Remove 'source' property if present
     const { source, ...rest } = complementaryData;
     const cleanedComplementaryData = Object.entries(rest);
     
@@ -36,15 +33,10 @@
     
     return resultObject;
   });
-  /* 
-    WIP: pass RowData to the DataTableItem
-    , sort the table based on data property of RowData
-  */
 
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let areColumnsNumber: boolean[] = rows[0].data.map((d: any) => isNumber(d[1]));
-  console.log(areColumnsNumber);
   let sortColumnIndex: number = -1;
 
   function updateSortStatus(column_label: string): void {

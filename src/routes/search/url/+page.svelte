@@ -7,7 +7,7 @@
   import FormUrlSearch from '$components/FormUrlSearch.svelte';
   import Table from '$components/Table.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import { ContentData, type ContentResponse } from '$models';
+  import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
@@ -17,14 +17,16 @@
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target); 
-    console.log(formData);
+    const formData = new FormData(target);
     inputStore.set(formData);
-    let contentResponse: ContentResponse = await parseUrl(formData);
-    console.log(contentResponse);
-    let content = new ContentData(contentResponse);
-    contentStore.set(content);
-    loadingStore.set(false);
+    let response: ApiResponse<any> = await parseUrl(formData);
+    if (response.error) {
+      console.log(response.error)
+    } else {
+      let content = new Content(response.data as ResponseData);
+      contentStore.set(content);
+      loadingStore.set(false);
+    }
   }
 </script>
 

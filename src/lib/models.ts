@@ -30,7 +30,7 @@ export interface ContentResult {
   url: string;
 }
 
-export interface ContentResponse {
+export interface ResponseData {
   countries: {
     [key: string]: string;
   };
@@ -71,14 +71,12 @@ export enum SortDirection {
   None = 'none'
 }
 
-export class ContentData {
-  private content: ContentResponse;
+export class Content {
+  private content: ResponseData;
 
-  constructor(content: ContentResponse) {
+  constructor(content: ResponseData) {
     this.content = content;
   }
-
-
 
   getResults() {
     return this.content.results;

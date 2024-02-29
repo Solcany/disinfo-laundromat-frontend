@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store';
-import { ContentData, type ContentResponse } from '$models';
+import { Content, type ResponseData } from '$models';
 
-const initialResult: ContentResponse = {
+const initialData: ResponseData = {
   countries: {},
   csv_data: '',
   indicator_metadata: {},
   languages: {},
   results: []
 };
-const initialContent: ContentData = new ContentData(initialResult);
+const initialContent = new Content(initialData);
 
-export const contentStore = writable<ContentData>(initialContent);
+export const contentStore = writable<Content>(initialContent);
