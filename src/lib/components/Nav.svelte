@@ -16,7 +16,7 @@
 <nav class={cn('', className)}>
   <ul class="flex list-none">
   {#each UI_NAV as {label, path}}
-    <li class="px-3 {activePath === getPathRoot(path) ? 'bg-red-500' : ''}"><a href={path}>{label}</a></li>
+    <li class="px-3"><a class="sans text-white px-3 text-base {activePath === getPathRoot(path) ? 'font-bold' : ''}" href={path}>{label}</a></li>
   {/each}
   </ul>
 </nav>

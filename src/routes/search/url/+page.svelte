@@ -30,9 +30,9 @@
   }
 </script>
 
-<div class="grid w-full grid-cols-1 pr-4 md:grid-cols-6">
+<div class="grid w-full grid-cols-1 pr-4 md:grid-cols-12 bg-gray4">
   <!-- search bar nav -->
-  <section class="col-span-1 w-full outline outline-1">
+  <section class="col-span-3 w-full">
     <!-- toolbar -->
     <!-- <h2>Url</h2> -->
     <FormUrlSearch onSubmit={handleSubmit} />
@@ -88,7 +88,7 @@
     </Button>
   </section>
 
-  <section class="col-span-5 col-start-auto w-full">
+  <section class="col-span-9 col-start-auto w-full">
     <div>
       <span> searched term: result </span>
       <!-- searched term bar-->

@@ -13,10 +13,12 @@
 <form on:submit={(event) => onSubmit(event)}>
   <div class="flex">
     <div>
-      <Label for="url_input">Url</Label>
-      <InputText {value} name="url" id="url_input" class="outline outline-1" required />
+      <Label for="url_input" class="block dark:text-white" >Url</Label>
+      <div class="flex item-center">
+        <InputText {value} name="url" id="url_input" class="outline outline-1" required />
+        <Button type="submit" ariaLabel="Submit form">→</Button>
+      </div>
     </div>
-    <Button type="submit" ariaLabel="Submit form">Submit</Button>
   </div>
 
   <Label for="region_input">Region</Label>

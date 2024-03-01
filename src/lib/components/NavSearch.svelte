@@ -8,10 +8,10 @@
   }
 </script>
 
-<nav class="outline outline-1">
+<nav>
   <ul class="flex w-full">
   {#each UI_SEARCH_NAV as {label, path}}
-    <li class="px-3 {activePath === path ? 'bg-red-500' : ''}"><a href={path}>{label}</a></li>
+    <li class="{activePath === path ? 'dark:text-white dark:bg-gray4' : 'dark:text-white'} font-light px-8 py-2 dark:border-r-2 dark:border-gray3"><a href={path}>{label}</a></li>
   {/each}
   </ul>
 </nav>

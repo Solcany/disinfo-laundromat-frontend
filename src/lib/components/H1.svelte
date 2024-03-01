@@ -4,4 +4,5 @@
   export {className as class};
 </script>
 
-<h1 class={cn('font-sans font-light dark:text-white text-black', className)}><slot/></h1>
+<h1 class={cn('font-sans font-light text-xl dark:text-white text-black', className)}><slot/></h1>
+

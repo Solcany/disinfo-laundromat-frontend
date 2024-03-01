@@ -20,7 +20,7 @@
     <!-- row data -->
     {#each data.data as [key, value]}
       {#if key === 'domain' && domainAssociations.length > 0} 
-        <td>
+        <td class="dark:text-white">
           {value}
           {#each domainAssociations as association}
             <Tooltip>
@@ -30,7 +30,7 @@
           {/each}
         </td>
       {:else}
-        <td>
+        <td class="dark:text-white">
           {value}
         </td>
       {/if}
