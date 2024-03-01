@@ -120,7 +120,7 @@
       <!-- main header -->
       <tr>
         {#each headerData as item, i (item)}
-          <th role="columnheader" scope="col">
+          <th class="text-white" role="columnheader" scope="col">
             {item.label}
             {#if sort}
               <button

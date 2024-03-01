@@ -4,13 +4,13 @@
 
 <Tooltip.Root openDelay={0} {...$$restProps}>
   <Tooltip.Trigger
-    class="border-border-input bg-background shadow-btn ring-dark ring-offset-background
-  hover:bg-muted focus-visible:ring-dark focus-visible:ring-offset-background inline-flex size-10 items-center justify-center rounded-full border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    class="border-border-input bg-white  shadow-btn ring-dark ring-offset-background
+  hover:bg-muted focus-visible:ring-dark focus-visible:ring-offset-background inline-flex size-5 items-center justify-center rounded-full border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-black"
   >
   <slot name="icon"/>
   </Tooltip.Trigger>
-  <Tooltip.Content sideOffset={8}>
-    <div class="bg-background">
+  <Tooltip.Content class="bg-white" sideOffset={8}>
+    <div class="bg-white">
       <Tooltip.Arrow class="border-dark-10 rounded-[2px] border-l border-t" />
     </div>
     <div
