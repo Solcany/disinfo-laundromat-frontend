@@ -9,6 +9,7 @@
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
 
+
   async function handleSubmit(event: Event) {
     event.preventDefault();
     loadingStore.set(true);
@@ -16,7 +17,6 @@
     const formData = new FormData(target);
     inputStore.set(formData);
     let response: ApiResponse<any> = await parseUrl(formData);
-
     if (response.error) {
       console.log(response.error)
     } else {

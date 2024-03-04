@@ -6,6 +6,7 @@
   import Button from '$components/Button.svelte';
   import FormUrlSearch from '$components/FormUrlSearch.svelte';
   import Table from '$components/Table.svelte';
+  import Link from '$components/Link.svelte';
   import { UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
@@ -90,8 +91,9 @@
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
-      {#if $inputStore.get('url') && $inputStore.get('url').length > 0 }
-      <span> Results for: {$inputStore.get('url')} </span>
+
+  {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
+      <span class="text-xs dark:text-white block py-2"> Results for: <Link href="{$inputStore.get('url')}"> {$inputStore.get('url')}</Link></span>
       {/if}
       <!-- searched term bar-->
     </div>

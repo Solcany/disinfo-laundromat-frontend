@@ -3,12 +3,12 @@
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
   import { SortDirection, Content, type TableHeaderItemData, type TableRowData } from '$models';
   import TableRow from '$components/TableRow.svelte';
+  import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
   export let data: Content;
-  export let sort: boolean = true;
   export let rowBorder: boolean = false;
   export let caption: string;
 
@@ -38,6 +38,11 @@
   let sortDirection: SortDirection = SortDirection.Ascending;
   let areColumnsNumber: boolean[] = rows[0].data.map((d: any) => isNumber(d[1]));
   let sortColumnIndex: number = -1;
+
+  function handleHeaderItemClick(i : number, label : string): void {
+    sortColumnIndex = i
+    updateSortStatus(label);
+  }
 
   function updateSortStatus(column_label: string): void {
     // reset all to "none"
@@ -116,31 +121,24 @@
     {#if caption}
       <caption>{caption}</caption>
     {/if}
+    <!--
+    <colgroup>
+      <col class="w-1/5">
+      <col class="w-1/5">
+      <col class="w-2/4">
+      <col>
+    </colgroup>
+    -->
+    <thead>
+      {#each headerData as data, i (data)}
+          <TableHeaderItem data={data} 
+                           onClick={() => {
+                            handleHeaderItemClick(i, data.label)
+                           }}
+          />
+      {/each}
+    </thead>
     <tbody>
-      <!-- main header -->
-      <tr>
-        {#each headerData as item, i (item)}
-          <th class="text-white" role="columnheader" scope="col">
-            {item.label}
-            {#if sort}
-              <button
-                on:click={() => {
-                  sortColumnIndex = i;
-                  updateSortStatus(item.label);
-                }}
-              >
-                <span>^</span>
-              </button>
-             {#if item.tooltip}
-                <Tooltip>
-                  <span slot="icon">i</span>
-                  <svelte:fragment slot="content">item.tooltip</svelte:fragment>
-                </Tooltip>
-             {/if}
-            {/if}
-          </th>
-        {/each}
-      </tr>
       {#each sortedRows as row, i (row)}
        <!-- {#if i === 0}
           <TableRow data={row} class="bg-red-500"/>

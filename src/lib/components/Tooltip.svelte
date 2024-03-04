@@ -4,8 +4,8 @@
 
 <Tooltip.Root openDelay={0} {...$$restProps}>
   <Tooltip.Trigger
-    class="border-border-input bg-white  shadow-btn ring-dark ring-offset-background
-  hover:bg-muted focus-visible:ring-dark focus-visible:ring-offset-background inline-flex size-5 items-center justify-center rounded-full border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-black"
+    class="border-border-input bg-white  shadow-btn ring-dark 
+  hover:bg-muted focus-visible:ring-dark focus-visible:ring-offset-background inline-flex size-5 items-center justify-center rounded-full border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 text-black shrink-0"
   >
   <slot name="icon"/>
   </Tooltip.Trigger>
