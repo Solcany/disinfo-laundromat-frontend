@@ -90,7 +90,9 @@
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
-      <span> searched term: result </span>
+      {#if $inputStore.get('url') && $inputStore.get('url').length > 0 }
+      <span> Results for: {$inputStore.get('url')} </span>
+      {/if}
       <!-- searched term bar-->
     </div>
 
