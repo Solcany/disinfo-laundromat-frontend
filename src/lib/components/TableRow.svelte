@@ -51,26 +51,28 @@
       <td>
     
   </tr>
-  <!-- expanded row data -->
+  <!-- expanded row Table -->
   {#if isExpanded && data.dataComplementary.length > 0}
     <tr>
-      <td colSpan={data.data.length}>
-        <table class="w-full bg-blue-100">
+      <td colSpan={data.data.length + 1}>
+        <div class="w-full py-4 dark:bg-gray6 bg-white">
+        <table>
           <tbody>
             {#each data.dataComplementary as [key, value]}
               <tr>
-                <th>
+                <th class="pl-4 text-left font-sans text-sm dark:text-white text-black">
                   {key}
                 </th>
               </tr>
               <tr>
-                <td>
-                  {key}
+                <td class="pl-4 pb-4 font-sans text-sm dark:text-white text-black">
+                  {value}
                 </td>
               </tr>
             {/each}
           </tbody>
         </table>
+        </div>
       </td>
     </tr>
   {/if}
