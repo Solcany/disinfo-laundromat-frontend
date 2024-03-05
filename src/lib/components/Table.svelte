@@ -101,7 +101,7 @@
 </script>
 
 <div>
-  <table class="border-spacing-0">
+  <table class="max-w-full w-full border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>
     {/if}

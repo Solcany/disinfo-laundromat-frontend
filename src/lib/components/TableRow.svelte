@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { TableRowData } from '$models';
   import { cn } from '$utils';
-  import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
   export let data: TableRowData;
@@ -16,11 +15,11 @@
   }
 </script>
 {#if data.data.length > 0}
-  <tr>
+  <tr class="w-full">
       <!-- row data -->
       {#each data.data as [key, value]}
         {#if key === 'domain' && domainAssociations.length > 0} 
-          <td class="py-3 dark:text-white text-black text-sm border-b-2 border-gray3">
+          <td class="dark:text-white text-black text-sm border-b-2 border-gray3">
             {value}
             {#each domainAssociations as association}
               <Tooltip>
@@ -30,15 +29,27 @@
             {/each}
           </td>
         {:else}
-          <td class="py-3 dark:text-white text-black text-sm border-b-2 border-gray3">
+          <td class="py-4 dark:text-white text-black text-sm border-b-2 border-gray3">
+            <div class="w-0 min-w-full whitespace-nowrap text-ellipsis overflow-hidden">
             {value}
+            </div>
           </td>
         {/if}
       {/each}
       <!-- expand row button -->
-      <td class="py-3 border-b-2 border-gray3">
-        <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
-      </td>
+
+      <td class="align-middle">
+        <button on:click={handleClick}
+                aria-label="expand row"
+                class="px-3 flex items-center align-center">
+        {#if isExpanded}
+          <span class="rotate-90 shrink-0 font-sans text-xl dark:text-white text-black inline-block"> &gt; </span>
+        {:else}
+          <span class="rotate-[-90deg] shrink-0 text-xl font-sans text-base dark:text-white text-black inline-block">&gt;</span>
+        {/if}
+        </button>
+      <td>
+    
   </tr>
   <!-- expanded row data -->
   {#if isExpanded && data.dataComplementary.length > 0}
