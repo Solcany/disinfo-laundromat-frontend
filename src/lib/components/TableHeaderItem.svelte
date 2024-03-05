@@ -1,19 +1,26 @@
 <script lang="ts">
-  import type { TableHeaderItemData } from '$models';
+  import { type TableHeaderItemData, SortDirection } from '$models';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
   export let data : TableHeaderItemData;
+  export let sortStatus: SortDirection;
   export let onClick: () => void;
   let className: string | undefined = undefined;
   export {className as class};
 </script>
 
 <th class={cn('', className)} role="columnheader" scope="col">
-  <div class="pr-4 flex items-center font-sans font-normal dark:text-white text-black text-sm">
+  <div class="pr-4 flex items-center font-sans font-light dark:text-white text-black text-lg">
   {data.label}
   <button on:click={onClick} class="pl-1 pr-2 font-sans font-normal text-xl shrink-0">
-    <span class="font-sans dark:text-white">↑</span>
+    {#if sortStatus === SortDirection.Ascending}
+      <span class="font-sans dark:text-white text-black">↑</span>
+    {:else if sortStatus === SortDirection.Descending}
+      <span class="font-sans dark:text-white text-black inline-block rotate-180">↑</span>
+    {:else}
+      <span class="font-sans dark:text-gray1">↑</span>
+    {/if}
   </button>
    {#if data.tooltip}
       <Tooltip>

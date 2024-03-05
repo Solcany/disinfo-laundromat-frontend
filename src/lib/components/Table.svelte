@@ -9,7 +9,6 @@
 
   export let headerData: TableHeaderItemData[];
   export let data: Content;
-  export let rowBorder: boolean = false;
   export let caption: string;
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
@@ -56,22 +55,7 @@
     sortStatus[column_label] = sortDirection;
   }
 
-  // let sortIcons: Record<string, { direction: string, icon: string }> = {
-  //     'none': {
-  //         direction: 'n',
-  //         icon: 'list'
-  //     },
-  //     'ascending': {
-  //         direction: 'w',
-  //         icon: 'arrow'
-  //     },
-  //     'descending': {
-  //         direction: 'e',
-  //         icon: 'arrow'
-  //     }
-  // };
-
-    $: sortedRows = rows;
+  $: sortedRows = rows;
 
   $: {
     // sort strings 
@@ -117,21 +101,22 @@
 </script>
 
 <div>
-  <table class:rowBorder>
+  <table class="border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>
     {/if}
-    <!--
+    <!-- WIP: should col width be hardcoded? -->
+    <!-- should this be somehow set dynamically -->
     <colgroup>
-      <col class="w-1/5">
-      <col class="w-1/5">
-      <col class="w-2/4">
-      <col>
+      <col style="width: 20%">
+      <col style="width: 20%">
+      <col style="width: 55%"> 
+      <col style="width: 5%">
     </colgroup>
-    -->
-    <thead>
+    <thead class="sticky top-0 bg-gray4">
       {#each headerData as data, i (data)}
-          <TableHeaderItem data={data} 
+          <TableHeaderItem data={data}
+                           sortStatus={sortStatus[data.label]}
                            onClick={() => {
                             handleHeaderItemClick(i, data.label)
                            }}

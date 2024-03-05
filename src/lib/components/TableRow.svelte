@@ -16,29 +16,29 @@
   }
 </script>
 {#if data.data.length > 0}
-  <tr class={cn('', className)}>
-    <!-- row data -->
-    {#each data.data as [key, value]}
-      {#if key === 'domain' && domainAssociations.length > 0} 
-        <td class="dark:text-white">
-          {value}
-          {#each domainAssociations as association}
-            <Tooltip>
-              <svelte:fragment slot="icon">i</svelte:fragment>
-              <svelte:fragment slot="content">{association}</svelte:fragment>
-            </Tooltip>
-          {/each}
-        </td>
-      {:else}
-        <td class="dark:text-white">
-          {value}
-        </td>
-      {/if}
-    {/each}
-    <!-- expand row button -->
-    <td>
-      <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
-    </td>
+  <tr>
+      <!-- row data -->
+      {#each data.data as [key, value]}
+        {#if key === 'domain' && domainAssociations.length > 0} 
+          <td class="py-3 dark:text-white text-black text-sm border-b-2 border-gray3">
+            {value}
+            {#each domainAssociations as association}
+              <Tooltip>
+                <svelte:fragment slot="icon">i</svelte:fragment>
+                <svelte:fragment slot="content">{association}</svelte:fragment>
+              </Tooltip>
+            {/each}
+          </td>
+        {:else}
+          <td class="py-3 dark:text-white text-black text-sm border-b-2 border-gray3">
+            {value}
+          </td>
+        {/if}
+      {/each}
+      <!-- expand row button -->
+      <td class="py-3 border-b-2 border-gray3">
+        <Button ariaLabel="expand row" onClick={handleClick}>^</Button>
+      </td>
   </tr>
   <!-- expanded row data -->
   {#if isExpanded && data.dataComplementary.length > 0}
