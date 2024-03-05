@@ -41,6 +41,23 @@
   }
 </script>
 
+<div class="drop-area" on:drop={handleDrop} on:dragover={handleDragOver}>
+  <p>Drop CSV file here or click to browse</p>
+  <label for="fileUpload" class="custom-file-upload">
+    <i class="fa fa-cloud-upload"></i> or browse
+  </label>
+  <input
+    id="fileUpload"
+    type="file"
+    on:change={handleFileInputChange}
+    accept=".csv"
+    class="hidden"
+  />
+  {#if errorMessage}
+    <p class="error-message">{errorMessage}</p>
+  {/if}
+</div>
+
 <style>
   .drop-area {
     border: 2px dashed #ccc;
@@ -51,26 +68,11 @@
   .error-message {
     color: red;
   }
-  input[type="file"] {
+  input[type='file'] {
     display: none;
-}
-.custom-file-upload {
+  }
+  .custom-file-upload {
     display: inline-block;
     cursor: pointer;
-}
+  }
 </style>
-
-<div 
-  class="drop-area" 
-  on:drop={handleDrop} 
-  on:dragover={handleDragOver}
->
-  <p>Drop CSV file here or click to browse</p>
-  <label for="fileUpload" class="custom-file-upload">
-      <i class="fa fa-cloud-upload"></i> or browse  
-  </label>
-  <input id="fileUpload" type="file" on:change={handleFileInputChange} accept=".csv" class="hidden">
-  {#if errorMessage}
-    <p class="error-message">{errorMessage}</p>
-  {/if}
-</div>

@@ -11,4 +11,13 @@
   export { className as class };
 </script>
 
-<input {id} {name} {type} {autocomplete} {required} {placeholder} {value} class={cn('', className)} />
+<input
+  {id}
+  {name}
+  {type}
+  {autocomplete}
+  {required}
+  {placeholder}
+  {value}
+  class={cn('', className)}
+/>

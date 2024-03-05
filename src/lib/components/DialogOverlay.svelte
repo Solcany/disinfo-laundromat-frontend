@@ -5,11 +5,4 @@
   export { className as class };
 </script>
 
-<Dialog.Overlay
-  class={cn(
-    'fixed inset-0 z-50 bg-black/80',
-    className
-  )}
-  {...$$restProps}
-/>
-
+<Dialog.Overlay class={cn('fixed inset-0 z-50 bg-black/80', className)} {...$$restProps} />

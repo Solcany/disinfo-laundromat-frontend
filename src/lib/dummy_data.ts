@@ -18,7 +18,7 @@ export const browser_data: LabeledValue[] = [
 
 export const operator_data: LabeledValue[] = [
   { label: 'AND', value: 'AND' },
-  { label: 'OR', value: 'OR' },
+  { label: 'OR', value: 'OR' }
 ];
 
 export const content_api_input: ContentApiInput = {

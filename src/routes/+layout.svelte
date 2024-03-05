@@ -11,10 +11,10 @@
 
 <Header class="px-2 md:px-3">
   <H1><a href="/">{APP_TITLE}</a></H1>
-  <Nav/>
+  <Nav />
 </Header>
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray1">
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
 </main>
-<Footer/>
+<Footer />

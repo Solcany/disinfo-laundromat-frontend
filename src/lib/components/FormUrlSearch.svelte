@@ -5,7 +5,13 @@
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import type { LabeledValue } from '$models';
-  import { content_api_input, region_data, language_data, browser_data, operator_data} from '$dummy_data';
+  import {
+    content_api_input,
+    region_data,
+    language_data,
+    browser_data,
+    operator_data
+  } from '$dummy_data';
   export let onSubmit: (event: Event) => void = () => {};
   export let value: string = '';
 </script>
@@ -13,8 +19,8 @@
 <form on:submit={(event) => onSubmit(event)}>
   <div class="flex">
     <div>
-      <Label for="url_input" class="block dark:text-white" >Url</Label>
-      <div class="flex item-center">
+      <Label for="url_input" class="block dark:text-white">Url</Label>
+      <div class="item-center flex">
         <InputText {value} name="url" id="url_input" class="outline outline-1" required />
         <Button type="submit" ariaLabel="Submit form">→</Button>
       </div>
@@ -47,7 +53,8 @@
     name="search_engines"
     value={content_api_input.browser}
     multiple={true}
-    required>
+    required
+  >
     {#each browser_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}
@@ -59,7 +66,8 @@
     name="combineOperator"
     value={content_api_input.operator}
     multiple={true}
-    required>
+    required
+  >
     {#each operator_data as item}
       <DropdownSelectItem value={item.value} label={item.label}></DropdownSelectItem>
     {/each}

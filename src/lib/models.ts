@@ -49,20 +49,20 @@ export interface ResponseData {
 }
 
 export interface TableRowData {
-  data:[string, (string | number)][];
-  dataComplementary: [string, (string | number)][];
+  data: [string, string | number][];
+  dataComplementary: [string, string | number][];
   domainAssociations?: string[];
 }
 
 export interface TableHeaderItemData {
-  label: string,
-  key: string,
-  tooltip?: string
+  label: string;
+  key: string;
+  tooltip?: string;
 }
 
 export interface NavItemData {
-  label: string,
-  path: string
+  label: string;
+  path: string;
 }
 
 export enum SortDirection {
@@ -93,4 +93,3 @@ export class Content {
     );
   }
 }
-

@@ -5,73 +5,84 @@
 
   export let data: TableRowData;
   let className: string = '';
-  export {className as class};
+  export { className as class };
 
-  let domainAssociations = (data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []) as string[];
+  let domainAssociations = (
+    data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []
+  ) as string[];
   let isExpanded = false;
-  
+
   function handleClick() {
     isExpanded = !isExpanded;
   }
 </script>
+
 {#if data.data.length > 0}
   <tr class="w-full">
-      <!-- row data -->
-      {#each data.data as [key, value]}
-        {#if key === 'domain' && domainAssociations.length > 0} 
-          <td class="dark:text-white text-black text-sm border-b-2 border-gray3">
+    <!-- row data -->
+    {#each data.data as [key, value]}
+      {#if key === 'domain' && domainAssociations.length > 0}
+        <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
+          {value}
+          {#each domainAssociations as association}
+            <Tooltip>
+              <svelte:fragment slot="icon">i</svelte:fragment>
+              <svelte:fragment slot="content">{association}</svelte:fragment>
+            </Tooltip>
+          {/each}
+        </td>
+      {:else}
+        <td class="border-b-2 border-gray3 py-4 text-sm text-black dark:text-white">
+          <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
             {value}
-            {#each domainAssociations as association}
-              <Tooltip>
-                <svelte:fragment slot="icon">i</svelte:fragment>
-                <svelte:fragment slot="content">{association}</svelte:fragment>
-              </Tooltip>
-            {/each}
-          </td>
-        {:else}
-          <td class="py-4 dark:text-white text-black text-sm border-b-2 border-gray3">
-            <div class="w-0 min-w-full whitespace-nowrap text-ellipsis overflow-hidden">
-            {value}
-            </div>
-          </td>
-        {/if}
-      {/each}
-      <!-- expand row button -->
+          </div>
+        </td>
+      {/if}
+    {/each}
+    <!-- expand row button -->
 
-      <td class="align-middle">
-        <button on:click={handleClick}
-                aria-label="expand row"
-                class="px-3 flex items-center align-center">
+    <td class="align-middle">
+      <button
+        on:click={handleClick}
+        aria-label="expand row"
+        class="align-center flex items-center px-3"
+      >
         {#if isExpanded}
-          <span class="rotate-90 shrink-0 font-sans text-xl dark:text-white text-black inline-block"> &gt; </span>
+          <span
+            class="inline-block shrink-0 rotate-90 font-sans text-xl text-black dark:text-white"
+          >
+            &gt;
+          </span>
         {:else}
-          <span class="rotate-[-90deg] shrink-0 text-xl font-sans text-base dark:text-white text-black inline-block">&gt;</span>
+          <span
+            class="inline-block shrink-0 rotate-[-90deg] font-sans text-base text-xl text-black dark:text-white"
+            >&gt;</span
+          >
         {/if}
-        </button>
-      <td>
-    
-  </tr>
+      </button>
+    </td><td> </td></tr
+  >
   <!-- expanded row Table -->
   {#if isExpanded && data.dataComplementary.length > 0}
     <tr>
       <td colSpan={data.data.length + 1}>
-        <div class="w-full py-4 dark:bg-gray6 bg-white">
-        <table>
-          <tbody>
-            {#each data.dataComplementary as [key, value]}
-              <tr>
-                <th class="pl-4 text-left font-sans text-sm dark:text-white text-black">
-                  {key}
-                </th>
-              </tr>
-              <tr>
-                <td class="pl-4 pb-4 font-sans text-sm dark:text-white text-black">
-                  {value}
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
+        <div class="w-full bg-white py-4 dark:bg-gray6">
+          <table>
+            <tbody>
+              {#each data.dataComplementary as [key, value]}
+                <tr>
+                  <th class="pl-4 text-left font-sans text-sm text-black dark:text-white">
+                    {key}
+                  </th>
+                </tr>
+                <tr>
+                  <td class="pb-4 pl-4 font-sans text-sm text-black dark:text-white">
+                    {value}
+                  </td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
         </div>
       </td>
     </tr>
