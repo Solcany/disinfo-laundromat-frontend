@@ -11,7 +11,7 @@ const config = {
   kit: {
     adapter: adapter(),
     files: {
-      // Specify that the root page
+      // Specify the root page if you want to adjust the home page
       // routes: 'src/routes/home/'
     },
     alias: {

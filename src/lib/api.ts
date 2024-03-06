@@ -1,21 +1,73 @@
 import { API_URL } from '$config';
 import type { ApiResponse } from '$models';
 
-export async function queryApi<T>(endpoint: string, data: FormData): Promise<ApiResponse<T>> {
+
+export async function PostApi<T>(
+  endpoint: string,
+  data: FormData,
+  headers?: { [key: string]: string } ): Promise<ApiResponse<T>> {
   try {
-    const query = API_URL.concat(endpoint);
-    const response = await fetch(query, {
+    const url = new URL(endpoint, API_URL); // Safely construct the URL
+
+    const finalHeaders = headers || {}; 
+
+    const response = await fetch(url.toString(), {
       method: 'POST',
-      body: data
+      headers: finalHeaders,
+      body: data,
     });
-    if (response.ok) {
-      const responseData: T = await response.json();
-      return { data: responseData, status: response.status };
-    } else {
+
+    if (!response.ok) {
       const errorText = await response.text();
-      console.error('Failed to fetch data:', response.statusText);
-      return { error: errorText, status: response.status };
+      const status = response.status;
+
+      // Handle specific error codes (e.g., check for 400, 401, 403)
+      if (status === 400) {
+        return { error: 'Bad request', status };
+      } else if (status === 401) {
+        return { error: 'Unauthorized', status };
+      } else if (status === 403) {
+        return { error: 'Forbidden', status };
+      } else {
+        console.error('Failed to fetch data:', response.statusText);
+        return { error: errorText, status };
+      }
     }
+
+    const responseData: T = await response.json();
+    return { data: responseData, status: response.status };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return { error: 'Network error', status: 500 };
+  }
+}
+
+
+export async function GetApi<T>(endpoint: string): Promise<ApiResponse<T>> {
+  try {
+    const url = new URL(endpoint, API_URL); // Safely construct the URL
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      const status = response.status;
+
+      if (status === 401) {
+        return { error: 'Unauthorized access', status };
+      } else if (status === 404) {
+        return { error: 'Resource not found', status };
+      } else {
+        console.error('Failed to fetch data:', response.statusText);
+        return { error: errorText, status };
+      }
+    }
+
+    const responseData: T = await response.json();
+
+    return { data: responseData, status: response.status };
   } catch (error) {
     console.error('Error fetching data:', error);
     return { error: 'Network error', status: 500 };
@@ -23,7 +75,11 @@ export async function queryApi<T>(endpoint: string, data: FormData): Promise<Api
 }
 
 export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
-  return queryApi<any>('parse-url', data);
+  return PostApi<any>('parse-url', data);
+}
+
+export async function getAppMetadata(): Promise<ApiResponse<any>> {
+  return GetApi<any>('metadata');
 }
 
 //export async parseUrl: async ({ request }) => {

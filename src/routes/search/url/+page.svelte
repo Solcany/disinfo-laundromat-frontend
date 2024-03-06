@@ -13,6 +13,9 @@
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
+	import type { PageData } from './$types';
+  import {onMount} from 'svelte';
+	export let data: PageData;
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
@@ -29,6 +32,11 @@
       loadingStore.set(false);
     }
   }
+
+  onMount( () => {
+    console.log("data?");
+    console.log(data);
+  })
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">

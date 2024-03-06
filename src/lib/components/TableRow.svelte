@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { CaretDown, CaretUp  } from "phosphor-svelte"
   import type { TableRowData } from '$models';
   import { cn } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
@@ -49,14 +50,14 @@
       >
         {#if isExpanded}
           <span
-            class="inline-block shrink-0 rotate-90 font-sans text-xl text-black dark:text-white"
+            class="shrink-0"
           >
-            &gt;
+            <CaretDown class="dark:fill-white fill-black" weight="bold" size="{20}"/>
           </span>
         {:else}
           <span
-            class="inline-block shrink-0 rotate-[-90deg] font-sans text-base text-xl text-black dark:text-white"
-            >&gt;</span
+            class="shrink-0"
+            ><CaretUp class="dark:fill-white fill-black" weight="bold" size="{20}"/></span
           >
         {/if}
       </button>

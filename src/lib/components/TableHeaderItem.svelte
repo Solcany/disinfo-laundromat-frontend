@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ArrowUp, ArrowDown} from 'phosphor-svelte';
   import { type TableHeaderItemData, SortDirection } from '$models';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
@@ -19,16 +20,18 @@
       class="shrink-0 pl-1 pr-2 font-sans text-xl font-normal"
     >
       {#if sortStatus === SortDirection.Ascending}
-        <span class="font-sans text-black dark:text-white">↑</span>
+        <span class="font-sans text-black dark:text-white">
+          <ArrowUp class="dark:fill-white fill-black" weight="bold" size={20}/>
+        </span>
       {:else if sortStatus === SortDirection.Descending}
-        <span class="inline-block rotate-180 font-sans text-black dark:text-white">↑</span>
+          <ArrowDown class="dark:fill-white fill-black" weight="bold" size={20}/>
       {:else}
-        <span class="font-sans dark:text-gray1">↑</span>
+          <ArrowUp class="fill-gray1" size={20}/>
       {/if}
     </button>
     {#if data.tooltip}
       <Tooltip>
-        <span slot="icon">i</span>
+        <svelte:fragment slot="icon">i</svelte:fragment>
         <svelte:fragment slot="content">data.tooltip</svelte:fragment>
       </Tooltip>
     {/if}
