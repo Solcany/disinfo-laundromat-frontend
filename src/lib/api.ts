@@ -7,8 +7,7 @@ export async function PostApi<T>(
   data: FormData,
   headers?: { [key: string]: string } ): Promise<ApiResponse<T>> {
   try {
-    const url = new URL(endpoint, API_URL); // Safely construct the URL
-
+    const url = new URL(endpoint, API_URL); 
     const finalHeaders = headers || {}; 
 
     const response = await fetch(url.toString(), {
@@ -21,7 +20,6 @@ export async function PostApi<T>(
       const errorText = await response.text();
       const status = response.status;
 
-      // Handle specific error codes (e.g., check for 400, 401, 403)
       if (status === 400) {
         return { error: 'Bad request', status };
       } else if (status === 401) {
@@ -43,12 +41,15 @@ export async function PostApi<T>(
 }
 
 
-export async function GetApi<T>(endpoint: string): Promise<ApiResponse<T>> {
+export async function GetApi<T>(
+  endpoint: string,
+  headers?: { [key: string]: string }) : Promise<ApiResponse<T>> {
   try {
-    const url = new URL(endpoint, API_URL); // Safely construct the URL
-
+    const url = new URL(endpoint, API_URL); 
+    const finalHeaders = headers || {}; 
     const response = await fetch(url.toString(), {
       method: 'GET',
+      headers: finalHeaders,
     });
 
     if (!response.ok) {
@@ -82,13 +83,3 @@ export async function getAppMetadata(): Promise<ApiResponse<any>> {
   return GetApi<any>('metadata');
 }
 
-//export async parseUrl: async ({ request }) => {
-//    const data = await request.formData();
-//    const responseData = await queryApi('parse-url', data);
-//    if(responseData) {
-//      return { props: { data: responseData }};
-//    } else {
-//      return { props: { }};
-//    }
-//  }
-//} satisfies Actions;
