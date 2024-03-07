@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowUp, ArrowDown} from 'phosphor-svelte';
+  import { ArrowUp, ArrowDown } from 'phosphor-svelte';
   import { type TableHeaderItemData, SortDirection } from '$models';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
@@ -21,12 +21,12 @@
     >
       {#if sortStatus === SortDirection.Ascending}
         <span class="font-sans text-black dark:text-white">
-          <ArrowUp class="dark:fill-white fill-black" weight="bold" size={20}/>
+          <ArrowUp class="fill-black dark:fill-white" weight="bold" size={20} />
         </span>
       {:else if sortStatus === SortDirection.Descending}
-          <ArrowDown class="dark:fill-white fill-black" weight="bold" size={20}/>
+        <ArrowDown class="fill-black dark:fill-white" weight="bold" size={20} />
       {:else}
-          <ArrowUp class="fill-gray1" size={20}/>
+        <ArrowUp class="fill-gray1" size={20} />
       {/if}
     </button>
     {#if data.tooltip}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CaretDown, CaretUp  } from "phosphor-svelte"
+  import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { TableRowData } from '$models';
   import { cn } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
@@ -49,15 +49,12 @@
         class="align-center flex items-center px-3"
       >
         {#if isExpanded}
-          <span
-            class="shrink-0"
-          >
-            <CaretDown class="dark:fill-white fill-black" weight="bold" size="{20}"/>
+          <span class="shrink-0">
+            <CaretDown class="fill-black dark:fill-white" weight="bold" size={20} />
           </span>
         {:else}
-          <span
-            class="shrink-0"
-            ><CaretUp class="dark:fill-white fill-black" weight="bold" size="{20}"/></span
+          <span class="shrink-0"
+            ><CaretUp class="fill-black dark:fill-white" weight="bold" size={20} /></span
           >
         {/if}
       </button>

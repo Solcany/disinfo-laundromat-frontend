@@ -1,19 +1,19 @@
 import { API_URL } from '$config';
 import type { ApiResponse } from '$models';
 
-
 export async function PostApi<T>(
   endpoint: string,
   data: FormData,
-  headers?: { [key: string]: string } ): Promise<ApiResponse<T>> {
+  headers?: { [key: string]: string }
+): Promise<ApiResponse<T>> {
   try {
-    const url = new URL(endpoint, API_URL); 
-    const finalHeaders = headers || {}; 
+    const url = new URL(endpoint, API_URL);
+    const finalHeaders = headers || {};
 
     const response = await fetch(url.toString(), {
       method: 'POST',
       headers: finalHeaders,
-      body: data,
+      body: data
     });
 
     if (!response.ok) {
@@ -40,16 +40,16 @@ export async function PostApi<T>(
   }
 }
 
-
 export async function GetApi<T>(
   endpoint: string,
-  headers?: { [key: string]: string }) : Promise<ApiResponse<T>> {
+  headers?: { [key: string]: string }
+): Promise<ApiResponse<T>> {
   try {
-    const url = new URL(endpoint, API_URL); 
-    const finalHeaders = headers || {}; 
+    const url = new URL(endpoint, API_URL);
+    const finalHeaders = headers || {};
     const response = await fetch(url.toString(), {
       method: 'GET',
-      headers: finalHeaders,
+      headers: finalHeaders
     });
 
     if (!response.ok) {
@@ -82,4 +82,3 @@ export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
 export async function getAppMetadata(): Promise<ApiResponse<any>> {
   return GetApi<any>('metadata');
 }
-

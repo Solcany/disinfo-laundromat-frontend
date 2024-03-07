@@ -5,24 +5,25 @@
   import type { LabeledValue } from '$models';
   export let id: string;
   export let name: string;
-  export let value: LabeledValue;
-  export let ariaLabel: string = '';
-  export let placeholder: string = ''
+  export let selected: LabeledValue | undefined = undefined;
+  export let ariaLabel: string | undefined = undefined;
+  export let placeholder: string | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
 </script>
 
 <div {id} class={className}>
-  <Select.Root {name} bind:selected={value} {...$$restProps}>
+  <Select.Root {name} bind:selected={selected} {...$$restProps}>
     <Select.Trigger
-      class="inline-flex h-input w-[296px] items-center rounded-9px border border-border-input bg-white px-[11px] text-sm transition-colors placeholder:text-foreground-alt/50  focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
+      class="h-input rounded-9px border-border-input placeholder:text-foreground-alt/50 focus:ring-foreground focus:ring-offset-background inline-flex w-[296px] items-center border bg-white px-[11px]  text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
       aria-label={ariaLabel}
     >
-    <Select.Value class="text-sm" {placeholder}/>
+      <Select.Value class="text-sm" {placeholder} />
     </Select.Trigger>
     <Select.Content
-      class="w-full rounded-xl border border-muted bg-white px-1 py-3 shadow-popover outline-none"
-      sideOffset={8}>
+      class="border-muted shadow-popover w-full rounded-xl border bg-white px-1 py-3 outline-none"
+      sideOffset={8}
+    >
       <slot />
     </Select.Content>
     <Select.Input id={name} />

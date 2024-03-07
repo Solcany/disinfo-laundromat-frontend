@@ -5,6 +5,9 @@
   export { className as class };
 </script>
 
-<Label.Root class={cn('font-sans font-light text-base dark:text-white text-black', className)} {...$$restProps>
+<Label.Root
+  class={cn('font-sans text-base font-light text-black dark:text-white', className)}
+  {...$$restProps}
+>
   <slot />
 </Label.Root>
