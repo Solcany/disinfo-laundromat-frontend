@@ -20,7 +20,7 @@ export const UI_NAV: NavItemData[] = [
 export const UI_SEARCH_NAV: NavItemData[] = [
   { label: 'Url', path: '/search/url' },
   { label: 'Content', path: '/search/content' },
-  { label: 'Metadata', path: '/search/content' }
+  { label: 'Metadata', path: '/search/metadata' }
 ];
 export const region_data: LabeledValue[] = [
   { label: 'US', value: 'US' },
@@ -43,7 +43,7 @@ export const operator_data: LabeledValue[] = [
   { label: 'OR', value: 'OR' }
 ];
 
-export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
+export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
@@ -77,4 +77,58 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     required: true,
     data: operator_data
   }
+];
+
+
+export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
+  {
+    type: InputType.Text,
+    name: 'title',
+    label: 'Title',
+    placeholder: 'Add title',
+    required: true
+  },
+  {
+    type: InputType.Text,
+    name: 'content',
+    label: 'title',
+    placeholder: 'Add content',
+    required: true
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'region',
+    label: 'Region',
+    value: region_data[0],
+    placeholder: 'Select region',
+    required: true,
+    data: region_data
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'language',
+    label: 'Language',
+    value: language_data[0],
+    placeholder: 'Select Language',
+    required: true,
+    data: language_data
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'combineOperator',
+    label: 'Operator',
+    placeholder: 'Select operator',
+    required: true,
+    data: operator_data 
+  },
+];
+
+export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
+  {
+    type: InputType.Text,
+    name: 'url',
+    label: 'Url',
+    placeholder: 'Add url',
+    required: true
+  },
 ];

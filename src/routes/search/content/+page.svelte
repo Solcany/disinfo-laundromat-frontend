@@ -7,7 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { URL_PAGE_FORM_CONFIG, UI_CONTENT_HEADER } from '$config';
+  import { CONTENT_PAGE_FORM_CONFIG, UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
@@ -34,8 +34,7 @@
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
-    <Form config={URL_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
-
+    <Form config={CONTENT_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>

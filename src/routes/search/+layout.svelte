@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NavSearch from '$components/NavSearch.svelte';
+import NavSearch from '$components/NavSearch.svelte';
 </script>
 
-<NavSearch />
-<slot />
+<NavSearch/>
+<slot/>
