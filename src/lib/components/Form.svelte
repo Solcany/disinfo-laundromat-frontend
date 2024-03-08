@@ -47,6 +47,6 @@
     {/if}
   {/each}
 
-  <InputCheckboxGroup/>
+  <!-- <InputCheckboxGroup/> -->
   <Button type="submit" ariaLabel="Submit form">→</Button>
 </form>

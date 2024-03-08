@@ -53,12 +53,21 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   },
   {
     type: InputType.Dropdown,
-    name: 'region',
-    label: 'Region',
+    name: 'country',
+    label: 'Country',
     value: region_data[0],
     placeholder: 'Select region',
     required: true,
     data: region_data
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'search_engines',
+    label: 'Search Engines',
+    placeholder: 'Select search engines',
+    value: browser_data[0],
+    required: true,
+    data: browser_data, 
   },
   {
     type: InputType.Dropdown,
@@ -73,6 +82,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     type: InputType.Dropdown,
     name: 'combineOperator',
     label: 'Operator',
+    value: operator_data[0],
     placeholder: 'Select Language',
     required: true,
     data: operator_data
