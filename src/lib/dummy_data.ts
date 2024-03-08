@@ -35,53 +35,61 @@ export enum InputType  {
   Text,
 }
 
-interface InputConfig {
+type InputTextConfig = {
+  type: InputType.Text;
   name: string;
   label: string;
   placeholder: string;
-  type: InputType;
   required: boolean;
-  data?: LabeledValue[];
-  value?: LabeledValue;
-
-
+  value?: string;
 }
 
-export const dum = [
+type InputDropdownConfig = {
+  type: InputType.Dropdown;
+  name: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  data: LabeledValue[];
+  value?: LabeledValue;
+}
+
+type InputConfig = InputTextConfig | InputDropdownConfig;
 
 
-]
 
 export const CONTENT_SEARCH_FORM_CONFIG : InputConfig[] = [
-  {name: "url",
-   label: "Url",
-   value: undefined,
-   placeholder: "Add url",
+  {
    type: InputType.Text,
-   required: true}
-  ,
-  {name: "region",
+   name: "url",
+   label: "Url",
+   placeholder: "Add url",
+   required: true
+  },
+  {
+   type: InputType.Dropdown,
+   name: "region",
    label: "Region",
    value: region_data[0],
    placeholder: "Select region",
-   type: InputType.Dropdown,
    required: true,
-   data: region_data},
-
-  {name: "language",
+   data: region_data
+  },
+  {
+   type: InputType.Dropdown,
+   name: "language",
    label: "Language",
    value: language_data[0],
    placeholder: "Select Language",
-   type: InputType.Dropdown,
    required: true,
-   data: language_data},
-
-  {name: "combineOperator",
+   data: language_data
+  },
+  {
+   type: InputType.Dropdown,
+   name: "combineOperator",
    label: "Operator",
-   value: operator_data[0],
    placeholder: "Select Language",
-   type: InputType.Dropdown,
    required: true,
-   data: operator_data},
+   data: operator_data}
 
 ]

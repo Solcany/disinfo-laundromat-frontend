@@ -80,5 +80,5 @@ export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
 }
 
 export async function getAppMetadata(): Promise<ApiResponse<any>> {
-  return GetApi<any>('metadata');
+  return GetApi<any>('');
 }
