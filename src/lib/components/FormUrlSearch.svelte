@@ -5,22 +5,15 @@
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import type { LabeledValue } from '$models';
-  import {
-    CONTENT_SEARCH_FORM_CONFIG,
-    InputType,
-    content_api_input,
-    region_data,
-    language_data,
-    browser_data,
-    operator_data
-  } from '$dummy_data';
+  import {CONTENT_PAGE_FORM_CONFIG} from '$config';
+  import { InputType } from '$models';
   export let onSubmit: (event: Event) => void = () => {};
   export let value: string = '';
 
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>
-  {#each CONTENT_SEARCH_FORM_CONFIG as item}
+  {#each CONTENT_PAGE_FORM_CONFIG as item}
     {#if item.type === InputType.Text}
     {@const id = item.name + '_input'}
       <div>
@@ -45,8 +38,7 @@
             items={item.data}
             selected={item.value}
             required={item.required}
-            placeholder={item.placeholder}>
-            
+            placeholder={item.placeholder}> 
             {#each item.data as v}
               <DropdownSelectItem value={v.value} label={v.label}/> 
             {/each}

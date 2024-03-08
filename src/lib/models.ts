@@ -93,3 +93,31 @@ export class Content {
     );
   }
 }
+
+
+export enum InputType  {
+  Dropdown,
+  Text,
+}
+
+interface InputTextConfig {
+  type: InputType.Text;
+  name: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  value?: string;
+}
+
+interface InputDropdownConfig {
+  type: InputType.Dropdown;
+  name: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  data: LabeledValue[];
+  value?: LabeledValue;
+}
+
+
+export type InputConfig = InputTextConfig | InputDropdownConfig;

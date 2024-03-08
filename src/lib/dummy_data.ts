@@ -1,4 +1,4 @@
-import type { LabeledValue, ContentApiInput } from '$models';
+import { type LabeledValue, type InputConfig, InputType  } from '$models';
 
 export const region_data: LabeledValue[] = [
   { label: 'US', value: 'US' },
@@ -21,44 +21,7 @@ export const operator_data: LabeledValue[] = [
   { label: 'OR', value: 'OR' }
 ];
 
-
-export const content_api_input: ContentApiInput = {
-  region: region_data[0],
-  language: language_data[0],
-  browser: browser_data[0],
-  operator: operator_data[0],
-  content: ''
-};
-
-export enum InputType  {
-  Dropdown,
-  Text,
-}
-
-type InputTextConfig = {
-  type: InputType.Text;
-  name: string;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  value?: string;
-}
-
-type InputDropdownConfig = {
-  type: InputType.Dropdown;
-  name: string;
-  label: string;
-  placeholder: string;
-  required: boolean;
-  data: LabeledValue[];
-  value?: LabeledValue;
-}
-
-type InputConfig = InputTextConfig | InputDropdownConfig;
-
-
-
-export const CONTENT_SEARCH_FORM_CONFIG : InputConfig[] = [
+export const CONTENT_PAGE_FORM_CONFIG : InputConfig[] = [
   {
    type: InputType.Text,
    name: "url",
