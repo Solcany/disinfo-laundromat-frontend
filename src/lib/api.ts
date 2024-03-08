@@ -79,6 +79,6 @@ export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
   return PostApi<any>('parse-url', data);
 }
 
-export async function getAppMetadata(): Promise<ApiResponse<any>> {
+export async function getAppConfig(): Promise<ApiResponse<any>> {
   return GetApi<any>('');
 }

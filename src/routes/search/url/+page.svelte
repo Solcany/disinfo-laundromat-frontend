@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
@@ -29,6 +30,14 @@
       loadingStore.set(false);
     }
   }
+
+  import { page } from '$app/stores';
+	export let data; 
+
+  onMount(()=> {
+    console.log(data);
+
+  })
 
 </script>
 
