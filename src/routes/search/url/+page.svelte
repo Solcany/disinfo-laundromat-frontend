@@ -4,10 +4,11 @@
   import InputText from '$components/InputText.svelte';
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
-  import FormUrlSearch from '$components/FormUrlSearch.svelte';
+  import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { UI_CONTENT_HEADER } from '$config';
+  import { CONTENT_PAGE_FORM_CONFIG,
+           UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
@@ -44,7 +45,7 @@
   <section class="col-span-3 w-full px-3">
     <!-- toolbar -->
     <!-- <h2>Url</h2> -->
-    <FormUrlSearch onSubmit={handleSubmit} />
+    <Form config={CONTENT_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
 
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>

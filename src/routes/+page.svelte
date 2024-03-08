@@ -1,9 +1,12 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
-  import FormUrlSearch from '$components/FormUrlSearch.svelte';
+  import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
-  import { Content, type LabeledValue, type ResponseData, type ApiResponse } from '$models';
+  import { Content, 
+            type ResponseData, 
+            type ApiResponse } from '$models';
+  import { CONTENT_PAGE_FORM_CONFIG } from '$config';
   import { parseUrl } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
@@ -42,7 +45,7 @@
             engines to find related websites. Discover networks of malicious actors/websites
             collectively sharing disinformation.
           </p>
-          <FormUrlSearch onSubmit={handleSubmit} />
+          <Form config={CONTENT_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
           <a href="search"> advanced search </a>
         </C.Content>
         <C.Content value="metadata similarity">test 2 test 2</C.Content>

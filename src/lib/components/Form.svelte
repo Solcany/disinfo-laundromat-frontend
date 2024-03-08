@@ -4,16 +4,13 @@
   import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
-  import type { LabeledValue } from '$models';
-  import {CONTENT_PAGE_FORM_CONFIG} from '$config';
-  import { InputType } from '$models';
+  import { type InputConfig, InputType } from '$models';
+  export let config : InputConfig[]; 
   export let onSubmit: (event: Event) => void = () => {};
-  export let value: string = '';
-
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>
-  {#each CONTENT_PAGE_FORM_CONFIG as item}
+  {#each config as item}
     {#if item.type === InputType.Text}
     {@const id = item.name + '_input'}
       <div>
