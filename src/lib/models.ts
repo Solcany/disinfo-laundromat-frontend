@@ -94,10 +94,9 @@ export class Content {
   }
 }
 
-
-export enum InputType  {
+export enum InputType {
   Dropdown,
-  Text,
+  Text
 }
 
 interface InputTextConfig {
@@ -118,6 +117,5 @@ interface InputDropdownConfig {
   data: LabeledValue[];
   value?: LabeledValue;
 }
-
 
 export type InputConfig = InputTextConfig | InputDropdownConfig;

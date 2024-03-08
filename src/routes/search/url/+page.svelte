@@ -7,8 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { CONTENT_PAGE_FORM_CONFIG,
-           UI_CONTENT_HEADER } from '$config';
+  import { CONTENT_PAGE_FORM_CONFIG, UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';

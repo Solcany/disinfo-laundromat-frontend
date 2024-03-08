@@ -3,9 +3,7 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
-  import { Content, 
-            type ResponseData, 
-            type ApiResponse } from '$models';
+  import { Content, type ResponseData, type ApiResponse } from '$models';
   import { CONTENT_PAGE_FORM_CONFIG } from '$config';
   import { parseUrl } from '$api';
   import { inputStore } from '$stores/input';

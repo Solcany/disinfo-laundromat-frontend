@@ -13,7 +13,7 @@
 </script>
 
 <div {id} class={className}>
-  <Select.Root {name} bind:selected={selected} {...$$restProps}>
+  <Select.Root {name} bind:selected {...$$restProps}>
     <Select.Trigger
       class="h-input rounded-9px border-border-input placeholder:text-foreground-alt/50 focus:ring-foreground focus:ring-offset-background inline-flex w-[296px] items-center border bg-white px-[11px]  text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
       aria-label={ariaLabel}
