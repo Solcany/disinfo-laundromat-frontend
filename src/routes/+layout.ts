@@ -1,5 +1,6 @@
 import type { LayoutLoad } from './$types';
-import type {LabeledValue} from '$models';
+import type {LabeledValue, ApiResponse} from '$models';
+import { error, type NumericRange } from '@sveltejs/kit';
 
 import { CONTENT_PAGE_FORM_CONFIG, 
          URL_PAGE_FORM_CONFIG, 
@@ -7,30 +8,22 @@ import { CONTENT_PAGE_FORM_CONFIG,
 
 import { getAppConfig } from '$api';
 
-  // todo:
-  // update local config dat with data fetched from API
-  // this has to be done for every  config manually 
-//
 export const load: LayoutLoad = async () => {
-  let appData = await getAppConfig();
+  let response = await getAppConfig();
+  let appConfig = {};
 
-  // copy local config
-  let upatedConfig = [...CONTENT_PAGE_FORM_CONFIG];
-  let languageField = upatedConfig.find(field => field.name === 'language');
-
-  // ohh appData is ApiResponse, it needs to be checked for errors before data is available,
-  // should this error checking be done here?
-  // if there's error push it to the global errorStore and show a toast?
-  // where else though?
-  const languages : LabeledValue[] = [];
-  for (const [key, value] of Object.entries(appData.languages)) {
-      languages.push({ label: value as string, value: key as string});
+  if (response.error && response.status >= 400 && response.status <= 599) {
+    error(response.status as NumericRange<400, 599>, { message: response.error });
+  } else if (response.error) {
+    console.error(`API returned a non-error status code (${response.status}) with an error message: ${response.error}`);
+  } else {
+    console.log(response);
   }
-
-
-
-
-  return {
-    appConfig: await getAppConfig()
-  };
+   // const languages: LabeledValue[] = Object.entries(response.languages).map(([key, value]) => ({
+   //   label: value as string,
+   //   value: key
+   // }));
+ // return {
+ //   appConfig: updatedConfig;
+ // };
 };
