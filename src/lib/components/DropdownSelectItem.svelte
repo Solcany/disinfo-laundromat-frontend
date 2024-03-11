@@ -13,5 +13,7 @@
   {...$$restProps}
 >
   {label}
-  <Select.ItemIndicator class="ml-auto" asChild={false}>S</Select.ItemIndicator>
-</Select.Item>
+  <Select.ItemIndicator class="ml-auto" asChild={false}><svg class="h-5 w-5 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg></Select.ItemIndicator>
+</Select.Item> 

@@ -10,7 +10,7 @@
   on:click={onClick}
   aria-label={ariaLabel}
   class={cn(
-    'rounded-input text-background shadow-mini hover:bg-dark/95 active:scale-98 inline-flex h-12 items-center justify-center bg-white px-[21px] text-[15px] font-semibold active:transition-all',
+    'rounded-md text-white shadow hover:bg-gray-700 active:scale-95 inline-flex h-12 items-center justify-center bg-black px-6 text-sm font-semibold active:transition-transform',
     className
   )}
   {...$$restProps}
