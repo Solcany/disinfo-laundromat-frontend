@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
@@ -8,12 +7,13 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { URL_PAGE_FORM_CONFIG, UI_CONTENT_HEADER } from '$config';
+  import { UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { parseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
+  export let data;
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
@@ -31,19 +31,11 @@
     }
   }
 
-  import { page } from '$app/stores';
-	export let data; 
-
-  onMount(()=> {
-    console.log(data);
-
-  })
-
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
-    <Form config={URL_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
+    <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
 
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>

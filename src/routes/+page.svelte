@@ -18,6 +18,7 @@
     inputStore.set(formData);
     let response: ApiResponse<any> = await parseUrl(formData);
     if (response.error) {
+      // WIP: handle with svelte kit error()
       console.log(response.error);
     } else {
       let content = new Content(response.data as ResponseData);

@@ -99,6 +99,13 @@ export enum InputType {
   Text
 }
 
+export enum RemoteConfigDataFlag {
+  // api config data that needs to be fetched from the api
+  Countries = "countries",
+  Languages = "languages",
+  Indicators = "indicators",
+}
+
 interface InputTextConfig {
   type: InputType.Text;
   name: string;
@@ -114,8 +121,10 @@ interface InputDropdownConfig {
   label: string;
   placeholder: string;
   required: boolean;
-  data: LabeledValue[];
+  data: RemoteConfigDataFlag | LabeledValue[];
   value?: LabeledValue;
 }
+
+export type InputTypeWithData = InputDropdownConfig; 
 
 export type InputConfig = InputTextConfig | InputDropdownConfig;

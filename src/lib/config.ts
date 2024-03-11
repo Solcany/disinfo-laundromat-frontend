@@ -1,4 +1,5 @@
 import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig } from '$models';
+import { RemoteConfigDataFlag } from '$models';
 
 import { InputType } from '$models';
 
@@ -43,6 +44,8 @@ export const operator_data: LabeledValue[] = [
   { label: 'OR', value: 'OR' }
 ];
 
+
+
 export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
@@ -58,7 +61,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     value: region_data[0],
     placeholder: 'Select region',
     required: true,
-    data: region_data
+    data: RemoteConfigDataFlag.Countries, 
   },
   {
     type: InputType.Dropdown,
@@ -76,7 +79,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     value: language_data[0],
     placeholder: 'Select Language',
     required: true,
-    data: language_data
+    data: RemoteConfigDataFlag.Languages, 
   },
   {
     type: InputType.Dropdown,
@@ -109,19 +112,18 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     type: InputType.Dropdown,
     name: 'region',
     label: 'Region',
-    value: region_data[0],
     placeholder: 'Select region',
     required: true,
-    data: region_data
+    data: RemoteConfigDataFlag.Countries
   },
   {
     type: InputType.Dropdown,
     name: 'language',
     label: 'Language',
-    value: language_data[0],
     placeholder: 'Select Language',
     required: true,
-    data: language_data
+    data: RemoteConfigDataFlag.Languages
+
   },
   {
     type: InputType.Dropdown,
