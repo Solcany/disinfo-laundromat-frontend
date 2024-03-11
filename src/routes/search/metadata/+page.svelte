@@ -30,7 +30,6 @@
       loadingStore.set(false);
     }
   }
-
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">

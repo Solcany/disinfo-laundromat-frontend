@@ -13,9 +13,8 @@
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
-	import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
   export let data;
-
 
   async function handleSubmit(event: Event) {
     event.preventDefault();
@@ -33,10 +32,9 @@
     }
   }
 
-  onMount( () => {
+  onMount(() => {
     console.log(data);
-  })
-
+  });
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">

@@ -31,9 +31,10 @@
 
 <section class="grid grid-rows-2 gap-4">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div class="w-100 flex items-center justify-items-center justify-center">
-      <h1 class="w-[300px] font-sans font-light text-xl dark:text-white text-black">
-  Uncover mirror websites. Understand content laundering. Safeguard content authenticity online. 
+    <div class="w-100 flex items-center justify-center justify-items-center">
+      <h1 class="w-[300px] font-sans text-xl font-light text-black dark:text-white">
+        Uncover mirror websites. Understand content laundering. Safeguard content authenticity
+        online.
       </h1>
     </div>
     <div class="">
@@ -57,17 +58,43 @@
   </div>
   <div>
     <ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
-      <li class="font-sans dark:text-white text-black">
-      <h2 class="font-sans font-base text-lg"> Prove content laundering from state-owned outlets </h2>
-      <p class="font-sans font-light text-sm"> Researchers from two European Universities, supported by the Alliance for Securing Democracy, reveal evidence of a small network operating in Poland and Germany that launders Russian state media content into the media mainstream. A sample of articles from problematic outlets, criticizing Ukraine President Zelensky was run through the Laundromat’s Content Search. The tool revealed that all the articles in the sample were lifted from Ria Novosti, an outlet belonging to the Russia Segodnya group. Read the report. </p>
+      <li class="font-sans text-black dark:text-white">
+        <h2 class="font-base font-sans text-lg">
+          Prove content laundering from state-owned outlets
+        </h2>
+        <p class="font-sans text-sm font-light">
+          Researchers from two European Universities, supported by the Alliance for Securing
+          Democracy, reveal evidence of a small network operating in Poland and Germany that
+          launders Russian state media content into the media mainstream. A sample of articles from
+          problematic outlets, criticizing Ukraine President Zelensky was run through the
+          Laundromat’s Content Search. The tool revealed that all the articles in the sample were
+          lifted from Ria Novosti, an outlet belonging to the Russia Segodnya group. Read the
+          report.
+        </p>
       </li>
-      <li class="font-sans dark:text-white text-black">
-      <h2 class="font-sans font-base text-lg"> Find proxy websites that exist to overcome DNS bans </h2>
-      <p class="font-sans font-light text-sm"> Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by the European Commission. However, despite these restrictions, each site employs sophisticated techniques to reach audiences in Member Countries. Read the report to learn how researchers were able to utilize the Laundromat's website fingerprinting service to map the entire network of Russia Today proxy websites, using altered or entirely new domain names. </p>
+      <li class="font-sans text-black dark:text-white">
+        <h2 class="font-base font-sans text-lg">
+          Find proxy websites that exist to overcome DNS bans
+        </h2>
+        <p class="font-sans text-sm font-light">
+          Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
+          the European Commission. However, despite these restrictions, each site employs
+          sophisticated techniques to reach audiences in Member Countries. Read the report to learn
+          how researchers were able to utilize the Laundromat's website fingerprinting service to
+          map the entire network of Russia Today proxy websites, using altered or entirely new
+          domain names.
+        </p>
       </li>
-      <li class="font-sans dark:text-white text-black">
-      <h2 class="font-sans font-base text-lg"> Tell if a site produces original content </h2>
-      <p class="font-sans font-light text-sm"> Content laundering occurs when individuals or entities replicate website content without proper attribution and, in some cases, authorization. This method is commonly employed by disinformation operatives to disseminate problematic content and political propaganda efficiently. The Laundromat tool serves as an effective means to detect duplicate content online and substantiate instances of content plagiarism. See how to use the Laundromat for proving gaps in editorial transparency. Read the guide. </p>
+      <li class="font-sans text-black dark:text-white">
+        <h2 class="font-base font-sans text-lg">Tell if a site produces original content</h2>
+        <p class="font-sans text-sm font-light">
+          Content laundering occurs when individuals or entities replicate website content without
+          proper attribution and, in some cases, authorization. This method is commonly employed by
+          disinformation operatives to disseminate problematic content and political propaganda
+          efficiently. The Laundromat tool serves as an effective means to detect duplicate content
+          online and substantiate instances of content plagiarism. See how to use the Laundromat for
+          proving gaps in editorial transparency. Read the guide.
+        </p>
       </li>
     </ul>
   </div>

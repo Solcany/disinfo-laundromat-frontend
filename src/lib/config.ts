@@ -23,28 +23,19 @@ export const UI_SEARCH_NAV: NavItemData[] = [
   { label: 'Content', path: '/search/content' },
   { label: 'Metadata', path: '/search/metadata' }
 ];
-export const region_data: LabeledValue[] = [
-  { label: 'US', value: 'US' },
-  { label: 'NL', value: 'NL' }
-];
 
-export const language_data: LabeledValue[] = [
-  { label: 'english', value: 'english' },
-  { label: 'dutch', value: 'dutch' }
-];
-
+// WIP this should be loaded from API with the rest of config
 export const browser_data: LabeledValue[] = [
   { label: 'all browsers', value: 'all' },
   { label: 'Google', value: 'Google' },
   { label: 'Bing', value: 'Bing' }
 ];
 
+// WIP this should be hardcoded in the Combine component
 export const operator_data: LabeledValue[] = [
   { label: 'AND', value: 'AND' },
   { label: 'OR', value: 'OR' }
 ];
-
-
 
 export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
@@ -58,28 +49,25 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     type: InputType.Dropdown,
     name: 'country',
     label: 'Country',
-    value: region_data[0],
     placeholder: 'Select region',
     required: true,
-    data: RemoteConfigDataFlag.Countries, 
+    data: RemoteConfigDataFlag.Countries
   },
   {
     type: InputType.Dropdown,
     name: 'search_engines',
     label: 'Search Engines',
     placeholder: 'Select search engines',
-    value: browser_data[0],
     required: true,
-    data: browser_data, 
+    data: browser_data
   },
   {
     type: InputType.Dropdown,
     name: 'language',
     label: 'Language',
-    value: language_data[0],
     placeholder: 'Select Language',
     required: true,
-    data: RemoteConfigDataFlag.Languages, 
+    data: RemoteConfigDataFlag.Languages
   },
   {
     type: InputType.Dropdown,
@@ -91,7 +79,6 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     data: operator_data
   }
 ];
-
 
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   {
@@ -123,7 +110,6 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select Language',
     required: true,
     data: RemoteConfigDataFlag.Languages
-
   },
   {
     type: InputType.Dropdown,
@@ -131,8 +117,8 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Operator',
     placeholder: 'Select operator',
     required: true,
-    data: operator_data 
-  },
+    data: operator_data
+  }
 ];
 
 export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
@@ -142,5 +128,5 @@ export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Url',
     placeholder: 'Add url',
     required: true
-  },
+  }
 ];

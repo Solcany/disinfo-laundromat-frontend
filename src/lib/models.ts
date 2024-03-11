@@ -101,9 +101,9 @@ export enum InputType {
 
 export enum RemoteConfigDataFlag {
   // api config data that needs to be fetched from the api
-  Countries = "countries",
-  Languages = "languages",
-  Indicators = "indicators",
+  Countries = 'countries',
+  Languages = 'languages',
+  Indicators = 'indicators'
 }
 
 interface InputTextConfig {
@@ -125,6 +125,6 @@ interface InputDropdownConfig {
   value?: LabeledValue;
 }
 
-export type InputTypeWithData = InputDropdownConfig; 
+export type InputTypeWithData = InputDropdownConfig;
 
 export type InputConfig = InputTextConfig | InputDropdownConfig;

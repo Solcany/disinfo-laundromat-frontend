@@ -1,4 +1,3 @@
-
 import type { LayoutLoad } from './$types';
 import type { LabeledValue, ApiResponse } from '$models';
 import { error, type NumericRange } from '@sveltejs/kit';
@@ -13,7 +12,9 @@ export const load: LayoutLoad = async () => {
     if (response.status >= 400 && response.status <= 599) {
       error(response.status as NumericRange<400, 599>, { message: response.error });
     } else {
-      console.error(`API returned a non-error status code (${response.status}) with an error message: ${response.error}`);
+      console.error(
+        `API returned a non-error status code (${response.status}) with an error message: ${response.error}`
+      );
     }
   }
   if (response.data) {
@@ -23,14 +24,17 @@ export const load: LayoutLoad = async () => {
       metadataFormConfig: enhanceFormConfig(METADATA_PAGE_FORM_CONFIG, response.data)
     };
   }
-  
+
   // WIP: handle situation where there's successful response but no data
 };
 
-function enhanceFormConfig(config: InputConfig[], apiConfigData: Record<string, Record<string, string | number >>) { 
-  return config.map(item => {
+function enhanceFormConfig(
+  config: InputConfig[],
+  apiConfigData: Record<string, Record<string, string | number>>
+) {
+  return config.map((item) => {
     if (isInputTypeWithData(item)) {
-      const apiDataKey = Object.values(RemoteConfigDataFlag).find(key => item.data === key);
+      const apiDataKey = Object.values(RemoteConfigDataFlag).find((key) => item.data === key);
       if (apiDataKey && apiConfigData[apiDataKey]) {
         const newData = configToLabeledValues(apiConfigData[apiDataKey]);
         return { ...item, data: newData };
@@ -46,8 +50,7 @@ function isInputTypeWithData(item: InputConfig): item is InputTypeWithData {
 
 function configToLabeledValues(data: Record<string, string | number>): LabeledValue[] {
   return Object.entries(data).map(([key, value]) => ({
-    label: value.toString(),     
+    label: value.toString(),
     value: key
   }));
 }
-
