@@ -83,22 +83,22 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
-    name: 'title',
+    name: 'queryTitle',
     label: 'Title',
     placeholder: 'Add title',
     required: true
   },
   {
     type: InputType.Text,
-    name: 'content',
-    label: 'title',
+    name: 'queryContent',
+    label: 'Content',
     placeholder: 'Add content',
     required: true
   },
   {
     type: InputType.Dropdown,
-    name: 'region',
-    label: 'Region',
+    name: 'country',
+    label: 'Country',
     placeholder: 'Select region',
     required: true,
     data: RemoteConfigDataFlag.Countries
@@ -113,9 +113,18 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   },
   {
     type: InputType.Dropdown,
+    name: 'search_engines',
+    label: 'Search Engines',
+    placeholder: 'Select search engines',
+    required: true,
+    data: browser_data
+  },
+  {
+    type: InputType.Dropdown,
     name: 'combineOperator',
     label: 'Operator',
-    placeholder: 'Select operator',
+    value: operator_data[0],
+    placeholder: 'Select Language',
     required: true,
     data: operator_data
   }

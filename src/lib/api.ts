@@ -65,7 +65,6 @@ export async function GetApi<T>(
         return { error: errorText, status };
       }
     }
-
     const responseData: T = await response.json();
 
     return { data: responseData, status: response.status };
@@ -77,6 +76,10 @@ export async function GetApi<T>(
 
 export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
   return PostApi<any>('parse-url', data);
+}
+
+export async function queryContent(data: FormData): Promise<ApiResponse<any>> {
+  return PostApi<any>('content', data);
 }
 
 export async function getAppConfig(): Promise<ApiResponse<any>> {

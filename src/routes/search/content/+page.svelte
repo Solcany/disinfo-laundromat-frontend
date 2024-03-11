@@ -9,7 +9,7 @@
   import Link from '$components/Link.svelte';
   import { UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
-  import { parseUrl } from '$api';
+  import { queryContent } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
@@ -22,7 +22,7 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
     inputStore.set(formData);
-    let response: ApiResponse<any> = await parseUrl(formData);
+    let response: ApiResponse<any> = await queryContent(formData);
     if (response.error) {
       console.log(response.error);
     } else {
@@ -32,9 +32,6 @@
     }
   }
 
-  onMount(() => {
-    console.log(data);
-  });
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
