@@ -6,6 +6,7 @@ export async function PostApi<T>(
   data: FormData,
   headers?: { [key: string]: string }
 ): Promise<ApiResponse<T>> {
+  console.log(data)
   try {
     const url = new URL(endpoint, API_URL);
     const finalHeaders = headers || {};
@@ -16,6 +17,7 @@ export async function PostApi<T>(
       body: data
     });
 
+  console.log(response)
     if (!response.ok) {
       const errorText = await response.text();
       const status = response.status;

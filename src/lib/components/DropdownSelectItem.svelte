@@ -13,5 +13,5 @@
   {...$$restProps}
 >
   {label}
-  <Select.ItemIndicator class="ml-auto" asChild={false}>S</Select.ItemIndicator>
+  <Select.ItemIndicator class="ml-auto" asChild={false}></Select.ItemIndicator>
 </Select.Item>

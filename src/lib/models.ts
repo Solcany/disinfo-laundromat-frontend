@@ -96,11 +96,12 @@ export class Content {
 
 export enum InputType {
   Dropdown,
-  Text
+  Text,
+  Checkbox, 
 }
 
 export enum RemoteConfigDataFlag {
-  // api config data that needs to be fetched from the api
+  // input config data that needs to be fetched from the api
   Countries = 'countries',
   Languages = 'languages',
   Indicators = 'indicators'
@@ -125,6 +126,15 @@ interface InputDropdownConfig {
   value?: LabeledValue;
 }
 
-export type InputTypeWithData = InputDropdownConfig;
+interface InputCheckboxConfig {
+  type: InputType.Checkbox;
+  name: string;
+  label: string;
+  required: boolean;
+  checked?: boolean;
+}
 
-export type InputConfig = InputTextConfig | InputDropdownConfig;
+
+export type InputConfig = InputTextConfig | InputDropdownConfig | InputCheckboxConfig;
+
+export type InputTypeWithData = InputDropdownConfig;

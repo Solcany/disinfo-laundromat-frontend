@@ -69,19 +69,28 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     required: true,
     data: RemoteConfigDataFlag.Languages
   },
+  {
+    type: InputType.Dropdown,
+    name: 'combineOperator',
+    label: 'Operator',
+    value: operator_data[0],
+    placeholder: 'Select Language',
+    required: true,
+    data: operator_data
+  }
 ];
 
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
-    name: 'queryTitle',
+    name: 'titleQuery',
     label: 'Title',
     placeholder: 'Add title',
     required: true
   },
   {
     type: InputType.Text,
-    name: 'queryContent',
+    name: 'contentQuery',
     label: 'Content',
     placeholder: 'Add content',
     required: true

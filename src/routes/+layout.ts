@@ -37,7 +37,7 @@ function enhanceFormConfig(
       const apiDataKey = Object.values(RemoteConfigDataFlag).find((key) => item.data === key);
       if (apiDataKey && apiConfigData[apiDataKey]) {
         const newData = configToLabeledValues(apiConfigData[apiDataKey]);
-        return { ...item, data: newData };
+        return { ...item, data: newData, value: newData[0] };
       }
     }
     return item;
