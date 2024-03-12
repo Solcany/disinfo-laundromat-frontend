@@ -34,8 +34,9 @@
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
-    <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
-
+    {#if data.urlFormConfig}
+      <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
+    {/if}
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>

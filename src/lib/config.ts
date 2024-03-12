@@ -70,13 +70,10 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     data: RemoteConfigDataFlag.Languages
   },
   {
-    type: InputType.Dropdown,
+    type: InputType.Checkbox,
     name: 'combineOperator',
-    label: 'Operator',
-    value: operator_data[0],
-    placeholder: 'Select Language',
+    label: 'Results must contain both paragraph and title',
     required: true,
-    data: operator_data
   }
 ];
 
@@ -120,13 +117,10 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     data: browser_data
   },
   {
-    type: InputType.Dropdown,
+    type: InputType.Checkbox,
     name: 'combineOperator',
-    label: 'Operator',
-    value: operator_data[0],
-    placeholder: 'Select Language',
+    label: 'Results must contain both paragraph and title',
     required: true,
-    data: operator_data
   }
 ];
 
