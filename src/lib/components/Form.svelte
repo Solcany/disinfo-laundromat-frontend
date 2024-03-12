@@ -38,8 +38,8 @@
             required={item.required}
             placeholder={item.placeholder}
           >
-            {#each item.data as v}
-              <DropdownSelectItem value={v.value} label={v.label} />
+            {#each item.data as entry}
+             <DropdownSelectItem value={entry.value} label={entry.label}/>
             {/each}
           </DropdownSelect>
         </div>

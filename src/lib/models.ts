@@ -122,7 +122,8 @@ interface InputDropdownConfig {
   label: string;
   placeholder: string;
   required: boolean;
-  data: RemoteConfigDataFlag | LabeledValue[];
+  data: undefined | LabeledValue[];
+  requiresRemoteData?: RemoteConfigDataFlag;  
   value?: LabeledValue;
 }
 

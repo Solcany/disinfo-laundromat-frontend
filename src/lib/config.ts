@@ -51,7 +51,8 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Country',
     placeholder: 'Select region',
     required: true,
-    data: RemoteConfigDataFlag.Countries
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Countries
   },
   {
     type: InputType.Dropdown,
@@ -67,7 +68,8 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Language',
     placeholder: 'Select Language',
     required: true,
-    data: RemoteConfigDataFlag.Languages
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Languages
   },
   {
     type: InputType.Checkbox,
@@ -98,7 +100,8 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Country',
     placeholder: 'Select region',
     required: true,
-    data: RemoteConfigDataFlag.Countries
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Countries
   },
   {
     type: InputType.Dropdown,
@@ -106,7 +109,8 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Language',
     placeholder: 'Select Language',
     required: true,
-    data: RemoteConfigDataFlag.Languages
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Languages
   },
   {
     type: InputType.Dropdown,

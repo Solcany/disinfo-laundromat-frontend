@@ -33,8 +33,8 @@ function enhanceFormConfig(
   apiConfigData: Record<string, Record<string, string | number>>
 ) {
   return config.map((item) => {
-    if (isInputTypeWithData(item)) {
-      const apiDataKey = Object.values(RemoteConfigDataFlag).find((key) => item.data === key);
+    if (doesInputRequireRemoteData(item)) {
+      const apiDataKey = Object.values(RemoteConfigDataFlag).find((key) => item.requiresRemoteData === key);
       if (apiDataKey && apiConfigData[apiDataKey]) {
         const newData = configToLabeledValues(apiConfigData[apiDataKey]);
         return { ...item, data: newData, value: newData[0] };
@@ -44,8 +44,8 @@ function enhanceFormConfig(
   });
 }
 
-function isInputTypeWithData(item: InputConfig): item is InputTypeWithData {
-  return 'data' in item;
+function doesInputRequireRemoteData(item: InputConfig): item is InputTypeWithData {
+  return 'requiresRemoteData' in item;
 }
 
 function configToLabeledValues(data: Record<string, string | number>): LabeledValue[] {
