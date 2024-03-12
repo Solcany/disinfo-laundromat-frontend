@@ -21,6 +21,15 @@
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
+
+    // for posting AND or OR to the backend when combineOperator checkbox is true or false respectively 
+    // this is just a hack and should be handled on the back end 
+    if (formData.has('combineOperator')) {
+        formData.set('combineOperator', 'AND');
+    } else {
+        formData.set('combineOperator', 'OR');
+    }
+    
     inputStore.set(formData);
     let response: ApiResponse<any> = await queryContent(formData);
     if (response.error) {
@@ -31,13 +40,17 @@
       loadingStore.set(false);
     }
   }
+  // wip: is this reactive binding necessary?
+  // check docs.
+  $: formConfig = data.contentFormConfig;
 
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
-    {#if data.contentFormConfig}
-      <Form config={data.contentFormConfig} onSubmit={handleSubmit} />
+    
+    {#if formConfig}
+      <Form config={formConfig} onSubmit={handleSubmit} />
     {/if}
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>

@@ -11,7 +11,14 @@ const config = {
         gray5: '#1f1e1d',
         gray6: '#131212',
         black: '#000000',
+        focus: '#0000ff',
         'bright-orange': '#FF6320'
+      },
+      height:  {
+        'input': '30px',
+      },
+      borderRadius: {
+        input: '0.3rem',
       }
     },
     fontFamily: {

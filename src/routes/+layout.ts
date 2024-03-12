@@ -3,10 +3,10 @@ import type { LabeledValue, ApiResponse } from '$models';
 import { error, type NumericRange } from '@sveltejs/kit';
 import { RemoteConfigDataFlag, type InputConfig, type InputTypeWithData } from '$models';
 import { CONTENT_PAGE_FORM_CONFIG, URL_PAGE_FORM_CONFIG, METADATA_PAGE_FORM_CONFIG } from '$config';
-import { getAppConfig } from '$api';
+import { queryAppConfig } from '$api';
 
 export const load: LayoutLoad = async () => {
-  let response: ApiResponse<any> = await getAppConfig();
+  let response: ApiResponse<any> = await queryAppConfig();
 
   if (response.error) {
     if (response.status >= 400 && response.status <= 599) {

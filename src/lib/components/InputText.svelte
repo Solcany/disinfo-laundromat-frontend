@@ -19,5 +19,5 @@
   {required}
   {placeholder}
   {value}
-  class={cn('', className)}
+  class={cn('px-2 font-sans font-light text-xs h-input w-full truncate rounded-input border bg-white text-sm placeholder:text-black-alt/50 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black', className)}
 />

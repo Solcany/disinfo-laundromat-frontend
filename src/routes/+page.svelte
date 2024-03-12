@@ -5,7 +5,7 @@
   import Label from '$components/Label.svelte';
   import { Content, type ResponseData, type ApiResponse } from '$models';
   import { CONTENT_PAGE_FORM_CONFIG } from '$config';
-  import { parseUrl } from '$api';
+  import { queryParseUrl, queryContent, queryFingerprint } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
@@ -16,7 +16,7 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
     inputStore.set(formData);
-    let response: ApiResponse<any> = await parseUrl(formData);
+    let response: ApiResponse<any> = await queryParseUrl(formData);
     if (response.error) {
       // WIP: handle with svelte kit error()
       console.log(response.error);

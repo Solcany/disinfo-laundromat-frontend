@@ -4,6 +4,7 @@
   import Button from '$components/Button.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
+  import InputCheckbox from '$components/InputCheckbox.svelte';
   import InputCheckboxGroup from '$components/InputCheckboxGroup.svelte';
   import { type InputConfig, InputType } from '$models';
   export let config: InputConfig[];
@@ -44,6 +45,12 @@
           </DropdownSelect>
         </div>
       {/if}
+    {:else if item.type === InputType.Checkbox}
+      <InputCheckbox
+        name={item.name}
+        label={item.label}
+        checked={item.checked}
+        required={item.required}/>
     {/if}
   {/each}
 

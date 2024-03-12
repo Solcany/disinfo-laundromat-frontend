@@ -1,5 +1,6 @@
 <script lang="ts">
   import Dialog from '$components/Dialog.svelte';
+  import Combobox from '$components/Combobox.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import InputFile from '$components/InputFile.svelte';
@@ -9,7 +10,7 @@
   import Link from '$components/Link.svelte';
   import { UI_CONTENT_HEADER } from '$config';
   import { Content, type ResponseData, type ApiResponse } from '$models';
-  import { parseUrl } from '$api';
+  import { queryParseUrl } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
@@ -20,8 +21,16 @@
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
+
+    // WIP: backend parse-url endpoint requires combineOperator
+    // which currently isn't it the UI
+    // this is a workaround just to give the api everything it wants
+    // should be figured out before app launch
+    formData.set('combineOperator', 'OR');
+    // ! 
+
     inputStore.set(formData);
-    let response: ApiResponse<any> = await parseUrl(formData);
+    let response: ApiResponse<any> = await queryParseUrl(formData);
     if (response.error) {
       console.log(response.error);
     } else {

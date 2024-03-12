@@ -76,7 +76,7 @@ export async function GetApi<T>(
   }
 }
 
-export async function parseUrl(data: FormData): Promise<ApiResponse<any>> {
+export async function queryParseUrl(data: FormData): Promise<ApiResponse<any>> {
   return PostApi<any>('parse-url', data);
 }
 
@@ -84,6 +84,10 @@ export async function queryContent(data: FormData): Promise<ApiResponse<any>> {
   return PostApi<any>('content', data);
 }
 
-export async function getAppConfig(): Promise<ApiResponse<any>> {
+export async function queryFingerprint(data: FormData): Promise<ApiResponse<any>> {
+  return PostApi<any>('fingerprint', data);
+}
+
+export async function queryAppConfig(): Promise<ApiResponse<any>> {
   return GetApi<any>('');
 }

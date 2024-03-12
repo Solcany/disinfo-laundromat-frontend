@@ -132,7 +132,7 @@ interface InputCheckboxConfig {
   name: string;
   label: string;
   required: boolean;
-  checked?: boolean;
+  checked: boolean;
 }
 
 

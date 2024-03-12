@@ -6,6 +6,9 @@
   export let label : string;
   export let required : boolean;
   export let checked = false; 
+  let className: string | undefined = undefined;
+  export { className as class };
+
   let id = name + "_input";
   let label_id = name + "_label";
 </script>
@@ -14,17 +17,16 @@
   <Checkbox.Root
     {id}
     {name}
-    {checked}
-    {...$$restProps}
     aria-labelledby={label_id}
     class="border-muted bg-foreground active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border transition-all duration-150 ease-in-out">
     <Checkbox.Indicator
       let:isChecked
       class="text-background inline-flex items-center justify-center">
-      {#if checked}
+      {#if isChecked} 
         <Check class="size-[15px]" weight="bold" />
       {/if}
     </Checkbox.Indicator>
+    <Checkbox.Input/>
   </Checkbox.Root>
   <Label
     for={id}

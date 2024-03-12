@@ -71,12 +71,6 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     data: undefined,
     requiresRemoteData: RemoteConfigDataFlag.Languages
   },
-  {
-    type: InputType.Checkbox,
-    name: 'combineOperator',
-    label: 'Results must contain both paragraph and title',
-    required: true,
-  }
 ];
 
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
@@ -125,6 +119,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'combineOperator',
     label: 'Results must contain both paragraph and title',
     required: true,
+    checked: false,
   }
 ];
 
