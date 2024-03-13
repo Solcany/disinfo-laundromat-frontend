@@ -4,12 +4,13 @@ const config = {
   theme: {
     extend: {
       colors: {
-        gray1: '#53504c',
-        gray2: '#454341',
-        gray3: '#383635',
-        gray4: '#2c2a29',
-        gray5: '#1f1e1d',
-        gray6: '#131212',
+        gray1: '#dbd7d2',
+        gray2: '#b7b3af',
+        gray3: '#94918e',
+        gray4: '#72706d',
+        gray5: '#52504f',
+        gray6: '#343332',
+        gray7: '#191818',
         black: '#000000',
         focus: '#0000ff',
         'bright-orange': '#FF6320',

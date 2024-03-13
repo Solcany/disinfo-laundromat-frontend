@@ -8,7 +8,7 @@
   import InputCheckboxGroup from '$components/InputCheckboxGroup.svelte';
   import { type InputConfig, InputType } from '$models';
   export let config: InputConfig[];
-  export let onSubmit: (event: Event) => void = () => {};
+  export let onSubmit: (event: Event) => void;
 </script>
 
 <form on:submit={(event) => onSubmit(event)}>

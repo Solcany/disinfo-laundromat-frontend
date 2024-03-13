@@ -16,32 +16,46 @@
   import { inputStore } from '$stores/input.ts';
   export let data;
 
-  async function handleSubmit(event: Event) {
-    event.preventDefault();
-    loadingStore.set(true);
-    const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
+ // async function handleSubmit(event: Event) {
+ //   event.preventDefault();
+ //   loadingStore.set(true);
+ //   const target = event.target as HTMLFormElement;
+ //   const formData = new FormData(target);
 
-    // WIP: backend parse-url endpoint requires combineOperator
-    // which currently isn't it the UI
-    // this is a workaround just to give the api everything it wants
-    // should be figured out before app launch
-    formData.set('combineOperator', 'OR');
-    // ! 
+ //   // WIP: backend parse-url endpoint requires combineOperator
+ //   // which currently isn't it the UI
+ //   // this is a workaround just to give the api everything it wants
+ //   // should be figured out before app launch
+ //   formData.set('combineOperator', 'OR');
+ //   // ! 
 
-    inputStore.set(formData);
-    let response: ApiResponse<any> = await queryParseUrl(formData);
-    if (response.error) {
-      console.log(response.error);
-    } else {
-      let content = new Content(response.data as ResponseData);
-      contentStore.set(content);
-      loadingStore.set(false);
-    }
-  }
+ //   inputStore.set(formData);
+ //   let response: ApiResponse<any> = await queryParseUrl(formData);
+ //   if (response.error) {
+ //     console.log(response.error);
+ //   } else {
+ //     let content = new Content(response.data as ResponseData);
+ //     contentStore.set(content);
+ //     loadingStore.set(false);
+ //   }
+ // }
+      async function handleSubmit(event: Event) {
+              event.preventDefault();
+              const target = event.target as HTMLFormElement;
+              const formData = new FormData(target);
+              formData.set('combineOperator', 'OR');
+              const response = await fetch('/api/parse_url', {
+                      method: 'POST',
+                      body: formData,
+              }); 
+              const data = await response.json(); // Parses the JSON response body
+              console.log(data);// Now logging the actual data
+
+      }
+      
 </script>
 
-<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
+<div class="grid w-full grid-cols-1 bg-white dark:bg-gray7 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
     {#if data.urlFormConfig}
       <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
