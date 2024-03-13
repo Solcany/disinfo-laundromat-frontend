@@ -7,7 +7,7 @@
 </script>
 
 <Select.Item
-  class="rounded-button flex h-10 w-full select-none items-center py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-red-500"
+  class="flex w-full select-none items-center py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-red-500"
   {value}
   {label}
   {...$$restProps}

@@ -1,7 +1,6 @@
-<!-- Wrapper component based on https://www.bits-ui.com/docs/components/select -->
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { Select, Label, type Selected, type SelectProps } from 'bits-ui';
+  import { Select } from 'bits-ui';
+  import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { LabeledValue } from '$models';
   export let id: string;
   export let name: string;
@@ -10,21 +9,41 @@
   export let placeholder: string | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
+  export let onOpenChange : ((open: boolean) => void) | undefined = undefined;
+
+ let isOpen : boolean = $$restProps.open || false; 
+
+  function handleOpenChange(open: boolean) {
+    isOpen = open;
+    if(onOpenChange) {
+      onOpenChange(open);
+    }
+  }
+
 </script>
 
 <div {id} class={className}>
-  <Select.Root {name} bind:selected {...$$restProps}>
+  <Select.Root 
+    {name} 
+    bind:selected
+    onOpenChange={handleOpenChange}
+    {...$$restProps}>
     <Select.Trigger
-      class="h-input rounded-9px border-border-input placeholder:text-foreground-alt/50 focus:ring-foreground focus:ring-offset-background inline-flex w-[296px] items-center border bg-white px-[11px]  text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
-      aria-label={ariaLabel}
-    >
-      <Select.Value class="text-sm" {placeholder} />
+      class="px-2 w-full flex justify-between h-input rounded-input border-border-input bg-white focus:ring-focus focus:ring-offset-black items-center placeholder:text-black-alt/50 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black"
+      aria-label={ariaLabel}>
+      <Select.Value class="text-sm" {placeholder}/>
+      {#if isOpen}
+        <CaretUp weight="bold"/>
+      {:else}
+        <CaretDown weight="bold"/>
+      {/if}
+
     </Select.Trigger>
     <Select.Content
-      class="border-muted shadow-popover w-full rounded-xl border bg-white px-1 py-3 outline-none"
+      class="border-muted shadow-popover w-full rounded-xl border bg-white px-1 outline-none"
       sideOffset={8}
     >
-      <slot />
+    <slot/>
     </Select.Content>
     <Select.Input id={name} />
   </Select.Root>

@@ -12,14 +12,15 @@ const config = {
         gray6: '#131212',
         black: '#000000',
         focus: '#0000ff',
-        'bright-orange': '#FF6320'
+        'bright-orange': '#FF6320',
+        'input-dark': '#131212'
       },
       height:  {
-        'input': '30px',
+        'input': '35px',
       },
       borderRadius: {
-        input: '0.3rem',
-      }
+        input: '3px',
+      },
     },
     fontFamily: {
       sans: ['Outfit', 'sans-serif']

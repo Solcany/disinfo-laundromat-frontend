@@ -6,7 +6,7 @@
 </script>
 
 <Label.Root
-  class={cn('font-sans text-base font-light text-black dark:text-white', className)}
+  class={cn('font-sans font-light text-sm text-black dark:text-white', className)}
   {...$$restProps}
 >
   <slot />

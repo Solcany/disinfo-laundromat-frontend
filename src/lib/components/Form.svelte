@@ -16,7 +16,7 @@
     {#if item.type === InputType.Text}
       {@const id = item.name + '_input'}
       <div>
-        <Label for={id} class="block dark:text-white">{item.label}</Label>
+        <Label for={id} class="block py-1">{item.label}</Label>
         <InputText
           {id}
           value={item.value}
@@ -30,7 +30,7 @@
       {#if item.data}
         {@const id = item.name + '_input'}
         <div>
-          <Label for={id}>{item.label}</Label>
+          <Label for={id} class="block py-1">{item.label}</Label>
           <DropdownSelect
             {id}
             name={item.name}
