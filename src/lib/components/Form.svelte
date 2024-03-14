@@ -40,7 +40,11 @@
           placeholder={item.placeholder}/>
         </div>
       {#if item.submitQuery}
-        <Button type="submit" ariaLabel="Submit form" on:click={() => (query = item.submitQuery)}
+        <Button 
+          type="submit" 
+          ariaLabel="Submit form" 
+          on:click={() => (query = item.submitQuery)}
+          variant='glyph'
           ><MagnifyingGlass weight="bold" class="dark:fill-black"/></Button>
       {/if}
       </div>
