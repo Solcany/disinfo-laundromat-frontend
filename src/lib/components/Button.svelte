@@ -9,7 +9,7 @@
   function variantClasses(variant: string): string {
     switch (variant) {
       case 'glyph':
-        return 'h-input w-[35px] rounded-full';
+        return 'h-input w-[35px] rounded-full shrink-0';
       case 'text':
         return 'h-input dark:text-black text-white rounded-input px-3';
       default: 

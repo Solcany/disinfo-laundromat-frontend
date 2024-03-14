@@ -113,7 +113,9 @@ export enum QueryType {
 }
 export enum Endpoint {
   AppConfig = '',
-  ParseUrl = 'parse-url'
+  ParseUrl = 'parse-url',
+  Fingerprint = 'fingerprint',
+  Content = 'content',
 }
 
 interface InputTextConfig {

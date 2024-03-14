@@ -8,7 +8,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { UI_CONTENT_HEADER } from '$config';
+  import { TABLE_CONTENT_HEADER } from '$config';
   import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
@@ -126,7 +126,7 @@
 
     <div>
       {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} headerData={UI_CONTENT_HEADER} />
+        <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {/if}
     </div>
   </section>

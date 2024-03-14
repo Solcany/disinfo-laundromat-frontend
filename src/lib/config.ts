@@ -4,12 +4,16 @@ import { RemoteConfigDataFlag, Endpoint, QueryType } from '$models';
 import { InputType } from '$models';
 
 export const APP_TITLE: string = 'Disinformation Laundromat';
-export const API_URL: string = 'http://20.55.107.60/api/';
+export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
 
-export const UI_CONTENT_HEADER: TableHeaderItemData[] = [
+export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain' },
+  { label: 'Similarity Score', key: 'score' },
   { label: 'Similar Content', key: 'snippet', tooltip: 'test' },
-  { label: 'Similarity Score', key: 'score' }
+];
+
+export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
+  { label: 'Content Domain', key: 'domain' },
 ];
 
 export const UI_NAV: NavItemData[] = [
@@ -90,7 +94,11 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'contentQuery',
     label: 'Content',
     placeholder: 'Add content',
-    required: true
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.Content
+    }
   },
   {
     type: InputType.Dropdown,
@@ -133,6 +141,17 @@ export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'url',
     label: 'Url',
     placeholder: 'Add url',
-    required: true
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.Fingerprint
+    }
+  },
+  {
+    type: InputType.Checkbox,
+    name: 'run_urlscan',
+    label: 'Run Url scan',
+    required: true,
+    checked: false
   }
 ];

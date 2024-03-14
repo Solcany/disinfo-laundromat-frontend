@@ -7,7 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { UI_CONTENT_HEADER } from '$config';
+  import { TABLE_METADATA_HEADER } from '$config';
   import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
@@ -15,25 +15,60 @@
   import { inputStore } from '$stores/input.ts';
   export let data;
 
+
+  type MatchDataItem = {
+    domain_name_y: string;
+    match_type: string;
+    match_value: string;
+  };
+
+  type GroupedMatches = {
+    [key: string]: {
+      domain_name: string;
+      indicators: { [key: string]: string };
+    };
+  };
+
+  function groupMatches(data: MatchDataItem[]): GroupedMatches {
+    const grouped = data.reduce((acc: GroupedMatches, { domain_name_y, match_type, match_value }) => {
+      // If domain_name_y does not exist in accumulator, initialize it
+      if (!acc[domain_name_y]) {
+        acc[domain_name_y] = { domain_name: domain_name_y, indicators: {} };
+      }
+      // Set the match_type and match_value in indicators object
+      acc[domain_name_y].indicators[match_type] = match_value;
+      return acc;
+    }, {});
+    return grouped;
+  }
+
+
   async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target); 
-
+    const formData = new FormData(target);
+    
     // a hack before this gets fixed on the backend
-    if(query.endpoint == Endpoint.ParseUrl) {
-      formData.set('combineOperator', 'OR');
+    if (query.endpoint === Endpoint.Fingerprint) {
+      formData.set('run_urlscan', '0');
     }
 
+
+    console.log(formData);
+
     let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+
+    console.log(response);
 
     if (response.error) {
        console.log(response.error);
      } else {
-       let content = new Content(response.data as ResponseData);
-       contentStore.set(content);
-       loadingStore.set(false);
+       let m = groupMatches(response.data.matches);
+       console.log(m);
+      // let content = new Content(response.data as ResponseData);
+      // contentStore.set(content);
+      // loadingStore.set(false);
      }
   }
 
@@ -92,7 +127,7 @@
 
     <div>
       {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} headerData={UI_CONTENT_HEADER} />
+        <Table caption="" data={$contentStore} headerData={TABLE_METADATA_HEADER} />
       {/if}
       <!-- result table-->
     </div>

@@ -7,7 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import { UI_CONTENT_HEADER } from '$config';
+  import { TABLE_CONTENT_HEADER } from '$config';
   import { Content, QueryType, Endpoint, type ResponseData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
@@ -20,14 +20,20 @@
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target); 
+    const formData = new FormData(target);
+    
 
     // a hack before this gets fixed on the backend
-    if(query.endpoint == Endpoint.ParseUrl) {
+    if(query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) {
       formData.set('combineOperator', 'OR');
+    } else if (query.endpoint === Endpoint.Fingerprint) {
+      formData.set('run_urlscan', '0');
     }
 
+    console.log(formData);
     let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+
+    console.log(response);
 
     if (response.error) {
        console.log(response.error);
@@ -94,7 +100,7 @@
 
     <div>
       {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} headerData={UI_CONTENT_HEADER} />
+        <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {/if}
     </div>
   </section>
