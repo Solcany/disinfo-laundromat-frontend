@@ -3,30 +3,37 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
-  import { Content, type ResponseData, type ApiResponse } from '$models';
   import { CONTENT_PAGE_FORM_CONFIG } from '$config';
-  import { queryParseUrl, queryContent, queryFingerprint } from '$api';
+  import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
+  import { queryApi } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore } from '$stores/content';
-
-  async function handleSubmit(event: Event) {
+  export let data;
+  
+  async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
-    inputStore.set(formData);
-    let response: ApiResponse<any> = await queryParseUrl(formData);
-    if (response.error) {
-      // WIP: handle with svelte kit error()
-      console.log(response.error);
-    } else {
-      let content = new Content(response.data as ResponseData);
-      contentStore.set(content);
-      loadingStore.set(false);
-      goto('/search/url');
+    const formData = new FormData(target); 
+
+    // a hack before this gets fixed on the backend
+    if(query.endpoint == Endpoint.ParseUrl) {
+      formData.set('combineOperator', 'OR');
     }
+
+    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+
+    if (response.error) {
+       console.log(response.error);
+     } else {
+       let content = new Content(response.data as ResponseData);
+       contentStore.set(content);
+       loadingStore.set(false);
+        goto('/search/url');
+     }
   }
+  $: formConfig = data.contentFormConfig;
 </script>
 
 <section class="grid grid-rows-2 gap-4">
@@ -49,7 +56,9 @@
             engines to find related websites. Discover networks of malicious actors/websites
             collectively sharing disinformation.
           </p>
-          <Form config={CONTENT_PAGE_FORM_CONFIG} onSubmit={handleSubmit} />
+          {#if formConfig}
+            <Form config={formConfig} onSubmit={handleSubmit} />
+          {/if}
           <a href="search"> advanced search </a>
         </C.Content>
         <C.Content value="metadata similarity">test 2 test 2</C.Content>

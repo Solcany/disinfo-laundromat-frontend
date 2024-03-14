@@ -16,12 +16,12 @@ const config = {
         'bright-orange': '#FF6320',
         'input-dark': '#131212'
       },
-      height:  {
-        'input': '35px',
+      height: {
+        input: '35px'
       },
       borderRadius: {
-        input: '3px',
-      },
+        input: '3px'
+      }
     },
     fontFamily: {
       sans: ['Outfit', 'sans-serif']

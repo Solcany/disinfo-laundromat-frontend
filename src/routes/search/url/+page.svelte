@@ -9,53 +9,65 @@
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import { Content, type ResponseData, type ApiResponse } from '$models';
-  import { queryParseUrl } from '$api';
+  import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
+  import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
   export let data;
 
- // async function handleSubmit(event: Event) {
- //   event.preventDefault();
- //   loadingStore.set(true);
- //   const target = event.target as HTMLFormElement;
- //   const formData = new FormData(target);
+  // async function handleSubmit(event: Event) {
+  //   event.preventDefault();
+  //   loadingStore.set(true);
+  //   const target = event.target as HTMLFormElement;
+  //   const formData = new FormData(target);
 
- //   // WIP: backend parse-url endpoint requires combineOperator
- //   // which currently isn't it the UI
- //   // this is a workaround just to give the api everything it wants
- //   // should be figured out before app launch
- //   formData.set('combineOperator', 'OR');
- //   // ! 
+  //   // WIP: backend parse-url endpoint requires combineOperator
+  //   // which currently isn't it the UI
+  //   // this is a workaround just to give the api everything it wants
+  //   // should be figured out before app launch
+  //   formData.set('combineOperator', 'OR');
+  //   // !
 
- //   inputStore.set(formData);
- //   let response: ApiResponse<any> = await queryParseUrl(formData);
- //   if (response.error) {
- //     console.log(response.error);
- //   } else {
- //     let content = new Content(response.data as ResponseData);
- //     contentStore.set(content);
- //     loadingStore.set(false);
- //   }
- // }
-      async function handleSubmit(event: Event) {
-              event.preventDefault();
-              const target = event.target as HTMLFormElement;
-              const formData = new FormData(target);
-              formData.set('combineOperator', 'OR');
-              const response = await fetch('/api/parse_url', {
-                      method: 'POST',
-                      body: formData,
-              }); 
-              const data = await response.json(); // Parses the JSON response body
-              console.log(data);// Now logging the actual data
+  //   inputStore.set(formData);
+  //   let response: ApiResponse<any> = await queryParseUrl(formData);
+  //   if (response.error) {
+  //     console.log(response.error);
+  //   } else {
+  //     let content = new Content(response.data as ResponseData);
+  //     contentStore.set(content);
+  //     loadingStore.set(false);
+  //   }
+  // }
+  async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
+    event.preventDefault();
+    loadingStore.set(true);
+    const target = event.target as HTMLFormElement;
+    const formData = new FormData(target); 
 
-      }
-      
+    // a hack before this gets fixed on the backend
+    if(query.endpoint == Endpoint.ParseUrl) {
+      formData.set('combineOperator', 'OR');
+    }
+    
+
+    console.log(formData);
+    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+
+    if (response.error) {
+       console.log(response.error);
+     } else {
+       console.log(response);
+       console.log(response.data);
+       let content = new Content(response.data as ResponseData);
+       contentStore.set(content);
+       loadingStore.set(false);
+     }
+  }
+
 </script>
 
-<div class="grid w-full grid-cols-1 bg-white dark:bg-gray7 pr-4 md:grid-cols-12">
+<div class="grid w-full grid-cols-1 bg-white pr-4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full px-3">
     {#if data.urlFormConfig}
       <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
@@ -89,8 +101,8 @@
     <h2>Refine Result</h2>
 
     <Button
-      onClick={() => {
-        return 0;
+      on:click={() => {
+        console.log('click');
       }}
       ariaLabel="Open select metadata modal"
     >
@@ -100,14 +112,7 @@
       <Label for="filter_result">Filter Result</Label>
       <InputText name="filter result" id="filter_result"></InputText>
     </div>
-    <Button
-      onClick={() => {
-        return 0;
-      }}
-      ariaLabel="Download result as csv"
-    >
-      Download CSV
-    </Button>
+    <Button on:click={() => {}} ariaLabel="Download result as csv">Download CSV</Button>
   </section>
 
   <section class="col-span-9 col-start-auto w-full">

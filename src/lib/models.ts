@@ -97,7 +97,7 @@ export class Content {
 export enum InputType {
   Dropdown,
   Text,
-  Checkbox, 
+  Checkbox
 }
 
 export enum RemoteConfigDataFlag {
@@ -107,6 +107,15 @@ export enum RemoteConfigDataFlag {
   Indicators = 'indicators'
 }
 
+export enum QueryType {
+  Post = 'POST',
+  Get = 'GET',
+}
+export enum Endpoint {
+  AppConfig = '',
+  ParseUrl = 'parse-url'
+}
+
 interface InputTextConfig {
   type: InputType.Text;
   name: string;
@@ -114,6 +123,10 @@ interface InputTextConfig {
   placeholder: string;
   required: boolean;
   value?: string;
+  submitQuery?: {
+    type: QueryType;
+    endpoint: Endpoint;
+  };
 }
 
 interface InputDropdownConfig {
@@ -123,8 +136,12 @@ interface InputDropdownConfig {
   placeholder: string;
   required: boolean;
   data: undefined | LabeledValue[];
-  requiresRemoteData?: RemoteConfigDataFlag;  
+  requiresRemoteData?: RemoteConfigDataFlag;
   value?: LabeledValue;
+  submitQuery?: {
+    type: QueryType;
+    endpoint: Endpoint;
+  };
 }
 
 interface InputCheckboxConfig {
@@ -133,8 +150,11 @@ interface InputCheckboxConfig {
   label: string;
   required: boolean;
   checked: boolean;
+  submitQuery?: {
+    type: QueryType;
+    endpoint: Endpoint;
+  };
 }
-
 
 export type InputConfig = InputTextConfig | InputDropdownConfig | InputCheckboxConfig;
 

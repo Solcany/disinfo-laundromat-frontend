@@ -19,5 +19,8 @@
   {required}
   {placeholder}
   {value}
-  class={cn('px-2 font-sans font-light text-xs h-input w-full truncate rounded-input border bg-white hover:bg-gray1 hover:cursor-pointer transition-colors duration-200  text-sm placeholder:text-gray5 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black', className)}
+  class={cn(
+    'h-input w-full truncate rounded-input border bg-white px-2 font-sans text-sm text-xs font-light transition-colors duration-200 placeholder:text-gray5  hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black',
+    className
+  )}
 />

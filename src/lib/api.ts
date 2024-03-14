@@ -1,23 +1,32 @@
 import { API_URL } from '$config';
-import type { ApiResponse } from '$models';
+import{ type ApiResponse, Endpoint, QueryType } from '$models';
 
-export async function PostApi<T>(
-  endpoint: string,
-  data: FormData,
+export async function queryApi<T>(
+  type: QueryType,
+  endpoint: Endpoint,
+  body?: FormData,
   headers?: { [key: string]: string }
 ): Promise<ApiResponse<T>> {
-  console.log(data)
   try {
     const url = new URL(endpoint, API_URL);
     const finalHeaders = headers || {};
+    const finalBody = body || new FormData();
+    
+    let response;
+    if (type === QueryType.Post) {
+      response = await fetch(url.toString(), {
+          method: type,
+          body: finalBody,
+          headers: finalHeaders,
+        });
+    } else {
+      response = await fetch(url.toString(), {
+          method: type,
+          headers: finalHeaders,
+        });
+    }
 
-    const response = await fetch(url.toString(), {
-      method: 'POST',
-      headers: finalHeaders,
-      body: data
-    });
 
-  console.log(response)
     if (!response.ok) {
       const errorText = await response.text();
       const status = response.status;
@@ -42,52 +51,4 @@ export async function PostApi<T>(
   }
 }
 
-export async function GetApi<T>(
-  endpoint: string,
-  headers?: { [key: string]: string }
-): Promise<ApiResponse<T>> {
-  try {
-    const url = new URL(endpoint, API_URL);
-    const finalHeaders = headers || {};
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: finalHeaders
-    });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      const status = response.status;
-
-      if (status === 401) {
-        return { error: 'Unauthorized access', status };
-      } else if (status === 404) {
-        return { error: 'Resource not found', status };
-      } else {
-        console.error('Failed to fetch data:', response.statusText);
-        return { error: errorText, status };
-      }
-    }
-    const responseData: T = await response.json();
-
-    return { data: responseData, status: response.status };
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return { error: 'Network error', status: 500 };
-  }
-}
-
-export async function queryParseUrl(data: FormData): Promise<ApiResponse<any>> {
-  return PostApi<any>('parse-url', data);
-}
-
-export async function queryContent(data: FormData): Promise<ApiResponse<any>> {
-  return PostApi<any>('content', data);
-}
-
-export async function queryFingerprint(data: FormData): Promise<ApiResponse<any>> {
-  return PostApi<any>('fingerprint', data);
-}
-
-export async function queryAppConfig(): Promise<ApiResponse<any>> {
-  return GetApi<any>('');
-}

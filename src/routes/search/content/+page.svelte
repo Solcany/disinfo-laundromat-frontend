@@ -8,47 +8,42 @@
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
   import { UI_CONTENT_HEADER } from '$config';
-  import { Content, type ResponseData, type ApiResponse } from '$models';
-  import { queryContent } from '$api';
+  import { Content, QueryType, Endpoint, type ResponseData, type ApiResponse } from '$models';
+  import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/content.ts';
   import { inputStore } from '$stores/input.ts';
   import { onMount } from 'svelte';
   export let data;
 
-  async function handleSubmit(event: Event) {
+  async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
+    const formData = new FormData(target); 
 
-    // for posting AND or OR to the backend when combineOperator checkbox is true or false respectively 
-    // this is just a hack and should be handled on the back end 
-    if (formData.has('combineOperator')) {
-        formData.set('combineOperator', 'AND');
-    } else {
-        formData.set('combineOperator', 'OR');
+    // a hack before this gets fixed on the backend
+    if(query.endpoint == Endpoint.ParseUrl) {
+      formData.set('combineOperator', 'OR');
     }
-    
-    inputStore.set(formData);
-    let response: ApiResponse<any> = await queryContent(formData);
+
+    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+
     if (response.error) {
-      console.log(response.error);
-    } else {
-      let content = new Content(response.data as ResponseData);
-      contentStore.set(content);
-      loadingStore.set(false);
-    }
+       console.log(response.error);
+     } else {
+       let content = new Content(response.data as ResponseData);
+       contentStore.set(content);
+       loadingStore.set(false);
+     }
   }
-  // wip: is this reactive binding necessary?
-  // check docs.
-  $: formConfig = data.contentFormConfig;
 
+  // wip: is this reactive binding necessary?
+  $: formConfig = data.contentFormConfig;
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
   <section class="col-span-3 w-full px-3">
-    
     {#if formConfig}
       <Form config={formConfig} onSubmit={handleSubmit} />
     {/if}
@@ -80,26 +75,12 @@
 
     <h2>Refine Result</h2>
 
-    <Button
-      onClick={() => {
-        return 0;
-      }}
-      ariaLabel="Open select metadata modal"
-    >
-      Filter Metadata
-    </Button>
+    <Button on:click={() => {}} ariaLabel="Open select metadata modal">Filter Metadata</Button>
     <div>
       <Label for="filter_result">Filter Result</Label>
       <InputText name="filter result" id="filter_result"></InputText>
     </div>
-    <Button
-      onClick={() => {
-        return 0;
-      }}
-      ariaLabel="Download result as csv"
-    >
-      Download CSV
-    </Button>
+    <Button on:click={() => {}} ariaLabel="Download result as csv">Download CSV</Button>
   </section>
 
   <section class="col-span-9 col-start-auto w-full">

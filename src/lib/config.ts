@@ -1,10 +1,10 @@
 import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig } from '$models';
-import { RemoteConfigDataFlag } from '$models';
+import { RemoteConfigDataFlag, Endpoint, QueryType } from '$models';
 
 import { InputType } from '$models';
 
 export const APP_TITLE: string = 'Disinformation Laundromat';
-export const API_URL: string = 'https://www.disinfo.id/api/';
+export const API_URL: string = 'http://20.55.107.60/api/';
 
 export const UI_CONTENT_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain' },
@@ -43,7 +43,11 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'url',
     label: 'Url',
     placeholder: 'Add url',
-    required: true
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.ParseUrl
+    }
   },
   {
     type: InputType.Dropdown,
@@ -70,7 +74,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     required: true,
     data: undefined,
     requiresRemoteData: RemoteConfigDataFlag.Languages
-  },
+  }
 ];
 
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
@@ -119,7 +123,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'combineOperator',
     label: 'Results must contain both paragraph and title',
     required: true,
-    checked: false,
+    checked: false
   }
 ];
 

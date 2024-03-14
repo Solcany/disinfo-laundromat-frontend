@@ -14,7 +14,7 @@
       <Tooltip.Arrow class="border-dark-10 rounded-[2px] border-l border-t" />
     </div>
     <div
-      class="rounded-input border-dark-10 bg-background shadow-popover flex items-center justify-center border p-3 text-sm font-medium outline-none"
+      class="border-dark-10 bg-background shadow-popover flex items-center justify-center rounded-input border p-3 text-sm font-medium outline-none"
     >
       <slot name="content" />
     </div>

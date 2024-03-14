@@ -9,7 +9,7 @@
   import ProgressBar from '$components/ProgressBar.svelte';
 </script>
 
-<Header class="px-2 md:px-3 bg-white dark:bg-gray6">
+<Header class="bg-white px-2 md:px-3 dark:bg-gray6">
   <H1><a href="/">{APP_TITLE}</a></H1>
   <Nav />
 </Header>

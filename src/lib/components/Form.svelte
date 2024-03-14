@@ -6,12 +6,24 @@
   import InputText from '$components/InputText.svelte';
   import InputCheckbox from '$components/InputCheckbox.svelte';
   import InputCheckboxGroup from '$components/InputCheckboxGroup.svelte';
-  import { type InputConfig, InputType } from '$models';
+  import { type InputConfig, InputType, Endpoint, QueryType } from '$models';
   export let config: InputConfig[];
-  export let onSubmit: (event: Event) => void;
+  export let onSubmit: (event: Event, query: { type: QueryType, endpoint: Endpoint }) => void;
+
+  let query: { type: QueryType; endpoint: Endpoint } | undefined = undefined;
+
+  function handleSubmit(event: Event) {
+    if(query) {
+      onSubmit(event, query)
+    } else {
+      // WIP: this should be handled better...
+      console.error("missing api query");
+    }
+  }
+
 </script>
 
-<form on:submit={(event) => onSubmit(event)}>
+<form on:submit={(event) => handleSubmit(event)}>
   {#each config as item}
     {#if item.type === InputType.Text}
       {@const id = item.name + '_input'}
@@ -26,6 +38,11 @@
           placeholder={item.placeholder}
         />
       </div>
+      {#if item.submitQuery}
+        <Button type="submit" ariaLabel="Submit form" on:click={() => (query = item.submitQuery)}
+          >→</Button
+        >
+      {/if}
     {:else if item.type === InputType.Dropdown}
       {#if item.data}
         {@const id = item.name + '_input'}
@@ -40,7 +57,7 @@
             placeholder={item.placeholder}
           >
             {#each item.data as entry}
-             <DropdownSelectItem value={entry.value} label={entry.label}/>
+              <DropdownSelectItem value={entry.value} label={entry.label} />
             {/each}
           </DropdownSelect>
         </div>
@@ -50,10 +67,10 @@
         name={item.name}
         label={item.label}
         checked={item.checked}
-        required={item.required}/>
+        required={item.required}
+      />
     {/if}
   {/each}
 
   <!-- <InputCheckboxGroup/> -->
-  <Button type="submit" ariaLabel="Submit form">→</Button>
 </form>

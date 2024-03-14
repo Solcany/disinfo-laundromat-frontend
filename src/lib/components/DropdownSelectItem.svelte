@@ -7,7 +7,7 @@
 </script>
 
 <Select.Item
-  class="px-2 flex w-full select-none items-center py-2 text-sm outline-none box-border data-[highlighted]:bg-gray1"
+  class="box-border flex w-full select-none items-center px-2 py-2 text-sm outline-none data-[highlighted]:bg-gray1"
   {value}
   {label}
   {...$$restProps}
