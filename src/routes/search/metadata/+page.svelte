@@ -16,34 +16,56 @@
   export let data;
 
 
-  type MatchDataItem = {
-    domain_name_y: string;
-    match_type: string;
-    match_value: string;
-  };
 
-  type GroupedMatches = {
-    [key: string]: {
-      domain_name: string;
-      indicators: { [key: string]: string };
-    };
-  };
+type MatchDataItem = {
+  domain_name_x: string;
+  domain_name_y: string;
+  match_type: string; // Format: "number-type"
+  match_value: string;
+};
 
-  function groupMatches(data: MatchDataItem[]): GroupedMatches {
-    const grouped = data.reduce((acc: GroupedMatches, { domain_name_y, match_type, match_value }) => {
-      // If domain_name_y does not exist in accumulator, initialize it
-      if (!acc[domain_name_y]) {
-        acc[domain_name_y] = { domain_name: domain_name_y, indicators: {} };
-      }
-      // Set the match_type and match_value in indicators object
-      acc[domain_name_y].indicators[match_type] = match_value;
-      return acc;
-    }, {});
-    return grouped;
-  }
+type IndicatorData = {
+  type: string;
+  value: string;
+};
 
+type TieredIndicator = {
+  tier: number;
+  data: IndicatorData[];
+};
 
-  async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
+type GroupedDomain = {
+  domain: string;
+  indicators: TieredIndicator[];
+};
+
+function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
+  const grouped: Record<string, GroupedDomain> = {};
+
+  data.forEach(({ domain_name_y, match_type, match_value }) => {
+    const [fullMatch, tierStr, type] = match_type.match(/^(\d+)-(.+)$/) || [];
+    const tier = parseInt(tierStr, 10);
+
+    if (!grouped[domain_name_y]) {
+      grouped[domain_name_y] = { domain: domain_name_y, indicators: [] };
+    }
+
+    let tierIndicator = grouped[domain_name_y].indicators.find(ind => ind.tier === tier);
+    if (!tierIndicator) {
+      tierIndicator = { tier, data: [] };
+      grouped[domain_name_y].indicators.push(tierIndicator);
+    }
+
+    tierIndicator.data.push({ type, value: match_value });
+  });
+
+  return Object.values(grouped).map(domain => ({
+    ...domain,
+    indicators: domain.indicators.sort((a, b) => a.tier - b.tier), // Optional: sort indicators by tier if needed
+  }));
+}
+
+    async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
