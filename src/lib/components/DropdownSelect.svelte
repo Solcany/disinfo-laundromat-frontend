@@ -24,7 +24,7 @@
 <div {id} class={className}>
   <Select.Root {name} bind:selected onOpenChange={handleOpenChange} {...$$restProps}>
     <Select.Trigger
-      class="border-border-input placeholder:text-black-alt/50 flex h-input w-full items-center justify-between rounded-input bg-white p-4 px-2 transition-colors duration-200 hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-focus focus:ring-offset-1 focus:ring-offset-black focus:ring-offset-black"
+      class="w-[250px] border-border-input placeholder:text-black-alt/50 flex h-input  items-center justify-between rounded-input bg-white p-4 px-2 transition-colors duration-200 hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-focus focus:ring-offset-1 focus:ring-offset-black focus:ring-offset-black"
       aria-label={ariaLabel}
     >
       <Select.Value class="text-sm" {placeholder} />
