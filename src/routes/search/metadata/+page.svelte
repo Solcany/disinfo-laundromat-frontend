@@ -16,9 +16,7 @@
   export let data;
 
 
-
 type MatchDataItem = {
-  domain_name_x: string;
   domain_name_y: string;
   match_type: string; // Format: "number-type"
   match_value: string;
@@ -26,7 +24,7 @@ type MatchDataItem = {
 
 type IndicatorData = {
   type: string;
-  value: string;
+  value: string[];
 };
 
 type TieredIndicator = {
@@ -34,36 +32,68 @@ type TieredIndicator = {
   data: IndicatorData[];
 };
 
+type IndicatorsSummary = {
+  [tier: string]: number; // Maps each tier to its number of values
+};
+
 type GroupedDomain = {
   domain: string;
   indicators: TieredIndicator[];
+  indicators_summary: IndicatorsSummary;
 };
 
 function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
-  const grouped: Record<string, GroupedDomain> = {};
+  // The `grouped` object will hold the intermediate grouping of data by `domain_name_y`.
+  const grouped: Record<string, { domain: string; indicators: Record<string, { [type: string]: string[] }>; indicators_summary: IndicatorsSummary }> = {};
 
   data.forEach(({ domain_name_y, match_type, match_value }) => {
-    const [fullMatch, tierStr, type] = match_type.match(/^(\d+)-(.+)$/) || [];
-    const tier = parseInt(tierStr, 10);
+    const match = match_type.match(/^(\d+)-(.+)$/);
+    if (!match) return; 
+
+    const tier: string = `tier${match[1]}`;
+    const type: string = match[2];
 
     if (!grouped[domain_name_y]) {
-      grouped[domain_name_y] = { domain: domain_name_y, indicators: [] };
+      grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
     }
 
-    let tierIndicator = grouped[domain_name_y].indicators.find(ind => ind.tier === tier);
-    if (!tierIndicator) {
-      tierIndicator = { tier, data: [] };
-      grouped[domain_name_y].indicators.push(tierIndicator);
+    if (!grouped[domain_name_y].indicators[tier]) {
+      grouped[domain_name_y].indicators[tier] = {};
+      grouped[domain_name_y].indicators_summary[tier] = 0; 
     }
 
-    tierIndicator.data.push({ type, value: match_value });
+    if (!grouped[domain_name_y].indicators[tier][type]) {
+      grouped[domain_name_y].indicators[tier][type] = [];
+    }
+
+    grouped[domain_name_y].indicators[tier][type].push(match_value);
+    grouped[domain_name_y].indicators_summary[tier]++;
   });
 
-  return Object.values(grouped).map(domain => ({
-    ...domain,
-    indicators: domain.indicators.sort((a, b) => a.tier - b.tier), // Optional: sort indicators by tier if needed
-  }));
+  const result: GroupedDomain[] = Object.keys(grouped).map(domainKey => {
+    const domainGroup = grouped[domainKey];
+    // Convert indicators from the intermediate structure to an array of TieredIndicator.
+    const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators).map(tierKey => {
+      const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(([type, values]) => ({
+        type,
+        value: values,
+      }));
+      return {
+        tier: parseInt(tierKey.replace('tier', ''), 10), // Convert the tier string back to a number.
+        data,
+      };
+    });
+    // Return the structured domain data, including the indicators and their summary.
+    return {
+      domain: domainGroup.domain,
+      indicators,
+      indicators_summary: domainGroup.indicators_summary,
+    };
+  });
+
+  return result; // Return the final transformed collection.
 }
+
 
     async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
@@ -78,15 +108,15 @@ function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
 
 
     console.log(formData);
-
     let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
-
     console.log(response);
 
     if (response.error) {
        console.log(response.error);
      } else {
+console.time("functionExecutionTime");
        let m = groupMatches(response.data.matches);
+console.timeEnd("functionExecutionTime");
        console.log(m);
       // let content = new Content(response.data as ResponseData);
       // contentStore.set(content);
