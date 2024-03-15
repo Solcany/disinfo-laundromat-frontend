@@ -9,11 +9,11 @@ export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.10
 export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain' },
   { label: 'Similarity Score', key: 'score' },
-  { label: 'Similar Content', key: 'snippet', tooltip: 'test' },
+  { label: 'Similar Content', key: 'snippet', tooltip: 'test' }
 ];
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
-  { label: 'Content Domain', key: 'domain' },
+  { label: 'Content Domain', key: 'domain' }
 ];
 
 export const UI_NAV: NavItemData[] = [

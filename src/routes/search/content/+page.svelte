@@ -16,38 +16,42 @@
   import { onMount } from 'svelte';
   export let data;
 
-  async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
+  async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
-  
+
     // a hack before thes gets fixed on the backend
-    if(query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) {
+    if (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) {
       formData.set('combineOperator', 'OR');
     } else if (query.endpoint === Endpoint.Fingerprint) {
       formData.set('run_urlscan', '0');
     }
 
-    let response: ApiResponse<ApiContentData> = await queryApi(query.type, query.endpoint, formData);
+    let response: ApiResponse<ApiContentData> = await queryApi(
+      query.type,
+      query.endpoint,
+      formData
+    );
     if (response.error) {
-       console.log(response.error);
-     } else {
-       if(response.data) {
-         contentStore.set(response.data);
-         loadingStore.set(false);
-       } else {
-         // WIP: this needs to be handled better!
-         loadingStore.set(false);
-       }
-     }
+      console.log(response.error);
+    } else {
+      if (response.data) {
+        contentStore.set(response.data);
+        loadingStore.set(false);
+      } else {
+        // WIP: this needs to be handled better!
+        loadingStore.set(false);
+      }
+    }
   }
 
   // wip: is this reactive binding necessary?
   $: formConfig = data.contentFormConfig;
 </script>
 
-<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
+<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full px-3">
     {#if formConfig}
       <Form config={formConfig} onSubmit={handleSubmit} />

@@ -15,119 +15,44 @@
   import { inputStore } from '$stores/input.ts';
   export let data;
 
-type MatchDataItem = {
-  domain_name_y: string;
-  match_type: string; // Format: "number-type"
-  match_value: string;
-};
-
-type IndicatorData = {
-  type: string;
-  value: string[];
-};
-
-type TieredIndicator = {
-  tier: number;
-  data: IndicatorData[];
-};
-
-type IndicatorsSummary = {
-  [tier: string]: number; // Maps each tier to its number of values
-};
-
-type GroupedDomain = {
-  domain: string;
-  indicators: TieredIndicator[];
-  indicators_summary: IndicatorsSummary;
-};
-
-function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
-  // The `grouped` object will hold the intermediate grouping of data by `domain_name_y`.
-  const grouped: Record<string, { domain: string; indicators: Record<string, { [type: string]: string[] }>; indicators_summary: IndicatorsSummary }> = {};
-
-  data.forEach(({ domain_name_y, match_type, match_value }) => {
-    const match = match_type.match(/^(\d+)-(.+)$/);
-    if (!match) return; 
-
-    const tier: string = `tier${match[1]}`;
-    const type: string = match[2];
-
-    if (!grouped[domain_name_y]) {
-      grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
-    }
-
-    if (!grouped[domain_name_y].indicators[tier]) {
-      grouped[domain_name_y].indicators[tier] = {};
-      grouped[domain_name_y].indicators_summary[tier] = 0; 
-    }
-
-    if (!grouped[domain_name_y].indicators[tier][type]) {
-      grouped[domain_name_y].indicators[tier][type] = [];
-    }
-
-    grouped[domain_name_y].indicators[tier][type].push(match_value);
-    grouped[domain_name_y].indicators_summary[tier]++;
-  });
-
-  const result: GroupedDomain[] = Object.keys(grouped).map(domainKey => {
-    const domainGroup = grouped[domainKey];
-    // Convert indicators from the intermediate structure to an array of TieredIndicator.
-    const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators).map(tierKey => {
-      const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(([type, values]) => ({
-        type,
-        value: values,
-      }));
-      return {
-        tier: parseInt(tierKey.replace('tier', ''), 10), // Convert the tier string back to a number.
-        data,
-      };
-    });
-    // Return the structured domain data, including the indicators and their summary.
-    return {
-      domain: domainGroup.domain,
-      indicators,
-      indicators_summary: domainGroup.indicators_summary,
-    };
-  });
-
-  return result; // Return the final transformed collection.
-}
-    async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
+  async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
-    
+
     // a hack before this gets fixed on the backend
     if (query.endpoint === Endpoint.Fingerprint) {
       formData.set('run_urlscan', '0');
     }
 
-    let response: ApiResponse<ApiFingerprintData> = await queryApi(query.type, query.endpoint, formData);
+    let response: ApiResponse<ApiFingerprintData> = await queryApi(
+      query.type,
+      query.endpoint,
+      formData
+    );
     console.log(response);
 
     if (response.error) {
-       console.log(response.error);
-     } else {
-       if(response.data && response.data.matches) {
-          let m = groupMatches(response.data.matches);
-          console.log(m);          
-       }
+      console.log(response.error);
+    } else {
+      if (response.data) {
+        metadataStore.set(response.data as ApiFingerprintData);
+        loadingStore.set(false);
+      }
       // if(response.data && response.data.matches) {
       //    let m = groupMatches(response.data.matches);
       // }
-       //let m = groupMatches(response.data.matches);
-       //console.log(m);
+      //let m = groupMatches(response.data.matches);
+      //console.log(m);
       // let content = new Content(response.data as ResponseData);
       // contentStore.set(content);
       // loadingStore.set(false);
-     }
+    }
   }
-
-
 </script>
 
-<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12">
+<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full px-3">
     {#if data.metadataFormConfig}
       <Form config={data.metadataFormConfig} onSubmit={handleSubmit} />
@@ -178,7 +103,7 @@ function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
     </div>
 
     <div>
-    <!--
+      <!--
       {#if $metadataStore}
         <Table caption="" data={$metadataStore} headerData={TABLE_METADATA_HEADER} />
       {/if}

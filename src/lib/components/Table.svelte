@@ -1,19 +1,27 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-  import { SortDirection, Content, type TableHeaderItemData, type TableRowData } from '$models';
+  import {
+    SortDirection,
+    type ApiContentData,
+    type ApiFingerprintData,
+    type TableHeaderItemData,
+    type TableRowData
+  } from '$models';
   import TableRow from '$components/TableRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: Content;
+  export let data: ApiContentData;
   export let caption: string;
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
 
-  const rows: TableRowData[] = data.getResults().map((entry) => {
+  console.log(data);
+
+  const rows: TableRowData[] = data.results.map((entry) => {
     const includedData = includeObjectKeys(entry, headerKeys);
     const complementaryData = excludeObjectKeys(entry, headerKeys);
 
@@ -27,11 +35,9 @@
       data: Object.entries(includedData),
       dataComplementary: cleanedComplementaryData
     };
-
     if (domainAssociations !== undefined) {
       resultObject.domainAssociations = domainAssociations;
     }
-
     return resultObject;
   });
 
@@ -109,7 +115,7 @@
       <col style="width: 55%" />
       <col style="width: 5%" />
     </colgroup>
-    <thead class="sticky top-0 bg-gray4">
+    <thead class="sticky top-0 dark:bg-gray7">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}

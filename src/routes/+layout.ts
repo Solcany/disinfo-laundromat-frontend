@@ -1,7 +1,13 @@
 import type { LayoutLoad } from './$types';
 import type { LabeledValue, ApiResponse } from '$models';
 import { error, type NumericRange } from '@sveltejs/kit';
-import { QueryType, Endpoint, RemoteConfigDataFlag, type InputConfig, type InputTypeWithData } from '$models';
+import {
+  QueryType,
+  Endpoint,
+  RemoteConfigDataFlag,
+  type InputConfig,
+  type InputTypeWithData
+} from '$models';
 import { CONTENT_PAGE_FORM_CONFIG, URL_PAGE_FORM_CONFIG, METADATA_PAGE_FORM_CONFIG } from '$config';
 import { queryApi } from '$api';
 

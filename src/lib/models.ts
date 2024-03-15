@@ -3,8 +3,6 @@ export interface LabeledValue {
   value: any;
 }
 
-
-
 export interface ContentApiInput {
   region: LabeledValue;
   language: LabeledValue;
@@ -33,34 +31,32 @@ export interface ApiResponse<T> {
 }
 
 export interface ApiFingerprintData {
-    countries: Record<string, string>;
-    indicator_metadata: {
-      [key: string]: {
-        description: string;
-        interpretation: string;
-        name: string;
-      };
+  countries: Record<string, string>;
+  indicator_metadata: {
+    [key: string]: {
+      description: string;
+      interpretation: string;
+      name: string;
     };
-    indicator_summary: Record<string, number>;
-    indicators: Array<{
-      domain_name: string;
-      indicator_content: string | string[];
-      indicator_type: string;
-    }>;
-    languages: Record<string, string>;
-    matches: Array<{
-      domain_name_x: string;
-      domain_name_y: string;
-      match_type: string;
-      match_value: string;
-    }>;
-    matches_summary: Record<string, number>;
+  };
+  indicator_summary: Record<string, number>;
+  indicators: Array<{
+    domain_name: string;
+    indicator_content: string | string[];
+    indicator_type: string;
+  }>;
+  languages: Record<string, string>;
+  matches: Array<{
+    domain_name_x: string;
+    domain_name_y: string;
+    match_type: string;
+    match_value: string;
+  }>;
+  matches_summary: Record<string, number>;
 }
 
 export interface ApiContentData {
-  countries: {
-    [key: string]: string;
-  };
+  countries: Record<string, string>;
   csv_data: string;
   indicator_metadata: {
     [key: string]: {
@@ -113,13 +109,13 @@ export enum RemoteConfigDataFlag {
 
 export enum QueryType {
   Post = 'POST',
-  Get = 'GET',
+  Get = 'GET'
 }
 export enum Endpoint {
   AppConfig = '',
   ParseUrl = 'parse-url',
   Fingerprint = 'fingerprint',
-  Content = 'content',
+  Content = 'content'
 }
 
 interface InputTextConfig {
