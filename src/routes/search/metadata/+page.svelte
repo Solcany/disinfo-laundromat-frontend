@@ -5,7 +5,7 @@
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
   import Form from '$components/Form.svelte';
-  import Table from '$components/Table.svelte';
+  import TableMeta from '$components/TableMeta.svelte';
   import Link from '$components/Link.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
   import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData } from '$models';
@@ -103,11 +103,9 @@
     </div>
 
     <div>
-      <!--
       {#if $metadataStore}
-        <Table caption="" data={$metadataStore} headerData={TABLE_METADATA_HEADER} />
+        <TableMeta caption="" data={$metadataStore} headerData={TABLE_METADATA_HEADER} />
       {/if}
-    -->
     </div>
   </section>
 </div>
