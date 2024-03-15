@@ -8,13 +8,12 @@
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
+  import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { contentStore } from '$stores/content.ts';
+  import { metadataStore } from '$stores/apiData.ts';
   import { inputStore } from '$stores/input.ts';
   export let data;
-
 
 type MatchDataItem = {
   domain_name_y: string;
@@ -93,8 +92,6 @@ function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
 
   return result; // Return the final transformed collection.
 }
-
-
     async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
@@ -106,18 +103,21 @@ function groupMatches(data: MatchDataItem[]): GroupedDomain[] {
       formData.set('run_urlscan', '0');
     }
 
-
-    console.log(formData);
-    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+    let response: ApiResponse<ApiFingerprintData> = await queryApi(query.type, query.endpoint, formData);
     console.log(response);
 
     if (response.error) {
        console.log(response.error);
      } else {
-console.time("functionExecutionTime");
-       let m = groupMatches(response.data.matches);
-console.timeEnd("functionExecutionTime");
-       console.log(m);
+       if(response.data && response.data.matches) {
+          let m = groupMatches(response.data.matches);
+          console.log(m);          
+       }
+      // if(response.data && response.data.matches) {
+      //    let m = groupMatches(response.data.matches);
+      // }
+       //let m = groupMatches(response.data.matches);
+       //console.log(m);
       // let content = new Content(response.data as ResponseData);
       // contentStore.set(content);
       // loadingStore.set(false);
@@ -178,10 +178,11 @@ console.timeEnd("functionExecutionTime");
     </div>
 
     <div>
-      {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} headerData={TABLE_METADATA_HEADER} />
+    <!--
+      {#if $metadataStore}
+        <Table caption="" data={$metadataStore} headerData={TABLE_METADATA_HEADER} />
       {/if}
-      <!-- result table-->
+    -->
     </div>
   </section>
 </div>

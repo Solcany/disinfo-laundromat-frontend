@@ -9,10 +9,10 @@
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
-  import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
+  import { Endpoint, QueryType, type ApiContentData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { contentStore } from '$stores/content.ts';
+  import { urlContentStore } from '$stores/apiData.ts';
   import { inputStore } from '$stores/input.ts';
   export let data;
 
@@ -52,16 +52,18 @@
     
 
     console.log(formData);
-    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+    let response: ApiResponse<ApiContentData> = await queryApi(query.type, query.endpoint, formData);
 
     if (response.error) {
        console.log(response.error);
      } else {
-       console.log(response);
-       console.log(response.data);
-       let content = new Content(response.data as ResponseData);
-       contentStore.set(content);
-       loadingStore.set(false);
+       if(response.data) {
+         urlContentStore.set(response.data);
+         loadingStore.set(false);
+       } else {
+         // WIP: this needs to be handled better!
+         loadingStore.set(false);
+       }
      }
   }
 
@@ -125,8 +127,8 @@
     </div>
 
     <div>
-      {#if !$contentStore.isEmpty()}
-        <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
+      {#if $urlContentStore}
+        <Table caption="" data={$urlContentStore} headerData={TABLE_CONTENT_HEADER} />
       {/if}
     </div>
   </section>

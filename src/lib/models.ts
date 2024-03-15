@@ -3,11 +3,7 @@ export interface LabeledValue {
   value: any;
 }
 
-export interface ApiResponse<T> {
-  data?: T;
-  error?: string;
-  status: number;
-}
+
 
 export interface ContentApiInput {
   region: LabeledValue;
@@ -30,7 +26,38 @@ export interface ContentResult {
   url: string;
 }
 
-export interface ResponseData {
+export interface ApiResponse<T> {
+  data?: T;
+  error?: string;
+  status: number;
+}
+
+export interface ApiFingerprintData {
+    countries: Record<string, string>;
+    indicator_metadata: {
+      [key: string]: {
+        description: string;
+        interpretation: string;
+        name: string;
+      };
+    };
+    indicator_summary: Record<string, number>;
+    indicators: Array<{
+      domain_name: string;
+      indicator_content: string | string[];
+      indicator_type: string;
+    }>;
+    languages: Record<string, string>;
+    matches: Array<{
+      domain_name_x: string;
+      domain_name_y: string;
+      match_type: string;
+      match_value: string;
+    }>;
+    matches_summary: Record<string, number>;
+}
+
+export interface ApiContentData {
   countries: {
     [key: string]: string;
   };
@@ -69,29 +96,6 @@ export enum SortDirection {
   Ascending = 'ascending',
   Descending = 'descending',
   None = 'none'
-}
-
-export class Content {
-  private content: ResponseData;
-
-  constructor(content: ResponseData) {
-    this.content = content;
-  }
-
-  getResults() {
-    return this.content.results;
-  }
-
-  isEmpty() {
-    const { countries, csv_data, indicator_metadata, languages, results } = this.content;
-    return (
-      Object.keys(countries).length === 0 &&
-      csv_data === '' &&
-      Object.keys(indicator_metadata).length === 0 &&
-      Object.keys(languages).length === 0 &&
-      Object.keys(results).length === 0
-    );
-  }
 }
 
 export enum InputType {

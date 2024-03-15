@@ -4,11 +4,11 @@
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
   import { CONTENT_PAGE_FORM_CONFIG } from '$config';
-  import { Content, Endpoint, QueryType, type ResponseData, type ApiResponse } from '$models';
+  import { Endpoint, QueryType,  type ApiResponse, type ApiContentData, type ApiFingerprintData } from '$models';
   import { queryApi } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
-  import { contentStore } from '$stores/content';
+  import { contentStore, urlContentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
   
   async function handleSubmit(event: Event, query: { type: QueryType, endpoint: Endpoint }) {
@@ -22,15 +22,28 @@
       formData.set('combineOperator', 'OR');
     }
 
-    let response: ApiResponse<any> = await queryApi(query.type, query.endpoint, formData);
+    const response : ApiResponse<ApiContentData | ApiFingerprintData>  = await queryApi(query.type, query.endpoint, formData);
+
 
     if (response.error) {
        console.log(response.error);
      } else {
-       let content = new Content(response.data as ResponseData);
-       contentStore.set(content);
-       loadingStore.set(false);
-        goto('/search/url');
+       if(response.data) {
+          if(query.endpoint === Endpoint.ParseUrl) {
+           urlContentStore.set(response.data as ApiContentData);
+           goto('/search/url');
+        } else if (query.endpoint === Endpoint.Content) {
+           contentStore.set(response.data as ApiContentData);
+           goto('/search/content');
+        } else if (query.endpoint === Endpoint.Fingerprint) {
+           metadataStore.set(response.data as ApiFingerprintData);
+           goto('/search/metadata');
+        }
+         loadingStore.set(false);
+       } else {
+         // WIP: this needs to be handled better!
+         loadingStore.set(false);
+       }
      }
   }
   $: formConfig = data.contentFormConfig;

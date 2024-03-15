@@ -44,6 +44,7 @@ export async function queryApi<T>(
     }
 
     const responseData: T = await response.json();
+
     return { data: responseData, status: response.status };
   } catch (error) {
     console.error('Error fetching data:', error);
