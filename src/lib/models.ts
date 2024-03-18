@@ -73,10 +73,38 @@ export interface ApiContentData {
 
 export interface TableRowData {
   data: [string, string | number][];
-  dataComplementary: [string, string | number][];
+  dataComplementary: [string, string | number | Array<number> | Array<string>][];
   domainAssociations?: string[];
 }
 
+interface TableMetaIndicatorSummary  { 
+  summary: number;
+  tier1: number;
+  tier2: number;
+  tier3: number;
+}
+
+export type IndicatorData = {
+  type: string;
+  value: string[];
+};
+
+export type TieredIndicator = {
+  tier: number;
+  data: IndicatorData[];
+};
+
+export type IndicatorsSummary = {
+  [tier: string]: number;
+};
+
+export interface TableMetaRowData {
+  domain: string;
+  indicators: TieredIndicator[];
+  indicators_summary: IndicatorsSummary;
+  domainAssociations?: string[];
+}
+   
 export interface TableHeaderItemData {
   label: string;
   key: string;
