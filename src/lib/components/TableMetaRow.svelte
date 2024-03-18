@@ -3,6 +3,8 @@
   import type { TableMetaRowData } from '$models';
   import { cn } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
+  import H3 from '$components/H3.svelte';
+  import H4 from '$components/H4.svelte';
 
   export let data: TableMetaRowData;
   let className: string = '';
@@ -65,38 +67,40 @@
   <!-- expanded row Table -->
   {#if isExpanded && data.indicators && data.indicators.length > 0}
     <tr>
-      {#each data.indicators as d}
-      {@const tier = d.tier}
-
+      {#each data.indicators as entry}
       <td colSpan={4}>
         <div class="w-full bg-white py-4 dark:bg-gray6">
 
-        {#if tier === 1}
-          tier1
-        {:else if tier === 2}
-          tier2
-        {:else} 
-          tier3
-        {/if}
+        {#if entry.tier}
+          {#if entry.tier === 1}
+            <div class="flex">
+              <H3>Conclusive Metadata</H3>
+            </div>
+          {:else if entry.tier === 2}
+            <div class="flex">
+              <H3>Associative Metadata</H3>
+            </div>
+          {:else if entry.tier === 3} 
+            <div class="flex">
+              <H3>Tertiary Metadata</H3>
+            </div>
+          {/if}
+        {/if} 
 
-        <!--
-          <table>
-            <tbody>
-              {#each data.dataComplementary as [key, value]}
-                <tr>
-                  <th class="pl-4 text-left font-sans text-sm text-black dark:text-white">
-                    {key}
-                  </th>
-                </tr>
-                <tr>
-                  <td class="pb-4 pl-4 font-sans text-sm text-black dark:text-white">
-                    {value}
-                  </td>
-                </tr>
+        {#if entry.data && entry.data.length > 0}
+          {#each entry.data as indicator}
+            {#if indicator.type}
+              <H4>{indicator.type}</H4>
+            {/if}
+            {#if indicator.value && indicator.value.length > 0}
+              <ul>
+              {#each indicator.value as value}
+                <li>{value}</li>
               {/each}
-            </tbody>
-          </table>
-          -->
+              </ul>
+            {/if}
+          {/each}
+        {/if}
         </div>
       </td>
       {/each}
