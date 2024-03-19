@@ -131,21 +131,61 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
       }
     }
   }
-//
-//  $: {
-//    // sort numbers
-//    if (sortColumnIndex > -1 && areColumnsNumber[sortColumnIndex] === true) {
-//      if (sortDirection === SortDirection.Ascending) {
-//        sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-//          ascending(a.data[sortColumnIndex][1] as number, b.data[sortColumnIndex][1] as number)
-//        );
-//      } else {
-//        sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-//          descending(a.data[sortColumnIndex][1] as number, b.data[sortColumnIndex][1] as number)
-//        );
-//      }
-//    }
-//  }
+
+  function sortRows() {
+
+    if (!rows || rows.length === 0) {
+      sortedRows = [];
+      return; 
+    }
+
+    if (sortColumnIndex > -1 && 
+        headerData[sortColumnIndex]?.key && 
+        sortDirection !== SortDirection.None) {
+
+      const { key, type } = headerData[sortColumnIndex];
+      
+      const sorter = (a: TableMetaRowData, b: TableMetaRowData) => {
+        const aValue = a[key];
+        const bValue = b[key];
+
+        if (aValue == null && bValue == null) {
+          return 0; // Consider them equal if both are null/undefined
+        } else if (aValue == null) {
+          return -1; // Consider a less if aValue is null/undefined
+        } else if (bValue == null) {
+          return 1; // Consider b less if bValue is null/undefined
+        }
+        switch (type) {
+          case TableHeaderItemType.String:
+            if (sortDirection === SortDirection.Ascending) {
+              // Assuming ascending() and descending() are comparison functions you've defined or imported
+              return ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+            } else {
+              return descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+            }
+          case TableHeaderItemType.Number:
+            if (sortDirection === SortDirection.Ascending) {
+              // Use the ascending function with Number() for clarity
+              return ascending(Number(aValue), Number(bValue));
+            } else {
+              // Use the descending function with Number() for clarity
+              return descending(Number(aValue), Number(bValue));
+            }
+          // Include default case to handle unexpected types
+          default:
+            return 0;
+        }
+      };
+      
+      sortedRows = rows.sort(sorter);
+    } else {
+      sortedRows = rows; 
+      }
+  }
+
+  $: sortRows(), [rows, sortColumnIndex, sortDirection, headerData];
+
 </script>
 <div>
   <table class="w-full max-w-full border-spacing-0">
