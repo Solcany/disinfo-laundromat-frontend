@@ -39,21 +39,21 @@
       <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">  
       {#if data.indicators_summary}
         {#if data.indicators_summary.tier1}
-          <RectMapped value={data.indicators_summary.tier1} value_max={10} height_px={10} class="block fill-red-500"/>
+          <RectMapped value={data.indicators_summary.tier1} value_max={10} rx={2} ry={2} height_px={7} class="block fill-indicator-1"/>
         {:else}
-          <Rect height_px={10} class="block fill-gray6"/>
+          <Rect height_px={7} class="block fill-gray6"/>
         {/if}
 
         {#if data.indicators_summary.tier2}
-          <RectMapped value={data.indicators_summary.tier2} value_max={10} height_px={10} class="block fill-green-500"/>
+          <RectMapped value={data.indicators_summary.tier2} value_max={10} height_px={7} class="block fill-indicator-2 py-1" rx={2} ry={2}/>
         {:else}
-          <Rect height_px={10} class="block fill-gray6"/>
+          <Rect height_px={7} class="block fill-gray5 py-1"/>
         {/if}
 
         {#if data.indicators_summary.tier3}
-          <RectMapped value={data.indicators_summary.tier3} value_max={10} height_px={10} class="block fill-yellow-500"/>
+          <RectMapped value={data.indicators_summary.tier3} value_max={10} height_px={7} class="block fill-indicator-3" rx={2} ry={2}/>
         {:else}
-          <Rect height_px={10} class="block fill-gray6"/>
+          <Rect height_px={7} class="block fill-gray6"/>
         {/if}
 
 
