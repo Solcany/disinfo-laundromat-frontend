@@ -1,26 +1,21 @@
 <script lang="ts">
-  import { ascending, 
-           descending } from 'd3-array';
-  import { includeObjectKeys, 
-           excludeObjectKeys, 
-           isNumber } from '$utils';
-  import type { 
-     ApiContentData, 
-     ApiFingerprintData,
-     IndicatorData,
-     TieredIndicator,
-     IndicatorsSummary,
-     TableHeaderItemData, 
-     TableMetaRowData 
+  import { ascending, descending } from 'd3-array';
+  import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
+  import type {
+    ApiContentData,
+    ApiFingerprintData,
+    IndicatorData,
+    TieredIndicator,
+    IndicatorsSummary,
+    TableHeaderItemData,
+    TableMetaRowData
   } from '$models';
-  import { SortDirection, 
-          TableHeaderItemType} from '$models';
+  import { SortDirection, TableHeaderItemType } from '$models';
 
   import TableMetaRow from '$components/TableMetaRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
-  import RectMapped from '$components/RectMapped.svelte';
 
   export let headerData: TableHeaderItemData[];
   export let data: ApiFingerprintData;
@@ -28,72 +23,81 @@
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
 
-type MatchDataItem = {
-  domain_name_y: string;
-  match_type: string; 
-  match_value: string;
-};
+  type MatchDataItem = {
+    domain_name_y: string;
+    match_type: string;
+    match_value: string;
+  };
 
-function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
-  const grouped: Record<string, { domain: string; indicators: Record<string, { [type: string]: string[] }>; indicators_summary: IndicatorsSummary }> = {};
+  function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
+    const grouped: Record<
+      string,
+      {
+        domain: string;
+        indicators: Record<string, { [type: string]: string[] }>;
+        indicators_summary: IndicatorsSummary;
+      }
+    > = {};
 
-  data.forEach(({ domain_name_y, match_type, match_value }) => {
-    const match = match_type.match(/^(\d+)-(.+)$/);
-    if (!match) return; 
-    const tier: string = `tier${match[1]}`;
-    const type: string = match[2];
+    data.forEach(({ domain_name_y, match_type, match_value }) => {
+      const match = match_type.match(/^(\d+)-(.+)$/);
+      if (!match) return;
+      const tier: string = `tier${match[1]}`;
+      const type: string = match[2];
 
-    if (!grouped[domain_name_y]) {
-      grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
-    }
+      if (!grouped[domain_name_y]) {
+        grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
+      }
 
-    if (!grouped[domain_name_y].indicators[tier]) {
-      grouped[domain_name_y].indicators[tier] = {};
-      grouped[domain_name_y].indicators_summary[tier] = 0; 
-    }
+      if (!grouped[domain_name_y].indicators[tier]) {
+        grouped[domain_name_y].indicators[tier] = {};
+        grouped[domain_name_y].indicators_summary[tier] = 0;
+      }
 
-    if (!grouped[domain_name_y].indicators[tier][type]) {
-      grouped[domain_name_y].indicators[tier][type] = [];
-    }
+      if (!grouped[domain_name_y].indicators[tier][type]) {
+        grouped[domain_name_y].indicators[tier][type] = [];
+      }
 
-    grouped[domain_name_y].indicators[tier][type].push(match_value);
-    grouped[domain_name_y].indicators_summary[tier]++;
-  });
+      grouped[domain_name_y].indicators[tier][type].push(match_value);
+      grouped[domain_name_y].indicators_summary[tier]++;
+    });
 
-  // Transform the grouped data into the final structure expected by the return type.
-  const rows: TableMetaRowData[] = Object.keys(grouped).map(domainKey => {
-    const domainGroup = grouped[domainKey];
-    // Convert indicators from the intermediate structure to an array of TieredIndicator.
-    const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators).map(tierKey => {
-      const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(([type, values]) => ({
-        type,
-        value: values,
-      }));
+    // Transform the grouped data into the final structure expected by the return type.
+    const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
+      const domainGroup = grouped[domainKey];
+      // Convert indicators from the intermediate structure to an array of TieredIndicator.
+      const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators).map((tierKey) => {
+        const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(
+          ([type, values]) => ({
+            type,
+            value: values
+          })
+        );
+        return {
+          tier: parseInt(tierKey.replace('tier', ''), 10), // Convert the tier string back to a number.
+          data
+        };
+      });
+      // Return the structured domain data, including the indicators and their summary.
       return {
-        tier: parseInt(tierKey.replace('tier', ''), 10), // Convert the tier string back to a number.
-        data,
+        domain: domainGroup.domain,
+        indicators,
+        indicators_summary: domainGroup.indicators_summary
       };
     });
-    // Return the structured domain data, including the indicators and their summary.
-    return {
-      domain: domainGroup.domain,
-      indicators,
-      indicators_summary: domainGroup.indicators_summary,
-    };
-  });
 
-  return rows; 
-}
+    return rows;
+  }
   const rows: TableMetaRowData[] = getTableRowsFromMatchedDomains(data.matches);
 
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
 
- function handleHeaderItemClick(i: number, label: string): void {
-   sortColumnIndex = i;
-   updateSortStatus(label);
- }
+  function handleHeaderItemClick(i: number, label: string): void {
+    sortColumnIndex = i;
+    updateSortStatus(label);
+  }
 
   function updateSortStatus(column_label: string): void {
     // reset all to "none"
@@ -110,25 +114,21 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
   $: sortedRows = rows;
 
   $: {
-    if (sortColumnIndex > -1 &&
-        headerData[sortColumnIndex].key &&
-        headerData[sortColumnIndex].type  &&
-        headerData[sortColumnIndex].type === TableHeaderItemType.String) {
+    if (
+      sortColumnIndex > -1 &&
+      headerData[sortColumnIndex].key &&
+      headerData[sortColumnIndex].type &&
+      headerData[sortColumnIndex].type === TableHeaderItemType.String
+    ) {
       const key = headerData[sortColumnIndex].key;
 
       if (sortDirection === SortDirection.Ascending) {
         sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-          ascending(
-            (a[key] as string).toLowerCase(),
-            (b[key] as string).toLowerCase()
-          )
+          ascending((a[key] as string).toLowerCase(), (b[key] as string).toLowerCase())
         );
       } else {
         sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-          descending(
-            (a[key] as string).toLowerCase(),
-            (b[key] as string).toLowerCase()
-          )
+          descending((a[key] as string).toLowerCase(), (b[key] as string).toLowerCase())
         );
       }
     }
@@ -136,15 +136,16 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
   function sortRows() {
     if (!rows || rows.length === 0) {
       sortedRows = [];
-      return; 
+      return;
     }
 
-    if (sortColumnIndex > -1 && 
-        headerData[sortColumnIndex]?.key && 
-        sortDirection !== SortDirection.None) {
-
+    if (
+      sortColumnIndex > -1 &&
+      headerData[sortColumnIndex]?.key &&
+      sortDirection !== SortDirection.None
+    ) {
       const { key, type } = headerData[sortColumnIndex];
-      
+
       const sorter = (a: TableMetaRowData, b: TableMetaRowData) => {
         const aValue = a[key];
         const bValue = b[key];
@@ -160,34 +161,30 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
         switch (type) {
           case TableHeaderItemType.String:
             if (sortDirection === SortDirection.Ascending) {
-              // Assuming ascending() and descending() are comparison functions you've defined or imported
               return ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
             } else {
               return descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
             }
           case TableHeaderItemType.Number:
             if (sortDirection === SortDirection.Ascending) {
-              // Use the ascending function with Number() for clarity
               return ascending(Number(aValue), Number(bValue));
             } else {
-              // Use the descending function with Number() for clarity
               return descending(Number(aValue), Number(bValue));
             }
-          // Include default case to handle unexpected types
           default:
             return 0;
         }
       };
-      
+
       sortedRows = rows.sort(sorter);
     } else {
-      sortedRows = rows; 
-      }
+      sortedRows = rows;
+    }
   }
 
   $: sortRows(), [rows, sortColumnIndex, sortDirection, headerData];
-
 </script>
+
 <div>
   <table class="w-full max-w-full border-spacing-0">
     {#if caption}
@@ -196,7 +193,8 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
     <!-- WIP: should col width be hardcoded? -->
     <!-- should this be somehow set dynamically -->
     <colgroup>
-      <col style="width: 95%" />
+      <col style="width: 52.5%" />
+      <col style="width: 52.5%" />
       <col style="width: 5%" />
     </colgroup>
     <thead class="sticky top-0 dark:bg-gray7">
@@ -206,12 +204,13 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
           sortStatus={sortStatus[data.label]}
           onClick={() => {
             handleHeaderItemClick(i, data.label);
-          }}/>
+          }}
+        />
       {/each}
     </thead>
     <tbody>
       {#each sortedRows as row, i (row)}
-          <TableMetaRow data={row}/>
+        <TableMetaRow data={row} />
       {/each}
     </tbody>
   </table>

@@ -77,7 +77,7 @@ export interface TableRowData {
   domainAssociations?: string[];
 }
 
-interface TableMetaIndicatorSummary  { 
+interface TableMetaIndicatorSummary {
   summary: number;
   tier1: number;
   tier2: number;
@@ -101,7 +101,7 @@ export type IndicatorsSummary = {
 export enum TableHeaderItemType {
   Number = 'number',
   String = 'string',
-  BarGraph = 'bar_chart',
+  BarGraph = 'bar_chart'
 }
 
 export interface TableMetaRowData {
@@ -111,7 +111,7 @@ export interface TableMetaRowData {
   domainAssociations?: string[];
   [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
 }
-   
+
 export interface TableHeaderItemData {
   label: string;
   key: string;

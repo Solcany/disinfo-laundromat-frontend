@@ -13,15 +13,12 @@ export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
 ];
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
-  { label: 'Content Domain', 
-    key: 'domain', 
-    type: TableHeaderItemType.String
-  },
-  { 
-    label: 'Indicators', 
-    key: 'indicators_summary', 
+  { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
+  {
+    label: 'Indicators',
+    key: 'indicators_summary',
     type: TableHeaderItemType.BarGraph
-  },
+  }
 ];
 
 export const UI_NAV: NavItemData[] = [
