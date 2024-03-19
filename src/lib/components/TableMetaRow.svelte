@@ -64,11 +64,12 @@
       </button>
     </td>
     <td></td>
+  </tr>
   <!-- expanded row Table -->
   {#if isExpanded && data.indicators && data.indicators.length > 0}
     <tr>
       {#each data.indicators as entry}
-      <td colSpan={4}>
+      <td colSpan={2}>
         <div class="w-full bg-white py-4 dark:bg-gray6">
 
         {#if entry.tier}
@@ -106,5 +107,4 @@
       {/each}
     </tr>
   {/if}
-</tr>
 

@@ -98,16 +98,24 @@ export type IndicatorsSummary = {
   [tier: string]: number;
 };
 
+export enum TableHeaderItemType {
+  Number = 'number',
+  String = 'string',
+  BarGraph = 'bar_chart',
+}
+
 export interface TableMetaRowData {
   domain: string;
   indicators: TieredIndicator[];
   indicators_summary: IndicatorsSummary;
   domainAssociations?: string[];
+  [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
 }
    
 export interface TableHeaderItemData {
   label: string;
   key: string;
+  type?: TableHeaderItemType;
   tooltip?: string;
 }
 

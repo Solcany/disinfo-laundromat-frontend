@@ -1,7 +1,7 @@
 import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig } from '$models';
 import { RemoteConfigDataFlag, Endpoint, QueryType } from '$models';
 
-import { InputType } from '$models';
+import { InputType, TableHeaderItemType } from '$models';
 
 export const APP_TITLE: string = 'Disinformation Laundromat';
 export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
@@ -13,7 +13,15 @@ export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
 ];
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
-  { label: 'Content Domain', key: 'domain' }
+  { label: 'Content Domain', 
+    key: 'domain', 
+    type: TableHeaderItemType.String
+  },
+  { 
+    label: 'Indicators', 
+    key: 'indicators_summary', 
+    type: TableHeaderItemType.BarGraph
+  },
 ];
 
 export const UI_NAV: NavItemData[] = [
