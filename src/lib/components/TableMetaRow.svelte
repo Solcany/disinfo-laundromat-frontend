@@ -38,25 +38,42 @@
       </td>
       <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">  
       {#if data.indicators_summary}
+      {@const rxy = 2}
+      {@const h = 7}
+      <div class="my-1">
         {#if data.indicators_summary.tier1}
-          <RectMapped value={data.indicators_summary.tier1} value_max={10} rx={2} ry={2} height_px={7} class="block fill-indicator-1"/>
+          <div class="relative block">
+            <Rect height_px={h} class="relative fill-gray6"rx={rxy} ry={rxy}/> 
+            <RectMapped value={data.indicators_summary.tier1} value_max={10} rx={rxy} ry={rxy} height_px={h} class="absolute top-0 left-0 z-50 fill-indicator-1"/>
+          </div>
         {:else}
-          <Rect height_px={7} class="block fill-gray6"/>
+        <div class="relative block">
+          <Rect height_px={h} class="fill-gray6"rx={rxy} ry={rxy}/>
+        </div>
         {/if}
 
         {#if data.indicators_summary.tier2}
-          <RectMapped value={data.indicators_summary.tier2} value_max={10} height_px={7} class="block fill-indicator-2 py-1" rx={2} ry={2}/>
+          <div class="relative block my-1">
+            <Rect height_px={h} class="relative fill-gray6"rx={rxy} ry={rxy}/> 
+            <RectMapped value={data.indicators_summary.tier2} value_max={10} rx={rxy} ry={rxy} height_px={h} class="absolute top-0 left-0 z-50 fill-indicator-2"/>
+          </div>
         {:else}
-          <Rect height_px={7} class="block fill-gray5 py-1"/>
+        <div class="relative block my-1">
+          <Rect height_px={h} class="fill-gray6"rx={rxy} ry={rxy}/>
+        </div>
         {/if}
 
         {#if data.indicators_summary.tier3}
-          <RectMapped value={data.indicators_summary.tier3} value_max={10} height_px={7} class="block fill-indicator-3" rx={2} ry={2}/>
+          <div class="relative block">
+            <Rect height_px={h} class="relative fill-gray6"rx={rxy} ry={rxy}/> 
+            <RectMapped value={data.indicators_summary.tier3} value_max={10} rx={rxy} ry={rxy} height_px={h} class="absolute top-0 left-0 z-50 fill-indicator-3"/>
+          </div>
         {:else}
-          <Rect height_px={7} class="block fill-gray6"/>
+        <div class="relative block">
+          <Rect height_px={h} class="fill-gray6"rx={rxy} ry={rxy}/>
+        </div>
         {/if}
-
-
+      </div>
       {/if}
       </td>
 
