@@ -3,6 +3,8 @@
   import type { TableMetaRowData } from '$models';
   import { cn } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
+  import Rect from '$components/Rect.svelte';
+  import RectMapped from '$components/RectMapped.svelte';
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
 
@@ -21,8 +23,8 @@
 </script>
 
   <tr class="w-full">
+      <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">     
       {#if data.domain}
-        <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
           <a href={"https://" + data.domain}>{data.domain}</a>
           {#if data.domainAssociations && data.domainAssociations.length > 0}
           {#each domainAssociations as association}
@@ -32,8 +34,32 @@
             </Tooltip>
           {/each}
           {/if}
-        </td>
+      {/if}      
+      </td>
+      <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">  
+      {#if data.indicators_summary}
+        {#if data.indicators_summary.tier1}
+          <RectMapped value={data.indicators_summary.tier1} value_max={10} height_px={10} class="block fill-red-500"/>
+        {:else}
+          <Rect height_px={10} class="block fill-gray6"/>
+        {/if}
+
+        {#if data.indicators_summary.tier2}
+          <RectMapped value={data.indicators_summary.tier2} value_max={10} height_px={10} class="block fill-green-500"/>
+        {:else}
+          <Rect height_px={10} class="block fill-gray6"/>
+        {/if}
+
+        {#if data.indicators_summary.tier3}
+          <RectMapped value={data.indicators_summary.tier3} value_max={10} height_px={10} class="block fill-yellow-500"/>
+        {:else}
+          <Rect height_px={10} class="block fill-gray6"/>
+        {/if}
+
+
       {/if}
+      </td>
+
 
 <!--
       {:else}

@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { ascending, descending } from 'd3-array';
-  import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
-
+  import { ascending, 
+           descending } from 'd3-array';
+  import { includeObjectKeys, 
+           excludeObjectKeys, 
+           isNumber } from '$utils';
   import type { 
      ApiContentData, 
      ApiFingerprintData,
@@ -11,7 +13,6 @@
      TableHeaderItemData, 
      TableMetaRowData 
   } from '$models';
-
   import { SortDirection, 
           TableHeaderItemType} from '$models';
 
@@ -19,6 +20,7 @@
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
+  import RectMapped from '$components/RectMapped.svelte';
 
   export let headerData: TableHeaderItemData[];
   export let data: ApiFingerprintData;
@@ -131,9 +133,7 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
       }
     }
   }
-
   function sortRows() {
-
     if (!rows || rows.length === 0) {
       sortedRows = [];
       return; 
@@ -156,6 +156,7 @@ function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData
         } else if (bValue == null) {
           return 1; // Consider b less if bValue is null/undefined
         }
+
         switch (type) {
           case TableHeaderItemType.String:
             if (sortDirection === SortDirection.Ascending) {
