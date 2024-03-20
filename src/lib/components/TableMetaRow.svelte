@@ -26,7 +26,7 @@
   <!-- the domain column -->
   <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
     {#if data.domain}
-      <a href={'https://' + data.domain}>{data.domain}</a>
+      <a href={'https://' + data.domain} class="underline">{data.domain}</a>
       {#if data.domainAssociations && data.domainAssociations.length > 0}
         {#each domainAssociations as association}
           <Tooltip>
@@ -121,43 +121,47 @@
   <td></td>
 </tr>
 
-<!-- expanded row Table -->
+<!-- expanded row -->
 {#if isExpanded && data.indicators && data.indicators.length > 0}
   <tr>
     {#each data.indicators as entry}
       <td colSpan={3}>
-        <div class="w-full bg-white py-4 dark:bg-gray6">
           {#if entry.tier}
             {#if entry.tier === 1}
-              <div class="flex">
-                <H3>Conclusive Metadata</H3>
-
+              <div class="w-full pl-3 py-4">
+                <H3 class="block w-full dark:text-indicator-1 text-indicator-1">Conclusive Metadata</H3>
                 {#if entry.data && entry.data.length > 0}
+                <div class="pt-2 w-full grid grid-cols-3 gap-4">
                   {#each entry.data as indicator}
-                    {#if indicator.type}
-                      <H4>{indicator.type}</H4>
-                    {/if}
-                    {#if indicator.value && indicator.value.length > 0}
-                      <ul>
-                        {#each indicator.value as value}
-                          <li>{value}</li>
-                        {/each}
-                      </ul>
+                    {#if indicator.type && 
+                        indicator.value &&
+                        indicator.value.length > 0}
+                      <div>
+                        <H4 class="">{indicator.type}</H4>
+                        <ul>
+                          {#each indicator.value as value}
+                            <li class="text-sm dark:text-white text-black py-2">{value}</li>
+                          {/each}
+                        </ul>
+                      </div>
                     {/if}
                   {/each}
+                </div>
                 {/if}
               </div>
             {:else if entry.tier === 2}
-              <div class="flex">
+             <!-- <div class="flex">
                 <H3>Associative Metadata</H3>
-              </div>
+              </div> -->
             {:else if entry.tier === 3}
+            <!--
               <div class="flex">
                 <H3>Tertiary Metadata</H3>
               </div>
+              -->
             {/if}
           {/if}
-        </div></td
+        </td
       >
     {/each}
   </tr>
