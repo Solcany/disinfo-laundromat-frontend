@@ -167,7 +167,13 @@
                         indicator.value &&
                         indicator.value.length > 0}
                       <div>
-                        <H4 class="">{indicator.type}</H4>
+                        <div>
+                          <H4 class="pr-2">{indicator.type}</H4>
+                          <Tooltip> 
+                            <svelte:fragment slot="icon">i</svelte:fragment>
+                            <svelte:fragment slot="content">{metadata[entry.tier + "-" + indicator.type].description}</svelte:fragment>
+                          </Tooltip>
+                        </div>
                         <ul>
                           {#each indicator.value as value}
                             <li class="text-sm dark:text-white text-black py-2">{value}</li>
@@ -189,7 +195,13 @@
                         indicator.value &&
                         indicator.value.length > 0}
                       <div>
-                        <H4 class="">{indicator.type}</H4>
+                        <div>
+                          <H4 class="pr-2">{indicator.type}</H4>
+                          <Tooltip> 
+                            <svelte:fragment slot="icon">i</svelte:fragment>
+                            <svelte:fragment slot="content">{metadata[entry.tier + "-" + indicator.type].description}</svelte:fragment>
+                          </Tooltip>
+                        </div>
                         <ul>
                           {#each indicator.value as value}
                             <li class="text-sm dark:text-white text-black py-2">{value}</li>
