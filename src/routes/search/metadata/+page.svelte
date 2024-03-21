@@ -7,9 +7,15 @@
   import Form from '$components/Form.svelte';
   import TableMeta from '$components/TableMeta.svelte';
   import Link from '$components/Link.svelte';
-  import {onMount} from 'svelte';
+  import { onMount } from 'svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData, type ApiIndicatorsData } from '$models';
+  import {
+    Endpoint,
+    QueryType,
+    type ApiResponse,
+    type ApiFingerprintData,
+    type ApiIndicatorsData
+  } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { metadataStore } from '$stores/apiData.ts';
@@ -23,9 +29,8 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
 
-    if (query.endpoint === Endpoint.Fingerprint &&
-        !formData.has('run_urlscan')) {
-          formData.set('run_urlscan', '0');
+    if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
+      formData.set('run_urlscan', '0');
     }
 
     let response: ApiResponse<ApiFingerprintData> = await queryApi(
@@ -51,7 +56,6 @@
       // loadingStore.set(false);
     }
   }
-
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">

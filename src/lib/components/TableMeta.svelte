@@ -27,7 +27,7 @@
     domain_name: string;
     indicator_content: string | string[];
     indicator_type: string;
-  }
+  };
 
   type MatchDataItem = {
     domain_name_y: string;
@@ -35,43 +35,42 @@
     match_value: string;
   };
 
+  function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
+    const result: TableMetaRowData = {
+      domain: '',
+      indicators: []
+    };
 
-function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
-  const result: TableMetaRowData = {
-    domain: "",
-    indicators: []
-  };
+    if (data.length === 0) return result;
 
-  if (data.length === 0) return result;
+    result.domain = data[0].domain_name;
+    const indicators: Record<string, Record<string, string[]>> = {};
 
-  result.domain = data[0].domain_name;
-  const indicators: Record<string, Record<string, string[]>> = {};
+    data.forEach(({ indicator_type, indicator_content }) => {
+      const [tierStr, type] = indicator_type.split('-');
+      const tier = `tier${tierStr}`;
 
-  data.forEach(({ indicator_type, indicator_content }) => {
-    const [tierStr, type] = indicator_type.split("-");
-    const tier = `tier${tierStr}`;
+      if (!indicators[tier]) {
+        indicators[tier] = {};
+      }
+      if (!indicators[tier][type]) {
+        indicators[tier][type] = [];
+      }
 
-    if (!indicators[tier]) {
-      indicators[tier] = {};
-    }
-    if (!indicators[tier][type]) {
-      indicators[tier][type] = [];
-    }
+      const content = Array.isArray(indicator_content) ? indicator_content : [indicator_content];
+      indicators[tier][type].push(...content);
+    });
 
-    const content = Array.isArray(indicator_content) ? indicator_content : [indicator_content];
-    indicators[tier][type].push(...content);
-  });
+    result.indicators = Object.entries(indicators).map(([tierKey, types]) => ({
+      tier: parseInt(tierKey.replace('tier', ''), 10),
+      data: Object.entries(types).map(([type, value]) => ({
+        type,
+        value
+      }))
+    }));
 
-  result.indicators = Object.entries(indicators).map(([tierKey, types]) => ({
-    tier: parseInt(tierKey.replace('tier', ''), 10),
-    data: Object.entries(types).map(([type, value]) => ({
-      type,
-      value
-    }))
-  }));
-
-  return result;
-}
+    return result;
+  }
 
   function getRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
     const grouped: Record<
@@ -204,7 +203,7 @@ function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
 
-  $: sortedRows = rows
+  $: sortedRows = rows;
   $: sortRows(), [sortedRows, sortColumnIndex, sortDirection, headerData];
 </script>
 
@@ -232,9 +231,9 @@ function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
       {/each}
     </thead>
     <tbody>
-      <TableMetaRow data={theDomainRow} metadata={data.indicator_metadata}/>
+      <TableMetaRow data={theDomainRow} metadata={data.indicator_metadata} />
       {#each sortedRows as row, i (row)}
-        <TableMetaRow data={row} metadata={data.indicator_metadata}/>
+        <TableMetaRow data={row} metadata={data.indicator_metadata} />
       {/each}
     </tbody>
   </table>

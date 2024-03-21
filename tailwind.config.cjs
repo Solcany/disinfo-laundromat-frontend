@@ -17,12 +17,12 @@ const config = {
         'input-dark': '#131212',
         'indicator-1': '#FF6320',
         'indicator-2': '#FFA178',
-        'indicator-3': '#FFA178',
+        'indicator-3': '#FFA178'
       },
       textColor: {
         'indicator-1': '#FF6320',
         'indicator-2': '#FFA178',
-        'indicator-3': '#FFA178',
+        'indicator-3': '#FFA178'
       },
       height: {
         input: '35px'

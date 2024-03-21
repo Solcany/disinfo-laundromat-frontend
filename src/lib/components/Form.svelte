@@ -14,7 +14,7 @@
   let query: { type: QueryType; endpoint: Endpoint } | undefined;
 
   function handleSubmit(event: Event) {
-    if(query) {
+    if (query) {
       onSubmit(event, query);
     }
   }

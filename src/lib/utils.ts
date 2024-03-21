@@ -69,12 +69,9 @@ export function domainToUrl(domain: string) {
     return url.href;
   } catch (error) {
     console.error('Invalid domain:', error);
-    return null; 
+    return null;
   }
 }
-
-
-
 
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';

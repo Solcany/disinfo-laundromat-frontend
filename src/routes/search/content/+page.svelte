@@ -22,9 +22,10 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
 
-    if (query.endpoint === Endpoint.ParseUrl ||
-        query.endpoint === Endpoint.Content &&
-        !formData.has('combineOperator')) {
+    if (
+      query.endpoint === Endpoint.ParseUrl ||
+      (query.endpoint === Endpoint.Content && !formData.has('combineOperator'))
+    ) {
       formData.set('combineOperator', 'OR');
     }
 

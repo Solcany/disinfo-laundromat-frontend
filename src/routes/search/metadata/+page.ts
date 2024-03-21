@@ -1,10 +1,7 @@
 import type { PageLoad } from './$types';
 import type { LabeledValue, ApiResponse, ApiIndicatorsData } from '$models';
 import { error, type NumericRange } from '@sveltejs/kit';
-import {
-  QueryType,
-  Endpoint,
-} from '$models';
+import { QueryType, Endpoint } from '$models';
 import { queryApi } from '$api';
 
 export const load: PageLoad = async () => {
@@ -20,6 +17,6 @@ export const load: PageLoad = async () => {
     }
   }
   if (response.data) {
-   return {indicators: response.data} 
+    return { indicators: response.data };
   }
 };

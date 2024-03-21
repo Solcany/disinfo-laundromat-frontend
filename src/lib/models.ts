@@ -31,11 +31,11 @@ export interface ApiResponse<T> {
 }
 
 export type IndicatorMetadata = {
-    [key: string]: {
-      description: string;
-      interpretation: string;
-      name: string;
-    };
+  [key: string]: {
+    description: string;
+    interpretation: string;
+    name: string;
+  };
 };
 
 export interface ApiFingerprintData {
@@ -74,15 +74,15 @@ export interface ApiContentData {
 }
 
 export interface ApiIndicatorsData {
-  data: Array<any>,
+  data: Array<any>;
   indicator_metadata: {
     [key: string]: {
       description: string;
       interpretation: string;
       name: string;
     };
-  },
-  unique_types: Array<string>
+  };
+  unique_types: Array<string>;
 }
 
 export interface TableRowData {

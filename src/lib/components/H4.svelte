@@ -5,4 +5,3 @@
 </script>
 
 <h3 class={cn('font-sans font-bold text-black dark:text-white', className)}><slot /></h3>
-
