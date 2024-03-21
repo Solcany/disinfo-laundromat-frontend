@@ -52,15 +52,29 @@ export function isNumber(value: any): value is number {
 
 export function zip(...arrays: any[][]): any[][] {
   const length = arrays.length > 0 ? arrays[0].length : 0;
-
   for (const arr of arrays) {
     if (arr.length !== length) {
       throw new Error('Arrays must have the same length');
     }
   }
-
   return Array.from({ length }, (_, index) => arrays.map((array) => array[index]));
 }
+
+export function domainToUrl(domain: string) {
+  if (!domain.startsWith('http://') && !domain.startsWith('https://')) {
+    domain = 'https://' + domain;
+  }
+  try {
+    const url = new URL(domain);
+    return url.href;
+  } catch (error) {
+    console.error('Invalid domain:', error);
+    return null; 
+  }
+}
+
+
+
 
 import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';

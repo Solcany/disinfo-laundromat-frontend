@@ -1,7 +1,7 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { TableMetaRowData } from '$models';
-  import { cn } from '$utils';
+  import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
   import Rect from '$components/Rect.svelte';
   import RectMapped from '$components/RectMapped.svelte';
@@ -26,7 +26,7 @@
   <!-- the domain column -->
   <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
     {#if data.domain}
-      <a href={'https://' + data.domain} class="underline">{data.domain}</a>
+      <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
       {#if data.domainAssociations && data.domainAssociations.length > 0}
         {#each domainAssociations as association}
           <Tooltip>
@@ -123,12 +123,12 @@
 
 <!-- expanded row -->
 {#if isExpanded && data.indicators && data.indicators.length > 0}
-  <tr>
+  <tr class="border-b-2 border-gray3">
+  <td colSpan={3}>
     {#each data.indicators as entry}
-      <td colSpan={3}>
           {#if entry.tier}
             {#if entry.tier === 1}
-              <div class="w-full pl-3 py-4">
+              <div class="w-full block pl-3 py-4">
                 <H3 class="block w-full dark:text-indicator-1 text-indicator-1">Conclusive Metadata</H3>
                 {#if entry.data && entry.data.length > 0}
                 <div class="pt-2 w-full grid grid-cols-3 gap-4">
@@ -150,19 +150,52 @@
                 {/if}
               </div>
             {:else if entry.tier === 2}
-             <!-- <div class="flex">
-                <H3>Associative Metadata</H3>
-              </div> -->
-            {:else if entry.tier === 3}
-            <!--
-              <div class="flex">
-                <H3>Tertiary Metadata</H3>
+              <div class="w-full pl-3 py-4">
+                <H3 class="block w-full dark:text-indicator-2 text-indicator-2">Associative Metadata</H3>
+                {#if entry.data && entry.data.length > 0}
+                <div class="pt-2 w-full grid grid-cols-3 gap-4">
+                  {#each entry.data as indicator}
+                    {#if indicator.type && 
+                        indicator.value &&
+                        indicator.value.length > 0}
+                      <div>
+                        <H4 class="">{indicator.type}</H4>
+                        <ul>
+                          {#each indicator.value as value}
+                            <li class="text-sm dark:text-white text-black py-2">{value}</li>
+                          {/each}
+                        </ul>
+                      </div>
+                    {/if}
+                  {/each}
+                </div>
+                {/if}
               </div>
-              -->
+            {:else if entry.tier === 3}
+              <div class="w-full pl-3 py-4">
+                <H3 class="block w-full dark:text-indicator-3 text-indicator-3">Tertiary Metadata</H3>
+                {#if entry.data && entry.data.length > 0}
+                <div class="pt-2 w-full grid grid-cols-3 gap-4">
+                  {#each entry.data as indicator}
+                    {#if indicator.type && 
+                        indicator.value &&
+                        indicator.value.length > 0}
+                      <div>
+                        <H4 class="">{indicator.type}</H4>
+                        <ul>
+                          {#each indicator.value as value}
+                            <li class="text-sm dark:text-white text-black py-2">{value}</li>
+                          {/each}
+                        </ul>
+                      </div>
+                    {/if}
+                  {/each}
+                </div>
+                {/if}
+              </div>
             {/if}
           {/if}
-        </td
-      >
     {/each}
+    </td>
   </tr>
 {/if}
