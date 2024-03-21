@@ -30,15 +30,17 @@ export interface ApiResponse<T> {
   status: number;
 }
 
-export interface ApiFingerprintData {
-  countries: Record<string, string>;
-  indicator_metadata: {
+export type IndicatorMetadata = {
     [key: string]: {
       description: string;
       interpretation: string;
       name: string;
     };
-  };
+};
+
+export interface ApiFingerprintData {
+  countries: Record<string, string>;
+  indicator_metadata: IndicatorMetadata;
   indicator_summary: Record<string, number>;
   indicators: Array<{
     domain_name: string;

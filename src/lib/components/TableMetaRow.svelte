@@ -1,6 +1,6 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { TableMetaRowData } from '$models';
+  import type { TableMetaRowData, IndicatorMetadata } from '$models';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
   import Rect from '$components/Rect.svelte';
@@ -9,6 +9,8 @@
   import H4 from '$components/H4.svelte';
 
   export let data: TableMetaRowData;
+  export let metadata: IndicatorMetadata;  
+
   let className: string = '';
   export { className as class };
 
@@ -137,7 +139,13 @@
                         indicator.value &&
                         indicator.value.length > 0}
                       <div>
-                        <H4 class="">{indicator.type}</H4>
+                        <div class="block flex items-center">
+                          <H4 class="pr-2">{indicator.type}</H4>
+                          <Tooltip> 
+                            <svelte:fragment slot="icon">i</svelte:fragment>
+                            <svelte:fragment slot="content">{metadata[entry.tier + "-" + indicator.type].description}</svelte:fragment>
+                          </Tooltip>
+                        </div>
                         <ul>
                           {#each indicator.value as value}
                             <li class="text-sm dark:text-white text-black py-2">{value}</li>

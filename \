@@ -2,7 +2,7 @@
   // https://www.bits-ui.com/docs/components/tooltip
 
   /*
-    add content through named slots:
+    pass content through named slots:
     <Tooltip>
           <svelte:fragment slot="icon">i</svelte:fragment>
           <svelte:fragment slot="content">{association}</svelte:fragment>

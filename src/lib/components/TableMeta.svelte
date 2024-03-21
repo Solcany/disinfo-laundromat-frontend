@@ -35,6 +35,7 @@
     match_value: string;
   };
 
+
 function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
   const result: TableMetaRowData = {
     domain: "",
@@ -231,9 +232,9 @@ function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
       {/each}
     </thead>
     <tbody>
-      <TableMetaRow data={theDomainRow} />
+      <TableMetaRow data={theDomainRow} metadata={data.indicator_metadata}/>
       {#each sortedRows as row, i (row)}
-        <TableMetaRow data={row} />
+        <TableMetaRow data={row} metadata={data.indicator_metadata}/>
       {/each}
     </tbody>
   </table>

@@ -12,7 +12,7 @@
   import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData, type ApiIndicatorsData } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { metadataStore, indicatorsStore } from '$stores/apiData.ts';
+  import { metadataStore } from '$stores/apiData.ts';
   import { inputStore } from '$stores/input.ts';
 
   export let data;
@@ -52,11 +52,6 @@
     }
   }
 
-  onMount(() => {
-    if(data.indicators) {
-      indicatorsStore.set(data.indicators as ApiIndicatorsData);
-    }
-  })
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
