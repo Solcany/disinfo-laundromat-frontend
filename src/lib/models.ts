@@ -71,6 +71,18 @@ export interface ApiContentData {
   results: ContentResult[];
 }
 
+export interface ApiIndicatorsData {
+  data: Array<any>,
+  indicator_metadata: {
+    [key: string]: {
+      description: string;
+      interpretation: string;
+      name: string;
+    };
+  },
+  unique_types: Array<string>
+}
+
 export interface TableRowData {
   data: [string, string | number][];
   dataComplementary: [string, string | number | Array<number> | Array<string>][];
@@ -142,6 +154,7 @@ export enum QueryType {
 }
 export enum Endpoint {
   AppConfig = '',
+  Indicators = 'indicators',
   ParseUrl = 'parse-url',
   Fingerprint = 'fingerprint',
   Content = 'content'

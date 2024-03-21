@@ -7,12 +7,14 @@
   import Form from '$components/Form.svelte';
   import TableMeta from '$components/TableMeta.svelte';
   import Link from '$components/Link.svelte';
+  import {onMount} from 'svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData } from '$models';
+  import { Endpoint, QueryType, type ApiResponse, type ApiFingerprintData, type ApiIndicatorsData } from '$models';
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
-  import { metadataStore } from '$stores/apiData.ts';
+  import { metadataStore, indicatorsStore } from '$stores/apiData.ts';
   import { inputStore } from '$stores/input.ts';
+
   export let data;
 
   async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
@@ -49,6 +51,12 @@
       // loadingStore.set(false);
     }
   }
+
+  onMount(() => {
+    if(data.indicators) {
+      indicatorsStore.set(data.indicators as ApiIndicatorsData);
+    }
+  })
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
