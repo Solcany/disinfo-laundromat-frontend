@@ -181,6 +181,7 @@ interface InputCheckboxConfig {
   label: string;
   required: boolean;
   checked: boolean;
+  value: string;
   submitQuery?: {
     type: QueryType;
     endpoint: Endpoint;

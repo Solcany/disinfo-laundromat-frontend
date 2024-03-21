@@ -134,6 +134,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Checkbox,
     name: 'combineOperator',
+    value: 'AND',
     label: 'Results must contain both paragraph and title',
     required: true,
     checked: false
@@ -156,6 +157,7 @@ export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
     type: InputType.Checkbox,
     name: 'run_urlscan',
     label: 'Run Url scan',
+    value: '1',
     required: true,
     checked: false
   }

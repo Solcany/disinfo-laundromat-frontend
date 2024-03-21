@@ -70,7 +70,7 @@
         label={item.label}
         checked={item.checked}
         required={item.required}
-        value={"1"}
+        value={item.value}
       />
     {/if}
   {/each}

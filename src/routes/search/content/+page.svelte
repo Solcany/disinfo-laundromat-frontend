@@ -22,11 +22,10 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
 
-    // a hack before thes gets fixed on the backend
-    if (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) {
+    if (query.endpoint === Endpoint.ParseUrl ||
+        query.endpoint === Endpoint.Content &&
+        !formData.has('combineOperator')) {
       formData.set('combineOperator', 'OR');
-    } else if (query.endpoint === Endpoint.Fingerprint) {
-      formData.set('run_urlscan', '0');
     }
 
     let response: ApiResponse<ApiContentData> = await queryApi(
