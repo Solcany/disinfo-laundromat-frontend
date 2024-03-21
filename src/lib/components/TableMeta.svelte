@@ -170,6 +170,23 @@
             } else {
               return descending(Number(aValue), Number(bValue));
             }
+          case TableHeaderItemType.IndicatorsSummary:
+            const tiers = ['tier1', 'tier2', 'tier3'];
+            for (let tier of tiers) {
+              // Defaulting to 0 if a tier does not exist
+              const a = aValue[tier] || 0;
+              const b = bValue[tier] || 0;
+
+            if (aValue !== bValue) {
+              if (sortDirection === SortDirection.Ascending) {
+                return ascending(a, b);
+              } else {
+                return descending(a, b);
+              }
+              }     
+            }
+            return 0;
+
           default:
             return 0;
         }

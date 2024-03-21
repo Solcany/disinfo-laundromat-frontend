@@ -17,7 +17,7 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   {
     label: 'Indicators',
     key: 'indicators_summary',
-    type: TableHeaderItemType.BarGraph
+    type: TableHeaderItemType.IndicatorsSummary
   }
 ];
 
