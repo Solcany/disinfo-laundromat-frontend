@@ -21,9 +21,9 @@
     const target = event.target as HTMLFormElement;
     const formData = new FormData(target);
 
-    // a hack before this gets fixed on the backend
-    if (query.endpoint === Endpoint.Fingerprint) {
-      formData.set('run_urlscan', '0');
+    if (query.endpoint === Endpoint.Fingerprint &&
+        !formData.has('run_urlscan')) {
+          formData.set('run_urlscan', '0');
     }
 
     let response: ApiResponse<ApiFingerprintData> = await queryApi(
@@ -31,7 +31,6 @@
       query.endpoint,
       formData
     );
-    console.log(response);
 
     if (response.error) {
       console.log(response.error);

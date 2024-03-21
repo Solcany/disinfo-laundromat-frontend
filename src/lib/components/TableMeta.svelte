@@ -23,13 +23,56 @@
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
 
+  type IndicatorDataItem = {
+    domain_name: string;
+    indicator_content: string | string[];
+    indicator_type: string;
+  }
+
   type MatchDataItem = {
     domain_name_y: string;
     match_type: string;
     match_value: string;
   };
 
-  function getTableRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
+function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
+  const result: TableMetaRowData = {
+    domain: "",
+    indicators: []
+  };
+
+  if (data.length === 0) return result;
+
+  result.domain = data[0].domain_name;
+  const indicators: Record<string, Record<string, string[]>> = {};
+
+  data.forEach(({ indicator_type, indicator_content }) => {
+    const [tierStr, type] = indicator_type.split("-");
+    const tier = `tier${tierStr}`;
+
+    if (!indicators[tier]) {
+      indicators[tier] = {};
+    }
+    if (!indicators[tier][type]) {
+      indicators[tier][type] = [];
+    }
+
+    const content = Array.isArray(indicator_content) ? indicator_content : [indicator_content];
+    indicators[tier][type].push(...content);
+  });
+
+  result.indicators = Object.entries(indicators).map(([tierKey, types]) => ({
+    tier: parseInt(tierKey.replace('tier', ''), 10),
+    data: Object.entries(types).map(([type, value]) => ({
+      type,
+      value
+    }))
+  }));
+
+  return result;
+}
+
+  function getRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
     const grouped: Record<
       string,
       {
@@ -88,51 +131,7 @@
 
     return rows;
   }
-  const rows: TableMetaRowData[] = getTableRowsFromMatchedDomains(data.matches);
 
-  let sortStatus: Record<string, SortDirection> = {};
-  let sortDirection: SortDirection = SortDirection.Ascending;
-  let sortColumnIndex: number = -1;
-
-  function handleHeaderItemClick(i: number, label: string): void {
-    sortColumnIndex = i;
-    updateSortStatus(label);
-  }
-
-  function updateSortStatus(column_label: string): void {
-    // reset all to "none"
-    headerData.forEach((item: TableHeaderItemData) => {
-      sortStatus[item.label] = SortDirection.None;
-    });
-
-    sortDirection === SortDirection.Ascending
-      ? (sortDirection = SortDirection.Descending)
-      : (sortDirection = SortDirection.Ascending);
-    sortStatus[column_label] = sortDirection;
-  }
-
-  $: sortedRows = rows;
-
-  $: {
-    if (
-      sortColumnIndex > -1 &&
-      headerData[sortColumnIndex].key &&
-      headerData[sortColumnIndex].type &&
-      headerData[sortColumnIndex].type === TableHeaderItemType.String
-    ) {
-      const key = headerData[sortColumnIndex].key;
-
-      if (sortDirection === SortDirection.Ascending) {
-        sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-          ascending((a[key] as string).toLowerCase(), (b[key] as string).toLowerCase())
-        );
-      } else {
-        sortedRows = rows.sort((a: TableMetaRowData, b: TableMetaRowData) =>
-          descending((a[key] as string).toLowerCase(), (b[key] as string).toLowerCase())
-        );
-      }
-    }
-  }
   function sortRows() {
     if (!rows || rows.length === 0) {
       sortedRows = [];
@@ -181,8 +180,31 @@
       sortedRows = rows;
     }
   }
+  function handleHeaderItemClick(i: number, label: string): void {
+    sortColumnIndex = i;
+    updateSortStatus(label);
+  }
 
-  $: sortRows(), [rows, sortColumnIndex, sortDirection, headerData];
+  function updateSortStatus(column_label: string): void {
+    // reset all to "none"
+    headerData.forEach((item: TableHeaderItemData) => {
+      sortStatus[item.label] = SortDirection.None;
+    });
+
+    sortDirection === SortDirection.Ascending
+      ? (sortDirection = SortDirection.Descending)
+      : (sortDirection = SortDirection.Ascending);
+    sortStatus[column_label] = sortDirection;
+  }
+  const theDomainRow: TableMetaRowData = getRowFromIndicators(data.indicators);
+  const rows: TableMetaRowData[] = getRowsFromMatchedDomains(data.matches);
+
+  let sortStatus: Record<string, SortDirection> = {};
+  let sortDirection: SortDirection = SortDirection.Ascending;
+  let sortColumnIndex: number = -1;
+
+  $: sortedRows = rows
+  $: sortRows(), [sortedRows, sortColumnIndex, sortDirection, headerData];
 </script>
 
 <div>
@@ -209,6 +231,7 @@
       {/each}
     </thead>
     <tbody>
+      <TableMetaRow data={theDomainRow} />
       {#each sortedRows as row, i (row)}
         <TableMetaRow data={row} />
       {/each}

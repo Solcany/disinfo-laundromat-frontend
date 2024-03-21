@@ -11,14 +11,11 @@
   export let config: InputConfig[];
   export let onSubmit: (event: Event, query: { type: QueryType; endpoint: Endpoint }) => void;
 
-  let query: { type: QueryType; endpoint: Endpoint } | undefined = undefined;
+  let query: { type: QueryType; endpoint: Endpoint } | undefined;
 
   function handleSubmit(event: Event) {
-    if (query) {
+    if(query) {
       onSubmit(event, query);
-    } else {
-      // WIP: this should be handled better...
-      console.error('missing api query');
     }
   }
 </script>
@@ -73,6 +70,7 @@
         label={item.label}
         checked={item.checked}
         required={item.required}
+        value={"1"}
       />
     {/if}
   {/each}
