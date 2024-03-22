@@ -33,13 +33,6 @@ export const UI_SEARCH_NAV: NavItemData[] = [
   { label: 'Metadata', path: '/search/metadata' }
 ];
 
-// WIP this should be loaded from API with the rest of config
-export const browser_data: LabeledValue[] = [
-  { label: 'all browsers', value: 'all' },
-  { label: 'Google', value: 'Google' },
-  { label: 'Bing', value: 'Bing' }
-];
-
 // WIP this should be hardcoded in the Combine component
 export const operator_data: LabeledValue[] = [
   { label: 'AND', value: 'AND' },
@@ -69,11 +62,12 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   },
   {
     type: InputType.Dropdown,
-    name: 'search_engines',
-    label: 'Search Engines',
-    placeholder: 'Select search engines',
+    name: 'country',
+    label: 'Country',
+    placeholder: 'Select region',
     required: true,
-    data: browser_data
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Countries
   },
   {
     type: InputType.Dropdown,
@@ -126,10 +120,11 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Dropdown,
     name: 'search_engines',
-    label: 'Search Engines',
+    label: 'Search engines',
     placeholder: 'Select search engines',
     required: true,
-    data: browser_data
+    data: undefined,
+    requiresRemoteData: RemoteConfigDataFlag.Engines
   },
   {
     type: InputType.Checkbox,

@@ -147,7 +147,8 @@ export enum RemoteConfigDataFlag {
   // input config data that needs to be fetched from the api
   Countries = 'countries',
   Languages = 'languages',
-  Indicators = 'indicators'
+  Indicators = 'indicators',
+  Engines = 'engines',
 }
 
 export enum QueryType {

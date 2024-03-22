@@ -24,6 +24,7 @@ export const load: LayoutLoad = async () => {
     }
   }
   if (response.data) {
+    console.log(response.data);
     return {
       contentFormConfig: enhanceFormConfig(CONTENT_PAGE_FORM_CONFIG, response.data),
       urlFormConfig: enhanceFormConfig(URL_PAGE_FORM_CONFIG, response.data),

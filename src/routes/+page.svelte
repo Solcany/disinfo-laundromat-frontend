@@ -16,7 +16,7 @@
   import { loadingStore } from '$stores/loading';
   import { contentStore, urlContentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
-
+  console.log(data.contentFormConfig);
   async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
