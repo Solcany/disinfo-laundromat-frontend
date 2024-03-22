@@ -171,55 +171,35 @@
             ? ascending(Number(aValue), Number(bValue))
             : descending(Number(aValue), Number(bValue));
         case TableHeaderItemType.IndicatorsSummary:
-          const tiers = ['tier1', 'tier2', 'tier3'];
+            const tiers = ['tier1', 'tier2', 'tier3'];
 
-          for (let tier of tiers) {
-            const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
-            const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
+            for (let tier of tiers) {
+              const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
+              const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
 
-            if (tierValA !== tierValB) {
-              let result = 0;
-              if (sortDirection === SortDirection.Ascending) {
-                result = ascending(tierValA, tierValB);
-              } else {
-                result = descending(tierValA, tierValB);
-              }
+              const result = tierValA !== tierValB ? (
+                  sortDirection === SortDirection.Ascending ? 
+                  ascending(tierValA, tierValB) : 
+                  descending(tierValA, tierValB)
+                  ) : 0;
               if (result !== 0) return result;
             }
-          }
-          const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
-          const bTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
+            const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
+            const bTierCount = tiers.filter((tier) => tier in (bValue as IndicatorsSummary)).length;
 
-          if (sortDirection === SortDirection.Ascending) {
-            return ascending(aTierCount, bTierCount);
-          } else {
-            return descending(aTierCount, bTierCount);
-          }
+            return sortDirection === SortDirection.Ascending ? 
+              ascending(aTierCount, bTierCount) : 
+              descending(aTierCount, bTierCount);
         default:
           return 0;
       }
     });
   }
 
-  // function handleHeaderItemClick(i: number, label: string): void {
-  //   sortColumnIndex = i;
-  //   updateSortStatus(label);
-  // }
+
   function handleHeaderItemClick(index: number): void {
-    sortColumnIndex = index;
     const clickedColumnLabel = headerData[index].label;
-
-    // if (sortColumnIndex === index) {
-    //   // Toggle sort direction if the same column is clicked again
-    //   sortDirection = sortDirection === SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
-    // } else {
-    //   // If a different column is clicked, start sorting in ascending order
-    //   sortDirection = SortDirection.Ascending;
-    //   // Reset sort column index to the new column
-    //   sortColumnIndex = index;
-    // }
-
-    // Update the sort status to reflect changes
+    sortColumnIndex = index;
     updateSortStatus(clickedColumnLabel);
   }
 
