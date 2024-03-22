@@ -172,20 +172,29 @@
             }
           case TableHeaderItemType.IndicatorsSummary:
             const tiers = ['tier1', 'tier2', 'tier3'];
-            for (let tier of tiers) {
-              // Defaulting to 0 if a tier does not exist
-              const a = aValue[tier] || 0;
-              const b = bValue[tier] || 0;
 
-            if (aValue !== bValue) {
-              if (sortDirection === SortDirection.Ascending) {
-                return ascending(a, b);
-              } else {
-                return descending(a, b);
-              }
+            for (let tier of tiers) {
+              const tierValA : number = (aValue as IndicatorsSummary)[tier] || 0;
+              const tierValB : number = (bValue as IndicatorsSummary)[tier] || 0;
+
+              if (tierValA !== tierValB) {
+                let result = 0;
+                if (sortDirection === SortDirection.Ascending) {
+                  result = ascending(tierValA, tierValB);
+                } else {
+                  result = descending(tierValA, tierValB);
+                }
+                if (result !== 0) return result;
               }     
             }
-            return 0;
+            const aTierCount = tiers.filter(tier => tier in (aValue as IndicatorsSummary)).length;
+            const bTierCount = tiers.filter(tier => tier in (aValue as IndicatorsSummary)).length;
+
+            if (sortDirection === SortDirection.Ascending) {
+              return ascending(aTierCount, bTierCount);
+            } else {
+              return descending(aTierCount, bTierCount);
+            }
 
           default:
             return 0;
