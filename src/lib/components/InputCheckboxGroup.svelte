@@ -10,21 +10,17 @@
   function handleCheckedChange(i: number, change: boolean | 'indeterminate') {
     checked[i] = change;
   }
-
   function handleSelectAll() {
     checked = checked.map(_  => true);
-    console.log(checked);
   }
-
 </script>
 
 <div>
-
     <button type="button" on:click={()=>handleSelectAll()}>select all </button>
   {#each data as item, index}
     <div class="flex items-center space-x-3">
       <Checkbox.Root
-        name={item.value.toString()}
+        name={"search_engines"}
         value={item.value.toString()}
         checked={checked[index]}
         onCheckedChange={(change) => handleCheckedChange(index, change)}
@@ -36,11 +32,12 @@
           let:isIndeterminate
           class="text-background inline-flex items-center justify-center">
           {#if isChecked}
-            <Check class="size-[15px]" weight="bold" />
+            <Check class="size-[15px] fill-white" weight="bold" />
           {:else if isIndeterminate}
             <Minus class="size-[15px]" weight="bold" />
           {/if}
         </Checkbox.Indicator>
+        <Checkbox.Input />
       </Checkbox.Root>
       <Label
         id="terms-label"

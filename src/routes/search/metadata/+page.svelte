@@ -46,14 +46,6 @@
         metadataStore.set(response.data as ApiFingerprintData);
         loadingStore.set(false);
       }
-      // if(response.data && response.data.matches) {
-      //    let m = groupMatches(response.data.matches);
-      // }
-      //let m = groupMatches(response.data.matches);
-      //console.log(m);
-      // let content = new Content(response.data as ResponseData);
-      // contentStore.set(content);
-      // loadingStore.set(false);
     }
   }
 </script>

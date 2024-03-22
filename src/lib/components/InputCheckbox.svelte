@@ -26,7 +26,7 @@
       class="text-background inline-flex items-center justify-center"
     >
       {#if isChecked}
-        <Check class="size-[15px]" weight="bold" />
+        <Check class="size-[15px] fill-white" weight="bold" />
       {/if}
     </Checkbox.Indicator>
     <Checkbox.Input />

@@ -121,3 +121,32 @@ export const flyAndScale = (node: Element, params?: FlyAndScaleParams): Transiti
     easing: cubicOut
   };
 };
+
+export function consolidateEnginesFormEntries(formData : FormData): FormData {
+  const entriesToCheck = [
+    'bing',
+    'bing_news',
+    'copyscape',
+    'gdelt',
+    'google',
+    'google_news',
+    'yandex',
+    'yahoo',
+  ];
+
+  let engines = [];
+
+  // Check and process specified entries in formData
+  for (const entry of entriesToCheck) {
+    if (formData.has(entry)) {
+      engines.push(entry); // Add to engines array
+      formData.delete(entry); // Remove from formData
+    }
+  }
+
+  engines.forEach(item => {
+    formData.append('search_engines', item);
+  });
+
+  return formData;
+}

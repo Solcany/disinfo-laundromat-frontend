@@ -19,7 +19,6 @@
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
 
-  console.log(data);
 
   const rows: TableRowData[] = data.results.map((entry) => {
     const includedData = includeObjectKeys(entry, headerKeys);

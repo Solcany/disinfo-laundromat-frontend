@@ -3,7 +3,6 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
-  import { CONTENT_PAGE_FORM_CONFIG } from '$config';
   import {
     Endpoint,
     QueryType,
@@ -16,17 +15,19 @@
   import { loadingStore } from '$stores/loading';
   import { contentStore, urlContentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
-  console.log(data.contentFormConfig);
+
   async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
     event.preventDefault();
     loadingStore.set(true);
     const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
+    let formData = new FormData(target);
 
-    // a hack before this gets fixed on the backend
     if (query.endpoint == Endpoint.ParseUrl) {
+      // back end expects combine operator for parse url
       formData.set('combineOperator', 'OR');
     }
+    
+    console.log(formData);
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
       query.type,
@@ -34,6 +35,7 @@
       formData
     );
 
+    console.log(response);
     if (response.error) {
       console.log(response.error);
     } else {
@@ -55,7 +57,7 @@
       }
     }
   }
-  $: formConfig = data.contentFormConfig;
+  $: formConfig = data.urlFormConfig;
 </script>
 
 <section class="grid grid-rows-2 gap-4">
@@ -70,7 +72,7 @@
       <Tabs value="content similarity" class="outline outline-1" let:C>
         <C.List>
           <C.Trigger value="content similarity">Content similarity</C.Trigger>
-          <C.Trigger value="metadata similarity">Metadata similarity</C.Trigger>
+          <!-- <C.Trigger value="metadata similarity">Metadata similarity</C.Trigger> -->
         </C.List>
         <C.Content value="content similarity">
           <p>
@@ -83,7 +85,7 @@
           {/if}
           <a href="search"> advanced search </a>
         </C.Content>
-        <C.Content value="metadata similarity">test 2 test 2</C.Content>
+        <!-- <C.Content value="metadata similarity">test 2 test 2</C.Content> -->
       </Tabs>
     </div>
   </div>
@@ -109,7 +111,7 @@
         </h2>
         <p class="font-sans text-sm font-light">
           Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
-          the European Commission. However, despite these restrictions, each site employs
+          the European Commission. However, despite these restrictions, each site employf
           sophisticated techniques to reach audiences in Member Countries. Read the report to learn
           how researchers were able to utilize the Laundromat's website fingerprinting service to
           map the entire network of Russia Today proxy websites, using altered or entirely new
