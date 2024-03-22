@@ -140,7 +140,8 @@ export enum SortDirection {
 export enum InputType {
   Dropdown,
   Text,
-  Checkbox
+  Checkbox,
+  CheckboxGroup,
 }
 
 export enum RemoteConfigFlag {
@@ -210,6 +211,21 @@ interface InputCheckboxConfig {
   };
 }
 
-export type InputConfig = InputTextConfig | InputDropdownConfig | InputCheckboxConfig;
+interface InputCheckboxGroupConfig {
+  type: InputType.CheckboxGroup;
+  name: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  data: undefined | LabeledValue[];
+  requiresRemoteData?: RemoteConfigFlag;
+  value?: LabeledValue;
+  submitQuery?: {
+    type: QueryType;
+    endpoint: Endpoint;
+  };
+}
+
+export type InputConfig = InputTextConfig | InputDropdownConfig | InputCheckboxConfig | InputCheckboxGroupConfig;
 
 export type InputTypeWithData = InputDropdownConfig;

@@ -72,8 +72,14 @@
         required={item.required}
         value={item.value}
       />
+    {:else if item.type === InputType.CheckboxGroup}
+      {#if item.data}
+        <InputCheckboxGroup data={item.data}
+        />
+      {/if}
     {/if}
   {/each}
+
 
   <!-- <InputCheckboxGroup/> -->
 </form>

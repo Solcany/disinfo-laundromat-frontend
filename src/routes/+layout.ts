@@ -50,6 +50,7 @@ function enhanceFormConfig(
         let defaultValue : LabeledValue;
         if(defaultKey && apiConfigData.defaults[defaultKey]) {
           let value = apiConfigData.defaults[defaultKey]
+          console.log(value);
           let label = apiConfigData[key][value];
           defaultValue = { label: label.toString(), value: value }
         } else {

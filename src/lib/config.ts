@@ -61,7 +61,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     requiresRemoteData: RemoteConfigFlag.Countries
   },
   {
-    type: InputType.Dropdown,
+    type: InputType.CheckboxGroup,
     name: 'search_engines',
     label: 'Search engines',
     placeholder: 'Select search engines',
@@ -118,7 +118,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     requiresRemoteData: RemoteConfigFlag.Languages
   },
   {
-    type: InputType.Dropdown,
+    type: InputType.CheckboxGroup,
     name: 'search_engines',
     label: 'Search engines',
     placeholder: 'Select search engines',
