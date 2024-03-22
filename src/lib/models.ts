@@ -143,13 +143,19 @@ export enum InputType {
   Checkbox
 }
 
-export enum RemoteConfigDataFlag {
+export enum RemoteConfigFlag {
   // input config data that needs to be fetched from the api
   Countries = 'countries',
   Languages = 'languages',
   Indicators = 'indicators',
   Engines = 'engines',
 }
+export const RemoteConfigFlagData = {
+  [RemoteConfigFlag.Countries]: { key: "countries", defaultKey: "country" },
+  [RemoteConfigFlag.Languages]: { key: "languages", defaultKey: "language" },
+  [RemoteConfigFlag.Indicators]: {key: "Indicators", defaultKey: "indicator" },
+  [RemoteConfigFlag.Engines]: {key: "engines", defaultKey: "engine" }
+} as const;
 
 export enum QueryType {
   Post = 'POST',
@@ -183,7 +189,7 @@ interface InputDropdownConfig {
   placeholder: string;
   required: boolean;
   data: undefined | LabeledValue[];
-  requiresRemoteData?: RemoteConfigDataFlag;
+  requiresRemoteData?: RemoteConfigFlag;
   value?: LabeledValue;
   submitQuery?: {
     type: QueryType;

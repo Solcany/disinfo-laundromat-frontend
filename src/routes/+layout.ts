@@ -4,7 +4,8 @@ import { error, type NumericRange } from '@sveltejs/kit';
 import {
   QueryType,
   Endpoint,
-  RemoteConfigDataFlag,
+  RemoteConfigFlag,
+  RemoteConfigFlagData,
   type InputConfig,
   type InputTypeWithData
 } from '$models';
@@ -41,12 +42,21 @@ function enhanceFormConfig(
 ) {
   return config.map((item) => {
     if (doesInputRequireRemoteData(item)) {
-      const apiDataKey = Object.values(RemoteConfigDataFlag).find(
-        (key) => item.requiresRemoteData === key
-      );
-      if (apiDataKey && apiConfigData[apiDataKey]) {
-        const newData = configToLabeledValues(apiConfigData[apiDataKey]);
-        return { ...item, data: newData, value: newData[0] };
+      const {key, defaultKey} = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag]; 
+
+      if (key && apiConfigData[key]) {
+        const newData = configToLabeledValues(apiConfigData[key]);
+
+        let defaultValue : LabeledValue;
+        if(defaultKey && apiConfigData.defaults[defaultKey]) {
+          let value = apiConfigData.defaults[defaultKey]
+          let label = apiConfigData[key][value];
+          defaultValue = { label: label.toString(), value: value }
+        } else {
+          defaultValue = newData[0];
+        }
+
+        return { ...item, data: newData, value: defaultValue};
       }
     }
     return item;

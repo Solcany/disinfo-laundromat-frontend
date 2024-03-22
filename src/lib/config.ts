@@ -1,5 +1,5 @@
 import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig } from '$models';
-import { RemoteConfigDataFlag, Endpoint, QueryType } from '$models';
+import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
 
 import { InputType, TableHeaderItemType } from '$models';
 
@@ -58,16 +58,16 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select region',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Countries
+    requiresRemoteData: RemoteConfigFlag.Countries
   },
   {
     type: InputType.Dropdown,
-    name: 'country',
-    label: 'Country',
-    placeholder: 'Select region',
+    name: 'search_engines',
+    label: 'Search engines',
+    placeholder: 'Select search engines',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Countries
+    requiresRemoteData: RemoteConfigFlag.Engines
   },
   {
     type: InputType.Dropdown,
@@ -76,7 +76,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select Language',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Languages
+    requiresRemoteData: RemoteConfigFlag.Languages
   }
 ];
 
@@ -106,7 +106,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select region',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Countries
+    requiresRemoteData: RemoteConfigFlag.Countries
   },
   {
     type: InputType.Dropdown,
@@ -115,7 +115,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select Language',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Languages
+    requiresRemoteData: RemoteConfigFlag.Languages
   },
   {
     type: InputType.Dropdown,
@@ -124,7 +124,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     placeholder: 'Select search engines',
     required: true,
     data: undefined,
-    requiresRemoteData: RemoteConfigDataFlag.Engines
+    requiresRemoteData: RemoteConfigFlag.Engines
   },
   {
     type: InputType.Checkbox,
