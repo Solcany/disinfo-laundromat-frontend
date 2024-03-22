@@ -57,6 +57,11 @@ export interface ApiFingerprintData {
   matches_summary: Record<string, number>;
 }
 
+export type TableFingerprintData = Pick<
+  ApiFingerprintData,
+  'indicators' | 'matches' | 'indicator_metadata'
+>;
+
 export interface ApiContentData {
   countries: Record<string, string>;
   csv_data: string;
@@ -141,7 +146,7 @@ export enum InputType {
   Dropdown,
   Text,
   Checkbox,
-  CheckboxGroup,
+  CheckboxGroup
 }
 
 export enum RemoteConfigFlag {
@@ -149,13 +154,13 @@ export enum RemoteConfigFlag {
   Countries = 'countries',
   Languages = 'languages',
   Indicators = 'indicators',
-  Engines = 'engines',
+  Engines = 'engines'
 }
 export const RemoteConfigFlagData = {
-  [RemoteConfigFlag.Countries]: { key: "countries", defaultKey: "country" },
-  [RemoteConfigFlag.Languages]: { key: "languages", defaultKey: "language" },
-  [RemoteConfigFlag.Indicators]: {key: "Indicators", defaultKey: "indicator" },
-  [RemoteConfigFlag.Engines]: {key: "engines", defaultKey: "engine" }
+  [RemoteConfigFlag.Countries]: { key: 'countries', defaultKey: 'country' },
+  [RemoteConfigFlag.Languages]: { key: 'languages', defaultKey: 'language' },
+  [RemoteConfigFlag.Indicators]: { key: 'Indicators', defaultKey: 'indicator' },
+  [RemoteConfigFlag.Engines]: { key: 'engines', defaultKey: 'engine' }
 } as const;
 
 export enum QueryType {
@@ -226,6 +231,10 @@ interface InputCheckboxGroupConfig {
   };
 }
 
-export type InputConfig = InputTextConfig | InputDropdownConfig | InputCheckboxConfig | InputCheckboxGroupConfig;
+export type InputConfig =
+  | InputTextConfig
+  | InputDropdownConfig
+  | InputCheckboxConfig
+  | InputCheckboxGroupConfig;
 
 export type InputTypeWithData = InputDropdownConfig;

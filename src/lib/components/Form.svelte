@@ -74,12 +74,10 @@
       />
     {:else if item.type === InputType.CheckboxGroup}
       {#if item.data}
-        <InputCheckboxGroup data={item.data}
-        />
+        <InputCheckboxGroup data={item.data} />
       {/if}
     {/if}
   {/each}
-
 
   <!-- <InputCheckboxGroup/> -->
 </form>

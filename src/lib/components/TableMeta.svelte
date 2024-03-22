@@ -2,8 +2,7 @@
   import { ascending, descending } from 'd3-array';
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
   import type {
-    ApiContentData,
-    ApiFingerprintData,
+    TableFingerprintData,
     IndicatorData,
     TieredIndicator,
     IndicatorsSummary,
@@ -18,10 +17,25 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: ApiFingerprintData;
+  export let data: TableFingerprintData;
   export let caption: string;
-
   const headerKeys: string[] = headerData.map(({ key }) => key);
+  const theDomainRow: TableMetaRowData = getRowFromIndicators(data.indicators);
+  let sortStatus: Record<string, SortDirection> = {};
+  let sortDirection: SortDirection = SortDirection.Ascending;
+  let sortColumnIndex: number = -1;
+  let rows: TableMetaRowData[] = [];
+  let sortedRows: TableMetaRowData[] = [];
+
+  $: (rows = getRowsFromMatchedDomains(data.matches)), data;
+
+  $: {
+    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
+      sortedRows = sortRows(rows, sortColumnIndex, sortDirection);
+    } else {
+      sortedRows = rows;
+    }
+  }
 
   type IndicatorDataItem = {
     domain_name: string;
@@ -132,83 +146,81 @@
     return rows;
   }
 
-  function sortRows() {
-    if (!rows || rows.length === 0) {
-      sortedRows = [];
-      return;
-    }
+  function sortRows(
+    rows: TableMetaRowData[],
+    columnIndex: number,
+    direction: SortDirection
+  ): TableMetaRowData[] {
+    const { key, type } = headerData[columnIndex];
 
-    if (
-      sortColumnIndex > -1 &&
-      headerData[sortColumnIndex]?.key &&
-      sortDirection !== SortDirection.None
-    ) {
-      const { key, type } = headerData[sortColumnIndex];
+    return rows.sort((a, b) => {
+      const aValue = a[key];
+      const bValue = b[key];
 
-      const sorter = (a: TableMetaRowData, b: TableMetaRowData) => {
-        const aValue = a[key];
-        const bValue = b[key];
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return -1;
+      if (bValue == null) return 1;
 
-        if (aValue == null && bValue == null) {
-          return 0; // Consider them equal if both are null/undefined
-        } else if (aValue == null) {
-          return -1; // Consider a less if aValue is null/undefined
-        } else if (bValue == null) {
-          return 1; // Consider b less if bValue is null/undefined
-        }
+      switch (type) {
+        case TableHeaderItemType.String:
+          return direction === SortDirection.Ascending
+            ? ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase())
+            : descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+        case TableHeaderItemType.Number:
+          return direction === SortDirection.Ascending
+            ? ascending(Number(aValue), Number(bValue))
+            : descending(Number(aValue), Number(bValue));
+        case TableHeaderItemType.IndicatorsSummary:
+          const tiers = ['tier1', 'tier2', 'tier3'];
 
-        switch (type) {
-          case TableHeaderItemType.String:
-            if (sortDirection === SortDirection.Ascending) {
-              return ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
-            } else {
-              return descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+          for (let tier of tiers) {
+            const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
+            const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
+
+            if (tierValA !== tierValB) {
+              let result = 0;
+              if (sortDirection === SortDirection.Ascending) {
+                result = ascending(tierValA, tierValB);
+              } else {
+                result = descending(tierValA, tierValB);
+              }
+              if (result !== 0) return result;
             }
-          case TableHeaderItemType.Number:
-            if (sortDirection === SortDirection.Ascending) {
-              return ascending(Number(aValue), Number(bValue));
-            } else {
-              return descending(Number(aValue), Number(bValue));
-            }
-          case TableHeaderItemType.IndicatorsSummary:
-            const tiers = ['tier1', 'tier2', 'tier3'];
+          }
+          const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
+          const bTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
 
-            for (let tier of tiers) {
-              const tierValA : number = (aValue as IndicatorsSummary)[tier] || 0;
-              const tierValB : number = (bValue as IndicatorsSummary)[tier] || 0;
-
-              if (tierValA !== tierValB) {
-                let result = 0;
-                if (sortDirection === SortDirection.Ascending) {
-                  result = ascending(tierValA, tierValB);
-                } else {
-                  result = descending(tierValA, tierValB);
-                }
-                if (result !== 0) return result;
-              }     
-            }
-            const aTierCount = tiers.filter(tier => tier in (aValue as IndicatorsSummary)).length;
-            const bTierCount = tiers.filter(tier => tier in (aValue as IndicatorsSummary)).length;
-
-            if (sortDirection === SortDirection.Ascending) {
-              return ascending(aTierCount, bTierCount);
-            } else {
-              return descending(aTierCount, bTierCount);
-            }
-
-          default:
-            return 0;
-        }
-      };
-
-      sortedRows = rows.sort(sorter);
-    } else {
-      sortedRows = rows;
-    }
+          if (sortDirection === SortDirection.Ascending) {
+            return ascending(aTierCount, bTierCount);
+          } else {
+            return descending(aTierCount, bTierCount);
+          }
+        default:
+          return 0;
+      }
+    });
   }
-  function handleHeaderItemClick(i: number, label: string): void {
-    sortColumnIndex = i;
-    updateSortStatus(label);
+
+  // function handleHeaderItemClick(i: number, label: string): void {
+  //   sortColumnIndex = i;
+  //   updateSortStatus(label);
+  // }
+  function handleHeaderItemClick(index: number): void {
+    sortColumnIndex = index;
+    const clickedColumnLabel = headerData[index].label;
+
+    // if (sortColumnIndex === index) {
+    //   // Toggle sort direction if the same column is clicked again
+    //   sortDirection = sortDirection === SortDirection.Ascending ? SortDirection.Descending : SortDirection.Ascending;
+    // } else {
+    //   // If a different column is clicked, start sorting in ascending order
+    //   sortDirection = SortDirection.Ascending;
+    //   // Reset sort column index to the new column
+    //   sortColumnIndex = index;
+    // }
+
+    // Update the sort status to reflect changes
+    updateSortStatus(clickedColumnLabel);
   }
 
   function updateSortStatus(column_label: string): void {
@@ -222,15 +234,6 @@
       : (sortDirection = SortDirection.Ascending);
     sortStatus[column_label] = sortDirection;
   }
-  const theDomainRow: TableMetaRowData = getRowFromIndicators(data.indicators);
-  const rows: TableMetaRowData[] = getRowsFromMatchedDomains(data.matches);
-
-  let sortStatus: Record<string, SortDirection> = {};
-  let sortDirection: SortDirection = SortDirection.Ascending;
-  let sortColumnIndex: number = -1;
-
-  $: sortedRows = rows;
-  $: sortRows(), [sortedRows, sortColumnIndex, sortDirection, headerData];
 </script>
 
 <div>
@@ -251,7 +254,7 @@
           {data}
           sortStatus={sortStatus[data.label]}
           onClick={() => {
-            handleHeaderItemClick(i, data.label);
+            handleHeaderItemClick(i);
           }}
         />
       {/each}

@@ -14,6 +14,7 @@
     QueryType,
     type ApiResponse,
     type ApiFingerprintData,
+    type TableFingerprintData,
     type ApiIndicatorsData
   } from '$models';
   import { queryApi } from '$api';
@@ -43,11 +44,20 @@
       console.log(response.error);
     } else {
       if (response.data) {
+        console.log(response.data);
         metadataStore.set(response.data as ApiFingerprintData);
         loadingStore.set(false);
       }
     }
   }
+
+  $: tableData = $metadataStore
+    ? ({
+        indicators: $metadataStore.indicators,
+        matches: $metadataStore.matches,
+        indicator_metadata: $metadataStore.indicator_metadata
+      } as TableFingerprintData)
+    : null;
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
@@ -101,8 +111,8 @@
     </div>
 
     <div>
-      {#if $metadataStore}
-        <TableMeta caption="" data={$metadataStore} headerData={TABLE_METADATA_HEADER} />
+      {#if tableData}
+        <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />
       {/if}
     </div>
   </section>

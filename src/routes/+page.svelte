@@ -22,11 +22,13 @@
     const target = event.target as HTMLFormElement;
     let formData = new FormData(target);
 
+    console.log(formData);
+
     if (query.endpoint == Endpoint.ParseUrl) {
       // back end expects combine operator for parse url
       formData.set('combineOperator', 'OR');
     }
-    
+
     console.log(formData);
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(

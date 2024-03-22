@@ -122,7 +122,7 @@ export const flyAndScale = (node: Element, params?: FlyAndScaleParams): Transiti
   };
 };
 
-export function consolidateEnginesFormEntries(formData : FormData): FormData {
+export function consolidateEnginesFormEntries(formData: FormData): FormData {
   const entriesToCheck = [
     'bing',
     'bing_news',
@@ -131,7 +131,7 @@ export function consolidateEnginesFormEntries(formData : FormData): FormData {
     'google',
     'google_news',
     'yandex',
-    'yahoo',
+    'yahoo'
   ];
 
   let engines = [];
@@ -144,7 +144,7 @@ export function consolidateEnginesFormEntries(formData : FormData): FormData {
     }
   }
 
-  engines.forEach(item => {
+  engines.forEach((item) => {
     formData.append('search_engines', item);
   });
 

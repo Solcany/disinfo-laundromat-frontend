@@ -41,21 +41,21 @@ function enhanceFormConfig(
 ) {
   return config.map((item) => {
     if (doesInputRequireRemoteData(item)) {
-      const {key, defaultKey} = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag]; 
+      const { key, defaultKey } = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag];
 
       if (key && apiConfigData[key]) {
         const newData = configToLabeledValues(apiConfigData[key]);
 
-        let defaultValue : LabeledValue;
-        if(defaultKey && apiConfigData.defaults[defaultKey]) {
-          let value = apiConfigData.defaults[defaultKey]
+        let defaultValue: LabeledValue;
+        if (defaultKey && apiConfigData.defaults[defaultKey]) {
+          let value = apiConfigData.defaults[defaultKey];
           let label = apiConfigData[key][value];
-          defaultValue = { label: label.toString(), value: value }
+          defaultValue = { label: label.toString(), value: value };
         } else {
           defaultValue = newData[0];
         }
 
-        return { ...item, data: newData, value: defaultValue};
+        return { ...item, data: newData, value: defaultValue };
       }
     }
     return item;

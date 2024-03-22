@@ -28,12 +28,15 @@
     ) {
       formData.set('combineOperator', 'OR');
     }
+    console.log(formData);
 
     let response: ApiResponse<ApiContentData> = await queryApi(
       query.type,
       query.endpoint,
       formData
     );
+
+    console.log(response);
     if (response.error) {
       console.log(response.error);
     } else {
