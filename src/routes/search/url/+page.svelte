@@ -129,7 +129,7 @@
     </div>
 
     <div>
-      {#if $urlContentStore}
+      {#if $urlContentStore && $urlContentStore.results && $urlContentStore.results.length > 0}
         <Table caption="" data={$urlContentStore} headerData={TABLE_CONTENT_HEADER} />
       {/if}
     </div>

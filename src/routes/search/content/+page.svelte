@@ -105,7 +105,7 @@
     </div>
 
     <div>
-      {#if $contentStore}
+      {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
         <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {/if}
     </div>

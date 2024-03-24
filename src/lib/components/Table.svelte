@@ -18,15 +18,22 @@
   export let caption: string;
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
+  let rows: TableRowData[] = [];
+  let sortedRows: TableRowData[] = [];
+  let sortStatus: Record<string, SortDirection> = {};
+  let sortDirection: SortDirection = SortDirection.Ascending;
+let areColumnsNumber: boolean[] = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
 
-  const rows: TableRowData[] = data.results.map((entry) => {
+  let sortColumnIndex: number = -1;  
+
+
+$: rows = (data.results && data.results.length > 0) ? data.results.map((entry) => {
     const includedData = includeObjectKeys(entry, headerKeys);
     const complementaryData = excludeObjectKeys(entry, headerKeys);
-
     const domainAssociations = entry.hasOwnProperty('source')
       ? Object.values(entry.source)
       : undefined;
-    const { source, ...rest } = complementaryData;
+    const { source, ...rest } = complementaryData; // Assuming `source` should be excluded from `complementaryData`
     const cleanedComplementaryData = Object.entries(rest);
 
     const resultObject: TableRowData = {
@@ -37,12 +44,8 @@
       resultObject.domainAssociations = domainAssociations;
     }
     return resultObject;
-  });
-
-  let sortStatus: Record<string, SortDirection> = {};
-  let sortDirection: SortDirection = SortDirection.Ascending;
-  let areColumnsNumber: boolean[] = rows[0].data.map((d: any) => isNumber(d[1]));
-  let sortColumnIndex: number = -1;
+  }) : [];
+  $: sortedRows = rows
 
   function handleHeaderItemClick(i: number, label: string): void {
     sortColumnIndex = i;
@@ -61,7 +64,6 @@
     sortStatus[column_label] = sortDirection;
   }
 
-  $: sortedRows = rows;
 
   $: {
     // sort strings
@@ -126,11 +128,7 @@
     </thead>
     <tbody>
       {#each sortedRows as row, i (row)}
-        <!-- {#if i === 0}
-          <TableRow data={row} class="bg-red-500"/>
-        {:else} -->
         <TableRow data={row} />
-        <!-- {/if} -->
       {/each}
     </tbody>
   </table>
