@@ -3,6 +3,8 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
+  import H1 from '$components/H1.svelte';
+  import P from '$components/P.svelte';
   import {
     Endpoint,
     QueryType,
@@ -72,34 +74,34 @@
       </h1>
     </div>
     <div class="">
-      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] rounded-md" let:C>
+      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] shadow-2xl rounded-md" let:C>
         <C.List>
-          <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
+          <C.Trigger value="content similarity" class="rounded-tl-md [data-active]:">Content similarity</C.Trigger>
           <C.Trigger value="url similarity">Url similarity</C.Trigger>
           <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
         </C.List>
         <C.Content value="content similarity">
-          <p>
+          <P>
             Search for similar content shared across the internet. Laundromat uses popular search
             engines to find related websites. Discover networks of malicious actors/websites
             collectively sharing disinformation.
-          </p>
+          </P>
           {#if urlFormConfig}
             <Form config={urlFormConfig} onSubmit={handleSubmit} />
           {/if}
         </C.Content>
         <C.Content value="url similarity">
-          <p>
+          <P>
             Search for similar content shared across the internet. Laundromat uses popular search;
-           </p>
+           </P>
           {#if contentFormConfig}
             <Form config={contentFormConfig} onSubmit={handleSubmit} />
           {/if}
         </C.Content>
         <C.Content value="metadata similarity">
-          <p>
+          <P>
             Search for similar content shared across the internet. Laundromat uses popular search;
-           </p>
+           </P>
           {#if metadataFormConfig}
             <Form config={metadataFormConfig} onSubmit={handleSubmit} />
           {/if}
@@ -113,7 +115,7 @@
         <h2 class="font-base font-sans text-lg">
           Prove content laundering from state-owned outlets
         </h2>
-        <p class="font-sans text-sm font-light">
+        <P class="font-sans text-sm font-light">
           Researchers from two European Universities, supported by the Alliance for Securing
           Democracy, reveal evidence of a small network operating in Poland and Germany that
           launders Russian state media content into the media mainstream. A sample of articles from
@@ -121,31 +123,31 @@
           Laundromat’s Content Search. The tool revealed that all the articles in the sample were
           lifted from Ria Novosti, an outlet belonging to the Russia Segodnya group. Read the
           report.
-        </p>
+        </P>
       </li>
       <li class="font-sans text-black dark:text-white">
         <h2 class="font-base font-sans text-lg">
           Find proxy websites that exist to overcome DNS bans
         </h2>
-        <p class="font-sans text-sm font-light">
+        <P class="font-sans text-sm font-light">
           Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
           the European Commission. However, despite these restrictions, each site employf
           sophisticated techniques to reach audiences in Member Countries. Read the report to learn
           how researchers were able to utilize the Laundromat's website fingerprinting service to
           map the entire network of Russia Today proxy websites, using altered or entirely new
           domain names.
-        </p>
+        </P>
       </li>
       <li class="font-sans text-black dark:text-white">
         <h2 class="font-base font-sans text-lg">Tell if a site produces original content</h2>
-        <p class="font-sans text-sm font-light">
+        <P class="font-sans text-sm font-light">
           Content laundering occurs when individuals or entities replicate website content without
           proper attribution and, in some cases, authorization. This method is commonly employed by
           disinformation operatives to disseminate problematic content and political propaganda
           efficiently. The Laundromat tool serves as an effective means to detect duplicate content
           online and substantiate instances of content plagiarism. See how to use the Laundromat for
           proving gaps in editorial transparency. Read the guide.
-        </p>
+        </P>
       </li>
     </ul>
   </div>
