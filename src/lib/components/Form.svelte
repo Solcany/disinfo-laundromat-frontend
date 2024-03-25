@@ -74,7 +74,7 @@
       />
     {:else if item.type === InputType.CheckboxGroup}
       {#if item.data}
-        <InputCheckboxGroup data={item.data} />
+        <InputCheckboxGroup caption={item.label}  data={item.data} />
       {/if}
     {/if}
   {/each}

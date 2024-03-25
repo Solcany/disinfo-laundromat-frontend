@@ -64,6 +64,7 @@
     {#if data.metadataFormConfig}
       <Form config={data.metadataFormConfig} onSubmit={handleSubmit} />
     {/if}
+  </section>
     <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
@@ -99,6 +100,7 @@
     </div>
     <Button on:click={() => {}} ariaLabel="Download result as csv">Download CSV</Button>
   </section>
+  -->
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
@@ -108,8 +110,6 @@
         >
       {/if}
     </div>
-    -->
-    
     <div>
       {#if tableData}
         <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />

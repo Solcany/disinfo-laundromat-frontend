@@ -23,8 +23,8 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
 
 export const UI_NAV: NavItemData[] = [
   { label: 'Search', path: '/search/url' },
-  { label: 'About', path: '/about' },
-  { label: 'Log in | Sign up', path: '/login' }
+  //{ label: 'About', path: '/about' },
+  //{ label: 'Log in | Sign up', path: '/login' }
 ];
 
 export const UI_SEARCH_NAV: NavItemData[] = [
@@ -61,6 +61,15 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     requiresRemoteData: RemoteConfigFlag.Countries
   },
   {
+    type: InputType.Dropdown,
+    name: 'language',
+    label: 'Language',
+    placeholder: 'Select Language',
+    required: true,
+    data: undefined,
+    requiresRemoteData: RemoteConfigFlag.Languages
+  },
+  {
     type: InputType.CheckboxGroup,
     name: 'search_engines',
     label: 'Search engines',
@@ -69,15 +78,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines
   },
-  {
-    type: InputType.Dropdown,
-    name: 'language',
-    label: 'Language',
-    placeholder: 'Select Language',
-    required: true,
-    data: undefined,
-    requiresRemoteData: RemoteConfigFlag.Languages
-  }
+
 ];
 
 export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
@@ -98,6 +99,14 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
       type: QueryType.Post,
       endpoint: Endpoint.Content
     }
+  },
+  {
+    type: InputType.Checkbox,
+    name: 'combineOperator',
+    value: 'AND',
+    label: 'Results must contain both paragraph and title',
+    required: true,
+    checked: false
   },
   {
     type: InputType.Dropdown,
@@ -126,14 +135,7 @@ export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines
   },
-  {
-    type: InputType.Checkbox,
-    name: 'combineOperator',
-    value: 'AND',
-    label: 'Results must contain both paragraph and title',
-    required: true,
-    checked: false
-  }
+
 ];
 
 export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [

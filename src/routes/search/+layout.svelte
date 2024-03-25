@@ -3,4 +3,6 @@
 </script>
 
 <NavSearch />
+<div class="bg-gray7 min-h-screen">
 <slot />
+</div>

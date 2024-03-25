@@ -64,7 +64,7 @@
   {#if isExpanded && data.dataComplementary.length > 0}
     <tr>
       <td colSpan={data.data.length + 1}>
-        <div class="w-full bg-white py-4 dark:bg-gray6">
+        <div class="w-full bg-white py-4 dark:bg-gray7">
           <table>
             <tbody>
               {#each data.dataComplementary as [key, value]}

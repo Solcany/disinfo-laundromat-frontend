@@ -6,15 +6,17 @@
   let className: string = '';
   export { className as class };
   import Label from '$components/Label.svelte';
+  export let caption: string;
   export let data: LabeledValue[];
 
-  let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(true);
+  let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(false);
 
   let selectedState = false;
 
   function handleCheckedChange(i: number, change: boolean | 'indeterminate') {
     checked[i] = change;
   }
+
   function handleToggleAll() {
     if(selectedState) {
     selectedState = !selectedState
@@ -28,6 +30,13 @@
 </script>
 
 <div class={cn('', className)}>
+  <Label
+    id="terms-label"
+    for="terms"
+    class="text-sm font-sans font-regular dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  >
+    {caption}
+  </Label>
   <ul>
   {#each data as item, index}
     <li class="pb-1 flex items-center space-x-3">
@@ -63,5 +72,7 @@
     </li>
   {/each}
   </ul>
+  <!--
   <button type="button" class="font-sans font-light dark:text-white text-black" on:click={() => handleToggleAll()}>{selectedState? 'Select all' : 'Unselect all'}</button>
+  -->
 </div>
