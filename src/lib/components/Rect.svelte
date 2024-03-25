@@ -4,7 +4,7 @@
   export let rx: number = 0;
   export let ry: number = 0;
 
-  let className: string = '';
+  let className: string | undefined = undefined;
   export { className as class };
   let height: string = height_px + 'px';
 </script>

@@ -29,7 +29,6 @@
       formData.set('combineOperator', 'OR');
     }
 
-    console.log(formData);
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
       query.type,
@@ -59,37 +58,55 @@
       }
     }
   }
-  $: formConfig = data.urlFormConfig;
+  $: urlFormConfig = data.urlFormConfig;
+  $: contentFormConfig = data.contentFormConfig;
+  $: metadataFormConfig = data.metadataFormConfig;
 </script>
 
-<section class="grid grid-rows-2 gap-4 items-center h-screen">
-  <!-- <div class=" grid grid-cols-1 gap-4 md:grid-cols-2"> -->
+<section class="grid grid-rows-2 gap-4">
+  <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
     <div class="w-100 flex items-center justify-center justify-items-center">
-      <h1 class="w-[300px] font-sans text-5xl font-light text-black dark:text-white">
-      Track content relationships from across the infosphere.
+      <h1 class="w-[300px] font-sans text-xl font-light text-black dark:text-white">
+        Uncover mirror websites. Understand content laundering. Safeguard content authenticity
+        online.
       </h1>
     </div>
-    <!-- <div class=""> -->
-    <!--
-      <Tabs value="content similarity" class="outline outline-1" let:C>
+    <div class="">
+      <Tabs value="content similarity" class="rounded-md" let:C>
         <C.List>
-          <C.Trigger value="content similarity">Content similarity</C.Trigger>
-          <C.Trigger value="metadata similarity">Metadata similarity</C.Trigger>        
-          </C.List>
+          <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
+          <C.Trigger value="url similarity">Url similarity</C.Trigger>
+          <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
+        </C.List>
         <C.Content value="content similarity">
           <p>
             Search for similar content shared across the internet. Laundromat uses popular search
             engines to find related websites. Discover networks of malicious actors/websites
             collectively sharing disinformation.
           </p>
-          {#if formConfig}
-            <Form config={formConfig} onSubmit={handleSubmit} />
+          {#if urlFormConfig}
+            <Form config={urlFormConfig} onSubmit={handleSubmit} />
           {/if}
-          <a href="search"> advanced search </a>
         </C.Content>
-        <C.Content value="metadata similarity">test 2 test 2</C.Content> 
+        <C.Content value="url similarity">
+          <p>
+            Search for similar content shared across the internet. Laundromat uses popular search;
+           </p>
+          {#if contentFormConfig}
+            <Form config={contentFormConfig} onSubmit={handleSubmit} />
+          {/if}
+        </C.Content>
+        <C.Content value="metadata similarity">
+          <p>
+            Search for similar content shared across the internet. Laundromat uses popular search;
+           </p>
+          {#if metadataFormConfig}
+            <Form config={metadataFormConfig} onSubmit={handleSubmit} />
+          {/if}
+        </C.Content>
       </Tabs>
-    -->
+    </div>
+  </div>
   <div>
     <ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
       <li class="font-sans text-black dark:text-white">
