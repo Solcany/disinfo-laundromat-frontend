@@ -72,7 +72,7 @@
       </h1>
     </div>
     <div class="">
-      <Tabs value="content similarity" class="rounded-md" let:C>
+      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] rounded-md" let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
           <C.Trigger value="url similarity">Url similarity</C.Trigger>
