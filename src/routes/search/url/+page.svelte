@@ -76,6 +76,7 @@
     {#if data.urlFormConfig}
       <Form config={data.urlFormConfig} onSubmit={handleSubmit} />
     {/if}
+    <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>
@@ -117,6 +118,8 @@
       <InputText name="filter result" id="filter_result"></InputText>
     </div>
     <Button on:click={() => {}} ariaLabel="Download result as csv">Download CSV</Button>
+
+    -->
   </section>
 
   <section class="col-span-9 col-start-auto w-full">

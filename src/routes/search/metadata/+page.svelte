@@ -51,13 +51,12 @@
     }
   }
 
-  $: tableData = $metadataStore
-    ? ({
-        indicators: $metadataStore.indicators,
-        matches: $metadataStore.matches,
-        indicator_metadata: $metadataStore.indicator_metadata
-      } as TableFingerprintData)
-    : null;
+  $: tableData = $metadataStore ? {
+    indicators: $metadataStore.indicators,
+    matches: $metadataStore.matches,
+    indicator_metadata: $metadataStore.indicator_metadata
+  } : null;
+
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
@@ -65,6 +64,7 @@
     {#if data.metadataFormConfig}
       <Form config={data.metadataFormConfig} onSubmit={handleSubmit} />
     {/if}
+    <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>
@@ -107,9 +107,9 @@
           Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span
         >
       {/if}
-      <!-- searched term bar-->
     </div>
-
+    -->
+    
     <div>
       {#if tableData}
         <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />
