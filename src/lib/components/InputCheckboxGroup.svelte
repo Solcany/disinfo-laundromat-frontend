@@ -9,7 +9,7 @@
   export let caption: string;
   export let data: LabeledValue[];
 
-  let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(false);
+  let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(true);
 
   let selectedState = false;
 
@@ -72,7 +72,5 @@
     </li>
   {/each}
   </ul>
-  <!--
-  <button type="button" class="font-sans font-light dark:text-white text-black" on:click={() => handleToggleAll()}>{selectedState? 'Select all' : 'Unselect all'}</button>
-  -->
+  <button type="button" class="font-sans underline font-light dark:text-white text-black" on:click={() => handleToggleAll()}>{selectedState? 'Select all' : 'Unselect all'}</button>
 </div>
