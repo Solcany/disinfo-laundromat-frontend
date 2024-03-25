@@ -18,7 +18,7 @@
     {id}
     {name}
     aria-labelledby={label_id}
-    class="border-muted bg-foreground active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border transition-all duration-150 ease-in-out"
+    class="border-muted bg-foreground active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border transition-all duration-150 ease-in-out background-black"
     {...$$restProps}
   >
     <Checkbox.Indicator
@@ -26,7 +26,7 @@
       class="text-background inline-flex items-center justify-center"
     >
       {#if isChecked}
-        <Check class="size-[15px] fill-white" weight="bold" />
+        <Check class="size-[15px] fill-black" weight="bold" />
       {/if}
     </Checkbox.Indicator>
     <Checkbox.Input />

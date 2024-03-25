@@ -27,7 +27,7 @@
   let rows: TableMetaRowData[] = [];
   let sortedRows: TableMetaRowData[] = [];
 
-  $: rows = getRowsFromMatchedDomains(data.matches);
+  $: rows = data.matches && data.matches.length > 0 ? getRowsFromMatchedDomains(data.matches) : [];
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
