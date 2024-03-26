@@ -3,6 +3,7 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
+  import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
   import P from '$components/P.svelte';
   import {
@@ -64,13 +65,13 @@
 
 <section class="grid grid-rows-2 px-3 md:px-8">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div class="w-100 flex items-center justify-center justify-items-center">
-      <h1 class="w-[400px] font-sans text-5xl font-light text-black dark:text-white">
+    <div class="w-100 py-8 md:py-0 flex items-center justify-center justify-items-center">
+      <H1 class="w-full md:w-[400px] text-4xl md:text-5xl">
         Discover content relationships from across the infosphere
-      </h1>
+      </H1>
     </div>
-    <div class="min-h-[500px] flex justify-center items-center">
-      <Tabs value="content similarity" class="w-3/4 outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
+    <div class="w-full min-h-auto md:w-auto md:min-h-[500px] flex justify-center items-center">
+      <Tabs value="content similarity" class="self-start w-full md:w-3/4 outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
           <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
@@ -104,13 +105,13 @@
       </Tabs>
     </div>
   </div>
-  <div>
-    <ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
-      <li class="pr-5">
-        <H2 class="">
+  <div class="mt-10 md:mt-20">
+    <ul id="use case list" class="grid grid-cols-1 md:grid-cols-3 gap-x-10 ">
+      <li class="">
+        <H2 class="pb-4">
           Prove content laundering from state-owned outlets
         </H2>
-        <P class=" font-sans text-sm font-light">
+        <P>
           Researchers from two European Universities, supported by the Alliance for Securing
           Democracy, reveal evidence of a small network operating in Poland and Germany that
           launders Russian state media content into the media mainstream. A sample of articles from
@@ -120,11 +121,11 @@
           report.
         </P>
       </li>
-      <li class="pr-5">
-        <H2 class="">
+      <li class="pt-6 md:pt-0">
+        <H2 class="pb-4">
           Find proxy websites that exist to overcome DNS bans
         </H2>
-        <P class="font-sans text-sm font-light">
+        <P>
           Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
           the European Commission. However, despite these restrictions, each site employf
           sophisticated techniques to reach audiences in Member Countries. Read the report to learn
@@ -133,9 +134,9 @@
           domain names.
         </P>
       </li>
-      <li class="font-sans text-black dark:text-white">
-        <H2 class="">Tell if a site produces original content</H2>
-        <P class="font-sans text-sm font-light">
+      <li class="pt-6 md:pt-0">
+        <H2 class="pb-4">Tell if a site produces original content</H2>
+        <P>
           Content laundering occurs when individuals or entities replicate website content without
           proper attribution and, in some cases, authorization. This method is commonly employed by
           disinformation operatives to disseminate problematic content and political propaganda

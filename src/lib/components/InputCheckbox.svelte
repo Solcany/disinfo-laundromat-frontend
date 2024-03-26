@@ -5,7 +5,6 @@
   export let name: string;
   export let label: string;
   export let required: boolean;
-  export let checked = false;
   let className: string | undefined = undefined;
   export { className as class };
   let id = name + '_input';

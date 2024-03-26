@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Checkbox } from 'bits-ui';
+  import InputCheckbox from '$components/InputCheckbox.svelte';
   import { Minus, Check } from 'phosphor-svelte';
   import  { type LabeledValue, FormOrientation } from '$models';
   import { cn } from '$utils';
@@ -11,6 +12,13 @@
   export let orientation: FormOrientation = FormOrientation.Vertical;
   let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(true);
   let selectedState = false;
+
+
+  function onCheckedChange(change: boolean | 'indeterminate') {
+
+
+  }
+
   function handleCheckedChange(i: number, change: boolean | 'indeterminate') {
     checked[i] = change;
   }
@@ -22,7 +30,6 @@
     } else {
     selectedState = !selectedState
     checked = checked.map((_) => false);
-
     }
   }
 </script>
@@ -31,13 +38,24 @@
   <Label
     id="terms-label"
     for="terms"
-    class="text-sm font-sans font-regular dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-  >
+    class="text-sm font-sans font-regular dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
     {label}
   </Label>
-  <ul class="flex {orientation === FormOrientation.Vertical ? 'flex-col' : 'flex-row flex-wrap'}">
+  <ul class="flex {orientation === FormOrientation.Vertical ? 'flex-col' : 'grid grid-cols-2 md:grid-cols-4'}">
   {#each data as item, index}
-    <li class="pb-1 flex items-center space-x-1 {orientation === FormOrientation.Vertical ? '' : 'pr-2'}">
+    <li class="pb-1 flex items-center space-x-1 {orientation === FormOrientation.Horizontal ? 'pr-2 ' : ''}">
+    <!--
+    <InputCheckbox
+        name={item.value}
+        label={item.label}
+        value={item.value.toString()}
+        checked={checked[index]}
+        required={false}
+        onCheckedChange={handleCheckedChange}
+        class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-input border transition-all duration-150 ease-in-out">
+    </InputCheckbox>
+    -->
+
       <Checkbox.Root
         name={'search_engines'}
         value={item.value.toString()}
@@ -65,6 +83,7 @@
         class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
         {item.label}
       </Label>
+
     </li>
   {/each}
   </ul>
