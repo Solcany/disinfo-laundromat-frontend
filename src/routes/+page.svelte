@@ -63,40 +63,37 @@
   $: metadataFormConfig = data.metadataFormConfig;
 </script>
 
-<section class="grid grid-rows-2 px-3 md:px-8">
+<section class="pt-8 grid grid-rows-2 px-3 md:px-8">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
     <div class="w-100 py-8 md:py-0 flex items-center justify-center justify-items-center">
-      <H1 class="w-full md:w-[400px] text-4xl md:text-5xl">
-        Discover content relationships from across the infosphere
+      <H1 class="w-full md:w-[500px] text-4xl md:text-5xl">
+      Uncover mirror websites. Understand content laundering. Safeguard content authenticity online.
       </H1>
     </div>
-    <div class="w-full min-h-auto md:w-auto md:min-h-[500px] flex justify-center items-center">
+    <div class="w-full min-h-autot md:w-auto md:min-h-[500px] flex justify-center items-center">
       <Tabs value="content similarity" class="self-start w-full md:w-3/4 outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
         <C.List>
-          <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
-          <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
+          <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity
+</C.Trigger>
+          <C.Trigger value="technical similarity" class="rounded-tr-md">Technical Similarity</C.Trigger>
         </C.List>
         <C.Content value="content similarity">
           <P>
-            Search for similar content shared across the internet. Laundromat uses popular search
-            engines to find related websites. Discover networks of malicious actors/websites
-            collectively sharing disinformation.
+          Enter a website URL or snippet of text to analyse content similarity. Check the search engines you want to use to power the search results.
           </P>
           {#if urlFormConfig}
             <Form config={urlFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
-        <C.Content value="url similarity">
+        <C.Content value="technical similarity">
           <P>
-            Search for similar content shared across the internet. Laundromat uses popular search;
-           </P>
-          {#if contentFormConfig}
-            <Form config={contentFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
-          {/if}
-        </C.Content>
-        <C.Content value="metadata similarity">
-          <P>
-            Search for similar content shared across the internet. Laundromat uses popular search;
+          Analysing technical relationships of a website with media websites in the corpus, including eg. state run media, fake news websites and Wikidata's list of news websites. For a full list see here.
+          <br/>
+          <br/>
+          Potential use-cases include:  understand sister sites, discover ad networks or analyse DNS ban circumvention practices.
+          <br/>
+          <br/>
+          Enter a URL, the Laundromat will look for similarities with other entries in the database based on metadata overlap.
            </P>
           {#if metadataFormConfig}
             <Form config={metadataFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>

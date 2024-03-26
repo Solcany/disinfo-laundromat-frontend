@@ -22,9 +22,9 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
 ];
 
 export const UI_NAV: NavItemData[] = [
-  { label: 'Search', path: '/search/url' },
-  //{ label: 'About', path: '/about' },
-  //{ label: 'Log in | Sign up', path: '/login' }
+  { label: 'Workspace', path: '/search/url' },
+  { label: 'About', path: '/about' },
+  { label: 'Log in | Sign up', path: '/login' }
 ];
 
 export const UI_SEARCH_NAV: NavItemData[] = [
@@ -43,8 +43,8 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
     name: 'url',
-    label: 'Url',
-    placeholder: 'Add url, title or a snippet of text',
+    label: 'Content',
+    placeholder: 'Enter a website URL or snippet of text',
     required: true,
     submitQuery: {
       type: QueryType.Post,
@@ -54,7 +54,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Dropdown,
     name: 'country',
-    label: 'Country',
+    label: 'Region of search engines',
     placeholder: 'Select region',
     required: true,
     data: undefined,
@@ -63,7 +63,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Dropdown,
     name: 'language',
-    label: 'Language',
+    label:'Language of search results',
     placeholder: 'Select Language',
     required: true,
     data: undefined,
