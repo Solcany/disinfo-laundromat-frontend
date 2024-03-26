@@ -145,6 +145,7 @@ export enum SortDirection {
 export enum InputType {
   Dropdown,
   Text,
+  TextArea,
   Checkbox,
   CheckboxGroup
 }
@@ -177,6 +178,20 @@ export enum Endpoint {
 
 interface InputTextConfig {
   type: InputType.Text;
+  name: string;
+  label: string;
+  placeholder: string;
+  required: boolean;
+  value?: string;
+  submitQuery?: {
+    type: QueryType;
+    endpoint: Endpoint;
+  };
+}
+
+
+interface InputTextAreaConfig {
+  type: InputType.TextArea;
   name: string;
   label: string;
   placeholder: string;
@@ -224,6 +239,7 @@ interface InputCheckboxGroupConfig {
   required: boolean;
   data: undefined | LabeledValue[];
   requiresRemoteData?: RemoteConfigFlag;
+  variant?: 'horizontal' | 'vertical';
   value?: LabeledValue;
   submitQuery?: {
     type: QueryType;
@@ -233,8 +249,16 @@ interface InputCheckboxGroupConfig {
 
 export type InputConfig =
   | InputTextConfig
+  | InputTextAreaConfig
   | InputDropdownConfig
   | InputCheckboxConfig
   | InputCheckboxGroupConfig;
 
 export type InputTypeWithData = InputDropdownConfig;
+
+export enum FormOrientation {
+  Horizontal = 'horizontal',
+  Vertical = 'vertical',
+}
+
+

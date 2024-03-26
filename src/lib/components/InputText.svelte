@@ -20,7 +20,7 @@
   {placeholder}
   {value}
   class={cn(
-    'h-input w-full truncate rounded-input border bg-white px-2 font-sans text-sm text-xs font-light transition-colors duration-200 placeholder:text-gray5  hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black',
+    'h-input w-full truncate rounded-md border bg-white px-2 font-sans text-sm text-xs font-light transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black',
     className
   )}
 />

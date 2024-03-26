@@ -12,6 +12,7 @@
   import {
     Endpoint,
     QueryType,
+    FormOrientation,
     type ApiResponse,
     type ApiFingerprintData,
     type TableFingerprintData,
@@ -62,7 +63,7 @@
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full px-3">
     {#if data.metadataFormConfig}
-      <Form config={data.metadataFormConfig} onSubmit={handleSubmit} />
+      <Form config={data.metadataFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Vertical} />
     {/if}
   </section>
     <!--

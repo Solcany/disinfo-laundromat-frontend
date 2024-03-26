@@ -8,7 +8,6 @@
   export let checked = false;
   let className: string | undefined = undefined;
   export { className as class };
-
   let id = name + '_input';
   let label_id = name + '_label';
 </script>
@@ -23,9 +22,7 @@
   >
     <Checkbox.Indicator
       let:isChecked
-      class="text-background bg-white inline-flex items-center justify-center"
-
-    >
+      class="text-background bg-white inline-flex items-center justify-center">
       {#if isChecked}
         <Check class="size-[15px] fill-black" weight="bold" />
       {/if}

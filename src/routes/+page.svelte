@@ -8,6 +8,7 @@
   import {
     Endpoint,
     QueryType,
+    FormOrientation,
     type ApiResponse,
     type ApiContentData,
     type ApiFingerprintData
@@ -65,7 +66,7 @@
   $: metadataFormConfig = data.metadataFormConfig;
 </script>
 
-<section class="grid grid-rows-2 gap-4">
+<section class="grid grid-rows-2 gap-4 px-6">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
     <div class="w-100 flex items-center justify-center justify-items-center">
       <h1 class="w-[300px] font-sans text-xl font-light text-black dark:text-white">
@@ -73,11 +74,10 @@
         online.
       </h1>
     </div>
-    <div class="">
-      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] shadow-2xl rounded-md" let:C>
+    <div class="flex justify-center items-center">
+      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
         <C.List>
-          <C.Trigger value="content similarity" class="rounded-tl-md [data-active]:">Content similarity</C.Trigger>
-          <C.Trigger value="url similarity">Url similarity</C.Trigger>
+          <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
           <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
         </C.List>
         <C.Content value="content similarity">
@@ -87,7 +87,7 @@
             collectively sharing disinformation.
           </P>
           {#if urlFormConfig}
-            <Form config={urlFormConfig} onSubmit={handleSubmit} />
+            <Form config={urlFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
         <C.Content value="url similarity">
@@ -95,7 +95,7 @@
             Search for similar content shared across the internet. Laundromat uses popular search;
            </P>
           {#if contentFormConfig}
-            <Form config={contentFormConfig} onSubmit={handleSubmit} />
+            <Form config={contentFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
         <C.Content value="metadata similarity">
@@ -103,7 +103,7 @@
             Search for similar content shared across the internet. Laundromat uses popular search;
            </P>
           {#if metadataFormConfig}
-            <Form config={metadataFormConfig} onSubmit={handleSubmit} />
+            <Form config={metadataFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
       </Tabs>

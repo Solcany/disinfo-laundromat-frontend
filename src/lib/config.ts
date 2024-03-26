@@ -41,10 +41,10 @@ export const operator_data: LabeledValue[] = [
 
 export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
   {
-    type: InputType.Text,
+    type: InputType.TextArea,
     name: 'url',
     label: 'Url',
-    placeholder: 'Add url',
+    placeholder: 'Add url, title or a snippet of text',
     required: true,
     submitQuery: {
       type: QueryType.Post,
@@ -74,6 +74,7 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
     name: 'search_engines',
     label: 'Search engines',
     placeholder: 'Select search engines',
+    variant: 'horizontal',
     required: true,
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines

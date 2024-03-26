@@ -1,18 +1,16 @@
 <script lang="ts">
   import { Checkbox } from 'bits-ui';
   import { Minus, Check } from 'phosphor-svelte';
-  import type { LabeledValue } from '$models';
+  import  { type LabeledValue, FormOrientation } from '$models';
   import { cn } from '$utils';
   let className: string = '';
   export { className as class };
   import Label from '$components/Label.svelte';
-  export let caption: string;
+  export let label: string;
   export let data: LabeledValue[];
-
+  export let orientation: FormOrientation = FormOrientation.Vertical;
   let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(true);
-
   let selectedState = false;
-
   function handleCheckedChange(i: number, change: boolean | 'indeterminate') {
     checked[i] = change;
   }
@@ -35,11 +33,11 @@
     for="terms"
     class="text-sm font-sans font-regular dark:text-white leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
   >
-    {caption}
+    {label}
   </Label>
-  <ul>
+  <ul class="flex {orientation === FormOrientation.Vertical ? 'flex-col' : 'flex-row flex-wrap'}">
   {#each data as item, index}
-    <li class="pb-1 flex items-center space-x-3">
+    <li class="pb-1 flex items-center space-x-3 {orientation === FormOrientation.Vertical ? '' : 'pr-2'}">
       <Checkbox.Root
         name={'search_engines'}
         value={item.value.toString()}
@@ -52,8 +50,7 @@
         <Checkbox.Indicator
           let:isChecked
           let:isIndeterminate
-          class="text-white inline-flex items-center justify-center"
-        >
+          class="text-white inline-flex items-center justify-center" >
           {#if isChecked}
             <Check class="size-[15px] fill-black" weight="bold" />
           {:else if isIndeterminate}
@@ -72,5 +69,5 @@
     </li>
   {/each}
   </ul>
-  <button type="button" class="font-sans underline font-light dark:text-white text-black" on:click={() => handleToggleAll()}>{selectedState? 'Select all' : 'Unselect all'}</button>
+  <button type="button" class="font-sans underline  font-light dark:text-white text-black" on:click={() => handleToggleAll()}>{selectedState? 'Select all' : 'Unselect all'}</button>
 </div>

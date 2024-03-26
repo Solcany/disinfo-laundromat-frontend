@@ -31,5 +31,5 @@
   {cols}
   {required}
   on:input={handleInputChange}
-  class={cn('w-full', className)}
+  class={cn('text-base font-sans text-white h-12 text-black resize-none w-full truncate rounded-md border bg-white px-2 transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black', className)}
 />
