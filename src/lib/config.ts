@@ -79,8 +79,69 @@ export const CONTENT_SEARCH_BASIC_FORM_CONFIG: InputConfig[] = [
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines
   },
-
 ];
+
+export const CONTENT_SEARCH_ADVANCED_FORM_CONFIG: InputConfig[] = [
+  {
+    type: InputType.TextArea,
+    name: 'url',
+    label: 'Content',
+    placeholder: 'Enter a website URL or snippet of text',
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.ParseUrl
+    }
+  },
+  {
+    type: InputType.Text,
+    name: 'titleQuery',
+    label: 'Title',
+    placeholder: 'Add title',
+    required: true
+  },
+  {
+    type: InputType.Text,
+    name: 'contentQuery',
+    label: 'Content',
+    placeholder: 'Add content',
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.Content
+    }
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'country',
+    label: 'Region of search engines',
+    placeholder: 'Select region',
+    required: true,
+    data: undefined,
+    requiresRemoteData: RemoteConfigFlag.Countries
+  },
+  {
+    type: InputType.Dropdown,
+    name: 'language',
+    label:'Language of search results',
+    placeholder: 'Select Language',
+    required: true,
+    data: undefined,
+    requiresRemoteData: RemoteConfigFlag.Languages
+  },
+  {
+    type: InputType.CheckboxGroup,
+    name: 'search_engines',
+    label: 'Search engines',
+    placeholder: 'Select search engines',
+    variant: 'horizontal',
+    required: true,
+    data: undefined,
+    requiresRemoteData: RemoteConfigFlag.Engines
+  },
+];
+
+
 
 //export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
 //  {

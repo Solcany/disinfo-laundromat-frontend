@@ -12,17 +12,7 @@ export interface ContentApiInput {
   [index: string]: string | LabeledValue;
 }
 
-export interface ContentResult {
-  domain: string;
-  domain_count: number;
-  engines: string[];
-  link_count: number;
-  score: number;
-  snippet: string;
-  source: string[];
-  title: string;
-  url: string;
-}
+
 
 export interface ApiResponse<T> {
   data?: T;
@@ -57,10 +47,19 @@ export interface ApiFingerprintData {
   matches_summary: Record<string, number>;
 }
 
-export type TableFingerprintData = Pick<
-  ApiFingerprintData,
-  'indicators' | 'matches' | 'indicator_metadata'
->;
+export type TableFingerprintData = Pick<ApiFingerprintData, 'indicators' | 'matches' | 'indicator_metadata'>;
+
+export interface ContentDataResult {
+  domain: string;
+  domain_count: number;
+  engines: string[];
+  link_count: number;
+  score: number;
+  snippet: string;
+  source: string[];
+  title: string;
+  url: string;
+}
 
 export interface ApiContentData {
   countries: Record<string, string>;
@@ -72,11 +71,11 @@ export interface ApiContentData {
       name: string;
     };
   };
-  languages: {
-    [key: string]: string;
-  };
-  results: ContentResult[];
+  languages: Record<string, string>;
+  results: ContentDataResult[];
 }
+
+export type TableContentData = Pick<ApiContentData, 'results'>
 
 export interface ApiIndicatorsData {
   data: Array<any>;

@@ -20,14 +20,15 @@
   export let data: TableFingerprintData;
   export let caption: string;
   const headerKeys: string[] = headerData.map(({ key }) => key);
-  const theDomainRow: TableMetaRowData = getRowFromIndicators(data.indicators);
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
+  let selfRow: TableMetaRowData = undefined;
   let rows: TableMetaRowData[] = [];
   let sortedRows: TableMetaRowData[] = [];
-
-  $: rows = data.matches && data.matches.length > 0 ? getRowsFromMatchedDomains(data.matches) : [];
+  
+  $: selfRow = data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
+  $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
@@ -49,7 +50,7 @@
     match_value: string;
   };
 
-  function getRowFromIndicators(data: IndicatorDataItem[]): TableMetaRowData {
+  function getSelfRow(data: IndicatorDataItem[]): TableMetaRowData {
     const result: TableMetaRowData = {
       domain: '',
       indicators: []
@@ -86,7 +87,7 @@
     return result;
   }
 
-  function getRowsFromMatchedDomains(data: MatchDataItem[]): TableMetaRowData[] {
+  function getRows(data: MatchDataItem[]): TableMetaRowData[] {
     const grouped: Record<
       string,
       {
@@ -240,7 +241,9 @@
       {/each}
     </thead>
     <tbody>
-      <TableMetaRow data={theDomainRow} metadata={data.indicator_metadata} />
+      {#if selfRow}
+        <TableMetaRow data={selfRow} metadata={data.indicator_metadata} />
+      {/if}
       {#each sortedRows as row, i (row)}
         <TableMetaRow data={row} metadata={data.indicator_metadata} />
       {/each}

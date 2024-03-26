@@ -63,9 +63,14 @@
 <section class="pt-8 grid grid-rows-2 px-3 md:px-8">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
     <div class="w-100 py-8 md:py-0 flex items-center justify-center justify-items-center">
-      <H1 class="w-full md:w-[500px] text-4xl md:text-5xl">
-      Uncover mirror websites. Understand content laundering. Safeguard content authenticity online.
-      </H1>
+      <div>
+        <H1 class="w-full md:w-[500px] text-4xl md:text-5xl">
+        Uncover mirror websites. Understand content laundering. Safeguard content authenticity online.
+        </H1>
+        <p class="mt-4 md:w-[400px] font-sans font-light text-gray1 text-sm">
+          <span class="font-bold"> Content Laundering </span> /ˈkɒntent lɔːndərɪŋ/  <span class="text-xs"> noun </span><br/><span class="font-normal">a strategic form of communication that disguises the origins of the content.</span>
+        <p>
+      </div>
     </div>
     <div class="w-full min-h-autot md:w-auto md:min-h-[500px] flex justify-center items-center">
       <Tabs value="content similarity" class="self-start w-full md:w-3/4 outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
