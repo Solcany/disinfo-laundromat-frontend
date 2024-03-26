@@ -3,7 +3,7 @@ import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
 
 import { InputType, TableHeaderItemType } from '$models';
 
-export const APP_TITLE: string = 'Disinformation Laundromat';
+export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
 
 export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
