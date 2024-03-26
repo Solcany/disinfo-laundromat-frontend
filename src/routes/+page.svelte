@@ -3,7 +3,7 @@
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
-  import H1 from '$components/H1.svelte';
+  import H2 from '$components/H2.svelte';
   import P from '$components/P.svelte';
   import {
     Endpoint,
@@ -25,13 +25,12 @@
     const target = event.target as HTMLFormElement;
     let formData = new FormData(target);
 
-    console.log(formData);
-
-    if (query.endpoint == Endpoint.ParseUrl) {
-      // back end expects combine operator for parse url
-      formData.set('combineOperator', 'OR');
+     if (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content 
+         && !formData.has('combineOperator')) {
+        formData.set('combineOperator', 'OR');
+      } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
+      formData.set('run_urlscan', '0');
     }
-
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
       query.type,
@@ -39,9 +38,7 @@
       formData
     );
 
-    console.log(response);
     if (response.error) {
-      console.log(response.error);
     } else {
       if (response.data) {
         if (query.endpoint === Endpoint.ParseUrl) {
@@ -56,7 +53,6 @@
         }
         loadingStore.set(false);
       } else {
-        // WIP: this needs to be handled better!
         loadingStore.set(false);
       }
     }
@@ -66,16 +62,15 @@
   $: metadataFormConfig = data.metadataFormConfig;
 </script>
 
-<section class="grid grid-rows-2 gap-4 px-6">
+<section class="grid grid-rows-2 px-3 md:px-8">
   <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
     <div class="w-100 flex items-center justify-center justify-items-center">
-      <h1 class="w-[300px] font-sans text-xl font-light text-black dark:text-white">
-        Uncover mirror websites. Understand content laundering. Safeguard content authenticity
-        online.
+      <h1 class="w-[400px] font-sans text-5xl font-light text-black dark:text-white">
+        Discover content relationships from across the infosphere
       </h1>
     </div>
-    <div class="flex justify-center items-center">
-      <Tabs value="content similarity" class="outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
+    <div class="min-h-[500px] flex justify-center items-center">
+      <Tabs value="content similarity" class="w-3/4 outline outline-gray5 outline-[1px] shadow-xl rounded-md" let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content similarity</C.Trigger>
           <C.Trigger value="metadata similarity" class="rounded-tr-md">Metadata similarity</C.Trigger>
@@ -111,11 +106,11 @@
   </div>
   <div>
     <ul id="use case list" class="grid grid-cols-1 gap-x-4 md:grid-cols-3">
-      <li class="font-sans text-black dark:text-white">
-        <h2 class="font-base font-sans text-lg">
+      <li class="pr-5">
+        <H2 class="">
           Prove content laundering from state-owned outlets
-        </h2>
-        <P class="font-sans text-sm font-light">
+        </H2>
+        <P class=" font-sans text-sm font-light">
           Researchers from two European Universities, supported by the Alliance for Securing
           Democracy, reveal evidence of a small network operating in Poland and Germany that
           launders Russian state media content into the media mainstream. A sample of articles from
@@ -125,10 +120,10 @@
           report.
         </P>
       </li>
-      <li class="font-sans text-black dark:text-white">
-        <h2 class="font-base font-sans text-lg">
+      <li class="pr-5">
+        <H2 class="">
           Find proxy websites that exist to overcome DNS bans
-        </h2>
+        </H2>
         <P class="font-sans text-sm font-light">
           Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
           the European Commission. However, despite these restrictions, each site employf
@@ -139,7 +134,7 @@
         </P>
       </li>
       <li class="font-sans text-black dark:text-white">
-        <h2 class="font-base font-sans text-lg">Tell if a site produces original content</h2>
+        <H2 class="">Tell if a site produces original content</H2>
         <P class="font-sans text-sm font-light">
           Content laundering occurs when individuals or entities replicate website content without
           proper attribution and, in some cases, authorization. This method is commonly employed by

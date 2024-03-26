@@ -37,7 +37,7 @@
   </Label>
   <ul class="flex {orientation === FormOrientation.Vertical ? 'flex-col' : 'flex-row flex-wrap'}">
   {#each data as item, index}
-    <li class="pb-1 flex items-center space-x-3 {orientation === FormOrientation.Vertical ? '' : 'pr-2'}">
+    <li class="pb-1 flex items-center space-x-1 {orientation === FormOrientation.Vertical ? '' : 'pr-2'}">
       <Checkbox.Root
         name={'search_engines'}
         value={item.value.toString()}
@@ -62,8 +62,7 @@
       <Label
         id="terms-label"
         for="terms"
-        class="text-sm font-sans font-regular leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-      >
+        class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
         {item.label}
       </Label>
     </li>

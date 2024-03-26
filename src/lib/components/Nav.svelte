@@ -16,9 +16,9 @@
 <nav class={cn('', className)}>
   <ul class="flex list-none">
     {#each UI_NAV as { label, path }}
-      <li class="px-3">
+      <li class="px-3 last:px-0 last:pl-3">
         <a
-          class="px-3 font-sans text-white {activePath === getPathRoot(path)
+          class="font-sans text-white {activePath === getPathRoot(path)
             ? 'font-bold'
             : 'font-base '}"
           href={path}>{label}</a

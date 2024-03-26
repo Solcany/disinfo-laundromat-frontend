@@ -5,6 +5,6 @@
   
 </script>
 
-<p class={cn("dark:text-white text-black text-base", className)}>
+<p class={cn("dark:text-white text-black text-sm", className)}>
 <slot/> 
 </p>

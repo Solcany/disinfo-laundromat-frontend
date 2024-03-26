@@ -22,7 +22,7 @@
   }
 </script>
 
-<form on:submit={(event) => handleSubmit(event)}>
+<form on:submit={(event) => handleSubmit(event)} class="flex flex-col">
   {#each config as item}
     {#if item.type === InputType.Text}
       {@const id = item.name + '_input'}
@@ -67,7 +67,7 @@
                 ariaLabel="Submit form"
                 on:click={() => (query = item.submitQuery)}
                 variant="glyph"> 
-                  <ArrowRight weight="bold" class="dark:fill-black fill-white"/>
+                  <ArrowRight weight="bold" class="dark:fill-black"/>
               </Button>
             </div>
           </div>
@@ -84,7 +84,7 @@
     {:else if item.type === InputType.Dropdown}
       {#if item.data}
         {@const id = item.name + '_input'}
-        <div class="pb-2 inline-block {orientation === FormOrientation.Horizontal ? 'pr-2' : ''}">
+        <div class="pb-2 inline-block">
           <Label for={id} class="block py-1">{item.label}</Label>
           <DropdownSelect
             {id}
