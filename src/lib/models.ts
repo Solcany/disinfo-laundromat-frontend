@@ -187,6 +187,7 @@ interface InputTextConfig {
     type: QueryType;
     endpoint: Endpoint;
   };
+  tooltip?: string;
 }
 
 
@@ -201,6 +202,7 @@ interface InputTextAreaConfig {
     type: QueryType;
     endpoint: Endpoint;
   };
+  tooltip?: string;
 }
 
 interface InputDropdownConfig {
@@ -216,6 +218,7 @@ interface InputDropdownConfig {
     type: QueryType;
     endpoint: Endpoint;
   };
+  tooltip?: string;
 }
 
 interface InputCheckboxConfig {
@@ -229,6 +232,7 @@ interface InputCheckboxConfig {
     type: QueryType;
     endpoint: Endpoint;
   };
+  tooltip?: string;
 }
 
 interface InputCheckboxGroupConfig {
@@ -245,6 +249,7 @@ interface InputCheckboxGroupConfig {
     type: QueryType;
     endpoint: Endpoint;
   };
+  tooltip?: string;
 }
 
 export type InputConfig =

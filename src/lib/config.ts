@@ -22,15 +22,15 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
 ];
 
 export const UI_NAV: NavItemData[] = [
-  { label: 'Workspace', path: '/search/url' },
+  { label: 'Workspace', path: '/search/content' },
   { label: 'About', path: '/about' },
   { label: 'Log in | Sign up', path: '/login' }
 ];
 
 export const UI_SEARCH_NAV: NavItemData[] = [
-  { label: 'Url', path: '/search/url' },
-  { label: 'Content', path: '/search/content' },
-  { label: 'Metadata', path: '/search/metadata' }
+  //{ label: 'Url', path: '/search/url' },
+  { label: 'Content Similarity', path: '/search/content' },
+  { label: 'Technical Similarity', path: '/search/metadata' }
 ];
 
 // WIP this should be hardcoded in the Combine component
@@ -39,7 +39,7 @@ export const operator_data: LabeledValue[] = [
   { label: 'OR', value: 'OR' }
 ];
 
-export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
+export const CONTENT_SEARCH_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
     name: 'url',
@@ -82,62 +82,62 @@ export const URL_PAGE_FORM_CONFIG: InputConfig[] = [
 
 ];
 
-export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
-  {
-    type: InputType.Text,
-    name: 'titleQuery',
-    label: 'Title',
-    placeholder: 'Add title',
-    required: true
-  },
-  {
-    type: InputType.Text,
-    name: 'contentQuery',
-    label: 'Content',
-    placeholder: 'Add content',
-    required: true,
-    submitQuery: {
-      type: QueryType.Post,
-      endpoint: Endpoint.Content
-    }
-  },
-  {
-    type: InputType.Checkbox,
-    name: 'combineOperator',
-    value: 'AND',
-    label: 'Results must contain both paragraph and title',
-    required: true,
-    checked: false
-  },
-  {
-    type: InputType.Dropdown,
-    name: 'country',
-    label: 'Country',
-    placeholder: 'Select region',
-    required: true,
-    data: undefined,
-    requiresRemoteData: RemoteConfigFlag.Countries
-  },
-  {
-    type: InputType.Dropdown,
-    name: 'language',
-    label: 'Language',
-    placeholder: 'Select Language',
-    required: true,
-    data: undefined,
-    requiresRemoteData: RemoteConfigFlag.Languages
-  },
-  {
-    type: InputType.CheckboxGroup,
-    name: 'search_engines',
-    label: 'Search engines',
-    placeholder: 'Select search engines',
-    required: true,
-    data: undefined,
-    requiresRemoteData: RemoteConfigFlag.Engines
-  },
-
-];
+//export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
+//  {
+//    type: InputType.Text,
+//    name: 'titleQuery',
+//    label: 'Title',
+//    placeholder: 'Add title',
+//    required: true
+//  },
+//  {
+//    type: InputType.Text,
+//    name: 'contentQuery',
+//    label: 'Content',
+//    placeholder: 'Add content',
+//    required: true,
+//    submitQuery: {
+//      type: QueryType.Post,
+//      endpoint: Endpoint.Content
+//    }
+//  },
+//  {
+//    type: InputType.Checkbox,
+//    name: 'combineOperator',
+//    value: 'AND',
+//    label: 'Results must contain both paragraph and title',
+//    required: true,
+//    checked: false
+//  },
+//  {
+//    type: InputType.Dropdown,
+//    name: 'country',
+//    label: 'Country',
+//    placeholder: 'Select region',
+//    required: true,
+//    data: undefined,
+//    requiresRemoteData: RemoteConfigFlag.Countries
+//  },
+//  {
+//    type: InputType.Dropdown,
+//    name: 'language',
+//    label: 'Language',
+//    placeholder: 'Select Language',
+//    required: true,
+//    data: undefined,
+//    requiresRemoteData: RemoteConfigFlag.Languages
+//  },
+//  {
+//    type: InputType.CheckboxGroup,
+//    name: 'search_engines',
+//    label: 'Search engines',
+//    placeholder: 'Select search engines',
+//    required: true,
+//    data: undefined,
+//    requiresRemoteData: RemoteConfigFlag.Engines
+//  },
+//
+//];
 
 export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
   {
@@ -157,6 +157,7 @@ export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
     label: 'Run Url scan',
     value: '1',
     required: true,
-    checked: false
+    checked: false,
+    tooltip: 'what is rulscan',
   }
 ];

@@ -17,7 +17,7 @@
   import { queryApi } from '$api';
   import { inputStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
-  import { contentStore, urlContentStore, metadataStore } from '$stores/apiData.ts';
+  import { contentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
 
   async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
@@ -42,10 +42,7 @@
     if (response.error) {
     } else {
       if (response.data) {
-        if (query.endpoint === Endpoint.ParseUrl) {
-          urlContentStore.set(response.data as ApiContentData);
-          goto('/search/url');
-        } else if (query.endpoint === Endpoint.Content) {
+        if (query.endpoint === Endpoint.Content) {
           contentStore.set(response.data as ApiContentData);
           goto('/search/content');
         } else if (query.endpoint === Endpoint.Fingerprint) {
@@ -58,8 +55,8 @@
       }
     }
   }
-  $: urlFormConfig = data.urlFormConfig;
-  $: contentFormConfig = data.contentFormConfig;
+ // $: urlFormConfig = data.urlFormConfig;
+  $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataFormConfig = data.metadataFormConfig;
 </script>
 
@@ -81,8 +78,8 @@
           <P>
           Enter a website URL or snippet of text to analyse content similarity. Check the search engines you want to use to power the search results.
           </P>
-          {#if urlFormConfig}
-            <Form config={urlFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
+          {#if contentBasicFormConfig}
+            <Form config={contentBasicFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
         <C.Content value="technical similarity">

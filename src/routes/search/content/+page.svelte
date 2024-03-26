@@ -28,7 +28,6 @@
     ) {
       formData.set('combineOperator', 'OR');
     }
-    console.log(formData);
 
     let response: ApiResponse<ApiContentData> = await queryApi(
       query.type,
@@ -51,7 +50,7 @@
   }
 
   // wip: is this reactive binding necessary?
-  $: formConfig = data.contentFormConfig;
+  $: formConfig = data.contentBasicFormConfig;
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">

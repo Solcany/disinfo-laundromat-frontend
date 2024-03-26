@@ -93,6 +93,7 @@
             selected={item.value}
             required={item.required}
             placeholder={item.placeholder}
+            tooltip={item.tooltip}
           >
             {#each item.data as entry}
               <DropdownSelectItem value={entry.value} label={entry.label} />
@@ -108,6 +109,7 @@
           checked={item.checked}
           required={item.required}
           value={item.value}
+          tooltip={item.tooltip}
         />
       </div>
     {:else if item.type === InputType.CheckboxGroup}
@@ -116,7 +118,8 @@
         <InputCheckboxGroup 
           label={item.label} 
           data={item.data}
-          orientation={orientation}/>
+          orientation={orientation}
+          />
       </div>
       {/if}
     {/if}

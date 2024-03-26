@@ -9,7 +9,7 @@ import {
   type InputConfig,
   type InputTypeWithData
 } from '$models';
-import { CONTENT_PAGE_FORM_CONFIG, URL_PAGE_FORM_CONFIG, METADATA_PAGE_FORM_CONFIG } from '$config';
+import { CONTENT_SEARCH_BASIC_FORM_CONFIG, METADATA_PAGE_FORM_CONFIG } from '$config';
 import { queryApi } from '$api';
 
 export const load: LayoutLoad = async () => {
@@ -26,8 +26,8 @@ export const load: LayoutLoad = async () => {
   }
   if (response.data) {
     return {
-      contentFormConfig: enhanceFormConfig(CONTENT_PAGE_FORM_CONFIG, response.data),
-      urlFormConfig: enhanceFormConfig(URL_PAGE_FORM_CONFIG, response.data),
+      contentBasicFormConfig: enhanceFormConfig(CONTENT_SEARCH_BASIC_FORM_CONFIG, response.data),
+      //urlFormConfig: enhanceFormConfig(URL_PAGE_FORM_CONFIG, response.data),
       metadataFormConfig: enhanceFormConfig(METADATA_PAGE_FORM_CONFIG, response.data)
     };
   }
