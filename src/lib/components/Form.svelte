@@ -49,26 +49,37 @@
       </div>
     {:else if item.type === InputType.TextArea}
       {@const id = item.name + '_input'}
-      <div class="pb-2 {item.submitQuery ? 'flex items-end' : ''}">
-        <div class="w-full">
+      <div class="pb-2 w-fulll pr-2 {item.submitQuery ? 'flex items-end' : ''}">
+          {#if item.submitQuery}
+          <div class="w-full pr-2">
+          <Label for={id} class="block py-1">{item.label}</Label>
+            <div class="flex items-center">
+              <InputTextArea
+                {id}
+                class="mr-2"
+                value={item.value}
+                name={item.name}
+                required={item.required}
+                placeholder={item.placeholder}
+              />
+              <Button
+                type="submit"
+                ariaLabel="Submit form"
+                on:click={() => (query = item.submitQuery)}
+                variant="glyph"> 
+                  <ArrowRight weight="bold" class="dark:fill-black fill-white"/>
+              </Button>
+            </div>
+          </div>
+          {:else}
           <Label for={id} class="block py-1">{item.label}</Label>
           <InputTextArea
             {id}
             value={item.value}
             name={item.name}
-            class="outline outline-1"
             required={item.required}
-            placeholder={item.placeholder}
-          />
-        </div>
-        {#if item.submitQuery}
-          <Button
-            type="submit"
-            ariaLabel="Submit form"
-            on:click={() => (query = item.submitQuery)}
-            variant="glyph"><ArrowRight weight="bold" class="dark:fill-black" /></Button
-          >
-        {/if}
+            placeholder={item.placeholder}/>
+          {/if}
       </div>
     {:else if item.type === InputType.Dropdown}
       {#if item.data}
