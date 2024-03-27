@@ -4,8 +4,8 @@
   export let name: string;
   export let value: string = '';
   export let placeholder: string = '';
-  export let rows: number = 4;
-  export let cols: number = 50;
+  export let rows: number = 3 ;
+  export let cols: number | undefined = undefined;
   export let required: boolean = false;
   export let onInputChange: (value: string, name: string) => void = (
     value: string,
@@ -30,6 +30,7 @@
   {rows}
   {cols}
   {required}
+  wrap="soft"
   on:input={handleInputChange}
-  class={cn('text-base font-sans text-white h-12 text-black resize-none w-full truncate rounded-input border bg-white px-2 transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black', className)}
+  class={cn(' whitespace-pre-wrap text-base font-sans text-white h-12 text-black resize-none w-full truncate rounded-input border bg-white px-2 transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black', className)}
 />

@@ -23,12 +23,16 @@
     const formData = new FormData(target);
 
     if (
-      query.endpoint === Endpoint.ParseUrl ||
-      (query.endpoint === Endpoint.Content && !formData.has('combineOperator'))
+      (query.endpoint === Endpoint.ParseUrl || Endpoint.ContentBasic || Endpoint.ContentAdvanced) && !formData.has('combineOperator')
     ) {
       formData.set('combineOperator', 'OR');
     }
 
+    if (query.endpoint === Endpoint.ContentBasic) {
+      formData.set('isApi', 'true');
+    }
+
+    console.log(formData);
     let response: ApiResponse<ApiContentData> = await queryApi(
       query.type,
       query.endpoint,
@@ -50,7 +54,7 @@
   }
 
   // wip: is this reactive binding necessary?
-  $: formConfig = data.contentBasicFormConfig;
+  $: formConfig = data.contentAdvancedFormConfig;
 </script>
 
 <div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">

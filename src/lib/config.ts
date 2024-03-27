@@ -38,16 +38,16 @@ export const operator_data: LabeledValue[] = [
   { label: 'OR', value: 'OR' }
 ];
 
-export const CONTENT_SEARCH_BASIC_FORM_CONFIG: InputConfig[] = [
+export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
-    name: 'url',
+    name: 'contentQuery',
     label: 'Content',
     placeholder: 'Enter a website URL or snippet of text',
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.ParseUrl
+      endpoint: Endpoint.ContentBasic
     }
   },
   {
@@ -80,16 +80,16 @@ export const CONTENT_SEARCH_BASIC_FORM_CONFIG: InputConfig[] = [
   },
 ];
 
-export const CONTENT_SEARCH_ADVANCED_FORM_CONFIG: InputConfig[] = [
+export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
-    name: 'url',
+    name: 'contentQuery',
     label: 'Content',
     placeholder: 'Enter a website URL or snippet of text',
-    required: true,
+    required: false,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.ParseUrl
+      endpoint: Endpoint.ContentBasic
     }
   },
   {
@@ -97,18 +97,15 @@ export const CONTENT_SEARCH_ADVANCED_FORM_CONFIG: InputConfig[] = [
     name: 'titleQuery',
     label: 'Title',
     placeholder: 'Add title',
-    required: true
+    required: false
   },
   {
-    type: InputType.Text,
-    name: 'contentQuery',
-    label: 'Content',
-    placeholder: 'Add content',
+    type: InputType.Checkbox,
+    name: 'combineOperator',
+    value: 'AND',
+    label: 'Results must contain both paragraph and title',
     required: true,
-    submitQuery: {
-      type: QueryType.Post,
-      endpoint: Endpoint.Content
-    }
+    checked: false
   },
   {
     type: InputType.Dropdown,
@@ -199,7 +196,7 @@ export const CONTENT_SEARCH_ADVANCED_FORM_CONFIG: InputConfig[] = [
 //
 //];
 
-export const METADATA_PAGE_FORM_CONFIG: InputConfig[] = [
+export const METADATA_SIMILARITY_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',

@@ -172,7 +172,8 @@ export enum Endpoint {
   Indicators = 'indicators',
   ParseUrl = 'parse-url',
   Fingerprint = 'fingerprint',
-  Content = 'content'
+  ContentBasic = 'content',
+  ContentAdvanced = 'content',
 }
 
 interface InputTextConfig {

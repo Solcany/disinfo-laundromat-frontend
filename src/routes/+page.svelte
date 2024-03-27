@@ -26,11 +26,14 @@
     const target = event.target as HTMLFormElement;
     let formData = new FormData(target);
 
-     if (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content 
-         && !formData.has('combineOperator')) {
+     if (query.endpoint === Endpoint.ParseUrl || Endpoint.ContentBasic || Endpoint.ContentAdvanced && !formData.has('combineOperator')) {
         formData.set('combineOperator', 'OR');
       } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
       formData.set('run_urlscan', '0');
+    }
+
+    if (query.endpoint === Endpoint.ContentBasic) {
+      formData.set('isApi', 'true');
     }
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
@@ -42,7 +45,8 @@
     if (response.error) {
     } else {
       if (response.data) {
-        if (query.endpoint === Endpoint.Content) {
+        if (query.endpoint === Endpoint.ContentBasic || Endpoint.ContentAdvanced
+          ) {
           contentStore.set(response.data as ApiContentData);
           goto('/search/content');
         } else if (query.endpoint === Endpoint.Fingerprint) {
