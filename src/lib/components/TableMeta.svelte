@@ -22,7 +22,7 @@
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
-  let selfRow: TableMetaRowData = undefined;
+  let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
   let sortedRows: TableMetaRowData[] = [];
   

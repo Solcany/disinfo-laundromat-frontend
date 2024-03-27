@@ -18,21 +18,29 @@
   }
 </script>
 
-<tr class="w-full">
-  <!-- the domain colmn -->
-  <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
-    {#if data.domain}
-      <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
-      {#if data.domainAssociations && data.domainAssociations.length > 0}
-        {#each domainAssociations as association}
-          <Tooltip>
-            <svelte:fragment slot="icon">i</svelte:fragment>
-            <svelte:fragment slot="content">{association}</svelte:fragment>
-          </Tooltip>
-        {/each}
+{#if data.data.length > 0}
+  <tr class="w-full">
+    <!-- row data -->
+    {#each data.data as [key, value]}
+      {#if key === 'domain' && domainAssociations.length > 0}
+        <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
+          {value}
+          {#each domainAssociations as association}
+            <Tooltip>
+              <svelte:fragment slot="icon">i</svelte:fragment>
+              <svelte:fragment slot="content">{association}</svelte:fragment>
+            </Tooltip>
+          {/each}
+        </td>
+      {:else}
+        <td class="border-b-2 border-gray3 py-4 text-sm text-black dark:text-white">
+          <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            {value}
+          </div>
+        </td>
       {/if}
-    {/if}
-  </td>
+    {/each}
+    <!-- expand row button -->
 
     <td class="align-middle">
       <button
