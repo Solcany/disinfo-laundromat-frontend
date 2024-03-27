@@ -18,11 +18,13 @@
     {id}
     {name}
     aria-labelledby={label_id}
-    class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border transition-all duration-150 ease-in-out"
-    {...$$restProps}>
+    class="border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border bg-white transition-all duration-150 ease-in-out"
+    {...$$restProps}
+  >
     <Checkbox.Indicator
       let:isChecked
-      class="text-background bg-white inline-flex items-center justify-center">
+      class="text-background inline-flex items-center justify-center bg-white"
+    >
       {#if isChecked}
         <Check class="size-[15px] fill-black" weight="bold" />
       {/if}
@@ -33,13 +35,14 @@
     for={id}
     id={label_id}
     title={tooltip}
-    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+  >
     {label}
   </Label>
   {#if tooltip}
     <Tooltip>
-          <svelte:fragment slot="icon">i</svelte:fragment>
-          <svelte:fragment slot="content">{tooltip}</svelte:fragment>
+      <svelte:fragment slot="icon">i</svelte:fragment>
+      <svelte:fragment slot="content">{tooltip}</svelte:fragment>
     </Tooltip>
   {/if}
 </div>

@@ -24,8 +24,8 @@
     const formData = new FormData(target);
 
     if (
-      (query.endpoint === Endpoint.ParseUrl || 
-       query.endpoint === Endpoint.Content) && !formData.has('combineOperator')
+      (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) &&
+      !formData.has('combineOperator')
     ) {
       formData.set('combineOperator', 'OR');
     }
@@ -55,13 +55,15 @@
   $: formConfig = data.contentAdvancedFormConfig;
 </script>
 
-<div class="flex-grow grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7
-border-t-[1px] border-gray5">
-  <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
+<div
+  class="grid w-full flex-grow grid-cols-1 border-t-[1px] border-gray5 bg-gray4 pr-4
+md:grid-cols-12 dark:bg-gray7"
+>
+  <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
       <Form config={formConfig} formData={contentFormData} onSubmit={handleSubmit} />
     {/if}
-    
+
     <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
@@ -103,7 +105,7 @@ border-t-[1px] border-gray5">
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
-    <!--
+      <!--
       {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
         <span class="block py-2 text-xs dark:text-white">
           Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span

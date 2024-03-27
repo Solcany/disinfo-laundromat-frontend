@@ -7,6 +7,12 @@
   export { className as class };
 </script>
 
-<Tabs.Trigger class={cn('flex-1 h-10 py-2 dark:bg-gray6 data-[state=active]:bg-gray7 data-[state=active]:shadow-mini dark:text-gray2 data-[state=active]:dark:text-white border-gray5 border-b-[1px] border-r-[1px] last:border-r-0 data-[state=active]:border-b-0' , className)} {...restProps}>
+<Tabs.Trigger
+  class={cn(
+    'data-[state=active]:shadow-mini h-10 flex-1 border-b-[1px] border-r-[1px] border-gray5 py-2 last:border-r-0 data-[state=active]:border-b-0 data-[state=active]:bg-gray7 dark:bg-gray6 dark:text-gray2 data-[state=active]:dark:text-white',
+    className
+  )}
+  {...restProps}
+>
   <slot />
 </Tabs.Trigger>

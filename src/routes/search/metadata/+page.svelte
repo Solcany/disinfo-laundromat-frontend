@@ -21,7 +21,7 @@
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { metadataStore } from '$stores/apiData.ts';
- // import { inputStore } from '$stores/input.ts';
+  // import { inputStore } from '$stores/input.ts';
 
   export let data;
 
@@ -52,22 +52,29 @@
     }
   }
 
-  $: tableData = $metadataStore ? {
-    indicators: $metadataStore.indicators,
-    matches: $metadataStore.matches,
-    indicator_metadata: $metadataStore.indicator_metadata
-  } : null;
-
+  $: tableData = $metadataStore
+    ? {
+        indicators: $metadataStore.indicators,
+        matches: $metadataStore.matches,
+        indicator_metadata: $metadataStore.indicator_metadata
+      }
+    : null;
 </script>
 
-<div class="flex-grow grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7
-border-t-[1px] border-gray5">
-  <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
+<div
+  class="grid w-full flex-grow grid-cols-1 border-t-[1px] border-gray5 bg-gray4 pr-4
+md:grid-cols-12 dark:bg-gray7"
+>
+  <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if data.metadataAdvancedFormConfig}
-      <Form config={data.metadataAdvancedFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Vertical} />
+      <Form
+        config={data.metadataAdvancedFormConfig}
+        onSubmit={handleSubmit}
+        orientation={FormOrientation.Vertical}
+      />
     {/if}
   </section>
-    <!--
+  <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>
@@ -106,7 +113,7 @@ border-t-[1px] border-gray5">
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
-    <!--
+      <!--
       {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
         <span class="block py-2 text-xs dark:text-white">
           Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span

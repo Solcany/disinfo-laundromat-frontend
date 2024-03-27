@@ -10,10 +10,12 @@ import {
   type InputConfig,
   type InputTypeWithData
 } from '$models';
-import { CONTENT_SIMILARITY_BASIC_FORM_CONFIG, 
-         CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
-         METADATA_SIMILARITY_BASIC_FORM_CONFIG,
-         METADATA_SIMILARITY_ADVANCED_FORM_CONFIG } from '$config';
+import {
+  CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
+  CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
+  METADATA_SIMILARITY_BASIC_FORM_CONFIG,
+  METADATA_SIMILARITY_ADVANCED_FORM_CONFIG
+} from '$config';
 import { queryApi } from '$api';
 
 export const load: LayoutLoad = async () => {
@@ -30,10 +32,22 @@ export const load: LayoutLoad = async () => {
   }
   if (response.data) {
     return {
-      contentBasicFormConfig: enhanceFormConfig(CONTENT_SIMILARITY_BASIC_FORM_CONFIG, response.data),
-      contentAdvancedFormConfig: enhanceFormConfig(CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG, response.data),
-      metadataBasicFormConfig: enhanceFormConfig(METADATA_SIMILARITY_BASIC_FORM_CONFIG, response.data), 
-      metadataAdvancedFormConfig: enhanceFormConfig(METADATA_SIMILARITY_ADVANCED_FORM_CONFIG, response.data)
+      contentBasicFormConfig: enhanceFormConfig(
+        CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
+        response.data
+      ),
+      contentAdvancedFormConfig: enhanceFormConfig(
+        CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
+        response.data
+      ),
+      metadataBasicFormConfig: enhanceFormConfig(
+        METADATA_SIMILARITY_BASIC_FORM_CONFIG,
+        response.data
+      ),
+      metadataAdvancedFormConfig: enhanceFormConfig(
+        METADATA_SIMILARITY_ADVANCED_FORM_CONFIG,
+        response.data
+      )
     };
   }
 
@@ -49,18 +63,18 @@ function enhanceFormConfig(
       const { key, defaultKey } = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag];
 
       if (key && apiConfigData[key]) {
-          const newData = configToLabeledValues(apiConfigData[key]);
-          let defaultValue: LabeledValue;
-          if (defaultKey && apiConfigData.defaults[defaultKey]) {
-            let value = apiConfigData.defaults[defaultKey];
-            let label = apiConfigData[key][value];
-            defaultValue = { label: label.toString(), value: value };
-          } else {
-            defaultValue = newData[0];
-          }
+        const newData = configToLabeledValues(apiConfigData[key]);
+        let defaultValue: LabeledValue;
+        if (defaultKey && apiConfigData.defaults[defaultKey]) {
+          let value = apiConfigData.defaults[defaultKey];
+          let label = apiConfigData[key][value];
+          defaultValue = { label: label.toString(), value: value };
+        } else {
+          defaultValue = newData[0];
+        }
 
         if (item.type === InputType.Hidden) {
-          return { ...item, value: defaultValue.value.toString()};
+          return { ...item, value: defaultValue.value.toString() };
         } else {
           return { ...item, data: newData, value: defaultValue };
         }

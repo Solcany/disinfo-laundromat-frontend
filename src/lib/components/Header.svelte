@@ -4,8 +4,6 @@
   export { className as class };
 </script>
 
-<header
-  class={cn('w-100 flex items-center justify-between py-3', className)}
->
+<header class={cn('w-100 flex items-center justify-between py-3', className)}>
   <slot />
 </header>

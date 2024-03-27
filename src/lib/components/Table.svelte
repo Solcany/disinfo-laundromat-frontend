@@ -22,34 +22,43 @@
   let sortedRows: TableRowData[] = [];
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
-  let areColumnsNumber: boolean[] = []; 
-  let sortColumnIndex: number = -1; 
+  let areColumnsNumber: boolean[] = [];
+  let sortColumnIndex: number = -1;
 
-$: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
+  $: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
 
-$: rows = (data.results && data.results.length > 0) ? data.results.map((entry) => {
-    const includedData = includeObjectKeys(entry, headerKeys);
-    const complementaryData = excludeObjectKeys(entry, headerKeys);
-    const domainAssociations = entry.hasOwnProperty('source')
-      ? Object.values(entry.source)
-      : undefined;
-    const { source, ...rest } = complementaryData;     
-    const cleanedComplementaryData = Object.entries(rest);
-    const resultObject: TableRowData = {
-      data: Object.entries(includedData),
-      dataComplementary: cleanedComplementaryData
-    };
-    if (domainAssociations !== undefined) {
-      resultObject.domainAssociations = domainAssociations;
-    }
-    return resultObject;
-  }) : [];
+  $: rows =
+    data.results && data.results.length > 0
+      ? data.results.map((entry) => {
+          const includedData = includeObjectKeys(entry, headerKeys);
+          const complementaryData = excludeObjectKeys(entry, headerKeys);
+          const domainAssociations = entry.hasOwnProperty('source')
+            ? Object.values(entry.source)
+            : undefined;
+          const { source, ...rest } = complementaryData;
+          const cleanedComplementaryData = Object.entries(rest);
+          const resultObject: TableRowData = {
+            data: Object.entries(includedData),
+            dataComplementary: cleanedComplementaryData
+          };
+          if (domainAssociations !== undefined) {
+            resultObject.domainAssociations = domainAssociations;
+          }
+          return resultObject;
+        })
+      : [];
 
- $: sortedRows = sortColumnIndex !== -1 && sortDirection !== SortDirection.None 
-      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber) 
+  $: sortedRows =
+    sortColumnIndex !== -1 && sortDirection !== SortDirection.None
+      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber)
       : rows;
 
-  function sortRows(rows: TableRowData[], columnIndex: number , direction : SortDirection, areColumnsNumber : boolean[]) {
+  function sortRows(
+    rows: TableRowData[],
+    columnIndex: number,
+    direction: SortDirection,
+    areColumnsNumber: boolean[]
+  ) {
     return [...rows].sort((a, b) => {
       const aValue = a.data[columnIndex][1];
       const bValue = b.data[columnIndex][1];
@@ -61,11 +70,13 @@ $: rows = (data.results && data.results.length > 0) ? data.results.map((entry) =
 
       if (areColumnsNumber[columnIndex]) {
         // Handle numeric sorting
-        return direction === SortDirection.Ascending ? ascending(+aValue, +bValue) : descending(+aValue, +bValue);
+        return direction === SortDirection.Ascending
+          ? ascending(+aValue, +bValue)
+          : descending(+aValue, +bValue);
       } else {
         // Handle string sorting
-        return direction === SortDirection.Ascending 
-          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase()) 
+        return direction === SortDirection.Ascending
+          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase())
           : descending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase());
       }
     });
@@ -87,8 +98,6 @@ $: rows = (data.results && data.results.length > 0) ? data.results.map((entry) =
       : (sortDirection = SortDirection.Ascending);
     sortStatus[column_label] = sortDirection;
   }
-
-
 </script>
 
 <div>

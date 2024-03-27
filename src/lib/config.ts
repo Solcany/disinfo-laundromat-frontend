@@ -7,17 +7,14 @@ export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
 
 export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
-  { label: 'Content Domain', key: 'domain',  type: TableHeaderItemType.String },
+  { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
-  { label: 'Similar Content', key: 'snippet', tooltip: 'test', type: TableHeaderItemType.String}
+  { label: 'Similar Content', key: 'snippet', tooltip: 'test', type: TableHeaderItemType.String }
 ];
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
-  { label: 'Indicators',
-    key: 'indicators_summary',
-    type: TableHeaderItemType.IndicatorsSummary
-  }
+  { label: 'Indicators', key: 'indicators_summary', type: TableHeaderItemType.IndicatorsSummary }
 ];
 
 export const UI_NAV: NavItemData[] = [
@@ -52,7 +49,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Dropdown,
     name: 'language',
-    label:'Language of search results',
+    label: 'Language of search results',
     placeholder: 'Select Language',
     required: true,
     data: undefined,
@@ -77,8 +74,8 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Hidden,
     name: 'isApi',
-    value: true, 
-  },
+    value: true
+  }
 ];
 
 export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
@@ -90,23 +87,24 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: false,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Content }
+      endpoint: Endpoint.Content
+    }
   },
- // {
- //   type: InputType.Text,
- //   name: 'titleQuery',
- //   label: 'Title',
- //   placeholder: 'Add title',
- //   required: false
- // },
- // {
- //   type: InputType.Checkbox,
- //   name: 'combineOperator',
- //   value: 'AND',
- //   label: 'Results must contain both paragraph and title',
- //   required: true,
- //   checked: false
- // },
+  // {
+  //   type: InputType.Text,
+  //   name: 'titleQuery',
+  //   label: 'Title',
+  //   placeholder: 'Add title',
+  //   required: false
+  // },
+  // {
+  //   type: InputType.Checkbox,
+  //   name: 'combineOperator',
+  //   value: 'AND',
+  //   label: 'Results must contain both paragraph and title',
+  //   required: true,
+  //   checked: false
+  // },
   {
     type: InputType.Dropdown,
     name: 'country',
@@ -119,7 +117,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Dropdown,
     name: 'language',
-    label:'Language of search results',
+    label: 'Language of search results',
     placeholder: 'Select Language',
     required: true,
     data: undefined,
@@ -138,11 +136,9 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Hidden,
     name: 'isApi',
-    value: true, 
-  },
+    value: true
+  }
 ];
-
-
 
 //export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
 //  {
@@ -216,10 +212,9 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Hidden,
     name: 'run_urlscan',
-    value: false, 
-  },
+    value: false
+  }
 ];
-
 
 export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
@@ -233,13 +228,13 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
       endpoint: Endpoint.Fingerprint
     }
   },
- {
-   type: InputType.Checkbox,
-   name: 'run_urlscan',
-   label: 'Run Url scan',
-   value: '1',
-   required: true,
-   checked: false,
-   tooltip: 'what is rulscan',
- }
+  {
+    type: InputType.Checkbox,
+    name: 'run_urlscan',
+    label: 'Run Url scan',
+    value: '1',
+    required: true,
+    checked: false,
+    tooltip: 'what is rulscan'
+  }
 ];

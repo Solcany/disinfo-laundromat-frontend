@@ -11,7 +11,7 @@
   import { TABLE_CONTENT_HEADER } from '$config';
   import { Endpoint, QueryType, type ApiContentData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
- // import { loadingStore } from '$stores/loading.ts';
+  // import { loadingStore } from '$stores/loading.ts';
   //import { urlContentStore } from '$stores/apiData.ts';
   //import { inputStore } from '$stores/input.ts';
   export let data;
@@ -39,37 +39,38 @@
   //     loadingStore.set(false);
   //   }
   // }
- // async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
- //   event.preventDefault();
- //   loadingStore.set(true);
- //   const target = event.target as HTMLFormElement;
- //   const formData = new FormData(target);
+  // async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
+  //   event.preventDefault();
+  //   loadingStore.set(true);
+  //   const target = event.target as HTMLFormElement;
+  //   const formData = new FormData(target);
 
- //   // a hack before this gets fixed on the backend
- //   if (query.endpoint == Endpoint.ParseUrl) {
- //     formData.set('combineOperator', 'OR');
- //   }
+  //   // a hack before this gets fixed on the backend
+  //   if (query.endpoint == Endpoint.ParseUrl) {
+  //     formData.set('combineOperator', 'OR');
+  //   }
 
- //   console.log(formData);
- //   let response: ApiResponse<ApiContentData> = await queryApi(
- //     query.type,
- //     query.endpoint,
- //     formData
- //   );
+  //   console.log(formData);
+  //   let response: ApiResponse<ApiContentData> = await queryApi(
+  //     query.type,
+  //     query.endpoint,
+  //     formData
+  //   );
 
- //   if (response.error) {
- //     console.log(response.error);
- //   } else {
- //     if (response.data) {
- //       urlContentStore.set(response.data);
- //       loadingStore.set(false);
- //     } else {
- //       // WIP: this needs to be handled better!
- //       loadingStore.set(false);
- //     }
- //   }
- // }
+  //   if (response.error) {
+  //     console.log(response.error);
+  //   } else {
+  //     if (response.data) {
+  //       urlContentStore.set(response.data);
+  //       loadingStore.set(false);
+  //     } else {
+  //       // WIP: this needs to be handled better!
+  //       loadingStore.set(false);
+  //     }
+  //   }
+  // }
 </script>
+
 <!--
 <div class="grid w-full grid-cols-1 bg-white pr-4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full px-3">
@@ -79,8 +80,7 @@
 
 -->
 
-
-    <!--
+<!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>

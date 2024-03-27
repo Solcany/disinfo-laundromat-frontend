@@ -7,6 +7,6 @@
   export { className as class };
 </script>
 
-<Tabs.Content {...restProps} class={cn('dark:bg-gray7 bg-white p-5', className)}>
+<Tabs.Content {...restProps} class={cn('bg-white p-5 dark:bg-gray7', className)}>
   <slot />
 </Tabs.Content>

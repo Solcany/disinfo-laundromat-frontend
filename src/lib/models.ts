@@ -12,8 +12,6 @@ export interface ContentApiInput {
   [index: string]: string | LabeledValue;
 }
 
-
-
 export interface ApiResponse<T> {
   data?: T;
   error?: string;
@@ -47,7 +45,10 @@ export interface ApiFingerprintData {
   matches_summary: Record<string, number>;
 }
 
-export type TableFingerprintData = Pick<ApiFingerprintData, 'indicators' | 'matches' | 'indicator_metadata'>;
+export type TableFingerprintData = Pick<
+  ApiFingerprintData,
+  'indicators' | 'matches' | 'indicator_metadata'
+>;
 
 export interface ContentDataResult {
   domain: string;
@@ -72,10 +73,10 @@ export interface ApiContentData {
     };
   };
   languages: Record<string, string>;
-  results: ContentDataResult[]
+  results: ContentDataResult[];
 }
 
-export type TableContentData = Pick<ApiContentData, 'results'>
+export type TableContentData = Pick<ApiContentData, 'results'>;
 
 export interface ApiIndicatorsData {
   data: Array<any>;
@@ -147,7 +148,7 @@ export enum InputType {
   TextArea,
   Checkbox,
   CheckboxGroup,
-  Hidden,
+  Hidden
 }
 
 export enum RemoteConfigFlag {
@@ -173,7 +174,7 @@ export enum Endpoint {
   Indicators = 'indicators',
   ParseUrl = 'parse-url',
   Fingerprint = 'fingerprint',
-  Content = 'content-search',
+  Content = 'content-search'
 }
 
 interface InputTextConfig {
@@ -189,7 +190,6 @@ interface InputTextConfig {
   };
   tooltip?: string;
 }
-
 
 interface InputTextAreaConfig {
   type: InputType.TextArea;
@@ -257,7 +257,7 @@ interface InputHiddenConfig {
   name: string;
   requiresRemoteData?: RemoteConfigFlag;
   value?: string | number | boolean;
-  submitQuery?: { 
+  submitQuery?: {
     // WIP this should be removed for the hidden config
     // but for some reason TS complains about its absence in the Form comp
     type: QueryType;
@@ -277,7 +277,5 @@ export type InputTypeWithData = InputDropdownConfig | InputHiddenConfig;
 
 export enum FormOrientation {
   Horizontal = 'horizontal',
-  Vertical = 'vertical',
+  Vertical = 'vertical'
 }
-
-

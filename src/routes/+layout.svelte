@@ -9,13 +9,12 @@
   import ProgressBar from '$components/ProgressBar.svelte';
 </script>
 
-
-<main class="border-box relative flex flex-col w-full min-h-screen bg-white dark:bg-gray6">
+<main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
   <Header class="bg-white px-3 md:px-8 dark:bg-gray6">
     <H1><a href="/">{APP_TITLE}</a></H1>
     <Nav />
   </Header>
-    <ProgressBar class="absolute left-0 top-0" />
-    <slot />
-    <Footer />
+  <ProgressBar class="absolute left-0 top-0" />
+  <slot />
+  <Footer />
 </main>

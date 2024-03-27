@@ -12,7 +12,7 @@
   export let config: InputConfig[];
   export let onSubmit: (event: Event, query: { type: QueryType; endpoint: Endpoint }) => void;
   export let orientation: FormOrientation = FormOrientation.Vertical;
-  export let formData: FormData | undefined = undefined; 
+  export let formData: FormData | undefined = undefined;
 
   let query: { type: QueryType; endpoint: Endpoint } | undefined;
 
@@ -50,10 +50,10 @@
       </div>
     {:else if item.type === InputType.TextArea}
       {@const id = item.name + '_input'}
-      <div class="pb-2 w-fulll pr-2 {item.submitQuery ? 'flex items-end' : ''}">
-          {#if item.submitQuery}
+      <div class="w-fulll pb-2 pr-2 {item.submitQuery ? 'flex items-end' : ''}">
+        {#if item.submitQuery}
           <div class="w-full pr-2">
-          <Label for={id} class="block py-1">{item.label}</Label>
+            <Label for={id} class="block py-1">{item.label}</Label>
             <div class="flex items-center">
               <InputTextArea
                 {id}
@@ -67,31 +67,35 @@
                 type="submit"
                 ariaLabel="Submit form"
                 on:click={() => (query = item.submitQuery)}
-                variant="glyph"> 
-                  <ArrowRight weight="bold" class="dark:fill-black"/>
+                variant="glyph"
+              >
+                <ArrowRight weight="bold" class="dark:fill-black" />
               </Button>
             </div>
           </div>
-          {:else}
+        {:else}
           <Label for={id} class="block py-1">{item.label}</Label>
           <InputTextArea
             {id}
             value={formData?.has(item.name) ? String(formData.get(item.name)) : item.value}
             name={item.name}
             required={item.required}
-            placeholder={item.placeholder}/>
-          {/if}
+            placeholder={item.placeholder}
+          />
+        {/if}
       </div>
     {:else if item.type === InputType.Dropdown}
       {#if item.data}
         {@const id = item.name + '_input'}
-        <div class="pb-2 inline-block">
+        <div class="inline-block pb-2">
           <Label for={id} class="block py-1">{item.label}</Label>
           <DropdownSelect
             {id}
             name={item.name}
             items={item.data}
-            selected={formData?.has(item.name) ? item.data.find(obj => obj.value === String(formData?.get(item.name))) : item.value}
+            selected={formData?.has(item.name)
+              ? item.data.find((obj) => obj.value === String(formData?.get(item.name)))
+              : item.value}
             required={item.required}
             placeholder={item.placeholder}
             tooltip={item.tooltip}
@@ -103,7 +107,7 @@
         </div>
       {/if}
     {:else if item.type === InputType.Checkbox}
-      <div class="pb-2 inline-block">
+      <div class="inline-block pb-2">
         <InputCheckbox
           name={item.name}
           label={item.label}
@@ -114,21 +118,19 @@
         />
       </div>
     {:else if item.type === InputType.CheckboxGroup && item.data}
-      <div class="pb-2 inline-block">
-        <InputCheckboxGroup 
+      <div class="inline-block pb-2">
+        <InputCheckboxGroup
           label={item.label}
           items={item.data}
-          itemsChecked={formData?.has(item.name) ? formData.getAll(item.name).map(v => String(v)) : []}
-          orientation={orientation}
-          />
+          itemsChecked={formData?.has(item.name)
+            ? formData.getAll(item.name).map((v) => String(v))
+            : []}
+          {orientation}
+        />
       </div>
-      {:else if item.type === InputType.Hidden && item.value}
-        <input
-          name={item.name}
-          value={item.value}
-          class="hidden"
-          aria-hidden="true"/>
-      {/if}
+    {:else if item.type === InputType.Hidden && item.value}
+      <input name={item.name} value={item.value} class="hidden" aria-hidden="true" />
+    {/if}
   {/each}
 
   <!-- <InputCheckboxGroup/> -->

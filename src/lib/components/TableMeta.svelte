@@ -25,8 +25,9 @@
   let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
   let sortedRows: TableMetaRowData[] = [];
-  
-  $: selfRow = data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
+
+  $: selfRow =
+    data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
   $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
 
   $: {
@@ -171,31 +172,31 @@
             ? ascending(Number(aValue), Number(bValue))
             : descending(Number(aValue), Number(bValue));
         case TableHeaderItemType.IndicatorsSummary:
-            const tiers = ['tier1', 'tier2', 'tier3'];
+          const tiers = ['tier1', 'tier2', 'tier3'];
 
-            for (let tier of tiers) {
-              const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
-              const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
+          for (let tier of tiers) {
+            const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
+            const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
 
-              const result = tierValA !== tierValB ? (
-                  sortDirection === SortDirection.Ascending ? 
-                  ascending(tierValA, tierValB) : 
-                  descending(tierValA, tierValB)
-                  ) : 0;
-              if (result !== 0) return result;
-            }
-            const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
-            const bTierCount = tiers.filter((tier) => tier in (bValue as IndicatorsSummary)).length;
+            const result =
+              tierValA !== tierValB
+                ? sortDirection === SortDirection.Ascending
+                  ? ascending(tierValA, tierValB)
+                  : descending(tierValA, tierValB)
+                : 0;
+            if (result !== 0) return result;
+          }
+          const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
+          const bTierCount = tiers.filter((tier) => tier in (bValue as IndicatorsSummary)).length;
 
-            return sortDirection === SortDirection.Ascending ? 
-              ascending(aTierCount, bTierCount) : 
-              descending(aTierCount, bTierCount);
+          return sortDirection === SortDirection.Ascending
+            ? ascending(aTierCount, bTierCount)
+            : descending(aTierCount, bTierCount);
         default:
           return 0;
       }
     });
   }
-
 
   function handleHeaderItemClick(index: number): void {
     const clickedColumnLabel = headerData[index].label;
