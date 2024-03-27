@@ -72,7 +72,7 @@ export interface ApiContentData {
     };
   };
   languages: Record<string, string>;
-  results: ContentDataResult[];
+  results: ContentDataResult[]
 }
 
 export type TableContentData = Pick<ApiContentData, 'results'>

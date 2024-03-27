@@ -1,3 +1,4 @@
+
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { TableRowData } from '$models';
@@ -23,11 +24,11 @@
   <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
     {#if data.domain}
       <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
-      {#if data.domainAssociations && data.domainAssociations.length > 0}
-        {#each domainAssociations as association}
+      {#if data.source && data.source.length > 0}
+        {#each data.source as source}
           <Tooltip>
             <svelte:fragment slot="icon">i</svelte:fragment>
-            <svelte:fragment slot="content">{association}</svelte:fragment>
+            <svelte:fragment slot="content">{source}</svelte:fragment>
           </Tooltip>
         {/each}
       {/if}
@@ -53,9 +54,9 @@
     </td><td> </td></tr
   >
   <!-- expanded row Table -->
-  {#if isExpanded && data.dataComplementary.length > 0}
+  {#if isExpanded}
     <tr>
-      <td colSpan={data.data.length + 1}>
+      <td colSpan={}>
         <div class="w-full bg-white py-4 dark:bg-gray7">
           <table>
             <tbody>

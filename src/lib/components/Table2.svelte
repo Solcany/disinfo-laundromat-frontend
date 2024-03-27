@@ -3,7 +3,8 @@
   import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
   import {
     SortDirection,
-    type ContentDataResult.
+    TableHeaderItemType,
+    type ContentDataResult,
     type TableContentdata, 
     type TableHeaderItemData,
     type TableRowData
@@ -14,77 +15,77 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: TableContentData;
+  export let data: ContentDataResult[];
   export let caption: string;
 
-  const headerKeys: string[] = headerData.map(({ key }) => key);
-  let rows: TableRowData[] = [];
-  let sortedRows: TableRowData[] = [];
+  let rows: ContentDataResult[] = [];
+  let sortedRows: ContentDataResult[] = [];
+
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let areColumnsNumber: boolean[] = []; 
-  let sortColumnIndex: number = -1; 
+  let sortColumnIndex: number = -1;  
 
-$: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
+   $: rows = data;
+   $: sortedRows = sortColumnIndex !== -1 && sortDirection !== SortDirection.None 
+        ? sortRows(data, sortColumnIndex, sortDirection, areColumnsNumber) 
+        : rows;
 
-$: rows = (data.results && data.results.length > 0) ? data.results.map((entry) => {
-    const includedData = includeObjectKeys(entry, headerKeys);
-    const complementaryData = excludeObjectKeys(entry, headerKeys);
-    const domainAssociations = entry.hasOwnProperty('source')
-      ? Object.values(entry.source)
-      : undefined;
-    const { source, ...rest } = complementaryData;     
-    const cleanedComplementaryData = Object.entries(rest);
-    const resultObject: TableRowData = {
-      data: Object.entries(includedData),
-      dataComplementary: cleanedComplementaryData
-    };
-    if (domainAssociations !== undefined) {
-      resultObject.domainAssociations = domainAssociations;
-    }
-    return resultObject;
-  }) : [];
+  function sortRows(
+    rows: ContentDataResult[],
+    columnIndex: number,
+    direction: SortDirection
+  ): ContentDataResult[] {
+    const { key, type } = headerData[columnIndex];
 
+    return rows.sort((a, b) => {
+      const aValue = a[key];
+      const bValue = b[key];
 
-  function getRows(data: TableContentData): TableRowData[] {
-    if(!data || data.length < 1) {
-      return [];
-    }
-    
-    data.map // continue heere
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return -1;
+      if (bValue == null) return 1;
 
+      switch (type) {
+        case TableHeaderItemType.String:
+          return direction === SortDirection.Ascending
+            ? ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase())
+            : descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+        case TableHeaderItemType.Number:
+          return direction === SortDirection.Ascending
+            ? ascending(Number(aValue), Number(bValue))
+            : descending(Number(aValue), Number(bValue));
+       // case TableHeaderItemType.IndicatorsSummary:
+       //     const tiers = ['tier1', 'tier2', 'tier3'];
 
-  }
+       //     for (let tier of tiers) {
+       //       const tierValA: number = (aValue as IndicatorsSummary)[tier] || 0;
+       //       const tierValB: number = (bValue as IndicatorsSummary)[tier] || 0;
 
- $: sortedRows = sortColumnIndex !== -1 && sortDirection !== SortDirection.None 
-      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber) 
-      : rows;
+       //       const result = tierValA !== tierValB ? (
+       //           sortDirection === SortDirection.Ascending ? 
+       //           ascending(tierValA, tierValB) : 
+       //           descending(tierValA, tierValB)
+       //           ) : 0;
+       //       if (result !== 0) return result;
+       //     }
+       //     const aTierCount = tiers.filter((tier) => tier in (aValue as IndicatorsSummary)).length;
+       //     const bTierCount = tiers.filter((tier) => tier in (bValue as IndicatorsSummary)).length;
 
-  function sortRows(rows: TableRowData[], columnIndex: number , direction : SortDirection, areColumnsNumber : boolean[]) {
-    return [...rows].sort((a, b) => {
-      const aValue = a.data[columnIndex][1];
-      const bValue = b.data[columnIndex][1];
-
-      // Check for null or undefined values
-      if (aValue == null || bValue == null) {
-        return aValue == null ? (bValue == null ? 0 : 1) : -1;
-      }
-
-      if (areColumnsNumber[columnIndex]) {
-        // Handle numeric sorting
-        return direction === SortDirection.Ascending ? ascending(+aValue, +bValue) : descending(+aValue, +bValue);
-      } else {
-        // Handle string sorting
-        return direction === SortDirection.Ascending 
-          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase()) 
-          : descending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase());
+       //     return sortDirection === SortDirection.Ascending ? 
+       //       ascending(aTierCount, bTierCount) : 
+       //       descending(aTierCount, bTierCount);
+        default:
+          return 0;
       }
     });
   }
 
-  function handleHeaderItemClick(i: number, label: string): void {
-    sortColumnIndex = i;
-    updateSortStatus(label);
+
+  function handleHeaderItemClick(index: number): void {
+    const clickedColumnLabel = headerData[index].label;
+    sortColumnIndex = index;
+    updateSortStatus(clickedColumnLabel);
   }
 
   function updateSortStatus(column_label: string): void {

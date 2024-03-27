@@ -19,7 +19,6 @@
   export let headerData: TableHeaderItemData[];
   export let data: TableFingerprintData;
   export let caption: string;
-  const headerKeys: string[] = headerData.map(({ key }) => key);
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;

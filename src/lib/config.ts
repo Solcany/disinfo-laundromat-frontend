@@ -7,15 +7,14 @@ export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
 
 export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
-  { label: 'Content Domain', key: 'domain' },
-  { label: 'Similarity Score', key: 'score' },
-  { label: 'Similar Content', key: 'snippet', tooltip: 'test' }
+  { label: 'Content Domain', key: 'domain',  type: TableHeaderItemType.String },
+  { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
+  { label: 'Similar Content', key: 'snippet', tooltip: 'test', type: TableHeaderItemType.String}
 ];
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
-  {
-    label: 'Indicators',
+  { label: 'Indicators',
     key: 'indicators_summary',
     type: TableHeaderItemType.IndicatorsSummary
   }
