@@ -102,7 +102,6 @@ md:grid-cols-12 dark:bg-gray7"
 
     -->
   </section>
-
   <section class="col-span-9 col-start-auto w-full">
     <div>
       {#if contentFormData?.has("contentToSearch")}
@@ -110,9 +109,14 @@ md:grid-cols-12 dark:bg-gray7"
               Results for: {contentFormData.get('contentToSearch')}</span>
       {/if}
     </div>
-    <div>
+    <div class="flex">
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
         <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
+      {:else}
+        <div class="w-full flex-grow h-full bg-red-500">
+          No data 
+        </div>
+
       {/if}
     </div>
   </section>
