@@ -26,15 +26,13 @@
     const target = event.target as HTMLFormElement;
     let formData = new FormData(target);
 
-     if (query.endpoint === Endpoint.ParseUrl || Endpoint.ContentBasic || Endpoint.ContentAdvanced && !formData.has('combineOperator')) {
+     if (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) {
         formData.set('combineOperator', 'OR');
       } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
       formData.set('run_urlscan', '0');
     }
 
-    if (query.endpoint === Endpoint.ContentBasic) {
-      formData.set('isApi', 'true');
-    }
+    console.log(formData);
 
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
       query.type,
@@ -42,11 +40,11 @@
       formData
     );
 
+    console.log(response);
     if (response.error) {
     } else {
       if (response.data) {
-        if (query.endpoint === Endpoint.ContentBasic || Endpoint.ContentAdvanced
-          ) {
+        if (query.endpoint === Endpoint.Content) {
           contentStore.set(response.data as ApiContentData);
           goto('/search/content');
         } else if (query.endpoint === Endpoint.Fingerprint) {
@@ -85,7 +83,7 @@
         </C.List>
         <C.Content value="content similarity">
           <P>
-          Enter a website URL or snippet of text to analyse content similarity. Check the search engines you want to use to power the search results.
+            Exploring potential content laundering practices. Enter an article URL or snippet of text to analyse content similarity. Check the search engines you want to use to power the search results.
           </P>
           {#if contentBasicFormConfig}
             <Form config={contentBasicFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>

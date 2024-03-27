@@ -41,23 +41,26 @@ export const operator_data: LabeledValue[] = [
 export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
-    name: 'contentQuery',
+    name: 'contentToSearch',
     label: 'Content',
-    placeholder: 'Enter a website URL or snippet of text',
+    placeholder: 'Enter an article URL or snippet of text]',
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.ContentBasic
+      endpoint: Endpoint.Content
     }
+
   },
   {
-    type: InputType.Dropdown,
+    type: InputType.Hidden,
     name: 'country',
-    label: 'Region of search engines',
-    placeholder: 'Select region',
-    required: true,
-    data: undefined,
+    value: undefined,
     requiresRemoteData: RemoteConfigFlag.Countries
+  },
+  {
+    type: InputType.Hidden,
+    name: 'isApi',
+    value: true, 
   },
   {
     type: InputType.Dropdown,
@@ -83,30 +86,35 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
 export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.TextArea,
-    name: 'contentQuery',
+    name: 'contentToSearch',
     label: 'Content',
     placeholder: 'Enter a website URL or snippet of text',
     required: false,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.ContentBasic
-    }
+      endpoint: Endpoint.Content }
   },
+ // {
+ //   type: InputType.Text,
+ //   name: 'titleQuery',
+ //   label: 'Title',
+ //   placeholder: 'Add title',
+ //   required: false
+ // },
+ // {
+ //   type: InputType.Checkbox,
+ //   name: 'combineOperator',
+ //   value: 'AND',
+ //   label: 'Results must contain both paragraph and title',
+ //   required: true,
+ //   checked: false
+ // },
   {
-    type: InputType.Text,
-    name: 'titleQuery',
-    label: 'Title',
-    placeholder: 'Add title',
-    required: false
+    type: InputType.Hidden,
+    name: 'isApi',
+    value: true, 
   },
-  {
-    type: InputType.Checkbox,
-    name: 'combineOperator',
-    value: 'AND',
-    label: 'Results must contain both paragraph and title',
-    required: true,
-    checked: false
-  },
+
   {
     type: InputType.Dropdown,
     name: 'country',
@@ -209,12 +217,17 @@ export const METADATA_SIMILARITY_FORM_CONFIG: InputConfig[] = [
     }
   },
   {
-    type: InputType.Checkbox,
+    type: InputType.Hidden,
     name: 'run_urlscan',
-    label: 'Run Url scan',
-    value: '1',
-    required: true,
-    checked: false,
-    tooltip: 'what is rulscan',
-  }
+    value: false, 
+  },
+ // {
+ //   type: InputType.Checkbox,
+ //   name: 'run_urlscan',
+ //   label: 'Run Url scan',
+ //   value: '1',
+ //   required: true,
+ //   checked: false,
+ //   tooltip: 'what is rulscan',
+ // }
 ];

@@ -112,8 +112,7 @@
           tooltip={item.tooltip}
         />
       </div>
-    {:else if item.type === InputType.CheckboxGroup}
-      {#if item.data}
+    {:else if item.type === InputType.CheckboxGroup && item.data}
       <div class="pb-2 inline-block">
         <InputCheckboxGroup 
           label={item.label} 
@@ -121,8 +120,13 @@
           orientation={orientation}
           />
       </div>
+      {:else if item.type === InputType.Hidden && item.value}
+        <input
+          name={item.name}
+          value={item.value}
+          class="hidden"
+          aria-hidden="true"/>
       {/if}
-    {/if}
   {/each}
 
   <!-- <InputCheckboxGroup/> -->

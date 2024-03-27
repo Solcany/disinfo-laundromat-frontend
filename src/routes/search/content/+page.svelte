@@ -23,13 +23,10 @@
     const formData = new FormData(target);
 
     if (
-      (query.endpoint === Endpoint.ParseUrl || Endpoint.ContentBasic || Endpoint.ContentAdvanced) && !formData.has('combineOperator')
+      (query.endpoint === Endpoint.ParseUrl || 
+       query.endpoint === Endpoint.Content) && !formData.has('combineOperator')
     ) {
       formData.set('combineOperator', 'OR');
-    }
-
-    if (query.endpoint === Endpoint.ContentBasic) {
-      formData.set('isApi', 'true');
     }
 
     console.log(formData);
@@ -57,8 +54,9 @@
   $: formConfig = data.contentAdvancedFormConfig;
 </script>
 
-<div class="grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7">
-  <section class="col-span-3 w-full px-3">
+<div class="flex-grow grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7
+border-t-[1px] border-gray5">
+  <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
     {#if formConfig}
       <Form config={formConfig} onSubmit={handleSubmit} />
     {/if}

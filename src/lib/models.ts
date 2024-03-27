@@ -146,7 +146,8 @@ export enum InputType {
   Text,
   TextArea,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Hidden,
 }
 
 export enum RemoteConfigFlag {
@@ -172,8 +173,7 @@ export enum Endpoint {
   Indicators = 'indicators',
   ParseUrl = 'parse-url',
   Fingerprint = 'fingerprint',
-  ContentBasic = 'content',
-  ContentAdvanced = 'content',
+  Content = 'content-search',
 }
 
 interface InputTextConfig {
@@ -252,14 +252,28 @@ interface InputCheckboxGroupConfig {
   tooltip?: string;
 }
 
+interface InputHiddenConfig {
+  type: InputType.Hidden;
+  name: string;
+  requiresRemoteData?: RemoteConfigFlag;
+  value?: string | number | boolean;
+  submitQuery?: { 
+    // WIP this should be removed for the hidden config
+    // but for some reason TS complains about its absence in the Form comp
+    type: QueryType;
+    endpoint: Endpoint;
+  };
+}
+
 export type InputConfig =
   | InputTextConfig
   | InputTextAreaConfig
   | InputDropdownConfig
   | InputCheckboxConfig
-  | InputCheckboxGroupConfig;
+  | InputCheckboxGroupConfig
+  | InputHiddenConfig;
 
-export type InputTypeWithData = InputDropdownConfig;
+export type InputTypeWithData = InputDropdownConfig | InputHiddenConfig;
 
 export enum FormOrientation {
   Horizontal = 'horizontal',

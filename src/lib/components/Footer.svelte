@@ -4,6 +4,6 @@
   export { className as class };
 </script>
 
-<footer class={cn('w-100 h-2 outline outline-1', className)}>
+<footer class={cn('w-100', className)}>
   <slot />
 </footer>

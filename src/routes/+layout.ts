@@ -6,6 +6,7 @@ import {
   Endpoint,
   RemoteConfigFlag,
   RemoteConfigFlagData,
+  InputType,
   type InputConfig,
   type InputTypeWithData
 } from '$models';
@@ -46,18 +47,21 @@ function enhanceFormConfig(
       const { key, defaultKey } = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag];
 
       if (key && apiConfigData[key]) {
-        const newData = configToLabeledValues(apiConfigData[key]);
+          const newData = configToLabeledValues(apiConfigData[key]);
+          let defaultValue: LabeledValue;
+          if (defaultKey && apiConfigData.defaults[defaultKey]) {
+            let value = apiConfigData.defaults[defaultKey];
+            let label = apiConfigData[key][value];
+            defaultValue = { label: label.toString(), value: value };
+          } else {
+            defaultValue = newData[0];
+          }
 
-        let defaultValue: LabeledValue;
-        if (defaultKey && apiConfigData.defaults[defaultKey]) {
-          let value = apiConfigData.defaults[defaultKey];
-          let label = apiConfigData[key][value];
-          defaultValue = { label: label.toString(), value: value };
+        if (item.type === InputType.Hidden) {
+          return { ...item, value: defaultValue.value.toString()};
         } else {
-          defaultValue = newData[0];
+          return { ...item, data: newData, value: defaultValue };
         }
-
-        return { ...item, data: newData, value: defaultValue };
       }
     }
     return item;
