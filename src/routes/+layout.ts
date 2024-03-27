@@ -12,7 +12,8 @@ import {
 } from '$models';
 import { CONTENT_SIMILARITY_BASIC_FORM_CONFIG, 
          CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
-         METADATA_SIMILARITY_FORM_CONFIG } from '$config';
+         METADATA_SIMILARITY_BASIC_FORM_CONFIG,
+         METADATA_SIMILARITY_ADVANCED_FORM_CONFIG } from '$config';
 import { queryApi } from '$api';
 
 export const load: LayoutLoad = async () => {
@@ -31,7 +32,8 @@ export const load: LayoutLoad = async () => {
     return {
       contentBasicFormConfig: enhanceFormConfig(CONTENT_SIMILARITY_BASIC_FORM_CONFIG, response.data),
       contentAdvancedFormConfig: enhanceFormConfig(CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG, response.data),
-      metadataFormConfig: enhanceFormConfig(METADATA_SIMILARITY_FORM_CONFIG, response.data)
+      metadataBasicFormConfig: enhanceFormConfig(METADATA_SIMILARITY_BASIC_FORM_CONFIG, response.data), 
+      metadataAdvancedFormConfig: enhanceFormConfig(METADATA_SIMILARITY_ADVANCED_FORM_CONFIG, response.data)
     };
   }
 

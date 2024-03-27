@@ -59,7 +59,7 @@
   }
  // $: urlFormConfig = data.urlFormConfig;
   $: contentBasicFormConfig = data.contentBasicFormConfig;
-  $: metadataFormConfig = data.metadataFormConfig;
+  $: metadataBasicFormConfig = data.metadataBasicFormConfig;
 </script>
 
 <section class="pt-8 grid grid-rows-2 px-3 md:px-8">
@@ -99,8 +99,8 @@
           <br/>
           Enter a URL, the Laundromat will look for similarities with other entries in the database based on metadata overlap.
            </P>
-          {#if metadataFormConfig}
-            <Form config={metadataFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
+          {#if metadataBasicFormConfig}
+            <Form config={metadataBasicFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Horizontal}/>
           {/if}
         </C.Content>
       </Tabs>

@@ -49,18 +49,6 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
       type: QueryType.Post,
       endpoint: Endpoint.Content
     }
-
-  },
-  {
-    type: InputType.Hidden,
-    name: 'country',
-    value: undefined,
-    requiresRemoteData: RemoteConfigFlag.Countries
-  },
-  {
-    type: InputType.Hidden,
-    name: 'isApi',
-    value: true, 
   },
   {
     type: InputType.Dropdown,
@@ -80,6 +68,17 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     required: true,
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines
+  },
+  {
+    type: InputType.Hidden,
+    name: 'country',
+    value: undefined,
+    requiresRemoteData: RemoteConfigFlag.Countries
+  },
+  {
+    type: InputType.Hidden,
+    name: 'isApi',
+    value: true, 
   },
 ];
 
@@ -110,12 +109,6 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
  //   checked: false
  // },
   {
-    type: InputType.Hidden,
-    name: 'isApi',
-    value: true, 
-  },
-
-  {
     type: InputType.Dropdown,
     name: 'country',
     label: 'Region of search engines',
@@ -142,6 +135,11 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: true,
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Engines
+  },
+  {
+    type: InputType.Hidden,
+    name: 'isApi',
+    value: true, 
   },
 ];
 
@@ -204,7 +202,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
 //
 //];
 
-export const METADATA_SIMILARITY_FORM_CONFIG: InputConfig[] = [
+export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
@@ -221,13 +219,28 @@ export const METADATA_SIMILARITY_FORM_CONFIG: InputConfig[] = [
     name: 'run_urlscan',
     value: false, 
   },
- // {
- //   type: InputType.Checkbox,
- //   name: 'run_urlscan',
- //   label: 'Run Url scan',
- //   value: '1',
- //   required: true,
- //   checked: false,
- //   tooltip: 'what is rulscan',
- // }
+];
+
+
+export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
+  {
+    type: InputType.Text,
+    name: 'url',
+    label: 'URL',
+    placeholder: 'Add url',
+    required: true,
+    submitQuery: {
+      type: QueryType.Post,
+      endpoint: Endpoint.Fingerprint
+    }
+  },
+ {
+   type: InputType.Checkbox,
+   name: 'run_urlscan',
+   label: 'Run Url scan',
+   value: '1',
+   required: true,
+   checked: false,
+   tooltip: 'what is rulscan',
+ }
 ];

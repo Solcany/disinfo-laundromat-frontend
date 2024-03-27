@@ -63,8 +63,8 @@
 <div class="flex-grow grid w-full grid-cols-1 bg-gray4 pr-4 md:grid-cols-12 dark:bg-gray7
 border-t-[1px] border-gray5">
   <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
-    {#if data.metadataFormConfig}
-      <Form config={data.metadataFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Vertical} />
+    {#if data.metadataAdvancedFormConfig}
+      <Form config={data.metadataAdvancedFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Vertical} />
     {/if}
   </section>
     <!--
