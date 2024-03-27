@@ -208,7 +208,7 @@ export const METADATA_SIMILARITY_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
-    label: 'Url',
+    label: 'URL',
     placeholder: 'Add url',
     required: true,
     submitQuery: {
