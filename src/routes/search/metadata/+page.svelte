@@ -21,7 +21,7 @@
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { metadataStore } from '$stores/apiData.ts';
-  import { inputStore } from '$stores/input.ts';
+ // import { inputStore } from '$stores/input.ts';
 
   export let data;
 
@@ -106,11 +106,13 @@ border-t-[1px] border-gray5">
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
+    <!--
       {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
         <span class="block py-2 text-xs dark:text-white">
           Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span
         >
       {/if}
+    -->
     </div>
     <div>
       {#if tableData}

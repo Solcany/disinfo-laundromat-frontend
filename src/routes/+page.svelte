@@ -15,7 +15,7 @@
     type ApiFingerprintData
   } from '$models';
   import { queryApi } from '$api';
-  import { inputStore } from '$stores/input';
+  import { contentFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
@@ -45,6 +45,7 @@
     } else {
       if (response.data) {
         if (query.endpoint === Endpoint.Content) {
+          contentFormDataStore.set(formData);
           contentStore.set(response.data as ApiContentData);
           goto('/search/content');
         } else if (query.endpoint === Endpoint.Fingerprint) {
@@ -57,7 +58,6 @@
       }
     }
   }
- // $: urlFormConfig = data.urlFormConfig;
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
 </script>

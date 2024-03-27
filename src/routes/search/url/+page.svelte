@@ -13,7 +13,7 @@
   import { queryApi } from '$api';
  // import { loadingStore } from '$stores/loading.ts';
   //import { urlContentStore } from '$stores/apiData.ts';
-  import { inputStore } from '$stores/input.ts';
+  //import { inputStore } from '$stores/input.ts';
   export let data;
 
   // async function handleSubmit(event: Event) {

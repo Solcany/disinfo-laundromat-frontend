@@ -12,9 +12,10 @@
   import { queryApi } from '$api';
   import { loadingStore } from '$stores/loading.ts';
   import { contentStore } from '$stores/apiData.ts';
-  import { inputStore } from '$stores/input.ts';
+  import { contentFormDataStore } from '$stores/input.ts';
   import { onMount } from 'svelte';
   export let data;
+  let contentFormData = $contentFormDataStore;
 
   async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
     event.preventDefault();
@@ -58,7 +59,7 @@
 border-t-[1px] border-gray5">
   <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
     {#if formConfig}
-      <Form config={formConfig} onSubmit={handleSubmit} />
+      <Form config={formConfig} formData={contentFormData} onSubmit={handleSubmit} />
     {/if}
     
     <!--
@@ -102,13 +103,14 @@ border-t-[1px] border-gray5">
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
+    <!--
       {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
         <span class="block py-2 text-xs dark:text-white">
           Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span
         >
       {/if}
+      -->
     </div>
-
     <div>
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
         <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />

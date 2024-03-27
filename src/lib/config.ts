@@ -27,7 +27,6 @@ export const UI_NAV: NavItemData[] = [
 ];
 
 export const UI_SEARCH_NAV: NavItemData[] = [
-  //{ label: 'Url', path: '/search/url' },
   { label: 'Content Similarity', path: '/search/content' },
   { label: 'Technical Similarity', path: '/search/metadata' }
 ];

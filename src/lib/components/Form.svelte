@@ -12,6 +12,7 @@
   export let config: InputConfig[];
   export let onSubmit: (event: Event, query: { type: QueryType; endpoint: Endpoint }) => void;
   export let orientation: FormOrientation = FormOrientation.Vertical;
+  export let formData: FormData | undefined = undefined; 
 
   let query: { type: QueryType; endpoint: Endpoint } | undefined;
 
@@ -31,7 +32,7 @@
           <Label for={id} class="block py-1">{item.label}</Label>
           <InputText
             {id}
-            value={item.value}
+            value={formData?.has(item.name) ? String(formData.get(item.name)) : item.value}
             name={item.name}
             class="outline outline-1"
             required={item.required}
@@ -57,7 +58,7 @@
               <InputTextArea
                 {id}
                 class="mr-2"
-                value={item.value}
+                value={formData?.has(item.name) ? String(formData.get(item.name)) : item.value}
                 name={item.name}
                 required={item.required}
                 placeholder={item.placeholder}
@@ -75,7 +76,7 @@
           <Label for={id} class="block py-1">{item.label}</Label>
           <InputTextArea
             {id}
-            value={item.value}
+            value={formData?.has(item.name) ? String(formData.get(item.name)) : item.value}
             name={item.name}
             required={item.required}
             placeholder={item.placeholder}/>
@@ -90,7 +91,7 @@
             {id}
             name={item.name}
             items={item.data}
-            selected={item.value}
+            selected={formData?.has(item.name) ? item.data.find(obj => obj.value === String(formData?.get(item.name))) : item.value}
             required={item.required}
             placeholder={item.placeholder}
             tooltip={item.tooltip}
@@ -108,7 +109,7 @@
           label={item.label}
           checked={item.checked}
           required={item.required}
-          value={item.value}
+          value={formData?.has(item.name) ? Boolean(formData.get(item.name)) : item.value}
           tooltip={item.tooltip}
         />
       </div>
