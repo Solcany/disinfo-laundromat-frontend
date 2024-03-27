@@ -116,8 +116,9 @@
     {:else if item.type === InputType.CheckboxGroup && item.data}
       <div class="pb-2 inline-block">
         <InputCheckboxGroup 
-          label={item.label} 
-          data={item.data}
+          label={item.label}
+          items={item.data}
+          itemsChecked={formData?.has(item.name) ? formData.getAll(item.name).map(v => String(v)) : []}
           orientation={orientation}
           />
       </div>

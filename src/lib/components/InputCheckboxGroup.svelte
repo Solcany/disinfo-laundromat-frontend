@@ -8,10 +8,38 @@
   export { className as class };
   import Label from '$components/Label.svelte';
   export let label: string;
-  export let data: LabeledValue[];
+  export let items: LabeledValue[];
   export let orientation: FormOrientation = FormOrientation.Vertical;
-  let checked: (boolean | 'indeterminate')[] = new Array(data.length).fill(true);
+  export let itemsChecked: string[] | LabeledValue[] | undefined = undefined;
+  let checked: (boolean | 'indeterminate')[] = new Array(items.length).fill(true);
   let selectedState = false;
+
+
+
+function findCheckedIndices(items: LabeledValue[], checkedItems: (string | LabeledValue)[] | undefined): number[] {
+  if (!checkedItems || checkedItems.length === 0) return [];
+  return items.reduce((acc: number[], {value}, index: number) => {
+    const isValueChecked = checkedItems.some(checkedItem => {
+      if (typeof checkedItem === 'string') {
+        return checkedItem === value;
+      } else if ('value' in checkedItem) {
+        return checkedItem.value === value;
+      }
+      return false;
+    });
+    if (isValueChecked) acc.push(index);
+    return acc;
+  }, []);
+}
+
+if(itemsChecked) {
+  let checkedIndices = findCheckedIndices(items, itemsChecked);
+  let matchArray = items.map((_ : LabeledValue, index: number) => checkedIndices.includes(index));
+  console.log(matchArray);
+}
+
+
+
 
 
   function onCheckedChange(change: boolean | 'indeterminate') {
@@ -42,7 +70,7 @@
     {label}
   </Label>
   <ul class="flex {orientation === FormOrientation.Vertical ? 'flex-col' : 'grid grid-cols-2 md:grid-cols-4'}">
-  {#each data as item, index}
+  {#each items as item, index}
     <li class="pb-1 flex items-center space-x-1 {orientation === FormOrientation.Horizontal ? 'pr-2 ' : ''}">
     <!--
     <InputCheckbox
