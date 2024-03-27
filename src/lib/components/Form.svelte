@@ -121,10 +121,12 @@
       <div class="inline-block pb-2">
         <InputCheckboxGroup
           label={item.label}
-          items={item.data}
-          itemsChecked={formData?.has(item.name)
+          data={item.data}
+          checked={formData?.has(item.name)
             ? formData.getAll(item.name).map((v) => String(v))
-            : []}
+            : item.checked 
+              ? item.checked
+              :  [] }
           {orientation}
         />
       </div>

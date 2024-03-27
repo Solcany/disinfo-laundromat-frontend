@@ -242,6 +242,7 @@ interface InputCheckboxGroupConfig {
   placeholder: string;
   required: boolean;
   data: undefined | LabeledValue[];
+  checked?: string[] | LabeledValue[];
   requiresRemoteData?: RemoteConfigFlag;
   variant?: 'horizontal' | 'vertical';
   value?: LabeledValue;

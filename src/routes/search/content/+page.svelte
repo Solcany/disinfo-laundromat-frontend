@@ -105,13 +105,10 @@ md:grid-cols-12 dark:bg-gray7"
 
   <section class="col-span-9 col-start-auto w-full">
     <div>
-      <!--
-      {#if $inputStore && $inputStore.has('url') && $inputStore.get('url') !== ''}
+      {#if contentFormData?.has("contentToSearch")}
         <span class="block py-2 text-xs dark:text-white">
-          Results for: <Link href={$inputStore.get('url')}>{$inputStore.get('url')}</Link></span
-        >
+              Results for: {contentFormData.get('contentToSearch')}</span>
       {/if}
-      -->
     </div>
     <div>
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}

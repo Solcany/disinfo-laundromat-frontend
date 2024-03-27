@@ -8,26 +8,26 @@
   export { className as class };
   import Label from '$components/Label.svelte';
   export let label: string;
-  export let items: LabeledValue[];
+  export let data: LabeledValue[];
   export let orientation: FormOrientation = FormOrientation.Vertical;
-  export let itemsChecked: string[] | LabeledValue[] | undefined = undefined;
-  let checked: (boolean | 'indeterminate')[] = new Array(items.length).fill(true);
-  let selectedState = false;
+  export let checked: string[] | LabeledValue[] | undefined = undefined;
+  let checkedItems: (boolean | 'indeterminate')[] = [];
+  let selectedState = true;
 
-  if (itemsChecked && itemsChecked.length > 0) {
-    let checkedIndices = findCheckedIndices(items, itemsChecked);
-    checked = items.map((_: LabeledValue, index: number) => checkedIndices.includes(index));
+  if (checked && checked.length > 0) {
+    let checkedIndices = findCheckedIndices(data, checked);
+    checkedItems = data.map((_: LabeledValue, index: number) => checkedIndices.includes(index));
   } else {
-    checked = new Array(items.length).fill(false);
+    checkedItems = new Array(data.length).fill(false);
   }
 
   function findCheckedIndices(
     items: LabeledValue[],
-    checkedItems: (string | LabeledValue)[] | undefined
+    checked: (string | LabeledValue)[] | undefined
   ): number[] {
-    if (!checkedItems || checkedItems.length === 0) return [];
+    if (!checked || checked.length === 0) return [];
     return items.reduce((acc: number[], { value }, index: number) => {
-      const isValueChecked = checkedItems.some((checkedItem) => {
+      const isValueChecked = checked.some((checkedItem) => {
         if (typeof checkedItem === 'string') {
           return checkedItem === value;
         } else if ('value' in checkedItem) {
@@ -41,16 +41,16 @@
   }
 
   function handleCheckedChange(i: number, change: boolean | 'indeterminate') {
-    checked[i] = change;
+    checkedItems[i] = change;
   }
 
   function handleToggleAll() {
     if (selectedState) {
       selectedState = !selectedState;
-      checked = checked.map((_) => true);
+      checkedItems = checkedItems.map((_) => true);
     } else {
       selectedState = !selectedState;
-      checked = checked.map((_) => false);
+      checkedItems = checkedItems.map((_) => false);
     }
   }
 </script>
@@ -68,7 +68,7 @@
       ? 'flex-col'
       : 'grid grid-cols-2 md:grid-cols-4'}"
   >
-    {#each items as item, index}
+    {#each data as item, index}
       <li
         class="flex items-center space-x-1 pb-1 {orientation === FormOrientation.Horizontal
           ? 'pr-2 '
@@ -89,7 +89,7 @@ class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-borde
         <Checkbox.Root
           name={'search_engines'}
           value={item.value.toString()}
-          checked={checked[index]}
+          checked={checkedItems[index]}
           onCheckedChange={(change) => handleCheckedChange(index, change)}
           id="terms"
           aria-labelledby="terms-label"
@@ -98,7 +98,7 @@ class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-borde
           <Checkbox.Indicator
             let:isChecked
             let:isIndeterminate
-            class="inline-flex items-center justify-center text-white"
+            class="inline-flex size-[15px] items-center justify-center text-white"
           >
             {#if isChecked}
               <Check class="size-[15px] fill-black" weight="bold" />
