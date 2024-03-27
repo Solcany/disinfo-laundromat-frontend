@@ -56,10 +56,7 @@
   $: formConfig = data.contentAdvancedFormConfig;
 </script>
 
-<div
-  class="grid w-full flex-grow grid-cols-1 border-t-[1px] border-gray5 bg-gray4 pr-4
-md:grid-cols-12 dark:bg-gray7"
->
+<div class="grid w-full flex-grow grid-cols-1  bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
       <Form config={formConfig} formData={contentFormData} onSubmit={handleSubmit} />
@@ -103,22 +100,21 @@ md:grid-cols-12 dark:bg-gray7"
 
     -->
   </section>
-  <section class="col-span-9 col-start-auto w-full">
+  <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
+
+    {#if contentFormData?.has("contentToSearch")}
     <div>
-      {#if contentFormData?.has("contentToSearch")}
         <span class="block py-2 text-xs dark:text-white">
               Results for: {contentFormData.get('contentToSearch')}</span>
-      {/if}
     </div>
+    {/if}
     <div class="flex w-full h-full">
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
         <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {:else}
         <div class="flex-1 flex items-center justify-center fence-pattern">
-
           <H4>No data</H4>
         </div>
-
       {/if}
     </div>
   </section>
