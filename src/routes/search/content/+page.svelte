@@ -7,6 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
+  import H4 from'$components/H4.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
   import { QueryType, Endpoint, type ApiContentData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
@@ -109,12 +110,13 @@ md:grid-cols-12 dark:bg-gray7"
               Results for: {contentFormData.get('contentToSearch')}</span>
       {/if}
     </div>
-    <div class="flex">
+    <div class="flex w-full h-full">
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
         <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {:else}
-        <div class="w-full flex-grow h-full bg-red-500">
-          No data 
+        <div class="flex-1 flex items-center justify-center fence-pattern">
+
+          <H4>No data</H4>
         </div>
 
       {/if}
