@@ -7,6 +7,78 @@
   import LI from '$components/LI.svelte';
 </script>
 
+<H3 id="about-the-indicator-tier-system-and-interpreting-results">
+  About the Indicator Tier System and Interpreting Results
+</H3>
+
+<P>
+  Each indicator is associated with evidentiary tier and are subject to <a
+    href="#Interpreting Indicator Validity">interpretation</a
+  >.
+</P>
+<P>
+  Tier 1 indicators: <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a>
+  are typically unique or highly indicative of the provenance of a website. This includes unique IDs
+  for verification purposes and web services like Google, Yandex, etc as well as site metadata like WHOIS
+  information and certification,
+  <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a>, as DDOS protection
+  services like Cloudflare and shared hosting services like Bluehost can provide spurious matches.
+</P>
+<P>
+  Tier 2 indicators: Tier 2 indicators, <a href="#Interpreting Indicator Validity"
+    ><strong>WHEN VALID</strong></a
+  >, offer a moderate level of certainty regarding the provenance of a website. These are not as
+  unique as Tier 1 indicators but provide valuable context. This tier includes IPs within the same
+  subnet, matching meta tags, and commonalities in standard and custom response headers
+</P>
+<P>
+  Tier 3: Tertiary Indicators Tier 3 indicators, <a href="#Interpreting Indicator Validity"
+    ><strong>WHEN VALID</strong></a
+  >, are the least specific but can still support broader analyses when combined with higher-tier
+  indicators. These include shared CSS classes, UUIDs, and Content Management Systems
+</P>
+<H4 id="interpreting-indicator-validity">Interpreting Indicator Validity</H4>
+<P>
+  Understanding the validity of indicators is crucial in the analysis of websites&#39; provenance
+  and connections. Indicators can range from high-confidence markers of direct relationships to
+  spurious matches that may mislead investigations. It is essential to approach each indicator with
+  a critical eye and corroborate findings with additional evidence.
+</P>
+<P><strong>High Confidence Indicators:</strong></P>
+<ul>
+  <LI>
+    Unique IDs for verification purposes: These are often excellent evidence of a connection or
+    shared ownership, such as unique Google Analytics IDs that directly link websites to the same
+    account.
+  </LI>
+  <LI>
+    Domain Certificate sharing: When websites share a specific SSL certificate, it often (but not
+    always, see below) indicates a direct relationship, as certificates are typically issued to and
+    managed by the same entity.
+  </LI>
+</ul>
+<P>
+  Discovering two websites with the same unique Google Analytics ID AND a shared, specific SSL
+  certificate suggests a high-confidence link, indicating shared management or ownership.
+</P>
+<P><strong>Spurious Matches:</strong></P>
+<ul>
+  <LI>
+    Using services like Cloudflare: While Cloudflare and similar DDOS protection services offer
+    valuable security benefits, they also mask true IP addresses and distribute shared SSL
+    certificates across multiple sites. This can lead to false positives in linking unrelated
+    websites based on shared IP addresses or certificates.
+  </LI>
+  <LI>
+    Shared hosting services: Websites hosted on shared services like Bluehost may share IP addresses
+    with hundreds of unrelated sites, making IP-based matches unreliable without further context.
+  </LI>
+</ul>
+<P>
+  Identifying that multiple websites are behind Cloudflare does not inherently indicate a connection
+  beyond choosing a common, popular service for performance and security enhancements. All tier 1
+  and 2 indicators should be scrutinized carefully to determine if a match is valid or spurious
+</P>
 <H2 id="full-indicators-list-">Full Indicators List:</H2>
 <ul>
   <LI>

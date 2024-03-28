@@ -23,7 +23,7 @@ export const UI_NAV: NavItemData[] = [
   { label: 'Workspace', path: '/search/content' },
   { label: 'About', path: '/about' },
   { label: 'Indicators', path: '/indicators' },
-  { label: 'Log in | Sign up', path: '/login' }
+  //{ label: 'Log in | Sign up', path: '/login' }
 ];
 
 export const UI_SEARCH_NAV: NavItemData[] = [
