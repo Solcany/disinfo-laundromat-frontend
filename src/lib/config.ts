@@ -14,7 +14,9 @@ export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
-  { label: 'Indicators', key: 'indicators_summary', type: TableHeaderItemType.IndicatorsSummary }
+  { label: 'Indicators', key: 'indicators_summary', type: TableHeaderItemType.IndicatorsSummary },
+
+  { label: '', key: '', type: TableHeaderItemType.Empty}
 ];
 
 export const UI_NAV: NavItemData[] = [
@@ -40,7 +42,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     type: InputType.TextArea,
     name: 'contentToSearch',
     label: 'Content',
-    placeholder: 'Enter an article URL or snippet of text]',
+    placeholder: 'Enter an article URL or snippet of text',
     required: true,
     submitQuery: {
       type: QueryType.Post,

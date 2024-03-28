@@ -231,7 +231,7 @@ function getRows(data: MatchDataItem[]): TableMetaRowData[] {
       <col style="width: 30%" />
       <col style="width: 40%" />
     </colgroup>
-    <thead class="sticky top-0 dark:bg-gray7 border-b-[1px] border-gray3">
+    <thead class="w-full sticky top-0 dark:bg-gray7 border-b-[1px] border-gray3">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}

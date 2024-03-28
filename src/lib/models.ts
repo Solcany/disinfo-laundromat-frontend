@@ -113,7 +113,8 @@ export type IndicatorsSummary = {
 export enum TableHeaderItemType {
   Number = 'number',
   String = 'string',
-  IndicatorsSummary = 'IndicatorsSummary'
+  IndicatorsSummary = 'IndicatorsSummary',
+  Empty = 'empty',
 }
 
 export interface TableMetaRowData {

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ArrowUp, ArrowDown } from 'phosphor-svelte';
-  import { type TableHeaderItemData, SortDirection } from '$models';
+  import {  type TableHeaderItemData, TableHeaderItemType,  SortDirection } from '$models';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
@@ -11,6 +11,10 @@
   export { className as class };
 </script>
 
+
+{#if data.type === TableHeaderItemType.Empty}
+  <th class={cn('', className)} role="columnheader" scope="col"/>
+{:else}
 <th class={cn('', className)} role="columnheader" scope="col">
   <div class="flex items-center py-2 px-4 font-sans text-lg font-light text-black dark:text-white ">
     {data.label}
@@ -37,3 +41,4 @@
     {/if}
   </div>
 </th>
+{/if}
