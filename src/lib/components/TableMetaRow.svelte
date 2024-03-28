@@ -124,7 +124,7 @@
 
 <!-- expanded row -->
 {#if isExpanded && data.indicators && data.indicators.length > 0}
-  <tr class="bg-black border-b-2 border-gray3">
+  <tr class="bg-black border-b-[1px] border-gray3">
     <td colSpan={3}>
       {#each data.indicators as entry}
         {#if entry.tier}
@@ -138,7 +138,7 @@
                   {#each entry.data as indicator}
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
-                        <div class="block flex items-center">
+                        <div class="flex items-center">
                           <H4 class="pr-2">{indicator.type}</H4>
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
@@ -169,7 +169,7 @@
                   {#each entry.data as indicator}
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
-                        <div>
+                        <div class="flex items-center">
                           <H4 class="pr-2">{indicator.type}</H4>
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
@@ -198,7 +198,7 @@
                   {#each entry.data as indicator}
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
-                        <div>
+                        <div class="flex items-center">
                           <H4 class="pr-2">{indicator.type}</H4>
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
