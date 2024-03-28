@@ -12,7 +12,7 @@
 </script>
 
 <th class={cn('', className)} role="columnheader" scope="col">
-  <div class="flex items-center pr-4 font-sans text-lg font-light text-black dark:text-white">
+  <div class="flex items-center py-2 px-4 font-sans text-lg font-light text-black dark:text-white ">
     {data.label}
     <button
       aria-label="sort by column"

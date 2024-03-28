@@ -119,7 +119,7 @@
         >
       {/if}
     </div>
-    <div class="flex h-full w-full">
+    <div class="flexi w-full">
       {#if tableData}
         <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />
       {:else}

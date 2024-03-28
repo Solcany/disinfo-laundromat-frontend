@@ -24,9 +24,12 @@
   }
 </script>
 
-<tr class="w-full">
+<tr 
+  on:click={handleClick}
+  aria-label="click to expand row"
+  class="w-full border-gray3 border-b-[1px] hover:bg-black {isExpanded? 'hover:cursor-n-resize' : 'hover:cursor-s-resize' }">
   <!-- the domain column -->
-  <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
+  <td class="pl-4 py-6 text-sm text-black dark:text-white">
     {#if data.domain}
       <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
       {#if data.domainAssociations && data.domainAssociations.length > 0}
@@ -41,7 +44,7 @@
   </td>
 
   <!-- the indicator sums column -->
-  <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
+  <td class="text-sm text-black dark:text-white">
     {#if data.indicators_summary}
       {@const rxy = 2}
       {@const h = 7}
@@ -104,28 +107,24 @@
   </td>
 
   <td class="align-middle">
-    <button
-      on:click={handleClick}
-      aria-label="expand row"
-      class="align-center flex items-center px-3"
-    >
-      {#if isExpanded}
-        <span class="shrink-0">
-          <CaretDown class="fill-black dark:fill-white" weight="bold" size={20} />
-        </span>
-      {:else}
-        <span class="shrink-0"
-          ><CaretUp class="fill-black dark:fill-white" weight="bold" size={20} /></span
-        >
-      {/if}
-    </button>
+    <div class="w-full pr-3 flex justify-end">
+        {#if isExpanded}
+          <span class="shrink-0">
+            <CaretUp class="fill-black dark:fill-white" weight="bold" size={20} />
+          </span>
+        {:else}
+          <span class="shrink-0"
+            ><CaretDown class="fill-black dark:fill-white" weight="bold" size={20} /></span
+          >
+        {/if}
+      </div>
   </td>
   <td></td>
 </tr>
 
 <!-- expanded row -->
 {#if isExpanded && data.indicators && data.indicators.length > 0}
-  <tr class="border-b-2 border-gray3">
+  <tr class="bg-black border-b-2 border-gray3">
     <td colSpan={3}>
       {#each data.indicators as entry}
         {#if entry.tier}

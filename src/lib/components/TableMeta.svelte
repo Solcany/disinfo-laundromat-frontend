@@ -225,11 +225,11 @@
     <!-- WIP: should col width be hardcoded? -->
     <!-- should this be somehow set dynamically -->
     <colgroup>
-      <col style="width: 52.5%" />
-      <col style="width: 52.5%" />
-      <col style="width: 5%" />
+      <col style="width: 30" />
+      <col style="width: 30%" />
+      <col style="width: 40%" />
     </colgroup>
-    <thead class="sticky top-0 dark:bg-gray7">
+    <thead class="sticky top-0 dark:bg-gray7 border-b-[1px] border-gray3">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}
