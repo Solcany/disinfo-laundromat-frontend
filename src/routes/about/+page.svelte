@@ -1,8 +1,8 @@
 <script lang="ts">
-  import H1 from "$components/h1.svelte";
-  import H2 from "$components/h2.svelte";
-  import H3 from "$components/h3.svelte";
-  import H4 from "$components/h4.svelte";
+  import H1 from "$components/H1.svelte";
+  import H2 from "$components/H2.svelte";
+  import H3 from "$components/H3.svelte";
+  import H4 from "$components/H4.svelte";
   import P from "$components/P.svelte";
   import LI from "$components/LI.svelte";
 </script>
