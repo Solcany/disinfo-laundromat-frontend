@@ -1,10 +1,10 @@
 <script lang="ts">
-  import H1 from '$components/h1.svelte';
-  import H2 from '$components/h2.svelte';
-  import H3 from '$components/h3.svelte';
-  import H4 from '$components/h4.svelte';
-  import P from '$components/p.svelte';
-  import LI from '$components/li.svelte';
+  import H1 from "$components/h1.svelte";
+  import H2 from "$components/h2.svelte";
+  import H3 from "$components/h3.svelte";
+  import H4 from "$components/h4.svelte";
+  import P from "$components/P.svelte";
+  import LI from "$components/LI.svelte";
 </script>
 
 <div class="container mt-5">
@@ -94,9 +94,9 @@
       <P>
         Tier 1 indicators: <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a
         >
-        are typically unique or highly indicative of the provenance of a website. This includes unique
-        IDs for verification purposes and web services like Google, Yandex, etc as well as site metadata
-        like WHOIS information and certification,
+        are typically unique or highly indicative of the provenance of a website. This includes
+        unique IDs for verification purposes and web services like Google, Yandex, etc as well as
+        site metadata like WHOIS information and certification,
         <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a>, as DDOS
         protection services like Cloudflare and shared hosting services like Bluehost can provide
         spurious matches.

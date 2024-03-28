@@ -1,10 +1,10 @@
 <script lang="ts">
-  import H1 from '$components/h1.svelte';
-  import H2 from '$components/h2.svelte';
-  import H3 from '$components/h3.svelte';
-  import H4 from '$components/h4.svelte';
-  import P from '$components/p.svelte';
-  import LI from '$components/li.svelte';
+  import H1 from '$components/H1.svelte';
+  import H2 from '$components/H2.svelte';
+  import H3 from '$components/H3.svelte';
+  import H4 from '$components/H4.svelte';
+  import P from '$components/P.svelte';
+  import LI from '$components/LI.svelte';
 </script>
 
 <H2 id="full-indicators-list-">Full Indicators List:</H2>
@@ -16,28 +16,28 @@
       an encrypted connection.
       <em
         >A shared certificate between two sites is strong evidence of a link between sites, as
-      typically a certificate must be issued for all those sites at once by a single entity and
-      cannot easily be spoofed. However, some web hosting and DDOS protection services bundle
-      certificates for unrelated sites, so carefully research any matches.</em
-    >
-  </P>
-</LI>
-<LI>
-  <P>
-    <strong>1-crypto-wallet - Cryptocurrency Wallet</strong>: A digital wallet used to store,
-    send, and receive cryptocurrencies like Bitcoin and Ethereum.
-    <em
-      >The presence of a cryptocurrency wallet address can link a site or an individual to
-      cryptocurrency transactions, potentially indicating financial sources or preferences.
-      However, due to the pseudonymous nature of such wallets, additional information is required
-      to definitively establish ownership or connections.</em
-    >
-  </P>
-</LI>
-<LI>
-  <P>
-    <strong>1-domain - Domain Name</strong>: The unique name that identifies a website, which is
-    registered in the Domain Name System (DNS).
+        typically a certificate must be issued for all those sites at once by a single entity and
+        cannot easily be spoofed. However, some web hosting and DDOS protection services bundle
+        certificates for unrelated sites, so carefully research any matches.</em
+      >
+    </P>
+  </LI>
+  <LI>
+    <P>
+      <strong>1-crypto-wallet - Cryptocurrency Wallet</strong>: A digital wallet used to store,
+      send, and receive cryptocurrencies like Bitcoin and Ethereum.
+      <em
+        >The presence of a cryptocurrency wallet address can link a site or an individual to
+        cryptocurrency transactions, potentially indicating financial sources or preferences.
+        However, due to the pseudonymous nature of such wallets, additional information is required
+        to definitively establish ownership or connections.</em
+      >
+    </P>
+  </LI>
+  <LI>
+    <P>
+      <strong>1-domain - Domain Name</strong>: The unique name that identifies a website, which is
+      registered in the Domain Name System (DNS).
       <em
         >The domain name can provide insights into the nature or origin of a website. Commonalities
         in domain names may suggest shared affiliations or intents. However, the ease of registering

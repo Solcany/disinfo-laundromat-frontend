@@ -5,6 +5,8 @@
   import Label from '$components/Label.svelte';
   import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
+  import H3 from '$components/H3.svelte';
+  import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
   import {
     Endpoint,
@@ -165,6 +167,60 @@
           online and substantiate instances of content plagiarism. See how to use the Laundromat for
           proving gaps in editorial transparency. Read the guide.
         </P>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="flex flex-col md:flex-row">
+  <div>
+    <H3></H3>
+    <ul>
+      <li>
+        <a href="https://gulbenkian.pt/emifund/" rel="nofollow">
+          <img
+            src="https://camo.githubusercontent.com/4644af047750ba3f45a2f3efcf9f746857215547882628e6e2a34ca806cc72ac/68747470733a2f2f7365637572696e6764656d6f63726163792e676d6675732e6f72672f77702d636f6e74656e742f75706c6f6164732f323032342f30322f454d49465f486f72697a6f6e74616c5f6c6f676f5f426c61636b2e706e67"
+            alt="MJRC Logo"
+            height="256"
+            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/02/EMIF_Horizontal_logo_Black.png"
+            style="width: 100%;height:auto"
+          />
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <H3></H3>
+    <ul>
+      <li>
+        <a href="https://securingdemocracy.gmfus.org/" rel="nofollow">
+          <img
+            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2023/05/ASD-Logo.png"
+            alt="ASD Logo"
+            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ASD_Logo_Black.png"
+            style="width: 100%;height:auto"
+          />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.isdglobal.org/" rel="nofollow">
+          <img
+            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/ISD-logo-ISD-Red.png"
+            alt="ISD Logo"
+            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ISD_Logo_Black.png"
+            style="width: 100%;height:auto"
+          />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.uva.nl/en" rel="nofollow">
+          <img
+            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/uva-logo-uvamerken_eng-1406x236-300dpi.png"
+            alt="UvA Logo"
+            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/UvA_Logo_Black.png"
+            style="width: 100%;height:auto"
+          />
+        </a>
       </li>
     </ul>
   </div>
