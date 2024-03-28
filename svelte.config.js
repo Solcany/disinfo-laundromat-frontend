@@ -17,6 +17,7 @@ const config = {
     alias: {
       $components: 'src/lib/components',
       $api: 'src/lib/api.ts',
+      $form: 'src/lib/form.ts',
       $utils: 'src/lib/utils.ts',
       $models: 'src/lib/models.ts',
       $config: 'src/lib/config.ts',

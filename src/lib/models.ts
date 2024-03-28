@@ -178,6 +178,12 @@ export enum Endpoint {
   Content = 'content-search'
 }
 
+export type ApiQuery = {
+   type: QueryType;
+   endpoint: Endpoint;
+   route?: string;
+
+}
 interface InputTextConfig {
   type: InputType.Text;
   name: string;
@@ -185,10 +191,7 @@ interface InputTextConfig {
   placeholder: string;
   required: boolean;
   value?: string;
-  submitQuery?: {
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  submitQuery?: ApiQuery
   tooltip?: string;
 }
 
@@ -199,10 +202,7 @@ interface InputTextAreaConfig {
   placeholder: string;
   required: boolean;
   value?: string;
-  submitQuery?: {
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  submitQuery?: ApiQuery;
   tooltip?: string;
 }
 
@@ -215,10 +215,7 @@ interface InputDropdownConfig {
   data: undefined | LabeledValue[];
   requiresRemoteData?: RemoteConfigFlag;
   value?: LabeledValue;
-  submitQuery?: {
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  submitQuery?: ApiQuery;
   tooltip?: string;
 }
 
@@ -229,10 +226,7 @@ interface InputCheckboxConfig {
   required: boolean;
   checked: boolean;
   value: string;
-  submitQuery?: {
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  submitQuery?: ApiQuery; 
   tooltip?: string;
 }
 
@@ -247,10 +241,7 @@ interface InputCheckboxGroupConfig {
   requiresRemoteData?: RemoteConfigFlag;
   variant?: 'horizontal' | 'vertical';
   value?: LabeledValue;
-  submitQuery?: {
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  submitQuery?: ApiQuery;
   tooltip?: string;
 }
 
@@ -259,12 +250,9 @@ interface InputHiddenConfig {
   name: string;
   requiresRemoteData?: RemoteConfigFlag;
   value?: string | number | boolean;
-  submitQuery?: {
-    // WIP this should be removed for the hidden config
-    // but for some reason TS complains about its absence in the Form comp
-    type: QueryType;
-    endpoint: Endpoint;
-  };
+  // WIP this should be removed for the this type
+  // but for some reason TS complains about its absence in the Form comp 
+  submitQuery?: ApiQuery; 
 }
 
 export type InputConfig =

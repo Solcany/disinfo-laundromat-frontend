@@ -10,49 +10,11 @@
   import P from '$components/P.svelte';
   import H4 from'$components/H4.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
-  import { QueryType, Endpoint, type ApiContentData, type ApiResponse } from '$models';
-  import { queryApi } from '$api';
-  import { loadingStore } from '$stores/loading.ts';
+  import {handleApiSubmit } from '$form';
   import { contentStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
-  import { onMount } from 'svelte';
   export let data;
   let contentFormData = $contentFormDataStore;
-
-  async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
-    event.preventDefault();
-    loadingStore.set(true);
-    const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
-
-    if (
-      (query.endpoint === Endpoint.ParseUrl || query.endpoint === Endpoint.Content) &&
-      !formData.has('combineOperator')
-    ) {
-      formData.set('combineOperator', 'OR');
-    }
-
-    console.log(formData);
-    let response: ApiResponse<ApiContentData> = await queryApi(
-      query.type,
-      query.endpoint,
-      formData
-    );
-
-    console.log(response);
-    if (response.error) {
-      console.log(response.error);
-    } else {
-      if (response.data) {
-        contentStore.set(response.data);
-        loadingStore.set(false);
-      } else {
-        // WIP: this needs to be handled better!
-        loadingStore.set(false);
-      }
-    }
-  }
-
   // wip: is this reactive binding necessary?
   $: formConfig = data.contentAdvancedFormConfig;
 </script>
@@ -60,7 +22,7 @@
 <div class="grid w-full flex-grow grid-cols-1  bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
-      <Form config={formConfig} formData={contentFormData} onSubmit={handleSubmit} />
+      <Form config={formConfig} formData={contentFormData} onSubmit={handleApiSubmit} />
     {/if}
 
     <!--

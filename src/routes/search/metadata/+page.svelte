@@ -8,52 +8,14 @@
   import TableMeta from '$components/TableMeta.svelte';
   import H4 from '$components/H4.svelte';
   import Link from '$components/Link.svelte';
-  import { onMount } from 'svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import {
-    Endpoint,
-    QueryType,
-    FormOrientation,
-    type ApiResponse,
-    type ApiFingerprintData,
-    type TableFingerprintData,
-    type ApiIndicatorsData
-  } from '$models';
-  import { queryApi } from '$api';
-  import { loadingStore } from '$stores/loading.ts';
+  import { FormOrientation } from '$models';
+  import { handleApiSubmit } from '$form';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
-
   let metadataFormData = $metadataFormDataStore;
 
   export let data;
-
-  async function handleSubmit(event: Event, query: { type: QueryType; endpoint: Endpoint }) {
-    event.preventDefault();
-    loadingStore.set(true);
-    const target = event.target as HTMLFormElement;
-    const formData = new FormData(target);
-
-    if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
-      formData.set('run_urlscan', '0');
-    }
-
-    let response: ApiResponse<ApiFingerprintData> = await queryApi(
-      query.type,
-      query.endpoint,
-      formData
-    );
-
-    if (response.error) {
-      console.log(response.error);
-    } else {
-      if (response.data) {
-        console.log(response.data);
-        metadataStore.set(response.data as ApiFingerprintData);
-        loadingStore.set(false);
-      }
-    }
-  }
 
   $: tableData = $metadataStore
     ? {
@@ -69,7 +31,7 @@
     {#if data.metadataAdvancedFormConfig}
       <Form
         config={data.metadataAdvancedFormConfig}
-        onSubmit={handleSubmit}
+        onSubmit={handleApiSubmit}
         orientation={FormOrientation.Vertical}
       />
     {/if}

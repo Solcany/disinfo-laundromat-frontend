@@ -46,7 +46,8 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Content
+      endpoint: Endpoint.Content,
+      route: '/search/content/',
     }
   },
   {
@@ -211,7 +212,8 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Fingerprint
+      endpoint: Endpoint.Fingerprint,
+      route: '/search/metadata/',
     }
   },
   {

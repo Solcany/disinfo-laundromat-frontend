@@ -17,6 +17,7 @@
     type ApiFingerprintData
   } from '$models';
   import { queryApi } from '$api';
+  import { handleApiSubmit } from '$form';
   import { contentFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
@@ -33,16 +34,11 @@
     } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
       formData.set('run_urlscan', '0');
     }
-
-    console.log(formData);
-
     const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
       query.type,
       query.endpoint,
       formData
     );
-
-    console.log(response);
     if (response.error) {
     } else {
       if (response.data) {
@@ -60,6 +56,7 @@
       }
     }
   }
+
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
 </script>
@@ -118,7 +115,7 @@
           {#if metadataBasicFormConfig}
             <Form
               config={metadataBasicFormConfig}
-              onSubmit={handleSubmit}
+              onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
           {/if}
