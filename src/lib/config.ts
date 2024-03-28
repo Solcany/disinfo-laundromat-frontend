@@ -88,7 +88,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     type: InputType.TextArea,
     name: 'contentToSearch',
     label: 'Content',
-    placeholder: 'Enter a website URL or snippet of text',
+    placeholder: 'Enter an article URL or snippet of text',
     required: false,
     submitQuery: {
       type: QueryType.Post,
@@ -207,8 +207,8 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
-    label: 'URL',
-    placeholder: 'Add url',
+    label: 'Domain URL',
+    placeholder: 'Add domain url',
     required: true,
     submitQuery: {
       type: QueryType.Post,
@@ -227,8 +227,8 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
-    label: 'URL',
-    placeholder: 'Add url',
+    label: 'Domain URL',
+    placeholder: 'Add domain url',
     required: true,
     submitQuery: {
       type: QueryType.Post,
@@ -242,6 +242,6 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     value: '1',
     required: true,
     checked: false,
-    tooltip: 'what is rulscan'
+    tooltip: 'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
   }
 ];
