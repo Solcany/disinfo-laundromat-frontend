@@ -109,17 +109,11 @@
         </C.Content>
         <C.Content value="technical similarity">
           <P>
-            Analysing technical relationships of a website with media websites in the corpus,
-            including eg. state run media, fake news websites and Wikidata's list of news websites.
-            For a full list see here.
-            <br />
-            <br />
-            Potential use-cases include: understand sister sites, discover ad networks or analyse DNS
-            ban circumvention practices.
-            <br />
-            <br />
-            Enter a URL, the Laundromat will look for similarities with other entries in the database
-            based on metadata overlap.
+
+          Enter a website URL to analyse metadata similarity with a variety of media outlets, including both trusted, dubious and known disinformation news sources.
+          <br><br/>
+
+          This tool is particularly helpful to detect affiliate networks, sister sites, advertising collaborations, or DNS ban circumvention practices.
           </P>
           {#if metadataBasicFormConfig}
             <Form
@@ -137,35 +131,19 @@
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
         <P>
-          Researchers from two European Universities, supported by the Alliance for Securing
-          Democracy, reveal evidence of a small network operating in Poland and Germany that
-          launders Russian state media content into the media mainstream. A sample of articles from
-          problematic outlets, criticizing Ukraine President Zelensky was run through the
-          Laundromat’s Content Search. The tool revealed that all the articles in the sample were
-          lifted from Ria Novosti, an outlet belonging to the Russia Segodnya group. Read the
-          report.
-        </P>
+          Researchers from two European Universities, supported by the Alliance for Securing Democracy, reveal evidence of a small network operating in Poland and Germany that launders Russian state media content into mainstream media. A sample of articles from problematic outlets, criticizing Ukrainian President Zelensky, was run through the Laundromat’s content search. The tool revealed that all the articles in the sample were lifted from Ria Novosti, an outlet belonging to the Russian? Segodnya group. Read the repor
+          </P>
       </li>
       <li class="pt-6 md:pt-0">
         <H2 class="pb-4">Find proxy websites that exist to overcome DNS bans</H2>
         <P>
-          Both Russia Today and Sputnik News sites are currently subjected to DNS bans imposed by
-          the European Commission. However, despite these restrictions, each site employf
-          sophisticated techniques to reach audiences in Member Countries. Read the report to learn
-          how researchers were able to utilize the Laundromat's website fingerprinting service to
-          map the entire network of Russia Today proxy websites, using altered or entirely new
-          domain names.
+        Both Russia Today and Sputnik News are currently subjected to DNS bans imposed by the European Commission. However, despite these restrictions, each site employs sophisticated techniques to reach audiences in EU member countries. Read the report to learn how researchers were able to utilize the Laundromat's website fingerprinting service to map the entire network of Russia Today proxy websites, using altered or entirely new domain names.
         </P>
       </li>
       <li class="pt-6 md:pt-0">
         <H2 class="pb-4">Tell if a site produces original content</H2>
         <P>
-          Content laundering occurs when individuals or entities replicate website content without
-          proper attribution and, in some cases, authorization. This method is commonly employed by
-          disinformation operatives to disseminate problematic content and political propaganda
-          efficiently. The Laundromat tool serves as an effective means to detect duplicate content
-          online and substantiate instances of content plagiarism. See how to use the Laundromat for
-          proving gaps in editorial transparency. Read the guide.
+        Content laundering occurs when individuals or entities replicate website content without proper attribution and, in some cases, authorization. This method is commonly employed by disinformation operatives to disseminate problematic content and political propaganda. The Laundromat tool serves as an effective means to detect duplicate content online and substantiate instances of content plagiarism. See how to use the Laundromat to prove gaps in editorial transparency. Read the guide.
         </P>
       </li>
     </ul>

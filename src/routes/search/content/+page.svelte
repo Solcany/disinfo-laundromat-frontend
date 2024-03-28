@@ -7,6 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
+  import P from '$components/P.svelte';
   import H4 from'$components/H4.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
   import { QueryType, Endpoint, type ApiContentData, type ApiResponse } from '$models';
