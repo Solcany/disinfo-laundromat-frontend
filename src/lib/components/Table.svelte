@@ -17,7 +17,7 @@
   export let data: ApiContentData;
   export let caption: string;
   let className: string | undefined = undefined;
-  export {className as class}
+  export { className as class };
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
   let rows: TableRowData[] = [];
@@ -102,7 +102,7 @@
   }
 </script>
 
-<div class={cn('',  className)}>
+<div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>

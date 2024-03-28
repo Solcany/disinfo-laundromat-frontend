@@ -114,7 +114,7 @@ export enum TableHeaderItemType {
   Number = 'number',
   String = 'string',
   IndicatorsSummary = 'IndicatorsSummary',
-  Empty = 'empty',
+  Empty = 'empty'
 }
 
 export interface TableMetaRowData {
@@ -179,11 +179,10 @@ export enum Endpoint {
 }
 
 export type ApiQuery = {
-   type: QueryType;
-   endpoint: Endpoint;
-   route?: string;
-
-}
+  type: QueryType;
+  endpoint: Endpoint;
+  route?: string;
+};
 interface InputTextConfig {
   type: InputType.Text;
   name: string;
@@ -191,7 +190,7 @@ interface InputTextConfig {
   placeholder: string;
   required: boolean;
   value?: string;
-  submitQuery?: ApiQuery
+  submitQuery?: ApiQuery;
   tooltip?: string;
 }
 
@@ -226,7 +225,7 @@ interface InputCheckboxConfig {
   required: boolean;
   checked: boolean;
   value: string;
-  submitQuery?: ApiQuery; 
+  submitQuery?: ApiQuery;
   tooltip?: string;
 }
 
@@ -251,8 +250,8 @@ interface InputHiddenConfig {
   requiresRemoteData?: RemoteConfigFlag;
   value?: string | number | boolean;
   // WIP this should be removed for the this type
-  // but for some reason TS complains about its absence in the Form comp 
-  submitQuery?: ApiQuery; 
+  // but for some reason TS complains about its absence in the Form comp
+  submitQuery?: ApiQuery;
 }
 
 export type InputConfig =

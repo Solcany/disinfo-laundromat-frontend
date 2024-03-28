@@ -16,7 +16,7 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Indicators', key: 'indicators_summary', type: TableHeaderItemType.IndicatorsSummary },
 
-  { label: '', key: '', type: TableHeaderItemType.Empty}
+  { label: '', key: '', type: TableHeaderItemType.Empty }
 ];
 
 export const UI_NAV: NavItemData[] = [
@@ -47,7 +47,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Content,
-      route: '/search/content/',
+      route: '/search/content/'
     }
   },
   {
@@ -214,7 +214,7 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Fingerprint,
-      route: '/search/metadata/',
+      route: '/search/metadata/'
     }
   },
   {
@@ -243,6 +243,7 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     value: '1',
     required: true,
     checked: false,
-    tooltip: 'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
+    tooltip:
+      'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
   }
 ];

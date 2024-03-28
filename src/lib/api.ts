@@ -50,7 +50,3 @@ export async function queryApi<T>(
     return { error: 'Network error', status: 500 };
   }
 }
-
-
-
-
