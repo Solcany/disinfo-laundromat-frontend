@@ -112,15 +112,6 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   // },
   {
     type: InputType.Dropdown,
-    name: 'country',
-    label: 'Region of search engines',
-    placeholder: 'Select region',
-    required: true,
-    data: undefined,
-    requiresRemoteData: RemoteConfigFlag.Countries
-  },
-  {
-    type: InputType.Dropdown,
     name: 'language',
     label: 'Language of search results',
     placeholder: 'Select Language',
@@ -128,6 +119,16 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     data: undefined,
     requiresRemoteData: RemoteConfigFlag.Languages
   },
+  {
+    type: InputType.Dropdown,
+    name: 'country',
+    label: 'Region of search engines',
+    placeholder: 'Select region',
+    required: true,
+    data: undefined,
+    requiresRemoteData: RemoteConfigFlag.Countries
+  },
+
   {
     type: InputType.CheckboxGroup,
     name: 'search_engines',
