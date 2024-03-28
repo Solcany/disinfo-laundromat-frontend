@@ -124,9 +124,9 @@
           data={item.data}
           checked={formData?.has(item.name)
             ? formData.getAll(item.name).map((v) => String(v))
-            : item.checked 
+            : item.checked
               ? item.checked
-              :  [] }
+              : []}
           {orientation}
         />
       </div>

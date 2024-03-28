@@ -63,7 +63,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     variant: 'horizontal',
     required: true,
     data: undefined,
-    checked: ["google"],
+    checked: ['google'],
     requiresRemoteData: RemoteConfigFlag.Engines
   },
   {
@@ -132,7 +132,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     variant: 'horizontal',
     required: true,
     data: undefined,
-    checked: ["google"],
+    checked: ['google'],
     requiresRemoteData: RemoteConfigFlag.Engines
   },
   {

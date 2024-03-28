@@ -6,7 +6,7 @@
   import Button from '$components/Button.svelte';
   import Form from '$components/Form.svelte';
   import TableMeta from '$components/TableMeta.svelte';
-  import H4 from'$components/H4.svelte';
+  import H4 from '$components/H4.svelte';
   import Link from '$components/Link.svelte';
   import { onMount } from 'svelte';
   import { TABLE_METADATA_HEADER } from '$config';
@@ -55,22 +55,26 @@
     }
   }
 
-
-  $: tableData = $metadataStore ? {
-    indicators: $metadataStore.indicators,
-    matches: $metadataStore.matches,
-    indicator_metadata: $metadataStore.indicator_metadata
-  } : null;
-
+  $: tableData = $metadataStore
+    ? {
+        indicators: $metadataStore.indicators,
+        matches: $metadataStore.matches,
+        indicator_metadata: $metadataStore.indicator_metadata
+      }
+    : null;
 </script>
 
-<div class="flex-grow grid w-full grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
-  <section class="col-span-3 w-full px-3 bg-gray7 border-r-[1px] border-gray5">
+<div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
+  <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if data.metadataAdvancedFormConfig}
-      <Form config={data.metadataAdvancedFormConfig} onSubmit={handleSubmit} orientation={FormOrientation.Vertical} />
+      <Form
+        config={data.metadataAdvancedFormConfig}
+        onSubmit={handleSubmit}
+        orientation={FormOrientation.Vertical}
+      />
     {/if}
   </section>
-    <!--
+  <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>
@@ -109,16 +113,17 @@
 
   <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
     <div>
-      {#if metadataFormData?.has("url")}
+      {#if metadataFormData?.has('url')}
         <span class="block py-2 text-xs dark:text-white">
-              Results for: {metadataFormData.get('contentToSearch')}</span>
+          Results for: {metadataFormData.get('contentToSearch')}</span
+        >
       {/if}
     </div>
-    <div class="flex w-full h-full">
+    <div class="flex h-full w-full">
       {#if tableData}
         <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />
       {:else}
-        <div class="flex-1 flex items-center justify-center fence-pattern">
+        <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>
         </div>
       {/if}

@@ -7,6 +7,7 @@
     activePath = $page.route.id;
   }
 </script>
+
 <!--
 data-[state=active]:shadow-mini h-10 flex-1 border-b-[1px] border-r-[1px] border-gray5 py-2 last:border-r-0 data-[state=active]:border-b-0 data-[state=active]:bg-gray7 dark:bg-gray6 dark:text-gray2 data-[state=active]:dark:text-white
 -->
@@ -14,11 +15,11 @@ data-[state=active]:shadow-mini h-10 flex-1 border-b-[1px] border-r-[1px] border
   <ul class="col-span-3 flex w-full">
     {#each UI_SEARCH_NAV as { label, path }}
       <li
-        class="{activePath === path 
-          ? 'dark:text-white dark:bg-gray7' 
-          : 'dark:text-white border-b-[1px]'
-          } 
-          flex justify-center py-2 flex-1 font-light first:rounded-tl-input last:rounded-tr-input border-t-[1px] border-r-[1px] border-gray5">
+        class="{activePath === path
+          ? 'dark:bg-gray7 dark:text-white'
+          : 'border-b-[1px] dark:text-white'} 
+          flex flex-1 justify-center border-r-[1px] border-t-[1px] border-gray5 py-2 font-light first:rounded-tl-input last:rounded-tr-input"
+      >
         <a href={path}>{label}</a>
       </li>
     {/each}
