@@ -27,7 +27,7 @@
 <tr 
   on:click={handleClick}
   aria-label="click to expand row"
-  class="w-full border-gray3 border-b-[1px] hover:bg-black {isExpanded? 'hover:cursor-n-resize' : 'hover:cursor-s-resize' }">
+  class="w-full border-gray3 hover:bg-black {isExpanded? 'hover:cursor-n-resize border-b-0' : 'hover:cursor-s-resize border-b-[1px]' }">
   <!-- the domain column -->
   <td class="pl-4 py-6 text-sm text-black dark:text-white">
     {#if data.domain}
@@ -68,7 +68,7 @@
         {/if}
 
         {#if data.indicators_summary.tier2}
-          <div class="relative my-1 block">
+          <div class="relative z-0 my-1 block">
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier2}

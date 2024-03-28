@@ -7,7 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
-  import H4 from '$components/H4.svelte';
+  import H4 from'$components/H4.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
   import { QueryType, Endpoint, type ApiContentData, type ApiResponse } from '$models';
   import { queryApi } from '$api';
@@ -56,7 +56,7 @@
   $: formConfig = data.contentAdvancedFormConfig;
 </script>
 
-<div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
+<div class="grid w-full flex-grow grid-cols-1  bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
       <Form config={formConfig} formData={contentFormData} onSubmit={handleSubmit} />
@@ -101,21 +101,22 @@
     -->
   </section>
   <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
-    {#if contentFormData?.has('contentToSearch')}
-      <div>
+
+    {#if contentFormData?.has("contentToSearch")}
+    <div>
         <span class="block py-2 text-xs dark:text-white">
-          Results for: {contentFormData.get('contentToSearch')}</span
-        >
-      </div>
+              Results for: {contentFormData.get('contentToSearch')}</span>
+    </div>
     {/if}
-    <div class="flex h-full w-full">
+    <div class="flex w-full h-full">
       {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
-        <Table caption="" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
+        <Table caption="" class="flex-1" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
       {:else}
-        <div class="fence-pattern flex flex-1 items-center justify-center">
+        <div class="flex-1 flex items-center justify-center fence-pattern">
           <H4>No data</H4>
         </div>
       {/if}
     </div>
   </section>
 </div>
+

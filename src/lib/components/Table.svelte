@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
-  import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
+  import { cn, includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
   import {
     SortDirection,
     type ApiContentData,
@@ -16,6 +16,8 @@
   export let headerData: TableHeaderItemData[];
   export let data: ApiContentData;
   export let caption: string;
+  let className: string | undefined = undefined;
+  export {className as class}
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
   let rows: TableRowData[] = [];
@@ -100,7 +102,7 @@
   }
 </script>
 
-<div>
+<div class={cn('',  className)}>
   <table class="w-full max-w-full border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>

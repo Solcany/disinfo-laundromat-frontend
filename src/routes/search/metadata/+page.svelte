@@ -119,9 +119,9 @@
         >
       {/if}
     </div>
-    <div class="flexi w-full">
+    <div class="flex h-full w-full">
       {#if tableData}
-        <TableMeta caption="" data={tableData} headerData={TABLE_METADATA_HEADER} />
+        <TableMeta caption="" class="flex-1" data={tableData} headerData={TABLE_METADATA_HEADER} />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

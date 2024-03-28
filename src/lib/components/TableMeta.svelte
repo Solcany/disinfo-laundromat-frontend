@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
-  import { includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
+  import { cn } from '$utils';
   import type {
     TableFingerprintData,
     IndicatorData,
@@ -19,6 +19,8 @@
   export let headerData: TableHeaderItemData[];
   export let data: TableFingerprintData;
   export let caption: string;
+  let className: string | undefined = undefined;
+  export {className as class}
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
@@ -219,7 +221,7 @@ function getRows(data: MatchDataItem[]): TableMetaRowData[] {
   }
 </script>
 
-<div>
+<div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>
@@ -231,7 +233,7 @@ function getRows(data: MatchDataItem[]): TableMetaRowData[] {
       <col style="width: 30%" />
       <col style="width: 40%" />
     </colgroup>
-    <thead class="w-full sticky top-0 dark:bg-gray7 border-b-[1px] border-gray3">
+    <thead class="z-50 w-full sticky shadow-xl top-0 dark:bg-gray7 border-b-[1px] border-gray3">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}
