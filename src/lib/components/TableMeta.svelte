@@ -87,44 +87,45 @@
     return result;
   }
 
-  function getRows(data: MatchDataItem[]): TableMetaRowData[] {
-    const grouped: Record<
-      string,
-      {
-        domain: string;
-        indicators: Record<string, { [type: string]: string[] }>;
-        indicators_summary: IndicatorsSummary;
-      }
-    > = {};
+function getRows(data: MatchDataItem[]): TableMetaRowData[] {
+  const grouped: Record<
+    string,
+    {
+      domain: string;
+      indicators: Record<string, { [type: string]: string[] }>;
+      indicators_summary: IndicatorsSummary;
+    }
+  > = {};
 
-    data.forEach(({ domain_name_y, match_type, match_value }) => {
-      const match = match_type.match(/^(\d+)-(.+)$/);
-      if (!match) return;
-      const tier: string = `tier${match[1]}`;
-      const type: string = match[2];
+  data.forEach(({ domain_name_y, match_type, match_value }) => {
+    const match = match_type.match(/^(\d+)-(.+)$/);
+    if (!match) return;
+    const tier: string = `tier${match[1]}`;
+    const type: string = match[2];
 
-      if (!grouped[domain_name_y]) {
-        grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
-      }
+    if (!grouped[domain_name_y]) {
+      grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
+    }
 
-      if (!grouped[domain_name_y].indicators[tier]) {
-        grouped[domain_name_y].indicators[tier] = {};
-        grouped[domain_name_y].indicators_summary[tier] = 0;
-      }
+    if (!grouped[domain_name_y].indicators[tier]) {
+      grouped[domain_name_y].indicators[tier] = {};
+      grouped[domain_name_y].indicators_summary[tier] = 0;
+    }
 
-      if (!grouped[domain_name_y].indicators[tier][type]) {
-        grouped[domain_name_y].indicators[tier][type] = [];
-      }
+    if (!grouped[domain_name_y].indicators[tier][type]) {
+      grouped[domain_name_y].indicators[tier][type] = [];
+    }
 
-      grouped[domain_name_y].indicators[tier][type].push(match_value);
-      grouped[domain_name_y].indicators_summary[tier]++;
-    });
+    grouped[domain_name_y].indicators[tier][type].push(match_value);
+    grouped[domain_name_y].indicators_summary[tier]++;
+  });
 
-    // Transform the grouped data into the final structure expected by the return type.
-    const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
-      const domainGroup = grouped[domainKey];
-      // Convert indicators from the intermediate structure to an array of TieredIndicator.
-      const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators).map((tierKey) => {
+  // Transform the grouped data into the final structure expected by the return type.
+  const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
+    const domainGroup = grouped[domainKey];
+    // Convert indicators from the intermediate structure to an array of TieredIndicator.
+    const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators)
+      .map((tierKey) => {
         const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(
           ([type, values]) => ({
             type,
@@ -135,17 +136,18 @@
           tier: parseInt(tierKey.replace('tier', ''), 10), // Convert the tier string back to a number.
           data
         };
-      });
-      // Return the structured domain data, including the indicators and their summary.
-      return {
-        domain: domainGroup.domain,
-        indicators,
-        indicators_summary: domainGroup.indicators_summary
-      };
-    });
+      })
+      .sort((a, b) => a.tier - b.tier); // Sort indicators by tier.
+    // Return the structured domain data, including the indicators and their summary.
+    return {
+      domain: domainGroup.domain,
+      indicators,
+      indicators_summary: domainGroup.indicators_summary
+    };
+  });
 
-    return rows;
-  }
+  return rows;
+}
 
   function sortRows(
     rows: TableMetaRowData[],
