@@ -29,7 +29,7 @@
 
 <section class="grid grid-rows-2 px-3 md:px-8">
   <div class="pt-5 md:pt-20 grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div class="w-100 flex justify-center py-8 md:py-0">
+    <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1 class="w-full text-4xl md:text-5xl md:w-[500px]">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
@@ -90,7 +90,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="mt-10 md:mt-20">
+  <div class="mt-10 md:mt-32">
     <ul id="use case list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
@@ -135,7 +135,7 @@
     class="flex w-full flex-col px-3 py-6 md:flex-row md:items-center md:justify-center md:px-8 md:py-3"
   >
     <div class="pb-2 md:pb-0 md:pr-12">
-      <H3 class="pb-3 text-center md:text-left dark:text-black">Sponsoring Organizations</H3>
+      <H3 class="py-3 text-center md:text-left dark:text-black">Sponsoring Organizations</H3>
       <ul class="flex flex-col flex-nowrap items-center md:flex-row md:space-x-10">
         <li>
           <a href="https://gulbenkian.pt/emifund/" rel="nofollow">
