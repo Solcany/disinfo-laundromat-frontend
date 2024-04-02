@@ -7,16 +7,12 @@
   import LI from '$components/LI.svelte';
 </script>
 
-<div class="container mt-5">
-  <div class="row about-page">
-    <div class="col">
-      <H1 id="about">About</H1>
-      <P>
-        The purpose of the laundromat, how to use it effectively, and how to interpret the results
-      </P>
-
-      <H2 id="the-laundromat">The Laundromat</H2>
-      <P>
+<div class="w-full px-3 md:px-8">
+  <div class="w-1/3 my-6">
+    <div class="">
+      <H1 class="pb-4" id="about">About</H1>
+      <H2 class="py-4" id="the-laundromat">The Laundromat</H2>
+      <P class="pb-2">
         The laundromat tool provides two functions: Content Similarity Search and Domain Forensics
         Matching:
       </P>
@@ -35,8 +31,8 @@
         </LI>
       </ul>
 
-      <H3 id="the-domain-forensics-comparison-corpus">The Domain Forensics Comparison Corpus</H3>
-      <P>
+      <H3 class="py-4" id="the-domain-forensics-comparison-corpus">The Domain Forensics Comparison Corpus</H3>
+      <P class="pb-2">
         Any URLs entered into the Domain Forensics Matching tool are compared against against a list
         of domains already processed by the tool. This corpus is sourced from a number of sources,
         including:
@@ -74,7 +70,7 @@
         </LI>
       </ul>
 
-      <P>
+      <P class="pb-2">
         Inclusion in the corpus of comparison sites is neither an endorsement nor a criticism of a
         given website&#39;s point of view or their relationship to any other member of the corpus.
         It solely reflects what websites are of interest to OSINT researchers. If you&#39;d like a
@@ -82,16 +78,16 @@
         pbenzoni (at) gmfus.org
       </P>
 
-      <H3 id="about-the-indicator-tier-system-and-interpreting-results">
+      <H3 class="py-4" id="about-the-indicator-tier-system-and-interpreting-results">
         About the Indicator Tier System and Interpreting Results
       </H3>
 
-      <P>
+      <P class="pb-2">
         Each indicator is associated with evidentiary tier and are subject to <a
           href="#Interpreting Indicator Validity">interpretation</a
         >.
       </P>
-      <P>
+      <P class="pb-2">
         Tier 1 indicators: <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a
         >
         are typically unique or highly indicative of the provenance of a website. This includes unique
@@ -101,7 +97,7 @@
         protection services like Cloudflare and shared hosting services like Bluehost can provide
         spurious matches.
       </P>
-      <P>
+      <P class="pb-2">
         Tier 2 indicators: Tier 2 indicators, <a href="#Interpreting Indicator Validity"
           ><strong>WHEN VALID</strong></a
         >, offer a moderate level of certainty regarding the provenance of a website. These are not
@@ -109,22 +105,22 @@
         the same subnet, matching meta tags, and commonalities in standard and custom response
         headers
       </P>
-      <P>
+      <P class="pb-2">
         Tier 3: Tertiary Indicators Tier 3 indicators, <a href="#Interpreting Indicator Validity"
           ><strong>WHEN VALID</strong></a
         >, are the least specific but can still support broader analyses when combined with
         higher-tier indicators. These include shared CSS classes, UUIDs, and Content Management
         Systems
       </P>
-      <H4 id="interpreting-indicator-validity">Interpreting Indicator Validity</H4>
-      <P>
+      <H4 class="py-4" id="interpreting-indicator-validity">Interpreting Indicator Validity</H4>
+      <P class="pb-2">
         Understanding the validity of indicators is crucial in the analysis of websites&#39;
         provenance and connections. Indicators can range from high-confidence markers of direct
         relationships to spurious matches that may mislead investigations. It is essential to
         approach each indicator with a critical eye and corroborate findings with additional
         evidence.
       </P>
-      <P><strong>High Confidence Indicators:</strong></P>
+      <P class="pb-2"><strong>High Confidence Indicators:</strong></P>
       <ul>
         <LI>
           Unique IDs for verification purposes: These are often excellent evidence of a connection
@@ -137,11 +133,11 @@
           issued to and managed by the same entity.
         </LI>
       </ul>
-      <P>
+      <P class="pb-2">
         Discovering two websites with the same unique Google Analytics ID AND a shared, specific SSL
         certificate suggests a high-confidence link, indicating shared management or ownership.
       </P>
-      <P><strong>Spurious Matches:</strong></P>
+      <P class="pb-2"><strong>Spurious Matches:</strong></P>
       <ul>
         <LI>
           Using services like Cloudflare: While Cloudflare and similar DDOS protection services
@@ -155,14 +151,14 @@
           further context.
         </LI>
       </ul>
-      <P>
+      <P class="pb-2">
         Identifying that multiple websites are behind Cloudflare does not inherently indicate a
         connection beyond choosing a common, popular service for performance and security
         enhancements. All tier 1 and 2 indicators should be scrutinized carefully to determine if a
         match is valid or spurious
       </P>
       <h5 id="example-investigation-">Example Investigation:</h5>
-      <P>
+      <P class="pb-2">
         An analyst investigating a network of disinformation websites notices that several sites
         share a specific Facebook Pixel ID, indicating a potential link in their online marketing
         strategies. This Tier 1 indicator suggests a high-confidence connection. However, upon
@@ -175,21 +171,21 @@
         connection between the sites beyond the spurious matches introduced by shared security
         services.
       </P>
-      <P>
+      <P class="pb-2">
         In interpreting indicator validity, analysts must weigh the evidence, seek corroboration,
         and consider the broader context to distinguish between high-confidence connections and
         potentially misleading, spurious matches.
       </P>
-      <H2 id="how-to-use-the-laundromat">How to use the Laundromat</H2>
-      <H3 id="content-similarity-search">Content Similarity Search</H3>
-      <P>
+      <H2 class="py-4" id="how-to-use-the-laundromat">How to use the Laundromat</H2>
+      <H3 class="py-4" id="content-similarity-search">Content Similarity Search</H3>
+      <P class="pb-2">
         Content Similarity Search takes a given title and/or content and uses <a
           href="https://www.gdeltproject.org/">GDELT</a
         >, a variety of search services, and a plagiarism checker to detect urls with some degree of
         similarity of the provided content.
       </P>
-      <H4 id="url-search">URL Search</H4>
-      <P>
+      <H4 class="py-4" id="url-search">URL Search</H4>
+      <P class="pb-2">
         Enter the full URL of an article or webpage (e.g. <a
           href="https://tech.cnn.com/article-title.html">https://tech.cnn.com/article-title.html</a
         >
@@ -198,15 +194,15 @@
           >https://www.rt.com/russia/588284-darkening-prospects-ukraine-postwar/</a
         >) to automatically attempt to extract title and content
       </P>
-      <H4 id="advanced-title-content-search">Advanced (Title/Content) Search</H4>
-      <P>
+      <H4 class="py-4" id="advanced-title-content-search">Advanced (Title/Content) Search</H4>
+      <P class="pb-2">
         This search allows users to specify the title and content (and apply boolean ANDs/ORs to the
         title and content). It also requires specifying a country and language to search in. As not
         all languages and countries are supported by each service, these will default to US and
         English if unsupported. Finally, users may specify which search engines they want to use for
         their search.
       </P>
-      <P>
+      <P class="pb-2">
         This will produce a searchable list of links, their domains, possible associations with
         known lists, the title and snippet, the search engines where that link will be found, and
         the percentage of the title or snippet which matches the provided inputs as determined by
@@ -214,8 +210,8 @@
           >Ratcliff/Obershelp algorithm.</a
         >.
       </P>
-      <H3 id="domain-forensics-matching">Domain Forensics Matching</H3>
-      <P>
+      <H3 class="py-4" id="domain-forensics-matching">Domain Forensics Matching</H3>
+      <P class="pb-2">
         This search, which will accept a list of one or more <a
           href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name"
           >fully qualified domain names.</a
@@ -223,8 +219,8 @@
         and a list of sites which match (or are extremely similart to) those indicators. Indicators,
         and thus matches, are broken into the three tiers described above.
       </P>
-      <H2 id="partners-sponsors-disclaimers">Partners, Sponsors, Disclaimers</H2>
-      <P>
+      <H2 class="py-4" id="partners-sponsors-disclaimers">Partners, Sponsors, Disclaimers</H2>
+      <P class="pb-2">
         The Laundromat Tool is made possible with the support of European Media and Information Fund
         (EMIF).
         <a href="https://gulbenkian.pt/emifund/"
@@ -239,28 +235,28 @@
         the Digital Methods Institute.
       </P>
 
-      <H2 id="disclaimers">Disclaimers</H2>
-      <H3 id="opinions-disclaimer">Opinions Disclaimer</H3>
-      <P>
+      <H2 class="py-4" id="disclaimers">Disclaimers</H2>
+      <H3 class="py-4" id="opinions-disclaimer">Opinions Disclaimer</H3>
+      <P class="pb-2">
         The sole responsibility for any content supported by the European Media and Information Fund
         lies with the author(s) and it may not necessarily reflect the positions of the EMIF and the
         Fund Partners, the Calouste Gulbenkian Foundation and the European University Institute.
       </P>
-      <H3 id="gdpr-disclaimer">GDPR Disclaimer</H3>
-      <P>
+      <H3 class="py-4" id="gdpr-disclaimer">GDPR Disclaimer</H3>
+      <P class="pb-2">
         The Information Laundromat tool is committed to protecting and respecting your privacy in
         compliance with the General Data Protection Regulation (GDPR). This disclaimer outlines the
         nature of the data processing activities conducted by our tool and your rights as a data
         subject.
       </P>
-      <H4 id="data-collection-and-use">Data Collection and Use</H4>
-      <P>
+      <H4 class="py-4" id="data-collection-and-use">Data Collection and Use</H4>
+      <P class="pb-2">
         The Information Laundromat tool collects data through two forms, as part of its functions:
         Content Similarity Search and Domain Forensics Matching.
       </P>
       <ul>
         <LI>
-          <P>
+          <P class="pb-2">
             <strong>Content Similarity Search</strong>: This function processes URLs and text
             snippets provided by the user to detect occurrences of the given text across various
             websites. It is important to note that the provenance of the text and the relationship
@@ -268,7 +264,7 @@
           </P>
         </LI>
         <LI>
-          <P>
+          <P class="pb-2">
             <strong>Domain Forensics Matching</strong>: This function processes a domain URL and
             analyzes aspects of website architecture, design, and usage to identify unique
             indicators. It compares these indicators across websites to find high degrees of
@@ -276,13 +272,13 @@
           </P>
         </LI>
       </ul>
-      <H4 id="purpose-of-processing">Purpose of Processing</H4>
-      <P>
+      <H4 class="py-4" id="purpose-of-processing">Purpose of Processing</H4>
+      <P class="pb-2">
         The form data and results are collected and are solely used for the purpose of usage
         analytics and potential corpus expansion.
       </P>
-      <H4 id="data-subject-rights">Data Subject Rights</H4>
-      <P>
+      <H4 class="py-4" id="data-subject-rights">Data Subject Rights</H4>
+      <P class="pb-2">
         Under GDPR, you have various rights concerning the processing of your personal data,
         including:
       </P>
@@ -295,28 +291,28 @@
         <LI>The right to object to data processing.</LI>
         <LI>The right to lodge a complaint with a supervisory authority.</LI>
       </ul>
-      <P>
+      <P class="pb-2">
         Please note that exercising some of these rights may impact the functionality of the tool in
         relation to your use.
       </P>
-      <H4 id="data-security-and-retention">Data Security and Retention</H4>
-      <P>
+      <H4 class="py-4" id="data-security-and-retention">Data Security and Retention</H4>
+      <P class="pb-2">
         We implement appropriate technical and organizational measures to ensure a level of security
         appropriate to the risk of the data processing activities. Data is retained only for as long
         as necessary for the purposes for which it was collected.
       </P>
-      <H4 id="contact-information">Contact Information</H4>
-      <P>
+      <H4 class="py-4" id="contact-information">Contact Information</H4>
+      <P class="pb-2">
         For any inquiries or requests regarding your data rights, please contact our data protection
         officer at pbenzoni (at) gmfus.org.
       </P>
-      <H4 id="consent">Consent</H4>
-      <P>
+      <H4 class="py-4" id="consent">Consent</H4>
+      <P class="pb-2">
         By using the Information Laundromat tool, you acknowledge that you have read this disclaimer
         and agree to the processing of your data as described herein. If you do not agree with these
         terms, please do not use the tool.
       </P>
-      <P>
+      <P class="pb-2">
         This disclaimer is subject to updates and modifications. Users are encouraged to review it
         periodically.
       </P>
