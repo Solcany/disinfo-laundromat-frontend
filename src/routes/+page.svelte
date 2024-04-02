@@ -28,10 +28,10 @@
 </script>
 
 <section class="grid grid-rows-2 px-3 md:px-8">
-  <div class="pt-5 md:pt-20 grid grid-cols-1 gap-4 md:grid-cols-2">
+  <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
-        <H1 class="w-full text-4xl md:text-5xl md:w-[500px]">
+        <H1 class="w-full text-4xl md:w-[500px] md:text-5xl">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
           online.
         </H1>
@@ -47,7 +47,7 @@
     <div class="flex w-full items-center justify-center">
       <Tabs
         value="content similarity"
-        class="w-full self-start rounded-input lg:min-w-[600px] shadow-xl outline outline-[1px] outline-gray5 md:w-3/4"
+        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-3/4 lg:min-w-[600px]"
         let:C
       >
         <C.List>

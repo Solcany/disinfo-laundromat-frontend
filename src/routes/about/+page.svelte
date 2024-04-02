@@ -5,6 +5,7 @@
   import H4 from '$components/H4.svelte';
   import H5 from '$components/H5.svelte';
   import P from '$components/P.svelte';
+  import Link  from '$components/Link.svelte';
 </script>
 <div class="w-full px-3 md:px-8">
   <div class="w-1/3 my-6">
@@ -16,17 +17,21 @@
         Matching:
       </P>
       <ul class="list-disc list-inside">
-        <li>
+        <li class="inline-block">
+          <P>
           Content Similarity Search attempts to detect URLs where a given text snippet occurs. It
           does not provide evidence of where that text originated or any relationship between two
           entities posting two similar texts. Detemination of a given text&#39;s provenance is
           outside the scope of this tool.
+          </P>
         </li>
-        <li>
+        <li class="inline-block">
+          <P> 
           Domain Forensics Matching attempts to find aspects of a website which indicate what makes
           it unique, give insight into its architecture/design, or show how its used/tracked. These
           indicators are compared for items with high degrees of similarity and matches are provided
           to the user
+          </P>
         </li>
       </ul>
 
@@ -38,29 +43,26 @@
       </P>
       <ul class="list-disc list-inside">
         <li>
-          <a href="https://euvsdisinfo.eu/disinformation-cases/">EU vs Disinfo&#39;s Database</a>
+          <Link href="https://euvsdisinfo.eu/disinformation-cases/">EU vs Disinfo&#39;s Database</Link>
         </li>
         <li>
-          Research from partner and related organizations, such as <a
+          Research from partner and related organizations, such as <Link
             href="https://isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/"
-            >ISD&#39;s report on RT Mirror Sites</a
-          >
+            >ISD&#39;s report on RT Mirror Sites</Link>
         </li>
         <li>
-          Known <a href="https://github.com/ASD-at-GMF/state-media-profiles">state media sites</a>
+          Known <Link href="https://github.com/ASD-at-GMF/state-media-profiles">state media sites</Link>
         </li>
         <li>
-          Lists of <a href="https://iffy.news/pink-slime-fake-local-news/">pink slime sites</a> and
-          <a href="https://www.midwestradionetwork.com/">faux local news sites</a>
+          Lists of <Link href="https://iffy.news/pink-slime-fake-local-news/">pink slime sites</Link> and
+          <Link href="https://www.midwestradionetwork.com/">faux local news sites</Link>
         </li>
         <li>
-          Wikipedia&#39;s list of <a href="https://en.wikipedia.org/wiki/List_of_fake_news_websites"
-            >fake news websites</a
-          >
+          Wikipedia&#39;s list of <Link href="https://en.wikipedia.org/wiki/List_of_fake_news_websites">fake news websites</Link>
           and Wikidata&#39;s
-          <a
+          <Link
             href="https://www.wikidata.org/w/index.php?title=Special:WhatLinksHere/Q17232649&amp;limit=50&amp;dir=next&amp;offset=0%7C3014523"
-            >list of news websites</a
+            >list of news websites</Link
           >
         </li>
         <li>
@@ -82,31 +84,31 @@
       </H3>
 
       <P class="pb-2">
-        Each indicator is associated with evidentiary tier and are subject to <a
-          href="#Interpreting Indicator Validity">interpretation</a
+        Each indicator is associated with evidentiary tier and are subject to <Link
+          href="#Interpreting Indicator Validity">interpretation</Link
         >.
       </P>
       <P class="pb-2">
-        Tier 1 indicators: <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a
+        Tier 1 indicators: <Link href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></Link
         >
         are typically unique or highly indicative of the provenance of a website. This includes unique
         IDs for verification purposes and web services like Google, Yandex, etc as well as site metadata
         like WHOIS information and certification,
-        <a href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></a>, as DDOS
+        <Link href="#Interpreting Indicator Validity"><strong>WHEN VALID</strong></Link>, as DDOS
         protection services like Cloudflare and shared hosting services like Bluehost can provide
         spurious matches.
       </P>
       <P class="pb-2">
-        Tier 2 indicators: Tier 2 indicators, <a href="#Interpreting Indicator Validity"
-          ><strong>WHEN VALID</strong></a
+        Tier 2 indicators: Tier 2 indicators, <Link href="#Interpreting Indicator Validity"
+          ><strong>WHEN VALID</strong></Link
         >, offer a moderate level of certainty regarding the provenance of a website. These are not
         as unique as Tier 1 indicators but provide valuable context. This tier includes IPs within
         the same subnet, matching meta tags, and commonalities in standard and custom response
         headers
       </P>
       <P class="pb-2">
-        Tier 3: Tertiary Indicators Tier 3 indicators, <a href="#Interpreting Indicator Validity"
-          ><strong>WHEN VALID</strong></a
+        Tier 3: Tertiary Indicators Tier 3 indicators, <Link href="#Interpreting Indicator Validity"
+          ><strong>WHEN VALID</strong></Link
         >, are the least specific but can still support broader analyses when combined with
         higher-tier indicators. These include shared CSS classes, UUIDs, and Content Management
         Systems
@@ -178,19 +180,19 @@
       <H2 class="py-4" id="how-to-use-the-laundromat">How to use the Laundromat</H2>
       <H3 class="py-4" id="content-similarity-search">Content Similarity Search</H3>
       <P class="pb-2">
-        Content Similarity Search takes a given title and/or content and uses <a
-          href="https://www.gdeltproject.org/">GDELT</a
+        Content Similarity Search takes a given title and/or content and uses <Link
+          href="https://www.gdeltproject.org/">GDELT</Link
         >, a variety of search services, and a plagiarism checker to detect urls with some degree of
         similarity of the provided content.
       </P>
       <H4 class="py-4" id="url-search">URL Search</H4>
       <P class="pb-2">
-        Enter the full URL of an article or webpage (e.g. <a
-          href="https://tech.cnn.com/article-title.html">https://tech.cnn.com/article-title.html</a
+        Enter the full URL of an article or webpage (e.g. <Link
+          href="https://tech.cnn.com/article-title.html">https://tech.cnn.com/article-title.html</Link
         >
         or
-        <a href="https://www.rt.com/russia/588284-darkening-prospects-ukraine-postwar/"
-          >https://www.rt.com/russia/588284-darkening-prospects-ukraine-postwar/</a
+        <Link href="https://www.rt.com/russia/588284-darkening-prospects-ukraine-postwar/"
+          >https://www.rt.com/russia/588284-darkening-prospects-ukraine-postwar/</Link
         >) to automatically attempt to extract title and content
       </P>
       <H4 class="py-4" id="advanced-title-content-search">Advanced (Title/Content) Search</H4>
@@ -205,15 +207,15 @@
         This will produce a searchable list of links, their domains, possible associations with
         known lists, the title and snippet, the search engines where that link will be found, and
         the percentage of the title or snippet which matches the provided inputs as determined by
-        the <a href="https://en.wikipedia.org/wiki/Gestalt_pattern_matching"
-          >Ratcliff/Obershelp algorithm.</a
+        the <Link href="https://en.wikipedia.org/wiki/Gestalt_pattern_matching"
+          >Ratcliff/Obershelp algorithm.</Link
         >.
       </P>
       <H3 class="py-4" id="domain-forensics-matching">Domain Forensics Matching</H3>
       <P class="pb-2">
-        This search, which will accept a list of one or more <a
+        This search, which will accept a list of one or more <Link
           href="https://en.wikipedia.org/wiki/Fully_qualified_domain_name"
-          >fully qualified domain names.</a
+          >fully qualified domain names.</Link
         > (including a prepended https:// on each domain name). This will produce a list of indicators
         and a list of sites which match (or are extremely similart to) those indicators. Indicators,
         and thus matches, are broken into the three tiers described above.
@@ -222,13 +224,12 @@
       <P class="pb-2">
         The Laundromat Tool is made possible with the support of European Media and Information Fund
         (EMIF).
-        <a href="https://gulbenkian.pt/emifund/"
+        <Link href="https://gulbenkian.pt/emifund/"
           ><img
             src="https://cdn.gulbenkian.pt/emifund/wp-content/uploads/sites/51/2021/10/2_Logo_white-1.svg"
             alt="MJRC Logo"
             height="256"
-          /></a
-        >
+          /></Link>
         The Information Laundromat Tool is built a partnership of the Alliance for Securing Democracy
         (ASD), the Institute for Strategic Dialogue (ISD), and the University of Amsterdam (UvA) through
         the Digital Methods Institute.
@@ -281,14 +282,14 @@
         Under GDPR, you have various rights concerning the processing of your personal data,
         including:
       </P>
-      <ul class="list-disc list-inside">
-        <li><P>The right to access your personal data.</P></li>
-        <li><P>The right to rectification if your data is inaccurate or incomplete.</P></li>
-        <li><P>The right to erasure of your data (&quot;the right to be forgotten&quot;).</P></li>
-        <li><P>The right to restrict processing of your data.</P></li>
-        <li><P>The right to data portability.</P></li>
-        <li><P>The right to object to data processing.</P></li>
-        <li><P>The right to lodge a complaint with a supervisory authority.</P></li>
+      <ul class="text-black dark:text-white list-disc list-inside">
+        <li><P class="inline-block">The right to access your personal data.</P></li>
+        <li><P class="inline-block">The right to rectification if your data is inaccurate or incomplete.</P></li>
+        <li><P class="inline-block">The right to erasure of your data (&quot;the right to be forgotten&quot;).</P></li>
+        <li><P class="inline-block">The right to restrict processing of your data.</P></li>
+        <li><P class="inline-block">The right to data portability.</P></li>
+        <li><P class="inline-block">The right to object to data processing.</P></li>
+        <li><P class="inline-block">The right to lodge a complaint with a supervisory authority.</P></li>
       </ul>
       <P class="pb-2">
         Please note that exercising some of these rights may impact the functionality of the tool in
