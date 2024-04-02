@@ -4,7 +4,6 @@
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
-  import LI from '$components/LI.svelte';
 </script>
 
 <H3 id="about-the-indicator-tier-system-and-interpreting-results">
@@ -46,16 +45,16 @@
 </P>
 <P><strong>High Confidence Indicators:</strong></P>
 <ul>
-  <LI>
+  <li>
     Unique IDs for verification purposes: These are often excellent evidence of a connection or
     shared ownership, such as unique Google Analytics IDs that directly link websites to the same
     account.
-  </LI>
-  <LI>
+  </li>
+  <li>
     Domain Certificate sharing: When websites share a specific SSL certificate, it often (but not
     always, see below) indicates a direct relationship, as certificates are typically issued to and
     managed by the same entity.
-  </LI>
+  </li>
 </ul>
 <P>
   Discovering two websites with the same unique Google Analytics ID AND a shared, specific SSL
@@ -63,16 +62,16 @@
 </P>
 <P><strong>Spurious Matches:</strong></P>
 <ul>
-  <LI>
+  <li>
     Using services like Cloudflare: While Cloudflare and similar DDOS protection services offer
     valuable security benefits, they also mask true IP addresses and distribute shared SSL
     certificates across multiple sites. This can lead to false positives in linking unrelated
     websites based on shared IP addresses or certificates.
-  </LI>
-  <LI>
+  </li>
+  <li>
     Shared hosting services: Websites hosted on shared services like Bluehost may share IP addresses
     with hundreds of unrelated sites, making IP-based matches unreliable without further context.
-  </LI>
+  </li>
 </ul>
 <P>
   Identifying that multiple websites are behind Cloudflare does not inherently indicate a connection
@@ -81,7 +80,7 @@
 </P>
 <H2 id="full-indicators-list-">Full Indicators List:</H2>
 <ul>
-  <LI>
+  <li>
     <P>
       <strong>1-cert-domain - Domain Certificate</strong>: An SSL certificate is a digital
       certificate that authenticates a website&#39;s or multiple websites&#39; identity and enables
@@ -93,8 +92,8 @@
         certificates for unrelated sites, so carefully research any matches.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-crypto-wallet - Cryptocurrency Wallet</strong>: A digital wallet used to store,
       send, and receive cryptocurrencies like Bitcoin and Ethereum.
@@ -105,8 +104,8 @@
         to definitively establish ownership or connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-domain - Domain Name</strong>: The unique name that identifies a website, which is
       registered in the Domain Name System (DNS).
@@ -116,8 +115,8 @@
         domain names requires careful analysis to avoid false associations.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-domain_suffix - Domain Suffix</strong>: The last part of a domain name, typically
       representing a category or country code.
@@ -127,8 +126,8 @@
         accessibility of most suffixes means this should not be a sole determinant of connection.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-fb_pixel_id - Facebook Pixel ID</strong>: A unique identifier for the Facebook
       Pixel, an analytics tool that allows website owners to measure the effectiveness of their
@@ -139,8 +138,8 @@
         clients, potentially leading to mistaken connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-adobe_analytics_id - Adobe Analytics ID</strong>: A unique identifier used by Adobe
       Analytics, a tool for analyzing visitor traffic on websites.
@@ -150,8 +149,8 @@
         IDs by third-party services may introduce unrelated links.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-sitemap_entries - Sitemap Entries</strong>: Entries in a website&#39;s sitemap,
       which is an XML file listing the URLs for a site along with additional metadata about each
@@ -163,8 +162,8 @@
         platforms.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_domain_iprangeowner_cidr - IP Range Owner CIDR</strong>: The Classless
       Inter-Domain Routing (CIDR) notation indicating the range of IP addresses owned by an entity.
@@ -174,8 +173,8 @@
         hosting providers may have numerous unrelated clients within the same range.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_domain_iprangeowner_ownerName - IP Range Owner Name</strong>: The name of the
       entity owning a range of IP addresses.
@@ -185,8 +184,8 @@
         entities using those IPs, though large organizations often host unrelated entities.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_domain_iprangeowner_address - IP Range Owner Address</strong>: Physical address
       of the entity owning a range of IP addresses.
@@ -197,8 +196,8 @@
         unrelated entities.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_domain_nameserver - Domain Name Server</strong>: A server that translates
       domain names into IP addresses, facilitating the connection between a user&#39;s device and
@@ -209,8 +208,8 @@
         leading to false associations.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_domain_otheripused - Other IPs Used by Domain</strong>: A list of IP addresses
       that have been used by a domain, aside from its primary IP address.
@@ -221,8 +220,8 @@
         IPs.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_siteonthisip_now - Current Sites on This IP</strong>: Websites currently hosted
       on the same IP address.
@@ -232,8 +231,8 @@
         being hosted on the same IP.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_siteonthisip_before - Former Sites on This IP</strong>: Websites that were
       previously hosted on the same IP address but are no longer.
@@ -244,8 +243,8 @@
         overlaps.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_siteonthisip_broken - Broken Sites on This IP</strong>: Websites hosted on the
       same IP address that are currently not functional or accessible.
@@ -256,8 +255,8 @@
         unrelated to their network neighbors.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ipms_useragents - User Agents</strong>: Strings that web browsers and other client
       devices send to identify themselves to web servers, typically containing information about the
@@ -269,8 +268,8 @@
         these insights.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-ip_shodan_hostnames - Shodan Hostnames</strong>: Hostnames associated with an IP
       address as indexed by Shodan, a search engine for internet-connected devices.
@@ -281,8 +280,8 @@
         transient or outdated hostname associations.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ip_shodan_ports - Shodan Ports</strong>: Open network ports on an IP address as
       detected by Shodan.
@@ -293,8 +292,8 @@
         not necessarily indicative of direct relationships.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-ip_shodan_vuln - Shodan Vulnerabilities</strong>: Vulnerabilities identified on an
       IP address by Shodan, based on open ports and services.
@@ -304,8 +303,8 @@
         widespread vulnerabilities in popular software can appear across unrelated networks.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-ip_shodan_cpe - Shodan CPE</strong>: Common Platform Enumeration (CPE) identifiers
       found by Shodan, indicating specific software or hardware on an IP.
@@ -315,8 +314,8 @@
         the ubiquity of certain technologies can lead to coincidental overlaps.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-ga_id - Google Analytics ID</strong>: A unique identifier associated with Google
       Analytics, used for tracking and analyzing website traffic.
@@ -326,8 +325,8 @@
         result in the same ID being used across unrelated sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-ga_tag_id - Google Analytics Tag ID</strong>: A unique tag identifier used in Google
       Analytics for tracking specific user interactions on a website.
@@ -337,8 +336,8 @@
         strategies might also be independently adopted by unrelated sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-ip - IP Address</strong>: A unique numerical label assigned to each device connected
       to a computer network that uses the Internet Protocol for communication.
@@ -348,8 +347,8 @@
         allocation and large hosting environments can lead to incidental sharing.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-verification_id - Verification ID</strong>: A unique identifier used for verifying
       ownership or authenticity of a website or online account.
@@ -359,8 +358,8 @@
         reassigned or spoofed, requiring careful verification.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>1-yandex_tag_id - Yandex Tag ID</strong>: A unique identifier used by Yandex Metrica,
       a tool for analyzing visitor traffic, similar to Google Analytics.
@@ -370,8 +369,8 @@
         can create misleading connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-subnet - Subnet</strong>: A segment of a network&#39;s IP address range that can be
       designated to optimize performance and security.
@@ -382,8 +381,8 @@
         multiple clients.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-cdn-domain - CDN Domain</strong>: A domain used by a Content Delivery Network (CDN)
       to deliver content efficiently across the internet.
@@ -394,8 +393,8 @@
         establishing direct connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-cms - Content Management System</strong>: A software application or set of related
       programs used to create and manage digital content.
@@ -405,8 +404,8 @@
         array of sites, often without any direct relation.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-css_classes - CSS Classes</strong>: Classes defined in Cascading Style Sheets (CSS)
       to style and format the layout of web pages.
@@ -416,8 +415,8 @@
         common frameworks and libraries can lead to similar CSS classes across unrelated sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-header-nonstd-value - Non-Standard Header Value</strong>: Values in HTTP headers
       that do not conform to standard header formats, potentially indicating custom configurations
@@ -429,8 +428,8 @@
         to avoid misattribution.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-header-server - Server Header</strong>: The &#39;Server&#39; HTTP header field that
       specifies information about the software used by the origin server.
@@ -441,8 +440,8 @@
         to establish a connection.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-id_tags - ID Tags</strong>: Unique identifiers used in the HTML code of a website to
       distinguish specific elements.
@@ -452,8 +451,8 @@
         and thus, might not be indicative of direct relationships.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-iframe_id_tags - Iframe ID Tags</strong>: Unique identifiers used for
       &#39;iframe&#39; elements in HTML, allowing the embedding of an external webpage within a
@@ -464,8 +463,8 @@
         Iframe IDs across different websites, reducing the significance of this correlation.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-link_href - Link Href Attributes</strong>: The &#39;href&#39; attribute of a link in
       HTML, specifying the URL of the page the link goes to.
@@ -476,8 +475,8 @@
         indicative of a direct relationship.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-meta_generic - Generic Meta Tags</strong>: Meta tags in HTML that provide general
       information about a webpage, such as description, keywords, and author.
@@ -487,8 +486,8 @@
         connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-meta_social - Social Media Meta Tags</strong>: Meta tags specifically designed for
       optimizing social media sharing, defining how content appears when shared on social platforms.
@@ -498,8 +497,8 @@
         practices can lead to similar tags across unrelated sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-script_src - Script Source Attributes</strong>: The &#39;src&#39; attribute of a
       script tag in HTML, indicating the source of a JavaScript file.
@@ -509,8 +508,8 @@
         coincidental similarities.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-uuid - UUID</strong>: Universally Unique Identifier, a 128-bit number used to
       identify information in computer systems.
@@ -521,8 +520,8 @@
         systems.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-whois_creation_date - WHOIS Creation Date</strong>: The date a domain name was first
       registered, as recorded in the WHOIS database.
@@ -532,8 +531,8 @@
         domain sales.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-whois_server - WHOIS Server</strong>: The server that provides the WHOIS
       information, containing details about domain name registrations.
@@ -543,8 +542,8 @@
         alone isn&#39;t a strong indicator of a relationship.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-whois-registrar - WHOIS Registrar</strong>: The organization authorized to register
       and manage domain names for a particular top-level domain.
@@ -554,8 +553,8 @@
         a direct connection between domain owners.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-blocks - WordPress Blocks</strong>: Content blocks used in WordPress to build and
       design webpages.
@@ -565,8 +564,8 @@
         similarities might occur coincidentally.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-categories - WordPress Categories</strong>: Categorization system in WordPress
       used to group content into different sections.
@@ -576,8 +575,8 @@
         leading to non-significant matches.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-pages - WordPress Pages</strong>: Web pages created and managed within the
       WordPress platform.
@@ -588,8 +587,8 @@
         sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-posts - WordPress Posts</strong>: Blog posts or articles published on a WordPress
       website.
@@ -599,8 +598,8 @@
         that thematic overlaps are common and not necessarily indicative of a connection.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-tags - WordPress Tags</strong>: Tagging system in WordPress used to describe
       specific details of posts, aiding in content organization and navigation.
@@ -610,8 +609,8 @@
         potential for meaningful connections.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>3-wp-users - WordPress Users</strong>: Individual accounts within WordPress that have
       various roles and permissions for managing website content.
@@ -621,8 +620,8 @@
         are common and not uniquely identifying.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_globalvariable - URLScan Global Variable</strong>: Global JavaScript
       variables identified by URLScan, a tool for scanning and analyzing websites.
@@ -632,8 +631,8 @@
         variables across different websites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_cookies - URLScan Cookies</strong>: Cookies identified by URLScan as being
       set by websites during a scan.
@@ -644,8 +643,8 @@
         similar cookies across various websites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_consolemessages - URLScan Console Messages</strong>: Messages output to the
       browser console during a website scan by URLScan.
@@ -656,8 +655,8 @@
         browser extensions.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_asn - URLScan Autonomous System Number</strong>: The Autonomous System
       Number (ASN) identified by URLScan, representing the collection of IP networks and routers
@@ -668,8 +667,8 @@
         wide range of clients.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_domainsonpage - URLScan Domains on Page</strong>: A list of all domains
       found on a webpage during a URLScan.
@@ -680,8 +679,8 @@
         sites.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscan_urlssonpage - URLScan URLs on Page</strong>: All URLs found on a webpage
       during a URLScan.
@@ -692,8 +691,8 @@
         significant.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-urlscanhrefs - URLScan Hrefs</strong>: Hypertext references (hrefs) identified on
       webpages during a URLScan.
@@ -704,8 +703,8 @@
         the potential for direct connection inference.</em
       >
     </P>
-  </LI>
-  <LI>
+  </li>
+  <li>
     <P>
       <strong>2-techstack - Technology Stack</strong>: The set of technologies used to build and run
       a website or application, including frameworks, languages, and software.
@@ -715,5 +714,5 @@
         unrelated websites or applications.</em
       >
     </P>
-  </LI>
+  </li>
 </ul>
