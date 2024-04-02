@@ -3,10 +3,10 @@
   import H2 from '$components/H2.svelte';
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
+  import H5 from '$components/H5.svelte';
   import P from '$components/P.svelte';
   import LI from '$components/LI.svelte';
 </script>
-
 <div class="w-full px-3 md:px-8">
   <div class="w-1/3 my-6">
     <div class="">
@@ -16,7 +16,7 @@
         The laundromat tool provides two functions: Content Similarity Search and Domain Forensics
         Matching:
       </P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>
           Content Similarity Search attempts to detect URLs where a given text snippet occurs. It
           does not provide evidence of where that text originated or any relationship between two
@@ -37,7 +37,7 @@
         of domains already processed by the tool. This corpus is sourced from a number of sources,
         including:
       </P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>
           <a href="https://euvsdisinfo.eu/disinformation-cases/">EU vs Disinfo&#39;s Database</a>
         </LI>
@@ -121,7 +121,7 @@
         evidence.
       </P>
       <P class="pb-2"><strong>High Confidence Indicators:</strong></P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>
           Unique IDs for verification purposes: These are often excellent evidence of a connection
           or shared ownership, such as unique Google Analytics IDs that directly link websites to
@@ -138,7 +138,7 @@
         certificate suggests a high-confidence link, indicating shared management or ownership.
       </P>
       <P class="pb-2"><strong>Spurious Matches:</strong></P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>
           Using services like Cloudflare: While Cloudflare and similar DDOS protection services
           offer valuable security benefits, they also mask true IP addresses and distribute shared
@@ -157,7 +157,7 @@
         enhancements. All tier 1 and 2 indicators should be scrutinized carefully to determine if a
         match is valid or spurious
       </P>
-      <h5 id="example-investigation-">Example Investigation:</h5>
+      <H5 id="example-investigation-">Example Investigation:</H5>
       <P class="pb-2">
         An analyst investigating a network of disinformation websites notices that several sites
         share a specific Facebook Pixel ID, indicating a potential link in their online marketing
@@ -225,7 +225,7 @@
         (EMIF).
         <a href="https://gulbenkian.pt/emifund/"
           ><img
-            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/02/EMIF_Horizontal_logo_Black.png"
+            src="https://cdn.gulbenkian.pt/emifund/wp-content/uploads/sites/51/2021/10/2_Logo_white-1.svg"
             alt="MJRC Logo"
             height="256"
           /></a
@@ -254,7 +254,7 @@
         The Information Laundromat tool collects data through two forms, as part of its functions:
         Content Similarity Search and Domain Forensics Matching.
       </P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>
           <P class="pb-2">
             <strong>Content Similarity Search</strong>: This function processes URLs and text
@@ -282,7 +282,7 @@
         Under GDPR, you have various rights concerning the processing of your personal data,
         including:
       </P>
-      <ul>
+      <ul class="list-disc list-inside">
         <LI>The right to access your personal data.</LI>
         <LI>The right to rectification if your data is inaccurate or incomplete.</LI>
         <LI>The right to erasure of your data (&quot;the right to be forgotten&quot;).</LI>
