@@ -27,15 +27,15 @@
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
 </script>
 
-<section class="grid grid-rows-2 px-3 pt-8 md:px-8">
-  <div class=" grid grid-cols-1 gap-4 md:grid-cols-2">
-    <div class="w-100 flex items-center justify-center justify-items-center py-8 md:py-0">
+<section class="grid grid-rows-2 px-3 md:px-8">
+  <div class="pt-5 md:pt-20 grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div class="w-100 flex justify-center py-8 md:py-0">
       <div>
-        <H1 class="w-full text-4xl md:w-[500px] md:text-5xl">
+        <H1 class="w-full text-4xl md:text-5xl md:w-[500px]">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
           online.
         </H1>
-        <p class="mt-4 font-sans text-sm font-light text-gray1 md:w-[400px]">
+        <p class="mt-4 font-sans text-sm font-light text-gray1">
           <span class="font-bold"> Content Laundering </span> /ˈkɒntent lɔːndərɪŋ/
           <span class="text-xs"> noun </span><br /><span class="font-normal"
             >a strategic form of communication that disguises the origins of the content.</span
@@ -44,10 +44,10 @@
         <p></p>
       </div>
     </div>
-    <div class="min-h-autot flex w-full items-center justify-center md:min-h-[500px] md:w-auto">
+    <div class="flex w-full items-center justify-center">
       <Tabs
         value="content similarity"
-        class="w-full self-start rounded-md shadow-xl outline outline-[1px] outline-gray5 md:w-3/4"
+        class="w-full self-start rounded-input lg:min-w-[600px] shadow-xl outline outline-[1px] outline-gray5 md:w-3/4"
         let:C
       >
         <C.List>
@@ -72,11 +72,12 @@
         </C.Content>
         <C.Content value="technical similarity">
           <P>
+            Enter a website URL to analyse metadata similarity with a variety of media outlets,
+            including both trusted, dubious and known disinformation news sources.
+            <br /><br />
 
-          Enter a website URL to analyse metadata similarity with a variety of media outlets, including both trusted, dubious and known disinformation news sources.
-          <br><br/>
-
-          This tool is particularly helpful to detect affiliate networks, sister sites, advertising collaborations, or DNS ban circumvention practices.
+            This tool is particularly helpful to detect affiliate networks, sister sites,
+            advertising collaborations, or DNS ban circumvention practices.
           </P>
           {#if metadataBasicFormConfig}
             <Form
@@ -94,79 +95,104 @@
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
         <P>
-          Researchers from two European Universities, supported by the Alliance for Securing Democracy, reveal evidence of a small network operating in Poland and Germany that launders Russian state media content into mainstream media. A sample of articles from problematic outlets, criticizing Ukrainian President Zelensky, was run through the Laundromat’s content search. The tool revealed that all the articles in the sample were lifted from Ria Novosti, an outlet belonging to the Russian? Segodnya group. Read the repor
-          </P>
+          Researchers from two European Universities, supported by the Alliance for Securing
+          Democracy, reveal evidence of a small network operating in Poland and Germany that
+          launders Russian state media content into mainstream media. A sample of articles from
+          problematic outlets, criticizing Ukrainian President Zelensky, was run through the
+          Laundromat’s content search. The tool revealed that all the articles in the sample were
+          lifted from Ria Novosti, an outlet belonging to the Russian? Segodnya group. Read the
+          repor
+        </P>
       </li>
       <li class="pt-6 md:pt-0">
         <H2 class="pb-4">Find proxy websites that exist to overcome DNS bans</H2>
         <P>
-        Both Russia Today and Sputnik News are currently subjected to DNS bans imposed by the European Commission. However, despite these restrictions, each site employs sophisticated techniques to reach audiences in EU member countries. Read the report to learn how researchers were able to utilize the Laundromat's website fingerprinting service to map the entire network of Russia Today proxy websites, using altered or entirely new domain names.
+          Both Russia Today and Sputnik News are currently subjected to DNS bans imposed by the
+          European Commission. However, despite these restrictions, each site employs sophisticated
+          techniques to reach audiences in EU member countries. Read the report to learn how
+          researchers were able to utilize the Laundromat's website fingerprinting service to map
+          the entire network of Russia Today proxy websites, using altered or entirely new domain
+          names.
         </P>
       </li>
       <li class="pt-6 md:pt-0">
         <H2 class="pb-4">Tell if a site produces original content</H2>
         <P>
-        Content laundering occurs when individuals or entities replicate website content without proper attribution and, in some cases, authorization. This method is commonly employed by disinformation operatives to disseminate problematic content and political propaganda. The Laundromat tool serves as an effective means to detect duplicate content online and substantiate instances of content plagiarism. See how to use the Laundromat to prove gaps in editorial transparency. Read the guide.
+          Content laundering occurs when individuals or entities replicate website content without
+          proper attribution and, in some cases, authorization. This method is commonly employed by
+          disinformation operatives to disseminate problematic content and political propaganda. The
+          Laundromat tool serves as an effective means to detect duplicate content online and
+          substantiate instances of content plagiarism. See how to use the Laundromat to prove gaps
+          in editorial transparency. Read the guide.
         </P>
       </li>
     </ul>
   </div>
 </section>
 
-<footer class="w-full">
-  <div class="w-full flex flex-col md:flex-row md:items-center md:justify-center bg-white">
-  <div>
-    <H3 class="dark:text-black">Sponsoring Organizations</H3>
-    <ul class="flex items-center space-x-4">
-      <li>
-        <a href="https://gulbenkian.pt/emifund/" rel="nofollow">
-          <img
-            src="https://camo.githubusercontent.com/4644af047750ba3f45a2f3efcf9f746857215547882628e6e2a34ca806cc72ac/68747470733a2f2f7365637572696e6764656d6f63726163792e676d6675732e6f72672f77702d636f6e74656e742f75706c6f6164732f323032342f30322f454d49465f486f72697a6f6e74616c5f6c6f676f5f426c61636b2e706e67"
-            alt="MJRC Logo"
-            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/02/EMIF_Horizontal_logo_Black.png"
-            class="h-16 object-contain"
-          />
-        </a>
-      </li>
-    </ul>
-  </div>
+<footer class="w-full bg-white">
+  <div
+    class="flex w-full flex-col px-3 py-6 md:flex-row md:items-center md:justify-center md:px-8 md:py-3"
+  >
+    <div class="pb-2 md:pb-0 md:pr-12">
+      <H3 class="pb-3 text-center md:text-left dark:text-black">Sponsoring Organizations</H3>
+      <ul class="flex flex-col flex-nowrap items-center md:flex-row md:space-x-10">
+        <li>
+          <a href="https://gulbenkian.pt/emifund/" rel="nofollow">
+            <img
+              src="https://camo.githubusercontent.com/4644af047750ba3f45a2f3efcf9f746857215547882628e6e2a34ca806cc72ac/68747470733a2f2f7365637572696e6764656d6f63726163792e676d6675732e6f72672f77702d636f6e74656e742f75706c6f6164732f323032342f30322f454d49465f486f72697a6f6e74616c5f6c6f676f5f426c61636b2e706e67"
+              alt="MJRC Logo"
+              data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/02/EMIF_Horizontal_logo_Black.png"
+              class="h-28 object-contain md:h-16"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
 
-  <div>
-    <H3 class="dark:text-black">Implementing Organizations</H3>
-    <ul class="flex items-center space-x-4">
-      <li>
-        <a href="https://securingdemocracy.gmfus.org/" rel="nofollow">
-          <img
-            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2023/05/ASD-Logo.png"
-            alt="ASD Logo"
-            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ASD_Logo_Black.png"
-            class="h-16 object-contain"
-          />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.isdglobal.org/" rel="nofollow">
+    <div>
+      <H3 class="py-3 text-center md:pb-3 md:text-left dark:text-black"
+        >Implementing Organizations</H3
+      >
+      <ul class="flex flex-col flex-nowrap items-center md:flex-row md:space-x-10">
+        <li class="py-3 md:py-0">
+          <a href="https://securingdemocracy.gmfus.org/" rel="nofollow">
+            <img
+              src="https://securingdemocracy.gmfus.org/wp-content/uploads/2023/05/ASD-Logo.png"
+              alt="ASD Logo"
+              data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ASD_Logo_Black.png"
+              class="h-16 object-contain"
+            />
+          </a>
+        </li>
+        <li class="py-3 md:py-0">
+          <a href="https://www.isdglobal.org/" rel="nofollow">
             <img
               src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/ISD-logo-ISD-Red.png"
               alt="ISD Logo"
               data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ISD_Logo_Black.png"
-              class="h-16 object-contain"
+              class="h-24 object-contain md:h-16"
             />
-        </a>
-      </li>
-      <li>
-        <a href="https://www.uva.nl/en" rel="nofollow">
-          <img
-            src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/uva-logo-uvamerken_eng-1406x236-300dpi.png"
-            alt="UvA Logo"
-            data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/UvA_Logo_Black.png"
-            class="h-16 object-contain"
-          />
-        </a>
-      </li>
-    </ul>
+          </a>
+        </li>
+        <li class="py-3 md:py-0">
+          <a href="https://www.uva.nl/en" rel="nofollow">
+            <img
+              src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/uva-logo-uvamerken_eng-1406x236-300dpi.png"
+              alt="UvA Logo"
+              data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/UvA_Logo_Black.png"
+              class="h-24 object-contain md:h-16"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
+  <div class="block flex w-full justify-center px-3 py-6 md:px-8 md:pb-3 md:pt-5">
+    <P class="w-full text-center md:w-1/2 dark:text-black ">
+      The sole responsibility for any content supported by the European Media and Information Fund
+      lies with the author(s) and it may not necessarily reflect the positions of the EMIF and the
+      Fund Partners, the Calouste Gulbenkian Foundation and the European University Institute.</P
+    >
   </div>
-  <P> The sole responsibility for any content supported by the European Media and Information Fund lies with the author(s) and it may not necessarily reflect the positions of the EMIF and the Fund Partners, the Calouste Gulbenkian Foundation and the European University Institute.</P> 
 </footer>
-
