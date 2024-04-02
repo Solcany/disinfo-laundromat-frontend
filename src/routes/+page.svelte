@@ -112,16 +112,19 @@
     </ul>
   </div>
 </section>
-<section class="w-full flex flex-col md:flex-row md:no-wrap">
+
+<footer class="w-full">
+  <div class="w-full flex flex-col md:flex-row md:items-center md:justify-center bg-white">
   <div>
-    <H3></H3>
-    <ul>
+    <H3 class="dark:text-black">Sponsoring Organizations</H3>
+    <ul class="flex items-center space-x-4">
       <li>
         <a href="https://gulbenkian.pt/emifund/" rel="nofollow">
           <img
             src="https://camo.githubusercontent.com/4644af047750ba3f45a2f3efcf9f746857215547882628e6e2a34ca806cc72ac/68747470733a2f2f7365637572696e6764656d6f63726163792e676d6675732e6f72672f77702d636f6e74656e742f75706c6f6164732f323032342f30322f454d49465f486f72697a6f6e74616c5f6c6f676f5f426c61636b2e706e67"
             alt="MJRC Logo"
             data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/02/EMIF_Horizontal_logo_Black.png"
+            class="h-16 object-contain"
           />
         </a>
       </li>
@@ -129,14 +132,15 @@
   </div>
 
   <div>
-    <H3></H3>
-    <ul class="flex items-center">
-      <li class="h-10">
+    <H3 class="dark:text-black">Implementing Organizations</H3>
+    <ul class="flex items-center space-x-4">
+      <li>
         <a href="https://securingdemocracy.gmfus.org/" rel="nofollow">
           <img
             src="https://securingdemocracy.gmfus.org/wp-content/uploads/2023/05/ASD-Logo.png"
             alt="ASD Logo"
             data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ASD_Logo_Black.png"
+            class="h-16 object-contain"
           />
         </a>
       </li>
@@ -146,18 +150,23 @@
               src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/ISD-logo-ISD-Red.png"
               alt="ISD Logo"
               data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/ISD_Logo_Black.png"
-              class=" w-full object-contain"/>
+              class="h-16 object-contain"
+            />
         </a>
       </li>
-      <li class="h-10">
+      <li>
         <a href="https://www.uva.nl/en" rel="nofollow">
           <img
             src="https://securingdemocracy.gmfus.org/wp-content/uploads/2024/03/uva-logo-uvamerken_eng-1406x236-300dpi.png"
             alt="UvA Logo"
             data-canonical-src="https://securingdemocracy.gmfus.org/wp-content/uploads/2020/02/UvA_Logo_Black.png"
+            class="h-16 object-contain"
           />
         </a>
       </li>
     </ul>
   </div>
-</section>
+  </div>
+  <P> The sole responsibility for any content supported by the European Media and Information Fund lies with the author(s) and it may not necessarily reflect the positions of the EMIF and the Fund Partners, the Calouste Gulbenkian Foundation and the European University Institute.</P> 
+</footer>
+
