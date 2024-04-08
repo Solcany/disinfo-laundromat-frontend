@@ -122,7 +122,7 @@
       grouped[domain_name_y].indicators_summary[tier]++;
     });
 
-    // Transform the grouped data into the final structure expected by the return type.
+    // Transform the grouped data into the final structure
     const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
       const domainGroup = grouped[domainKey];
       // Convert indicators from the intermediate structure to an array of TieredIndicator.

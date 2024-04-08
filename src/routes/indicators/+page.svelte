@@ -16,7 +16,6 @@
   <H1 id="about-the-indicator-tier-system-and-interpreting-results">
     About the Indicator Tier System and Interpreting Results
   </H1>
-
   <section class="pt-8">
     <P class="pb-2">
       Each indicator is associated with evidentiary tier and are subject to <Link
@@ -124,7 +123,7 @@
   </section>
 
   <section class="pt-8">
-    <H2 id="full-indicators-list-">Full Indicators List:</H2>
+    <H2 id="full-indicators-list-">Full Indicators List</H2>
     {#if indicator_metadata}
       <ul>
         {#each Object.entries(indicator_metadata) as [key, data]}
