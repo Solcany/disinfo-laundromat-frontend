@@ -8,8 +8,9 @@
   import Link from '$components/Link.svelte';
   import type { ApiIndicatorsData } from '$models';
   export let data;
-  let indicator_metadata: Pick<ApiIndicatorsData, 'indicator_metadata'>;
-  $: indicator_metadata = data.indicator.indicator_metadata;
+  let indicatorMetadata: Pick<ApiIndicatorsData, 'indicator_metadata'>;
+  $: indicatorMetadata = data.indicatorMetadata;
+
 </script>
 
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">
@@ -124,9 +125,9 @@
 
   <section class="pt-8">
     <H2 id="full-indicators-list-">Full Indicators List</H2>
-    {#if indicator_metadata}
+    {#if indicatorMetadata}
       <ul>
-        {#each Object.entries(indicator_metadata) as [key, data]}
+        {#each Object.entries(indicatorMetadata) as [key, data]}
           <li class="py-3">
             <H4 id={data.name}>{data.name}</H4>
             <span class="block pb-3 font-sans text-sm text-gray1"> {key}</span>

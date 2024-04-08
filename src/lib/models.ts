@@ -62,6 +62,30 @@ export interface ContentDataResult {
   url: string;
 }
 
+//export interface ApiAppConfigData { 
+//  [key: string]: {
+//    countries: Record<string, string>;
+//    defaults: {
+//      [key: string]: {
+//        country: string,
+//        language: string,
+//        search_engines: Array<string>
+//        };
+//      };
+//    engines: Record<string, string>;
+//    indicator_metadata: {
+//      [key: string]: {
+//        description: string;
+//        interpretation: string;
+//        name: string;
+//      }
+//    };
+//    languages: Record<string, string>;
+//  }
+//}
+
+
+
 export interface ApiContentData {
   countries: Record<string, string>;
   csv_data: string;
