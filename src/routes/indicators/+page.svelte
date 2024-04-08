@@ -124,7 +124,7 @@
   </section>
 
   <section class="pt-8">
-    <H2 id="full-indicators-list-">Full Indicators List</H2>
+    <H2 id="full-indicators-list">Full Indicators List</H2>
     {#if indicatorMetadata}
       <ul>
         {#each Object.entries(indicatorMetadata) as [key, data]}

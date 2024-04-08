@@ -25,8 +25,8 @@
     {#if formConfig}
       <Form config={formConfig} formData={contentFormData} onSubmit={handleApiSubmit} />
     {/if}
-    <Separator/>
 
+    <Separator/>
     <P> Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link href="/about/#how-to-use-the-laundromat">read the documentation</Link></P>
 
     <!--

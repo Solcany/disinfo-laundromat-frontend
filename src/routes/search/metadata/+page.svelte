@@ -8,6 +8,8 @@
   import TableMeta from '$components/TableMeta.svelte';
   import H4 from '$components/H4.svelte';
   import Link from '$components/Link.svelte';
+  import P from '$components/P.svelte';
+  import Separator from '$components/Separator.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
   import { FormOrientation } from '$models';
   import { handleApiSubmit } from '$form';
@@ -35,6 +37,11 @@
         orientation={FormOrientation.Vertical}
       />
     {/if}
+
+    <Separator/>
+
+    <P><Link href="/indicators">How to interpret results?</Link> <Link href="/indicators/#full-indicators-list">Need more information about indicators?</Link>  
+    </P>
   </section>
   <!--
     <Dialog let:C>
