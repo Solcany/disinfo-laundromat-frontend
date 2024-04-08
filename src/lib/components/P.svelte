@@ -4,6 +4,6 @@
   export { className as class };
 </script>
 
-<p class={cn('text-sm text-black dark:text-white m-0', className)} {...$$restProps}>
+<p class={cn('m-0 text-sm text-black dark:text-white', className)} {...$$restProps}>
   <slot />
 </p>
