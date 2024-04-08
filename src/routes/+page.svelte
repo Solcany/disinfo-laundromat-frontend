@@ -91,7 +91,7 @@
     </div>
   </div>
   <div class="mt-10 md:mt-32">
-    <ul id="use case list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
+    <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
         <P>

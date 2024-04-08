@@ -7,6 +7,7 @@
   import Form from '$components/Form.svelte';
   import Table from '$components/Table.svelte';
   import Link from '$components/Link.svelte';
+  import Separator from '$components/Separator.svelte';
   import P from '$components/P.svelte';
   import H4 from '$components/H4.svelte';
   import { TABLE_CONTENT_HEADER } from '$config';
@@ -24,6 +25,9 @@
     {#if formConfig}
       <Form config={formConfig} formData={contentFormData} onSubmit={handleApiSubmit} />
     {/if}
+    <Separator/>
+
+    <P> Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link href="/about/#how-to-use-the-laundromat">read the documentation</Link></P>
 
     <!--
     <Dialog let:C>
