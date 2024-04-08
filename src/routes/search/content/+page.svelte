@@ -29,6 +29,7 @@
     <Separator/>
     <P> Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link href="/about/#how-to-use-the-laundromat">read the documentation</Link></P>
 
+    <P class="pt-2"> Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link> to see what’s possible</P>
     <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>

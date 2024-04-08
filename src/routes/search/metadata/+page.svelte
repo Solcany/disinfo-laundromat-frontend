@@ -42,6 +42,7 @@
 
     <P><Link href="/indicators">How to interpret results?</Link> <Link href="/indicators/#full-indicators-list">Need more information about indicators?</Link>  
     </P>
+    <P class="pt-2"> Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link> to see what’s possible</P>
   </section>
   <!--
     <Dialog let:C>
