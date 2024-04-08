@@ -8,7 +8,7 @@
   import Link  from '$components/Link.svelte';
 </script>
 <div class="w-full px-3 md:px-8">
-  <div class="w-1/3 my-6">
+  <div class="w-full md:w-1/3 my-6">
     <div class="">
       <H1 class="pb-4" id="about">About</H1>
       <H2 class="py-4" id="the-laundromat">The Laundromat</H2>
@@ -17,16 +17,16 @@
         Matching:
       </P>
       <ul class="list-disc list-inside">
-        <li class="inline-block">
-          <P>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Content Similarity Search attempts to detect URLs where a given text snippet occurs. It
           does not provide evidence of where that text originated or any relationship between two
           entities posting two similar texts. Detemination of a given text&#39;s provenance is
           outside the scope of this tool.
           </P>
         </li>
-        <li class="inline-block">
-          <P> 
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Domain Forensics Matching attempts to find aspects of a website which indicate what makes
           it unique, give insight into its architecture/design, or show how its used/tracked. These
           indicators are compared for items with high degrees of similarity and matches are provided
@@ -42,32 +42,44 @@
         including:
       </P>
       <ul class="list-disc list-inside">
-        <li>
-          <Link href="https://euvsdisinfo.eu/disinformation-cases/">EU vs Disinfo&#39;s Database</Link>
+        <li class="dark:text-white text-black">
+          <P class="inline">
+            <Link href="https://euvsdisinfo.eu/disinformation-cases/">EU vs Disinfo&#39;s Database</Link>
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Research from partner and related organizations, such as <Link
             href="https://isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/"
             >ISD&#39;s report on RT Mirror Sites</Link>
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Known <Link href="https://github.com/ASD-at-GMF/state-media-profiles">state media sites</Link>
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Lists of <Link href="https://iffy.news/pink-slime-fake-local-news/">pink slime sites</Link> and
           <Link href="https://www.midwestradionetwork.com/">faux local news sites</Link>
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Wikipedia&#39;s list of <Link href="https://en.wikipedia.org/wiki/List_of_fake_news_websites">fake news websites</Link>
           and Wikidata&#39;s
           <Link
             href="https://www.wikidata.org/w/index.php?title=Special:WhatLinksHere/Q17232649&amp;limit=50&amp;dir=next&amp;offset=0%7C3014523"
             >list of news websites</Link
           >
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           At our own discretion, user-input sites. (As of March 2024, no user input sites are
           included)
+        </P>
         </li>
       </ul>
 
@@ -123,15 +135,19 @@
       </P>
       <P class="pb-2"><strong>High Confidence Indicators:</strong></P>
       <ul class="list-disc list-inside">
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Unique IDs for verification purposes: These are often excellent evidence of a connection
           or shared ownership, such as unique Google Analytics IDs that directly link websites to
           the same account.
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Domain Certificate sharing: When websites share a specific SSL certificate, it often (but
           not always, see below) indicates a direct relationship, as certificates are typically
           issued to and managed by the same entity.
+          </P>
         </li>
       </ul>
       <P class="pb-2">
@@ -140,16 +156,20 @@
       </P>
       <P class="pb-2"><strong>Spurious Matches:</strong></P>
       <ul class="list-disc list-inside">
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Using services like Cloudflare: While Cloudflare and similar DDOS protection services
           offer valuable security benefits, they also mask true IP addresses and distribute shared
           SSL certificates across multiple sites. This can lead to false positives in linking
           unrelated websites based on shared IP addresses or certificates.
+          </P>
         </li>
-        <li>
+        <li class="dark:text-white text-black">
+          <P class="inline">
           Shared hosting services: Websites hosted on shared services like Bluehost may share IP
           addresses with hundreds of unrelated sites, making IP-based matches unreliable without
           further context.
+          </P>
         </li>
       </ul>
       <P class="pb-2">
@@ -224,11 +244,13 @@
       <P class="pb-2">
         The Laundromat Tool is made possible with the support of European Media and Information Fund
         (EMIF).
-        <Link href="https://gulbenkian.pt/emifund/"
+        <Link 
+          href="https://gulbenkian.pt/emifund/"
+          class="block my-6"
           ><img
             src="https://cdn.gulbenkian.pt/emifund/wp-content/uploads/sites/51/2021/10/2_Logo_white-1.svg"
             alt="MJRC Logo"
-            height="256"
+            class="h-12"
           /></Link>
         The Information Laundromat Tool is built a partnership of the Alliance for Securing Democracy
         (ASD), the Institute for Strategic Dialogue (ISD), and the University of Amsterdam (UvA) through
@@ -255,16 +277,16 @@
         Content Similarity Search and Domain Forensics Matching.
       </P>
       <ul class="list-disc list-inside">
-        <li>
-          <P class="pb-2">
+        <li class="dark:text-white text-black">
+          <P class="inline pb-2">
             <strong>Content Similarity Search</strong>: This function processes URLs and text
             snippets provided by the user to detect occurrences of the given text across various
             websites. It is important to note that the provenance of the text and the relationship
             between entities posting similar texts are not determined by this tool.
           </P>
         </li>
-        <li>
-          <P class="pb-2">
+        <li class="dark:text-white text-black">
+          <P class="inline pb-2">
             <strong>Domain Forensics Matching</strong>: This function processes a domain URL and
             analyzes aspects of website architecture, design, and usage to identify unique
             indicators. It compares these indicators across websites to find high degrees of
@@ -283,13 +305,13 @@
         including:
       </P>
       <ul class="text-black dark:text-white list-disc list-inside">
-        <li><P class="inline-block">The right to access your personal data.</P></li>
-        <li><P class="inline-block">The right to rectification if your data is inaccurate or incomplete.</P></li>
-        <li><P class="inline-block">The right to erasure of your data (&quot;the right to be forgotten&quot;).</P></li>
-        <li><P class="inline-block">The right to restrict processing of your data.</P></li>
-        <li><P class="inline-block">The right to data portability.</P></li>
-        <li><P class="inline-block">The right to object to data processing.</P></li>
-        <li><P class="inline-block">The right to lodge a complaint with a supervisory authority.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to access your personal data.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to rectification if your data is inaccurate or incomplete.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to erasure of your data (&quot;the right to be forgotten&quot;).</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to restrict processing of your data.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to data portability.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to object to data processing.</P></li>
+        <li class="dark:text-white text-black"><P class="inline">The right to lodge a complaint with a supervisory authority.</P></li>
       </ul>
       <P class="pb-2">
         Please note that exercising some of these rights may impact the functionality of the tool in
