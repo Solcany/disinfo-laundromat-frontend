@@ -7,8 +7,7 @@
   import P from '$components/P.svelte';
   import Link  from '$components/Link.svelte';
 </script>
-<div class="w-full px-3 md:px-8">
-  <div class="w-full md:w-1/3 my-6">
+<div class="w-full md:w-1/3 my-6 px-3 md:px-8">
     <div class="">
       <H1 class="pb-4" id="about">About</H1>
       <H2 class="py-4" id="the-laundromat">The Laundromat</H2>
@@ -339,5 +338,4 @@
         periodically.
       </P>
     </div>
-  </div>
 </div>
