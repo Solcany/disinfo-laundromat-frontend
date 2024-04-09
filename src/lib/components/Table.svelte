@@ -20,18 +20,23 @@
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
   let rows: TableContentRowData[] = [];
-  let sortedRows: TableContentRowData[] = [];
-  
+  let sortedRows: TableContentRowData[] = []; 
+  let sortDirection: SortDirection = SortDirection.Ascending;
+  let sortStatus: Record<string, SortDirection> = {}; 
+  let sortColumnIndex: number = -1;
+
   $: rows = data && data.length > 0 && headerKeys && headerKeys.length > 0 ? getRows(data, headerKeys) : [];
- // let sortedRows: TableRowData[] = [];
- // let sortStatus: Record<string, SortDirection> = {};
- // let sortDirection: SortDirection = SortDirection.Ascending;
- // let areColumnsNumber: boolean[] = [];
- // let sortColumnIndex: number = -1;
 
-//  $: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
-
- // console.log("from table", data);
+  $: {
+    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
+      sortedRows = sortRows(rows, 
+                            headerData, 
+                            sortColumnIndex, 
+                            sortDirection);
+    } else {
+      sortedRows = rows;
+    }
+  }
 
   function getRows(data: ContentDataResult[], 
                    mainDataKeys: string[]): TableContentRowData[] {
@@ -128,22 +133,23 @@
 //    });
 //  }
 //
-//  function handleHeaderItemClick(i: number, label: string): void {
-//    sortColumnIndex = i;
-//    updateSortStatus(label);
-//  }
-//
-//  function updateSortStatus(column_label: string): void {
-//    // reset all to "none"
-//    headerData.forEach((item: TableHeaderItemData) => {
-//      sortStatus[item.label] = SortDirection.None;
-//    });
-//
-//    sortDirection === SortDirection.Ascending
-//      ? (sortDirection = SortDirection.Descending)
-//      : (sortDirection = SortDirection.Ascending);
-//    sortStatus[column_label] = sortDirection;
-//  }
+  function handleHeaderItemClick(index: number): void {
+    const clickedColumnLabel = headerData[index].label;
+    sortColumnIndex = index;
+    updateSortStatus(clickedColumnLabel);
+  }
+
+  function updateSortStatus(column_label: string): void {
+    // reset all to "none"
+    headerData.forEach((item: TableHeaderItemData) => {
+      sortStatus[item.label] = SortDirection.None;
+    });
+
+    sortDirection === SortDirection.Ascending
+      ? (sortDirection = SortDirection.Descending)
+      : (sortDirection = SortDirection.Ascending);
+    sortStatus[column_label] = sortDirection;
+  }
 </script>
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
@@ -153,19 +159,19 @@
       <col style="width: 55%" />
       <col style="width: 5%" />
     </colgroup>
-   <!-- <thead class="sticky top-0 dark:bg-gray7">
+   <thead class="sticky top-0 dark:bg-gray7">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}
           sortStatus={sortStatus[data.label]}
           onClick={() => {
-            handleHeaderItemClick(i, data.label);
+            handleHeaderItemClick(i);
           }}
         />
       {/each}
-    </thead> -->
+    </thead>
     <tbody>
-      {#each rows as row, i (row)}
+      {#each sortedRows as row, i (row)}
         <TableRow data={row} />
       {/each}
     </tbody>

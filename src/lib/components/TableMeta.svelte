@@ -34,7 +34,7 @@
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
-      sortedRows = sortRows(rows, sortColumnIndex, sortDirection);
+      sortedRows = sortRows(rows, headerData, sortColumnIndex, sortDirection);
     } else {
       sortedRows = rows;
     }
@@ -155,10 +155,11 @@
 
   function sortRows(
     rows: TableMetaRowData[],
+    header: TableHeaderItemData[],
     columnIndex: number,
     direction: SortDirection
   ): TableMetaRowData[] {
-    const { key, type } = headerData[columnIndex];
+    const { key, type } = header[columnIndex];
 
     return rows.sort((a, b) => {
       const aValue = a[key];
