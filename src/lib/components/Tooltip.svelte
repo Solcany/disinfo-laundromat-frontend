@@ -9,11 +9,10 @@
     </Tooltip>
 
   */
-
   import { Tooltip } from 'bits-ui';
 </script>
 
-<Tooltip.Root openDelay={0} {...$$restProps}>
+<Tooltip.Root openDelay={0} closeDelay={0} {...$$restProps}>
   <Tooltip.Trigger
     class="border-border-input shadow-btn focus-visible:ring-dark focus-visible:ring-offset-background inline-flex  
   size-4 shrink-0 items-center justify-center rounded-full border bg-black font-sans text-sm font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 dark:bg-white dark:text-black"

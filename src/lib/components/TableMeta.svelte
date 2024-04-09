@@ -229,7 +229,7 @@
     <!-- WIP: should col width be hardcoded? -->
     <!-- should this be somehow set dynamically -->
     <colgroup>
-      <col style="width: 30" />
+      <col style="width: 30%" />
       <col style="width: 30%" />
       <col style="width: 40%" />
     </colgroup>
