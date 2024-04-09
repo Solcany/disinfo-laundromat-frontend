@@ -8,7 +8,7 @@
     type TableHeaderItemData,
     type TableContentRowData
   } from '$models';
-  import TableRow from '$components/TableRow.svelte';
+  import TableContentRow from '$components/TableContentRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
@@ -97,42 +97,6 @@
     });
   }
 
-
-//
-//  $: sortedRows =
-//    sortColumnIndex !== -1 && sortDirection !== SortDirection.None
-//      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber)
-//      : rows;
-//
-//  function sortRows(
-//    rows: TableRowData[],
-//    columnIndex: number,
-//    direction: SortDirection,
-//    areColumnsNumber: boolean[]
-//  ) {
-//    return [...rows].sort((a, b) => {
-//      const aValue = a.data[columnIndex][1];
-//      const bValue = b.data[columnIndex][1];
-//
-//      // Check for null or undefined values
-//      if (aValue == null || bValue == null) {
-//        return aValue == null ? (bValue == null ? 0 : 1) : -1;
-//      }
-//
-//      if (areColumnsNumber[columnIndex]) {
-//        // Handle numeric sorting
-//        return direction === SortDirection.Ascending
-//          ? ascending(+aValue, +bValue)
-//          : descending(+aValue, +bValue);
-//      } else {
-//        // Handle string sorting
-//        return direction === SortDirection.Ascending
-//          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase())
-//          : descending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase());
-//      }
-//    });
-//  }
-//
   function handleHeaderItemClick(index: number): void {
     const clickedColumnLabel = headerData[index].label;
     sortColumnIndex = index;
@@ -172,7 +136,7 @@
     </thead>
     <tbody>
       {#each sortedRows as row, i (row)}
-        <TableRow data={row} />
+        <TableContentRow data={row} />
       {/each}
     </tbody>
   </table>
