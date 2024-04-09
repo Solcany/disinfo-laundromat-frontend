@@ -40,6 +40,11 @@
           </div>
           {/each}
         </td>
+      {:else if key === 'domain' && tags.length > 0}
+
+      <!-- wip continue here. Render Score Bar chart --> 
+
+
       {:else}
       <td class="py-2 pl-4 text-sm text-black dark:text-white">
           <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
