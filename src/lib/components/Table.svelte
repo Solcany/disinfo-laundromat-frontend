@@ -145,19 +145,15 @@
 //    sortStatus[column_label] = sortDirection;
 //  }
 </script>
-<!--
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
-    {#if caption}
-      <caption>{caption}</caption>
-    {/if}
     <colgroup>
       <col style="width: 20%" />
       <col style="width: 20%" />
       <col style="width: 55%" />
       <col style="width: 5%" />
     </colgroup>
-    <thead class="sticky top-0 dark:bg-gray7">
+   <!-- <thead class="sticky top-0 dark:bg-gray7">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}
@@ -167,16 +163,11 @@
           }}
         />
       {/each}
-    </thead>
+    </thead> -->
     <tbody>
--->
-<!--      {#each sortedRows as row, i (row)}
+      {#each rows as row, i (row)}
         <TableRow data={row} />
       {/each}
--->
-<!--
     </tbody>
   </table>
 </div>
--->
-<div/>
