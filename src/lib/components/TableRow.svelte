@@ -1,16 +1,17 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { TableRowData } from '$models';
+  import type { TableContentRowData } from '$models';
   import { cn } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
 
-  export let data: TableRowData;
+  export let data: TableContentRowData;
   let className: string = '';
   export { className as class };
 
-  let domainAssociations = (
-    data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []
+  let tags = (
+    data.hasOwnProperty('tags') ? data.tags : []
   ) as string[];
+
   let isExpanded = false;
 
   function handleClick() {
@@ -18,17 +19,17 @@
   }
 </script>
 
-{#if data.data.length > 0}
+{#if data.dataMain.length > 0}
   <tr class="w-full">
     <!-- row data -->
-    {#each data.data as [key, value]}
-      {#if key === 'domain' && domainAssociations.length > 0}
+    {#each data.dataMain as [key, value]}
+      {#if key === 'domain' && tags.length > 0}
         <td class="border-b-2 border-gray3 text-sm text-black dark:text-white">
           {value}
-          {#each domainAssociations as association}
+          {#each tags as tag}
             <Tooltip>
               <svelte:fragment slot="icon">i</svelte:fragment>
-              <svelte:fragment slot="content">{association}</svelte:fragment>
+              <svelte:fragment slot="content">{tag}</svelte:fragment>
             </Tooltip>
           {/each}
         </td>
@@ -63,7 +64,7 @@
   <!-- expanded row Table -->
   {#if isExpanded && data.dataComplementary.length > 0}
     <tr>
-      <td colSpan={data.data.length + 1}>
+      <td colSpan={data.dataMain.length + 1}>
         <div class="w-full bg-white py-4 dark:bg-gray7">
           <table>
             <tbody>

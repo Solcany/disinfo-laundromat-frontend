@@ -50,17 +50,6 @@ export type TableFingerprintData = Pick<
   'indicators' | 'matches' | 'indicator_metadata'
 >;
 
-export interface ContentDataResult {
-  domain: string;
-  domain_count: number;
-  engines: string[];
-  link_count: number;
-  score: number;
-  snippet: string;
-  source: string[];
-  title: string;
-  url: string;
-}
 
 //export interface ApiAppConfigData { 
 //  [key: string]: {
@@ -84,6 +73,17 @@ export interface ContentDataResult {
 //  }
 //}
 
+export interface ContentDataResult {
+  domain: string;
+  domain_count: number;
+  engines: string[];
+  link_count: number;
+  score: number;
+  snippet: string;
+  source: string[];
+  title: string;
+  url: string;
+}
 
 
 export interface ApiContentData {
@@ -100,8 +100,6 @@ export interface ApiContentData {
   results: ContentDataResult[];
 }
 
-export type TableContentData = Pick<ApiContentData, 'results'>;
-
 export interface ApiIndicatorsData {
   data: Array<any>;
   indicator_metadata: {
@@ -114,10 +112,10 @@ export interface ApiIndicatorsData {
   unique_types: Array<string>;
 }
 
-export interface TableRowData {
-  data: [string, string | number][];
-  dataComplementary: [string, string | number | Array<number> | Array<string>][];
-  domainAssociations?: string[];
+export interface TableContentRowData {
+  dataMain: [string, string | number][];
+  dataComplementary: [string, string | number | number[] | string[]][];
+  tags?: string[];
 }
 
 export type IndicatorData = {
@@ -140,19 +138,18 @@ export enum TableHeaderItemType {
   IndicatorsSummary = 'IndicatorsSummary',
   Empty = 'empty'
 }
-
 export interface TableMetaRowData {
+  [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
   domain: string;
   indicators: TieredIndicator[];
   indicators_summary?: IndicatorsSummary;
   domainAssociations?: string[];
-  [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
 }
 
 export interface TableHeaderItemData {
   label: string;
   key: string;
-  type?: TableHeaderItemType;
+  type: TableHeaderItemType;
   tooltip?: string;
 }
 

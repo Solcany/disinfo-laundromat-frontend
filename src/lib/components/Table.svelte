@@ -3,10 +3,10 @@
   import { cn, includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
   import {
     SortDirection,
-    type ApiContentData,
-    type ApiFingerprintData,
+    TableHeaderItemType,
+    type ContentDataResult,
     type TableHeaderItemData,
-    type TableRowData
+    type TableContentRowData
   } from '$models';
   import TableRow from '$components/TableRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
@@ -14,101 +14,143 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: ApiContentData;
-  export let caption: string;
+  export let data: ContentDataResult[];
   let className: string | undefined = undefined;
   export { className as class };
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
-  let rows: TableRowData[] = [];
-  let sortedRows: TableRowData[] = [];
-  let sortStatus: Record<string, SortDirection> = {};
-  let sortDirection: SortDirection = SortDirection.Ascending;
-  let areColumnsNumber: boolean[] = [];
-  let sortColumnIndex: number = -1;
+  let rows: TableContentRowData[] = [];
+  let sortedRows: TableContentRowData[] = [];
+  
+  $: rows = data && data.length > 0 && headerKeys && headerKeys.length > 0 ? getRows(data, headerKeys) : [];
+ // let sortedRows: TableRowData[] = [];
+ // let sortStatus: Record<string, SortDirection> = {};
+ // let sortDirection: SortDirection = SortDirection.Ascending;
+ // let areColumnsNumber: boolean[] = [];
+ // let sortColumnIndex: number = -1;
 
-  $: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
+//  $: areColumnsNumber = rows.length > 0 ? rows[0].data.map((d: any) => isNumber(d[1])) : [];
 
-  $: rows =
-    data.results && data.results.length > 0
-      ? data.results.map((entry) => {
-          const includedData = includeObjectKeys(entry, headerKeys);
-          const complementaryData = excludeObjectKeys(entry, headerKeys);
-          const domainAssociations = entry.hasOwnProperty('source')
-            ? Object.values(entry.source)
-            : undefined;
-          const { source, ...rest } = complementaryData;
-          const cleanedComplementaryData = Object.entries(rest);
-          const resultObject: TableRowData = {
-            data: Object.entries(includedData),
-            dataComplementary: cleanedComplementaryData
-          };
-          if (domainAssociations !== undefined) {
-            resultObject.domainAssociations = domainAssociations;
-          }
-          return resultObject;
-        })
-      : [];
+ // console.log("from table", data);
 
-  $: sortedRows =
-    sortColumnIndex !== -1 && sortDirection !== SortDirection.None
-      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber)
-      : rows;
+  function getRows(data: ContentDataResult[], 
+                   mainDataKeys: string[]): TableContentRowData[] {
+    if(!data.length) {
+      return []
+    }
+    let rows = data.map((entry) => {
+      // main data are rendered in the row header
+      const dataMain = includeObjectKeys(entry, mainDataKeys);
+      // complementary data are rendered in the expanded row
+      const dataComplementary = excludeObjectKeys(entry, mainDataKeys);
+      // tags are rendered in the row header alongside the first column
+        const tags : string[] | undefined = entry.hasOwnProperty('source')
+          ? Object.values(entry.source)
+          : undefined;
+        // remove source entry from data
+        const { source, ...dataComplementaryRest } = dataComplementary;
+        const row: TableContentRowData = {
+          dataMain: Object.entries(dataMain),
+          dataComplementary: Object.entries(dataComplementaryRest)
+        };
+        if (tags) {
+          row.tags = tags;
+        }
+        return row;
 
-  function sortRows(
-    rows: TableRowData[],
+      })
+    return rows;
+  }
+ function sortRows(
+    rows: TableContentRowData[],
+    header: TableHeaderItemData[],
     columnIndex: number,
-    direction: SortDirection,
-    areColumnsNumber: boolean[]
-  ) {
-    return [...rows].sort((a, b) => {
-      const aValue = a.data[columnIndex][1];
-      const bValue = b.data[columnIndex][1];
+    direction: SortDirection
+  ): TableContentRowData[] {
+    const column_type = header[columnIndex].type;
 
-      // Check for null or undefined values
-      if (aValue == null || bValue == null) {
-        return aValue == null ? (bValue == null ? 0 : 1) : -1;
-      }
+    return rows.sort((a, b) => {
+      const aValue = a.dataMain[columnIndex][1];
+      const bValue = b.dataMain[columnIndex][1];
 
-      if (areColumnsNumber[columnIndex]) {
-        // Handle numeric sorting
-        return direction === SortDirection.Ascending
-          ? ascending(+aValue, +bValue)
-          : descending(+aValue, +bValue);
-      } else {
-        // Handle string sorting
-        return direction === SortDirection.Ascending
-          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase())
-          : descending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase());
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return -1;
+      if (bValue == null) return 1;
+
+      switch (column_type) {
+        case TableHeaderItemType.String:
+          return direction === SortDirection.Ascending
+            ? ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase())
+            : descending(String(aValue).toLowerCase(), String(bValue).toLowerCase());
+        case TableHeaderItemType.Number:
+          return direction === SortDirection.Ascending
+            ? ascending(Number(aValue), Number(bValue))
+            : descending(Number(aValue), Number(bValue));
+        default:
+          return 0;
       }
     });
   }
 
-  function handleHeaderItemClick(i: number, label: string): void {
-    sortColumnIndex = i;
-    updateSortStatus(label);
-  }
 
-  function updateSortStatus(column_label: string): void {
-    // reset all to "none"
-    headerData.forEach((item: TableHeaderItemData) => {
-      sortStatus[item.label] = SortDirection.None;
-    });
-
-    sortDirection === SortDirection.Ascending
-      ? (sortDirection = SortDirection.Descending)
-      : (sortDirection = SortDirection.Ascending);
-    sortStatus[column_label] = sortDirection;
-  }
+//
+//  $: sortedRows =
+//    sortColumnIndex !== -1 && sortDirection !== SortDirection.None
+//      ? sortRows(rows, sortColumnIndex, sortDirection, areColumnsNumber)
+//      : rows;
+//
+//  function sortRows(
+//    rows: TableRowData[],
+//    columnIndex: number,
+//    direction: SortDirection,
+//    areColumnsNumber: boolean[]
+//  ) {
+//    return [...rows].sort((a, b) => {
+//      const aValue = a.data[columnIndex][1];
+//      const bValue = b.data[columnIndex][1];
+//
+//      // Check for null or undefined values
+//      if (aValue == null || bValue == null) {
+//        return aValue == null ? (bValue == null ? 0 : 1) : -1;
+//      }
+//
+//      if (areColumnsNumber[columnIndex]) {
+//        // Handle numeric sorting
+//        return direction === SortDirection.Ascending
+//          ? ascending(+aValue, +bValue)
+//          : descending(+aValue, +bValue);
+//      } else {
+//        // Handle string sorting
+//        return direction === SortDirection.Ascending
+//          ? ascending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase())
+//          : descending(aValue.toString().toLowerCase(), bValue.toString().toLowerCase());
+//      }
+//    });
+//  }
+//
+//  function handleHeaderItemClick(i: number, label: string): void {
+//    sortColumnIndex = i;
+//    updateSortStatus(label);
+//  }
+//
+//  function updateSortStatus(column_label: string): void {
+//    // reset all to "none"
+//    headerData.forEach((item: TableHeaderItemData) => {
+//      sortStatus[item.label] = SortDirection.None;
+//    });
+//
+//    sortDirection === SortDirection.Ascending
+//      ? (sortDirection = SortDirection.Descending)
+//      : (sortDirection = SortDirection.Ascending);
+//    sortStatus[column_label] = sortDirection;
+//  }
 </script>
-
+<!--
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
     {#if caption}
       <caption>{caption}</caption>
     {/if}
-    <!-- WIP: should col width be hardcoded? -->
-    <!-- should this be somehow set dynamically -->
     <colgroup>
       <col style="width: 20%" />
       <col style="width: 20%" />
@@ -127,12 +169,14 @@
       {/each}
     </thead>
     <tbody>
-      {#each sortedRows as row, i (row)}
+-->
+<!--      {#each sortedRows as row, i (row)}
         <TableRow data={row} />
       {/each}
+-->
+<!--
     </tbody>
   </table>
 </div>
-
-<style>
-</style>
+-->
+<div/>

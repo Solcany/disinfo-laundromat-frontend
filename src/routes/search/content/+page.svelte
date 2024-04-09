@@ -18,6 +18,11 @@
   let contentFormData = $contentFormDataStore;
   // wip: is this reactive binding necessary?
   $: formConfig = data.contentAdvancedFormConfig;
+
+  $: tableData = $contentStore
+    ? $contentStore.results 
+    : null;
+
 </script>
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
@@ -77,8 +82,12 @@
       </div>
     {/if}
     <div class="flex h-full w-full">
-      {#if $contentStore && $contentStore.results && $contentStore.results.length > 0}
-        <Table caption="" class="flex-1" data={$contentStore} headerData={TABLE_CONTENT_HEADER} />
+      {#if tableData && tableData.length > 0}
+        <Table 
+          class="flex-1" 
+          data={tableData} 
+          headerData={TABLE_CONTENT_HEADER} 
+        />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

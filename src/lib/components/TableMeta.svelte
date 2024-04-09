@@ -17,8 +17,8 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: TableFingerprintData;
-  export let caption: string;
+  export let data: TableFingerprintData; 
+
   let className: string | undefined = undefined;
   export { className as class };
   let sortStatus: Record<string, SortDirection> = {};
@@ -90,6 +90,7 @@
   }
 
   function getRows(data: MatchDataItem[]): TableMetaRowData[] {
+    // group match data by indicator tiers
     const grouped: Record<
       string,
       {
@@ -100,11 +101,13 @@
     > = {};
 
     data.forEach(({ domain_name_y, match_type, match_value }) => {
+      // extract tier and type from indicator string 
       const match = match_type.match(/^(\d+)-(.+)$/);
       if (!match) return;
       const tier: string = `tier${match[1]}`;
       const type: string = match[2];
-
+      
+      // initialise object props
       if (!grouped[domain_name_y]) {
         grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
       }
@@ -125,7 +128,6 @@
     // Transform the grouped data into the final structure
     const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
       const domainGroup = grouped[domainKey];
-      // Convert indicators from the intermediate structure to an array of TieredIndicator.
       const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators)
         .map((tierKey) => {
           const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(
@@ -223,9 +225,6 @@
 
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
-    {#if caption}
-      <caption>{caption}</caption>
-    {/if}
     <!-- WIP: should col width be hardcoded? -->
     <!-- should this be somehow set dynamically -->
     <colgroup>
