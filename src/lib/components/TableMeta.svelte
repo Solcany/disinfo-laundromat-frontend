@@ -11,7 +11,6 @@
     type TableHeaderItemData,
     type TableMetaRowData,
   } from '$models';
-
   import TableMetaRow from '$components/TableMetaRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
@@ -234,7 +233,7 @@
       <col style="width: 30%" />
       <col style="width: 40%" />
     </colgroup>
-    <thead class="sticky top-0 z-50 w-full border-b-[1px] border-gray3 shadow-xl dark:bg-gray7">
+    <thead class="sticky top-0 z-50 w-full dark:bg-gray7 box-shadow-border-bottom">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}

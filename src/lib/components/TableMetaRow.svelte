@@ -29,10 +29,9 @@
   aria-label="click to expand row"
   class="w-full border-gray3 hover:bg-black {isExpanded
     ? 'border-b-0 hover:cursor-n-resize'
-    : 'border-b-[1px] hover:cursor-s-resize'}"
->
+    : 'border-b-[1px] hover:cursor-s-resize'}">
   <!-- the domain column -->
-  <td class="py-6 pl-4 text-sm text-black dark:text-white">
+  <td class="py-1 pl-4 text-sm text-black dark:text-white">
     {#if data.domain}
       <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
       {#if data.domainAssociations && data.domainAssociations.length > 0}
@@ -49,8 +48,8 @@
   <!-- the indicator sums column -->
   <td class="text-sm text-black dark:text-white">
     {#if data.indicators_summary}
-      {@const rxy = 2}
-      {@const h = 7}
+      {@const rxy = 1}
+      {@const h = 5}
       <div class="my-1">
         {#if data.indicators_summary.tier1}
           <div class="relative block">

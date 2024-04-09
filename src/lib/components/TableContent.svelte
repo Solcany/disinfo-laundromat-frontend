@@ -123,7 +123,7 @@
       <col style="width: 55%" />
       <col style="width: 5%" />
     </colgroup>
-   <thead class="sticky top-0 dark:bg-gray7">
+   <thead class="sticky top-0 dark:bg-gray7 box-shadow-border-bottom">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}

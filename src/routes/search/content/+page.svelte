@@ -74,12 +74,12 @@
   <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
     {#if $contentFormDataStore?.has('contentToSearch')}
       <div>
-        <span class="block py-2 text-xs dark:text-white">
+        <span class="block pl-2 py-2 text-xs border-b-[1px] border-gray5 dark:text-white">
           Results for: {$contentFormDataStore.get('contentToSearch')}</span
         >
       </div>
     {/if}
-    <div class="flex h-full w-full">
+    <div class="flex w-full">
       {#if tableData && tableData.length > 0}
         <TableContent 
           class="flex-1" 
