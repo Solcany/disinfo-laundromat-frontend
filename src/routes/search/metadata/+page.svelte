@@ -85,7 +85,7 @@
     <div>
       {#if metadataFormData?.has('url')}
         <span class="block py-2 text-xs dark:text-white">
-          Results for: {metadataFormData.get('contentToSearch')}</span
+          Results for: {metadataFormData.get('url')}</span
         >
       {/if}
     </div>

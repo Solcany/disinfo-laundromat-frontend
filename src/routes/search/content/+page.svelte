@@ -5,7 +5,7 @@
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
   import Form from '$components/Form.svelte';
-  import Table from '$components/Table.svelte';
+  import TableContent from '$components/TableContent.svelte';
   import Link from '$components/Link.svelte';
   import Separator from '$components/Separator.svelte';
   import P from '$components/P.svelte';
@@ -83,7 +83,7 @@
     {/if}
     <div class="flex h-full w-full">
       {#if tableData && tableData.length > 0}
-        <Table 
+        <TableContent 
           class="flex-1" 
           data={tableData} 
           headerData={TABLE_CONTENT_HEADER} 

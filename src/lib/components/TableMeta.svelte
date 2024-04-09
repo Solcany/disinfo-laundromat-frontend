@@ -1,15 +1,16 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
-  import type {
-    TableFingerprintData,
-    IndicatorData,
-    TieredIndicator,
-    IndicatorsSummary,
-    TableHeaderItemData,
-    TableMetaRowData
+  import {
+    SortDirection,
+    TableHeaderItemType,
+    type TableFingerprintData,
+    type IndicatorData,
+    type TieredIndicator,
+    type IndicatorsSummary,
+    type TableHeaderItemData,
+    type TableMetaRowData,
   } from '$models';
-  import { SortDirection, TableHeaderItemType } from '$models';
 
   import TableMetaRow from '$components/TableMetaRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
