@@ -18,7 +18,7 @@
   } from '$models';
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
-  import { contentFormDataStore } from '$stores/input';
+  import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
   export let data;
@@ -65,6 +65,7 @@
           {#if contentBasicFormConfig}
             <Form
               config={contentBasicFormConfig}
+              formData={$contentFormDataStore}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
@@ -82,6 +83,7 @@
           {#if metadataBasicFormConfig}
             <Form
               config={metadataBasicFormConfig}
+              formData={$metadataFormDataStore}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />

@@ -15,8 +15,6 @@
   import { contentStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
   export let data;
-  let contentFormData = $contentFormDataStore;
-  // wip: is this reactive binding necessary?
   $: formConfig = data.contentAdvancedFormConfig;
 
   $: tableData = $contentStore
@@ -28,7 +26,7 @@
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
-      <Form config={formConfig} formData={contentFormData} onSubmit={handleApiSubmit} />
+      <Form config={formConfig} formData={$contentFormDataStore} onSubmit={handleApiSubmit} />
     {/if}
 
     <Separator/>
@@ -74,10 +72,10 @@
     -->
   </section>
   <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
-    {#if contentFormData?.has('contentToSearch')}
+    {#if $contentFormDataStore?.has('contentToSearch')}
       <div>
         <span class="block py-2 text-xs dark:text-white">
-          Results for: {contentFormData.get('contentToSearch')}</span
+          Results for: {$contentFormDataStore.get('contentToSearch')}</span
         >
       </div>
     {/if}

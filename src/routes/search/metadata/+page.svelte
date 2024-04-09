@@ -15,7 +15,6 @@
   import { handleApiSubmit } from '$form';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
-  let metadataFormData = $metadataFormDataStore;
 
   export let data;
 
@@ -33,6 +32,7 @@
     {#if data.metadataAdvancedFormConfig}
       <Form
         config={data.metadataAdvancedFormConfig}
+        formData={$metadataFormDataStore}
         onSubmit={handleApiSubmit}
         orientation={FormOrientation.Vertical}
       />
@@ -83,9 +83,9 @@
 
   <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
     <div>
-      {#if metadataFormData?.has('url')}
+      {#if $metadataFormDataStore?.has('url')}
         <span class="block py-2 text-xs dark:text-white">
-          Results for: {metadataFormData.get('url')}</span
+          Results for: {$metadataFormDataStore.get('url')}</span
         >
       {/if}
     </div>
