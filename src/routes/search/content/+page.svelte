@@ -17,10 +17,7 @@
   export let data;
   $: formConfig = data.contentAdvancedFormConfig;
 
-  $: tableData = $contentStore
-    ? $contentStore.results 
-    : null;
-
+  $: tableData = $contentStore ? $contentStore.results : null;
 </script>
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
@@ -29,10 +26,17 @@
       <Form config={formConfig} formData={$contentFormDataStore} onSubmit={handleApiSubmit} />
     {/if}
 
-    <Separator/>
-    <P> Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link href="/about/#how-to-use-the-laundromat">read the documentation</Link></P>
+    <Separator />
+    <P>
+      Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link
+        href="/about/#how-to-use-the-laundromat">read the documentation</Link
+      ></P
+    >
 
-    <P class="pt-2"> Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link> to see what’s possible</P>
+    <P class="pt-2">
+      Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link
+      > to see what’s possible</P
+    >
     <!--
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
@@ -71,21 +75,17 @@
 
     -->
   </section>
-  <section class="col-span-9 col-start-auto w-full flex flex-col border-t-[1px] border-gray5">
+  <section class="col-span-9 col-start-auto flex w-full flex-col border-t-[1px] border-gray5">
     {#if $contentFormDataStore?.has('contentToSearch')}
       <div>
-        <span class="block pl-2 py-2 text-xs border-b-[1px] border-gray5 dark:text-white">
+        <span class="block border-b-[1px] border-gray5 py-2 pl-2 text-xs dark:text-white">
           Results for: {$contentFormDataStore.get('contentToSearch')}</span
         >
       </div>
     {/if}
     <div class="flex flex-1">
       {#if tableData && tableData.length > 0}
-        <TableContent 
-          class="flex-1" 
-          data={tableData} 
-          headerData={TABLE_CONTENT_HEADER} 
-        />
+        <TableContent class="flex-1" data={tableData} headerData={TABLE_CONTENT_HEADER} />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

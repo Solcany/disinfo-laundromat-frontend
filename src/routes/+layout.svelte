@@ -12,7 +12,7 @@
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
   <Header class="bg-white px-3 md:px-8 dark:bg-gray6">
     <H1><a href="/">{APP_TITLE}</a></H1>
-    <Nav class="pt-3 md:pt-0"/>
+    <Nav class="pt-3 md:pt-0" />
   </Header>
   <ProgressBar class="absolute left-0 top-0" />
   <slot />

@@ -20,30 +20,26 @@
 
   const headerKeys: string[] = headerData.map(({ key }) => key);
   let rows: TableContentRowData[] = [];
-  let sortedRows: TableContentRowData[] = []; 
+  let sortedRows: TableContentRowData[] = [];
   let sortDirection: SortDirection = SortDirection.Ascending;
-  let sortStatus: Record<string, SortDirection> = {}; 
+  let sortStatus: Record<string, SortDirection> = {};
   let sortColumnIndex: number = -1;
 
-  $: rows = data && data.length > 0 && headerKeys && headerKeys.length > 0 ? getRows(data, headerKeys) : [];
+  $: rows =
+    data && data.length > 0 && headerKeys && headerKeys.length > 0 ? getRows(data, headerKeys) : [];
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
-      sortedRows = sortRows(rows, 
-                            headerData, 
-                            sortColumnIndex, 
-                            sortDirection);
+      sortedRows = sortRows(rows, headerData, sortColumnIndex, sortDirection);
     } else {
       sortedRows = rows;
     }
   }
 
-  function getRows(data: ContentDataResult[], 
-                   mainDataKeys: string[]): TableContentRowData[] {
-    if(!data.length) {
-      return []
+  function getRows(data: ContentDataResult[], mainDataKeys: string[]): TableContentRowData[] {
+    if (!data.length) {
+      return [];
     }
-    console.log(data[0])
     let rows = data.map((entry) => {
       // main data are rendered in the row header
       let dataMain = includeObjectKeys(entry, mainDataKeys);
@@ -51,27 +47,26 @@
       // complementary data are rendered in the expanded row
       const dataComplementary = excludeObjectKeys(entry, mainDataKeys);
       // tags are rendered in the row header alongside the first column
-        const tags : string[] | undefined = entry.hasOwnProperty('source')
-          ? Object.values(entry.source)
-          : undefined;
+      const tags: string[] | undefined = entry.hasOwnProperty('source')
+        ? Object.values(entry.source)
+        : undefined;
 
-        // manually insert content snippet to render it in row header & expanded row
-        dataComplementary["Content snippet"] = entry.snippet;
-        // remove source entry from data
-        const { source, ...dataComplementaryRest } = dataComplementary;
-        const row: TableContentRowData = {
-          dataMain: Object.entries(dataMain),
-          dataComplementary: Object.entries(dataComplementaryRest)
-        };
-        if (tags) {
-          row.tags = tags;
-        }
-        return row;
-
-      })
+      // manually insert content snippet to render it in row header & expanded row
+      dataComplementary['Content snippet'] = entry.snippet;
+      // remove source entry from data
+      const { source, ...dataComplementaryRest } = dataComplementary;
+      const row: TableContentRowData = {
+        dataMain: Object.entries(dataMain),
+        dataComplementary: Object.entries(dataComplementaryRest)
+      };
+      if (tags) {
+        row.tags = tags;
+      }
+      return row;
+    });
     return rows;
   }
- function sortRows(
+  function sortRows(
     rows: TableContentRowData[],
     header: TableHeaderItemData[],
     columnIndex: number,
@@ -120,6 +115,7 @@
     sortStatus[column_label] = sortDirection;
   }
 </script>
+
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
     <colgroup>
@@ -128,7 +124,7 @@
       <col style="width: 55%" />
       <col style="width: 5%" />
     </colgroup>
-   <thead class="sticky top-0 dark:bg-gray7 box-shadow-border-bottom">
+    <thead class="box-shadow-border-bottom sticky top-0 dark:bg-gray7">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}

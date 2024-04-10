@@ -50,8 +50,7 @@ export type TableFingerprintData = Pick<
   'indicators' | 'matches' | 'indicator_metadata'
 >;
 
-
-//export interface ApiAppConfigData { 
+//export interface ApiAppConfigData {
 //  [key: string]: {
 //    countries: Record<string, string>;
 //    defaults: {
@@ -84,7 +83,6 @@ export interface ContentDataResult {
   title: string;
   url: string;
 }
-
 
 export interface ApiContentData {
   countries: Record<string, string>;

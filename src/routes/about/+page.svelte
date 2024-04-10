@@ -9,8 +9,8 @@
 </script>
 
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">
-    <H1 id="about">About</H1>
-    <section class="pt-8">
+  <H1 id="about">About</H1>
+  <section class="pt-8">
     <H2 class="pb-4" id="the-laundromat">The Laundromat</H2>
     <P class="pb-2">
       The laundromat tool provides two functions: Content Similarity Search and Domain Forensics
@@ -100,8 +100,8 @@
       website removed from the list or have a potential list of new items to include, email pbenzoni
       (at) gmfus.org
     </P>
-    </section>
-    <section class="pt-8">
+  </section>
+  <section class="pt-8">
     <H2 class="pb-4" id="how-to-use-the-laundromat">How to use the Laundromat</H2>
     <H3 class="pb-4" id="content-similarity-search">Content Similarity Search</H3>
     <P class="pb-2">
@@ -145,9 +145,9 @@
       and a list of sites which match (or are extremely similart to) those indicators. Indicators, and
       thus matches, are broken into the three tiers described above.
     </P>
-    </section>
+  </section>
 
-    <section class="pt-8">
+  <section class="pt-8">
     <H2 class="py-4" id="partners-sponsors-disclaimers">Partners, Sponsors, Disclaimers</H2>
     <P class="pb-2">
       The Laundromat Tool is made possible with the support of European Media and Information Fund
@@ -261,5 +261,5 @@
       This disclaimer is subject to updates and modifications. Users are encouraged to review it
       periodically.
     </P>
-    </section>
+  </section>
 </div>

@@ -10,7 +10,6 @@
   export let data;
   let indicatorMetadata: Pick<ApiIndicatorsData, 'indicator_metadata'>;
   $: indicatorMetadata = data.indicatorMetadata;
-
 </script>
 
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">

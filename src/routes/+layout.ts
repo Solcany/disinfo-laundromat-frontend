@@ -31,7 +31,7 @@ export const load: LayoutLoad = async () => {
     }
   }
   if (response.data) {
-    console.log(response.data)
+    console.log(response.data);
     return {
       contentBasicFormConfig: enhanceFormConfig(
         CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
@@ -49,7 +49,7 @@ export const load: LayoutLoad = async () => {
         METADATA_SIMILARITY_ADVANCED_FORM_CONFIG,
         response.data
       ),
-      indicatorMetadata: response.data.indicator_metadata,
+      indicatorMetadata: response.data.indicator_metadata
     };
   }
 

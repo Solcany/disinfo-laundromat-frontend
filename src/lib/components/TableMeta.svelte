@@ -9,7 +9,7 @@
     type TieredIndicator,
     type IndicatorsSummary,
     type TableHeaderItemData,
-    type TableMetaRowData,
+    type TableMetaRowData
   } from '$models';
   import TableMetaRow from '$components/TableMetaRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
@@ -17,7 +17,7 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: TableFingerprintData; 
+  export let data: TableFingerprintData;
 
   let className: string | undefined = undefined;
   export { className as class };
@@ -101,12 +101,12 @@
     > = {};
 
     data.forEach(({ domain_name_y, match_type, match_value }) => {
-      // extract tier and type from indicator string 
+      // extract tier and type from indicator string
       const match = match_type.match(/^(\d+)-(.+)$/);
       if (!match) return;
       const tier: string = `tier${match[1]}`;
       const type: string = match[2];
-      
+
       // initialise object props
       if (!grouped[domain_name_y]) {
         grouped[domain_name_y] = { domain: domain_name_y, indicators: {}, indicators_summary: {} };
@@ -233,7 +233,7 @@
       <col style="width: 30%" />
       <col style="width: 40%" />
     </colgroup>
-    <thead class="sticky top-0 z-50 w-full dark:bg-gray7 box-shadow-border-bottom">
+    <thead class="box-shadow-border-bottom sticky top-0 z-50 w-full dark:bg-gray7">
       {#each headerData as data, i (data)}
         <TableHeaderItem
           {data}
