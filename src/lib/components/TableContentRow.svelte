@@ -31,7 +31,7 @@
     <!-- row data -->
     {#each data.dataMain as [key, value]}
       {#if key === 'domain' && tags.length > 0}
-      <td class="h-10 first:pl-4 text-sm text-black dark:text-white">
+      <td class="h-10 first:pl-4 pr-6 text-sm text-black dark:text-white">
           {value}
           {#each tags as tag}
           <div class="inline-block mr-2">
@@ -44,7 +44,7 @@
         </td>
       {:else if key === 'score'}
       <td class="h-10 text-sm first:pl-4 text-black dark:text-white">
-        <div class="my-1">
+        <div class="my-1 pr-6">
             <div class="relative block">
               <Rect height_px={5} class="relative fill-gray6" rx={1} ry={1} />
               <RectMapped
@@ -58,9 +58,8 @@
             </div>
         </div>
       </td>
-
       {:else}
-      <td class="h-10 first:pl-4 text-sm text-black dark:text-white">
+      <td class="h-10 first:pl-4 pr-6 text-sm text-black dark:text-white">
           <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
             {value}
           </div>
