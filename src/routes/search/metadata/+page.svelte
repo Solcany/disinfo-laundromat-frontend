@@ -81,7 +81,7 @@
   </section>
   -->
 
-  <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
+  <section class="col-span-9 col-start-auto w-full flex flex-col border-t-[1px] border-gray5">
     <div>
       {#if $metadataFormDataStore?.has('url')}
         <span class="block pl-4 py-2 text-xs  dark:text-white border-b-[1px] border-gray5">
@@ -89,7 +89,7 @@
         >
       {/if}
     </div>
-    <div class="flex w-full">
+    <div class="flex flex-1">
       {#if tableData}
         <TableMeta class="flex-1" data={tableData} headerData={TABLE_METADATA_HEADER} />
       {:else}

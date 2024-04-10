@@ -31,7 +31,7 @@
     ? 'border-b-0 hover:cursor-n-resize'
     : 'border-b-[1px] hover:cursor-s-resize'}">
   <!-- the domain column -->
-  <td class="py-1 pl-4 text-sm text-black dark:text-white">
+  <td class="h-10 first:pl-4 text-sm text-black dark:text-white">
     {#if data.domain}
       <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
       {#if data.domainAssociations && data.domainAssociations.length > 0}
@@ -46,7 +46,7 @@
   </td>
 
   <!-- the indicator sums column -->
-  <td class="text-sm text-black dark:text-white">
+  <td class="h-10 text-sm first:pl-4 text-black dark:text-white">
     {#if data.indicators_summary}
       {@const rxy = 1}
       {@const h = 5}

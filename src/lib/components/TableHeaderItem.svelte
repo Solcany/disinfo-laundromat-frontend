@@ -16,7 +16,7 @@
 {:else}
   <th class={cn('', className)} role="columnheader" scope="col">
     <div
-      class="flex items-center px-4 py-2 font-sans text-lg font-light text-black dark:text-white"
+      class="flex items-center  py-2 font-sans text-lg font-light text-black dark:text-white"
     >
       {data.label}
       <button

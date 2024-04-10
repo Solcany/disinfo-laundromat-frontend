@@ -71,7 +71,7 @@
 
     -->
   </section>
-  <section class="col-span-9 col-start-auto w-full border-t-[1px] border-gray5">
+  <section class="col-span-9 col-start-auto w-full flex flex-col border-t-[1px] border-gray5">
     {#if $contentFormDataStore?.has('contentToSearch')}
       <div>
         <span class="block pl-2 py-2 text-xs border-b-[1px] border-gray5 dark:text-white">
@@ -79,7 +79,7 @@
         >
       </div>
     {/if}
-    <div class="flex w-full">
+    <div class="flex flex-1">
       {#if tableData && tableData.length > 0}
         <TableContent 
           class="flex-1" 

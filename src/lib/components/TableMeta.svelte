@@ -241,6 +241,7 @@
           onClick={() => {
             handleHeaderItemClick(i);
           }}
+          class="first:pl-4"
         />
       {/each}
     </thead>
