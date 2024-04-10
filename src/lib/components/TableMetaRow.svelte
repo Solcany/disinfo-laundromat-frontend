@@ -28,8 +28,8 @@
   on:click={handleClick}
   aria-label="click to expand row"
   role="button"
-  class="w-full border-gray3 hover:bg-black {isExpanded
-    ? 'border-b-0 hover:cursor-n-resize'
+  class="w-full border-gray6 hover:bg-black {isExpanded
+    ? 'border-b-0 hover:cursor-n-resize bg-black'
     : 'border-b-[1px] hover:cursor-s-resize'}"
 >
   <!-- the domain column -->
@@ -133,7 +133,7 @@
       {#each data.indicators as entry}
         {#if entry.tier}
           {#if entry.tier === 1}
-            <div class="block w-full py-4 pl-3">
+            <div class="block w-full py-2 pl-3">
               <H3 class="block w-full text-indicator-1 dark:text-indicator-1"
                 >Conclusive Metadata</H3
               >
@@ -154,7 +154,7 @@
                         </div>
                         <ul>
                           {#each indicator.value as value}
-                            <li class="py-2 text-sm text-black dark:text-white">{value}</li>
+                            <li class="py-1 text-sm text-black dark:text-white">{value}</li>
                           {/each}
                         </ul>
                       </div>
@@ -164,7 +164,7 @@
               {/if}
             </div>
           {:else if entry.tier === 2}
-            <div class="w-full py-4 pl-3">
+            <div class="w-full py-2 pl-3">
               <H3 class="block w-full text-indicator-2 dark:text-indicator-2"
                 >Associative Metadata</H3
               >
@@ -185,7 +185,7 @@
                         </div>
                         <ul>
                           {#each indicator.value as value}
-                            <li class="py-2 text-sm text-black dark:text-white">{value}</li>
+                            <li class="py-1 text-sm text-black dark:text-white">{value}</li>
                           {/each}
                         </ul>
                       </div>
@@ -195,7 +195,7 @@
               {/if}
             </div>
           {:else if entry.tier === 3}
-            <div class="w-full py-4 pl-3">
+            <div class="w-full py-2 pl-3">
               <H3 class="block w-full text-indicator-3 dark:text-indicator-3">Tertiary Metadata</H3>
               {#if entry.data && entry.data.length > 0}
                 <div class="grid w-full grid-cols-3 gap-4 pt-2">
@@ -214,7 +214,7 @@
                         </div>
                         <ul>
                           {#each indicator.value as value}
-                            <li class="py-2 text-sm text-black dark:text-white">{value}</li>
+                            <li class="py-1 text-sm text-black dark:text-white">{value}</li>
                           {/each}
                         </ul>
                       </div>
