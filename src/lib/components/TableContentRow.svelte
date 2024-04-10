@@ -6,6 +6,7 @@
   import Link from '$components/Link.svelte';
   import Rect from '$components/Rect.svelte';
   import RectMapped from '$components/RectMapped.svelte';
+  import H4 from '$components/H4.svelte';
 
   export let data: TableContentRowData;
   let className: string = '';
@@ -24,7 +25,7 @@
   <tr
     on:click={handleClick}
     aria-label="click to expand row"
-role="button"
+    role="button"
     class="w-full border-gray3 hover:bg-black {isExpanded
       ? 'border-b-0 hover:cursor-n-resize'
       : 'border-b-[1px] hover:cursor-s-resize'}"
@@ -88,8 +89,10 @@ role="button"
             <tbody>
               {#each data.dataComplementary as [key, value]}
                 <tr>
-                  <th class="pl-4 text-left font-sans text-sm text-black dark:text-white">
-                    {key}
+                  <th class="pl-4">
+                    <H4 class="text-left">
+                      {key}
+                    </H4>
                   </th>
                 </tr>
                 <tr>
