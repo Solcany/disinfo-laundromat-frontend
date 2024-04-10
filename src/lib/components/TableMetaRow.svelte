@@ -27,6 +27,7 @@
 <tr
   on:click={handleClick}
   aria-label="click to expand row"
+  role="button"
   class="w-full border-gray3 hover:bg-black {isExpanded
     ? 'border-b-0 hover:cursor-n-resize'
     : 'border-b-[1px] hover:cursor-s-resize'}"
@@ -109,6 +110,7 @@
     {/if}
   </td>
 
+  <!-- expand row glyph -->
   <td class="align-middle">
     <div class="flex w-full justify-end pr-3">
       {#if isExpanded}
@@ -122,7 +124,6 @@
       {/if}
     </div>
   </td>
-  <td></td>
 </tr>
 
 <!-- expanded row -->

@@ -33,7 +33,7 @@
       ></P
     >
 
-    <P class="pt-2">
+    <P class="pt-2 pb-6">
       Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link
       > to see what’s possible</P
     >

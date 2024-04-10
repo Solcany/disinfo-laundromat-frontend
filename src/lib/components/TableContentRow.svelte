@@ -24,6 +24,7 @@
   <tr
     on:click={handleClick}
     aria-label="click to expand row"
+role="button"
     class="w-full border-gray3 hover:bg-black {isExpanded
       ? 'border-b-0 hover:cursor-n-resize'
       : 'border-b-[1px] hover:cursor-s-resize'}"
@@ -63,25 +64,21 @@
         </div>
       </td>
     {/each}
-    <!-- expand row button -->
-    <td class="align-middle">
-      <button
-        on:click={handleClick}
-        aria-label="expand row"
-        class="align-center flex items-center px-3"
-      >
-        {#if isExpanded}
-          <span class="shrink-0">
-            <CaretDown class="fill-black dark:fill-white" weight="bold" size={20} />
-          </span>
-        {:else}
-          <span class="shrink-0"
-            ><CaretUp class="fill-black dark:fill-white" weight="bold" size={20} /></span
-          >
-        {/if}
-      </button>
-    </td><td> </td></tr
-  >
+  <!-- expand row glyph -->
+  <td class="align-middle">
+    <div class="flex w-full justify-end pr-3">
+      {#if isExpanded}
+        <span class="shrink-0">
+          <CaretUp class="fill-black dark:fill-white" weight="bold" size={20} />
+        </span>
+      {:else}
+        <span class="shrink-0"
+          ><CaretDown class="fill-black dark:fill-white" weight="bold" size={20} /></span
+        >
+      {/if}
+    </div>
+  </td>
+</tr>
   <!-- expanded row inner table -->
   {#if isExpanded && data.dataComplementary.length > 0}
     <tr class="border-b-[1px] border-gray3 bg-black">
@@ -96,7 +93,7 @@
                   </th>
                 </tr>
                 <tr>
-                  <td class="pb-4 pl-4 font-sans text-sm text-black dark:text-white">
+                  <td class="pb-2 pl-4 font-sans text-sm text-black dark:text-white">
                   {#if key === 'url'}
                     <Link href={domainToUrl(String(value))}>{value}</Link>
                   {:else}
