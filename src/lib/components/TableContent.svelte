@@ -43,15 +43,20 @@
     if(!data.length) {
       return []
     }
+    console.log(data[0])
     let rows = data.map((entry) => {
       // main data are rendered in the row header
-      const dataMain = includeObjectKeys(entry, mainDataKeys);
+      let dataMain = includeObjectKeys(entry, mainDataKeys);
+
       // complementary data are rendered in the expanded row
       const dataComplementary = excludeObjectKeys(entry, mainDataKeys);
       // tags are rendered in the row header alongside the first column
         const tags : string[] | undefined = entry.hasOwnProperty('source')
           ? Object.values(entry.source)
           : undefined;
+
+        // manually insert content snippet to render it in row header & expanded row
+        dataComplementary["Content snippet"] = entry.snippet;
         // remove source entry from data
         const { source, ...dataComplementaryRest } = dataComplementary;
         const row: TableContentRowData = {

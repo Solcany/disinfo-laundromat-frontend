@@ -1,8 +1,9 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { TableContentRowData } from '$models';
-  import { cn } from '$utils';
+  import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
+  import Link from '$components/Link.svelte';
   import Rect from '$components/Rect.svelte';
   import RectMapped from '$components/RectMapped.svelte';
 
@@ -30,9 +31,10 @@
     : 'border-b-[1px] hover:cursor-s-resize'}">
     <!-- row data -->
     {#each data.dataMain as [key, value]}
-      {#if key === 'domain' && tags.length > 0}
+      {#if key === 'domain'}
       <td class="h-10 first:pl-4 pr-6 text-sm text-black dark:text-white">
-          {value}
+          <Link href={domainToUrl(String(value))}>{value}</Link>
+          {#if tags.length > 0}
           {#each tags as tag}
           <div class="inline-block mr-2">
             <Tooltip>
@@ -41,6 +43,7 @@
             </Tooltip>
           </div>
           {/each}
+          {/if}
         </td>
       {:else if key === 'score'}
       <td class="h-10 text-sm first:pl-4 text-black dark:text-white">
