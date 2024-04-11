@@ -110,12 +110,6 @@ export interface ApiIndicatorsData {
   unique_types: Array<string>;
 }
 
-export interface TableContentRowData {
-  dataMain: [string, string | number][];
-  dataComplementary: [string, string | number | number[] | string[]][];
-  tags?: string[];
-}
-
 export type IndicatorData = {
   type: string;
   value: string[];
@@ -133,7 +127,11 @@ export type IndicatorsSummary = {
 export enum TableHeaderItemType {
   Number = 'number',
   String = 'string',
+  NumberArray ='numberArray',
+  StringArray = 'stringArray',
   IndicatorsSummary = 'IndicatorsSummary',
+  MatchScore = 'MatchScore',
+  Url = 'url',
   Empty = 'empty'
 }
 export interface TableMetaRowData {

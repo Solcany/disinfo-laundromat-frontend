@@ -11,7 +11,6 @@
   import Separator from '$components/Separator.svelte';
   import P from '$components/P.svelte';
   import H4 from '$components/H4.svelte';
-  import { TABLE_CONTENT_HEADER } from '$config';
   import { handleApiSubmit } from '$form';
   import { contentStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
@@ -86,7 +85,7 @@
     {/if}
     <div class="flex flex-1">
       {#if tableData && tableData.length > 0}
-        <TableContent class="flex-1" data={tableData} headerData={TABLE_CONTENT_HEADER} />
+        <TableContent class="flex-1" data={tableData}/>
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

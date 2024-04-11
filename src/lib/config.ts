@@ -6,11 +6,29 @@ import { InputType, TableHeaderItemType } from '$models';
 export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
 
-export const TABLE_CONTENT_HEADER: TableHeaderItemData[] = [
+export const TABLE_CONTENT_SEARCH_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
-  { label: 'Similar Content', key: 'snippet', tooltip: 'test', type: TableHeaderItemType.String }
+  { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
 ];
+
+export const TABLE_CONTENT_SEARCH_MAIN_ROW: TableHeaderItemData[] = [
+  { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
+  { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
+  { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
+];
+
+export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW: TableHeaderItemData[] =[
+  { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String },
+  { label: 'Content Title', key: 'title', tooltip: '', type: TableHeaderItemType.String },
+  {label: 'Domain count', key: 'domain_count', tooltip: '', type: TableHeaderItemType.Number },
+  {label: 'Link count', key: 'link_count', tooltip: '', type: TableHeaderItemType.String },
+  {label: 'Search engines', key: 'engines', type: TableHeaderItemType.String },
+  {label: 'Content URL', key: 'url', type: TableHeaderItemType.Url },
+];
+
+
+
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },

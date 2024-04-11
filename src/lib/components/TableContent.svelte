@@ -1,89 +1,63 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
-  import { cn, includeObjectKeys, excludeObjectKeys, isNumber } from '$utils';
+  import { cn } from '$utils';
+  import TABLE_CONTENT_SEARCH_HEADER from '$config';
   import {
     SortDirection,
     TableHeaderItemType,
     type ContentDataResult,
     type TableHeaderItemData,
-    type TableContentRowData
   } from '$models';
-  import TableContentRow from '$components/TableContentRow.svelte';
+  //import TableContentRow from '$components/TableContentRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import DownloadResult from '$components/DownloadResult.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
-  export let headerData: TableHeaderItemData[];
   export let data: ContentDataResult[];
   let className: string | undefined = undefined;
   export { className as class };
 
-  const headerKeys: string[] = headerData.map(({ key }) => key);
-  let rows: TableContentRowData[] = [];
-  let sortedRows: TableContentRowData[] = [];
+  let sortedData: ContentDataResult[] = [];
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortStatus: Record<string, SortDirection> = {};
-  let sortColumnIndex: number = -1;
+  //let sortColumnIndex: number = -1;
+  let sortKey : string | undefined = undefined;
 
-  $: rows =
-    data && data.length > 0 && headerKeys && headerKeys.length > 0 ? getRows(data, headerKeys) : [];
+//  $: {
+//    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
+//      sortedData = sortData(data, sortColumnIndex, sortDirection);
+//    } else {
+//      sortedData = data;
+//    }
+//  }
 
   $: {
-    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
-      sortedRows = sortRows(rows, headerData, sortColumnIndex, sortDirection);
+    if (sortKey && sortDirection !== SortDirection.None) {
+      sortedData = sortData(data, sortKey, /*sortColumnIndex,*/ sortDirection);
     } else {
-      sortedRows = rows;
+      sortedData = data;
     }
   }
 
-  function getRows(data: ContentDataResult[], mainDataKeys: string[]): TableContentRowData[] {
-    if (!data.length) {
-      return [];
-    }
-    let rows = data.map((entry) => {
-      // main data are rendered in the row header
-      let dataMain = includeObjectKeys(entry, mainDataKeys);
+  function sortData(
+    data: ContentDataResult[],
+    //columnIndex: number,
+    sortKey: string,
 
-      // complementary data are rendered in the expanded row
-      const dataComplementary = excludeObjectKeys(entry, mainDataKeys);
-      // tags are rendered in the row header alongside the first column
-      const tags: string[] | undefined = entry.hasOwnProperty('source')
-        ? Object.values(entry.source)
-        : undefined;
-
-      // manually insert content snippet to render it in row header & expanded row
-      dataComplementary['Content snippet'] = entry.snippet;
-      // remove source entry from data
-      const { source, ...dataComplementaryRest } = dataComplementary;
-      const row: TableContentRowData = {
-        dataMain: Object.entries(dataMain),
-        dataComplementary: Object.entries(dataComplementaryRest)
-      };
-      if (tags) {
-        row.tags = tags;
-      }
-      return row;
-    });
-    return rows;
-  }
-  function sortRows(
-    rows: TableContentRowData[],
-    header: TableHeaderItemData[],
-    columnIndex: number,
     direction: SortDirection
-  ): TableContentRowData[] {
-    const column_type = header[columnIndex].type;
+  ): ContentDataResult[] {
+    const type = TABLE_CONTENT_SEARCH_HEADER.find((item : TableHeaderItemData) => item.key === sortKey).type;
 
-    return rows.sort((a, b) => {
-      const aValue = a.dataMain[columnIndex][1];
-      const bValue = b.dataMain[columnIndex][1];
+    return data.sort((a, b) => {
+      const aValue = a[sortKey];
+      const bValue = b[sortKey];
 
       if (aValue == null && bValue == null) return 0;
       if (aValue == null) return -1;
       if (bValue == null) return 1;
 
-      switch (column_type) {
+      switch (type) {
         case TableHeaderItemType.String:
           return direction === SortDirection.Ascending
             ? ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase())
@@ -98,22 +72,23 @@
     });
   }
 
-  function handleHeaderItemClick(index: number): void {
-    const clickedColumnLabel = headerData[index].label;
-    sortColumnIndex = index;
-    updateSortStatus(clickedColumnLabel);
+  //function handleHeaderItemClick(index: number): void {
+  function handleHeaderItemClick(key: string) {
+    //const clickedColumnLabel = TABLE_CONTENT_SEARCH_HEADER[index].key;
+    sortKey = key 
+    //sortColumnIndex = index;
+    updateSortStatus(key);
   }
 
-  function updateSortStatus(column_label: string): void {
-    // reset all to "none"
-    headerData.forEach((item: TableHeaderItemData) => {
-      sortStatus[item.label] = SortDirection.None;
+  function updateSortStatus(key: string): void {
+    TABLE_CONTENT_SEARCH_HEADER.forEach((item: TableHeaderItemData) => {
+      sortStatus[item.key] = SortDirection.None;
     });
 
     sortDirection === SortDirection.Ascending
       ? (sortDirection = SortDirection.Descending)
       : (sortDirection = SortDirection.Ascending);
-    sortStatus[column_label] = sortDirection;
+    sortStatus[key] = sortDirection;
   }
 </script>
 
@@ -127,20 +102,20 @@
       <col style="width: 5%" />
     </colgroup>
     <thead class="box-shadow-border-bottom sticky top-0 dark:bg-gray7">
-      {#each headerData as data, i (data)}
+      {#each TABLE_CONTENT_SEARCH_HEADER as item (item)}
         <TableHeaderItem
-          {data}
-          sortStatus={sortStatus[data.label]}
+          data={item}
+          sortStatus={sortStatus[item.key]}
           onClick={() => {
-            handleHeaderItemClick(i);
+            handleHeaderItemClick(item.key);
           }}
           class="first:pl-4"
         />
       {/each}
     </thead>
     <tbody>
-      {#each sortedRows as row, i (row)}
-        <TableContentRow data={row} />
+      {#each sortedData as item, i (item)}
+        <TableContentRow data={item} />
       {/each}
     </tbody>
   </table>
