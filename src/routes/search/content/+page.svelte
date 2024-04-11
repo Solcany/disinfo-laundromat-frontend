@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DownloadResult from '$components/DownloadResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
