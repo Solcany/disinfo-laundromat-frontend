@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
-  import TABLE_CONTENT_SEARCH_HEADER from '$config';
+  import { TABLE_CONTENT_SEARCH_HEADER  } from '$config';
   import {
     SortDirection,
     TableHeaderItemType,
@@ -10,6 +10,7 @@
   } from '$models';
   //import TableContentRow from '$components/TableContentRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
+  import TableContentRow from '$components/TableContentRow.svelte';
   import DownloadResult from '$components/DownloadResult.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
@@ -22,7 +23,7 @@
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortStatus: Record<string, SortDirection> = {};
   //let sortColumnIndex: number = -1;
-  let sortKey : string | undefined = undefined;
+  let sorter : TableHeaderItemData | undefined = undefined;
 
 //  $: {
 //    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
@@ -33,8 +34,8 @@
 //  }
 
   $: {
-    if (sortKey && sortDirection !== SortDirection.None) {
-      sortedData = sortData(data, sortKey, /*sortColumnIndex,*/ sortDirection);
+    if (sorter && sortDirection !== SortDirection.None) {
+      sortedData = sortData(data, sorter, /*sortColumnIndex,*/ sortDirection);
     } else {
       sortedData = data;
     }
@@ -43,21 +44,19 @@
   function sortData(
     data: ContentDataResult[],
     //columnIndex: number,
-    sortKey: string,
+    sorter: TableHeaderItemData,
 
     direction: SortDirection
   ): ContentDataResult[] {
-    const type = TABLE_CONTENT_SEARCH_HEADER.find((item : TableHeaderItemData) => item.key === sortKey).type;
-
     return data.sort((a, b) => {
-      const aValue = a[sortKey];
-      const bValue = b[sortKey];
+      const aValue = a[sorter.key];
+      const bValue = b[sorter.key];
 
       if (aValue == null && bValue == null) return 0;
       if (aValue == null) return -1;
       if (bValue == null) return 1;
 
-      switch (type) {
+      switch (sorter.type) {
         case TableHeaderItemType.String:
           return direction === SortDirection.Ascending
             ? ascending(String(aValue).toLowerCase(), String(bValue).toLowerCase())
@@ -73,11 +72,11 @@
   }
 
   //function handleHeaderItemClick(index: number): void {
-  function handleHeaderItemClick(key: string) {
+  function handleHeaderItemClick(item: TableHeaderItemData) {
     //const clickedColumnLabel = TABLE_CONTENT_SEARCH_HEADER[index].key;
-    sortKey = key 
+    sorter = item 
     //sortColumnIndex = index;
-    updateSortStatus(key);
+    updateSortStatus(item.key);
   }
 
   function updateSortStatus(key: string): void {
@@ -107,7 +106,7 @@
           data={item}
           sortStatus={sortStatus[item.key]}
           onClick={() => {
-            handleHeaderItemClick(item.key);
+            handleHeaderItemClick(item);
           }}
           class="first:pl-4"
         />

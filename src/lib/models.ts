@@ -73,6 +73,7 @@ export type TableFingerprintData = Pick<
 //}
 
 export interface ContentDataResult {
+  [key: string]: number | string | string[] | number[];
   domain: string;
   domain_count: number;
   engines: string[];

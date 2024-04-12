@@ -2,7 +2,10 @@
   import { CaretDown, CaretUp } from 'phosphor-svelte';
   import type { ContentDataResult } from '$models';
   import { TABLE_CONTENT_SEARCH_MAIN_ROW,
-           TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW } from '$config';
+           TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
+           TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW,
+           TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS,
+           } from '$config';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
   import Link from '$components/Link.svelte';
@@ -18,18 +21,13 @@
   let dataMain : any[] = [];
   let dataComplementary: any[] = [];
 
-
-  // WIP: continue here
-  // includes doesn't work because TABLE_CONT... is Object array
-  // need to check for the key for each item.key of the TABLE_CONT...
-
-  Object.entries(data).forEach(([key, value]) => {
-    if (TABLE_CONTENT_SEARCH_MAIN_ROW.includes(key)) {
-      dataMain.push([key, value]);
-    } else if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW.includes(key)) {
-      dataComplementary.push([key, value]);
-    }
-  });
+Object.entries(data).forEach(([key, value]) => {
+  if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
+    dataMain.push([key, value]);
+  } else if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
+    dataComplementary.push([key, value]);
+  }
+});
   //let tags = (data.hasOwnProperty('tags') ? data.tags : []) as string[];
 
   let showComplementaryData: boolean  = false;
@@ -39,15 +37,14 @@
   }
 </script>
 
-{#if dataMain.length > 0}
+{#if dataMain.length > 0} 
   <tr
     on:click={handleClick}
     aria-label="click to expand row"
     role="button"
     class="w-full border-gray6 hover:bg-black {showComplementaryData
       ? 'border-b-0 hover:cursor-n-resize'
-      : 'border-b-[1px] hover:cursor-s-resize'}"
-  >
+      : 'border-b-[1px] hover:cursor-s-resize'}">
     <!-- row data -->
     {#each dataMain as [key, value]}
       <td class="h-10 pr-6 text-sm text-black first:pl-4 dark:text-white">
@@ -86,10 +83,9 @@
     {/each}
   <!-- expand row glyph -->
 
-  <!--
-  <td class="align-middle">
+   <td class="align-middle">
     <div class="flex w-full justify-end pr-3">
-      {#if isExpanded}
+      {#if showComplementaryData}
         <span class="shrink-0">
           <CaretUp class="fill-black dark:fill-white" weight="bold" size={20} />
         </span>
@@ -101,16 +97,15 @@
     </div>
   </td>
 </tr>
--->
+
   <!-- expanded row inner table -->
-<!-- 
-  {#if showComplementaryData && data.dataComplementary.length > 0}
+  {#if showComplementaryData && dataComplementary.length > 0}
     <tr class="border-b-[1px] border-gray3 bg-black">
-      <td colSpan={data.dataMain.length + 1}>
+      <td colSpan={dataMain.length + 1}>
         <div class="w-full py-4">
           <table>
             <tbody>
-              {#each data.dataComplementary as [key, value]}
+              {#each dataComplementary as [key, value]}
                 <tr>
                   <th class="pl-4">
                     <H4 class="text-left">
@@ -134,5 +129,4 @@
       </td>
     </tr>
   {/if}
--->
-{/if}
+{/if} 
