@@ -26,7 +26,10 @@
   let sortColumnIndex: number = -1;
   let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
-  let sortedRows: TableMetaRowData[] = [];
+  export let sortedRows: TableMetaRowData[] = [];
+
+  // self row + sorted rows, used to pass processed data to parent for export
+  //export let allRows: TableMetaRowData[] = [];
 
   $: selfRow =
     data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
@@ -40,6 +43,8 @@
       sortedRows = rows;
     }
   }
+
+  //$: allRows = selfRow ? [selfRow, ...sortedRows.slice()] : [];
 
   type IndicatorDataItem = {
     domain_name: string;

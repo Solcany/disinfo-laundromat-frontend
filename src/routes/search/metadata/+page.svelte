@@ -1,4 +1,5 @@
 <script lang="ts">
+  import DownloadMetaResult from '$components/DownloadMetaResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
@@ -11,14 +12,19 @@
   import P from '$components/P.svelte';
   import Separator from '$components/Separator.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { FormOrientation } from '$models';
+  import { FormOrientation, type TableMetaRowData} from '$models';
   import { handleApiSubmit } from '$form';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
 
+  // layout & page data
   export let data;
+  
+  // variable bound to TableMeta components's sorted data
+  // used for exporting the Table data to files
+  let tableData: TableMetaRowData[] = [];
 
-  $: tableData = $metadataStore
+  $: metadataSearchData = $metadataStore
     ? {
         indicators: $metadataStore.indicators,
         matches: $metadataStore.matches,
@@ -38,6 +44,8 @@
       />
     {/if}
 
+    <Separator />
+    <DownloadMetaResult data={tableData}/> 
     <Separator />
 
     <P
@@ -95,8 +103,12 @@
       {/if}
     </div>
     <div class="flex flex-1">
-      {#if tableData}
-        <TableMeta class="flex-1" data={tableData} headerData={TABLE_METADATA_HEADER} />
+      {#if metadataSearchData}
+        <TableMeta 
+          class="flex-1" 
+          data={metadataSearchData} 
+          bind:sortedRows={tableData}
+          headerData={TABLE_METADATA_HEADER} />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>
