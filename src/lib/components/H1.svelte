@@ -5,7 +5,7 @@
 </script>
 
 <h1
-  class={cn('font-sans text-xl font-light text-black md:text-2xl dark:text-white', className)}
+  class={cn('font-sans text-xl font-light text-black md:text-3xl dark:text-white', className)}
   {...$$restProps}
 >
   <slot />

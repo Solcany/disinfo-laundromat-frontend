@@ -5,7 +5,7 @@
 </script>
 
 <h3
-  class={cn('font-sans font-bold uppercase text-black dark:text-white', className)}
+  class={cn('font-sans font-bold uppercase text-sm text-black dark:text-white', className)}
   {...$$restProps}
 >
   <slot />

@@ -35,6 +35,7 @@
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
       sortedRows = sortRows(rows, headerData, sortColumnIndex, sortDirection);
+      console.log(sortedRows);
     } else {
       sortedRows = rows;
     }
