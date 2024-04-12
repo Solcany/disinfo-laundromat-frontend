@@ -1,22 +1,20 @@
 <script lang="ts">
+    import Button from "$components/Button.svelte";
     export let data: Record<string, any>[]; 
-    // Function to convert JS object to CSV, handling array values
+
     function convertToCSV(objArray: Record<string, any>[]): string {
         let str: string = '';
 
-        // Extract headers
         const header = Object.keys(objArray[0]);
         str += header.join(',') + '\r\n';
 
-        // Extract rows
         for (let i = 0; i < objArray.length; i++) {
             let line = '';
             for (let index in objArray[i]) {
                 if (line !== '') line += ',';
                 const value = objArray[i][index];
-                // Check if the value is an array
                 if (Array.isArray(value)) {
-                    // Convert array to string separated by "; " or any other separator that fits your data
+ 
                     line += '"' + value.join('; ') + '"';
                 } else {
                     line += '"' + value.toString().replace(/"/g, '""') + '"';
@@ -42,4 +40,4 @@
     }
 </script>
 
-<button on:click={downloadCSV}>Download CSV</button>
+<Button on:click={downloadCSV} ariaLabel="download csv">Download CSV</Button>

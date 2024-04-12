@@ -8,7 +8,6 @@
     type ContentDataResult,
     type TableHeaderItemData,
   } from '$models';
-  //import TableContentRow from '$components/TableContentRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import TableContentRow from '$components/TableContentRow.svelte';
   import DownloadResult from '$components/DownloadResult.svelte';
@@ -19,19 +18,10 @@
   let className: string | undefined = undefined;
   export { className as class };
 
-  let sortedData: ContentDataResult[] = [];
+  export let sortedData: ContentDataResult[] = [];
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortStatus: Record<string, SortDirection> = {};
-  //let sortColumnIndex: number = -1;
   let sorter : TableHeaderItemData | undefined = undefined;
-
-//  $: {
-//    if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
-//      sortedData = sortData(data, sortColumnIndex, sortDirection);
-//    } else {
-//      sortedData = data;
-//    }
-//  }
 
   $: {
     if (sorter && sortDirection !== SortDirection.None) {
@@ -43,7 +33,6 @@
 
   function sortData(
     data: ContentDataResult[],
-    //columnIndex: number,
     sorter: TableHeaderItemData,
 
     direction: SortDirection
@@ -71,11 +60,8 @@
     });
   }
 
-  //function handleHeaderItemClick(index: number): void {
   function handleHeaderItemClick(item: TableHeaderItemData) {
-    //const clickedColumnLabel = TABLE_CONTENT_SEARCH_HEADER[index].key;
     sorter = item 
-    //sortColumnIndex = index;
     updateSortStatus(item.key);
   }
 

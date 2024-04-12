@@ -14,10 +14,17 @@
   import { handleApiSubmit } from '$form';
   import { contentStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
-  export let data;
-  $: formConfig = data.contentAdvancedFormConfig;
+  import { type ContentDataResult } from '$models';
 
-  $: tableData = $contentStore ? $contentStore.results : null;
+  // layout & page data
+  export let data;
+
+  // variable bound to TableContent components's sorted data
+  // used for exporting the Table data to files
+  let tableData: ContentDataResult[] = [];
+
+  $: formConfig = data.contentAdvancedFormConfig;
+  $: contentSearchData = $contentStore ? $contentStore.results : null;
 </script>
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
@@ -26,6 +33,8 @@
       <Form config={formConfig} formData={$contentFormDataStore} onSubmit={handleApiSubmit} />
     {/if}
 
+    <Separator />
+    <DownloadResult data={tableData}/> 
     <Separator />
     <P>
       Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link
@@ -83,9 +92,10 @@
         >
       </div>
     {/if}
+
     <div class="flex flex-1">
-      {#if tableData && tableData.length > 0}
-        <TableContent class="flex-1" data={tableData}/>
+      {#if contentSearchData}
+        <TableContent data={contentSearchData} bind:sortedData={tableData} class="flex-1"/>
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

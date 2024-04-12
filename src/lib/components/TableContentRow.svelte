@@ -17,7 +17,6 @@
   let className: string = '';
   export { className as class };
   
-  // WIP: add proper types
   let dataMain : [string, number | string | number[] | string[]][] = [];
   let dataComplementary : [string, number | string | number[] | string[]][] = [];
   let showComplementaryData: boolean  = false;
