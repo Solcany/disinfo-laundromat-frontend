@@ -10,7 +10,6 @@
   } from '$models';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import TableContentRow from '$components/TableContentRow.svelte';
-  import DownloadResult from '$components/DownloadResult.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
@@ -78,7 +77,6 @@
 </script>
 
 <div class={cn('', className)}>
-  <DownloadResult {data}/> 
   <table class="w-full max-w-full border-spacing-0">
     <colgroup>
       <col style="width: 20%" />
