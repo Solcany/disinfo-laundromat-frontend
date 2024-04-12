@@ -24,7 +24,7 @@
 
   $: {
     if (sorter && sortDirection !== SortDirection.None) {
-      sortedData = sortData(data, sorter, /*sortColumnIndex,*/ sortDirection);
+      sortedData = sortData(data, sorter, sortDirection);
     } else {
       sortedData = data;
     }
