@@ -18,19 +18,27 @@
   export { className as class };
   
   // WIP: add proper types
-  let dataMain : any[] = [];
-  let dataComplementary: any[] = [];
-
-Object.entries(data).forEach(([key, value]) => {
-  if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
-    dataMain.push([key, value]);
-  } else if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
-    dataComplementary.push([key, value]);
-  }
-});
-  //let tags = (data.hasOwnProperty('tags') ? data.tags : []) as string[];
-
+  let dataMain : [string, number | string | number[] | string[]][] = [];
+  let dataComplementary : [string, number | string | number[] | string[]][] = [];
   let showComplementaryData: boolean  = false;
+  let domainAssociations: string[] = [];
+
+  $: setRows(data);
+  $: setDomainAssociations(data);
+
+  function setRows(data: ContentDataResult) {
+    Object.entries(data).forEach(([key, value]) => {
+      if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
+        dataMain.push([key, value]);
+      } else if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
+        dataComplementary.push([key, value]);
+      }
+    });
+  }
+
+  function setDomainAssociations(data: ContentDataResult) {
+    domainAssociations = data.hasOwnProperty('source') ? data.source : [] 
+  }
 
   function handleClick() {
     showComplementaryData = !showComplementaryData;
@@ -51,18 +59,14 @@ Object.entries(data).forEach(([key, value]) => {
         <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
           {#if key === 'domain'}
             <Link href={domainToUrl(String(value))}>{value}</Link>
-            <!--
-            {#if tags.length > 0}
-              {#each tags as tag}
-                <div class="mr-2 inline-block">
-                  <Tooltip>
-                    <svelte:fragment slot="icon">i</svelte:fragment>
-                    <svelte:fragment slot="content">{tag}</svelte:fragment>
-                  </Tooltip>
-                </div>
-              {/each}
-            {/if}
-            -->
+            {#each domainAssociations as association}
+              <div class="mr-2 inline-block">
+                <Tooltip>
+                  <svelte:fragment slot="icon">i</svelte:fragment>
+                  <svelte:fragment slot="content">{association}</svelte:fragment>
+                </Tooltip>
+              </div>
+            {/each}
           {:else if key === 'score'}
             <div class="relative block">
               <Rect height_px={5} class="relative fill-gray6" rx={1} ry={1} />
