@@ -28,8 +28,11 @@
   let rows: TableMetaRowData[] = [];
   export let sortedRows: TableMetaRowData[] = [];
 
-  // self row + sorted rows, used to pass processed data to parent for export
-  //export let allRows: TableMetaRowData[] = [];
+  // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
+
+    // self row + sorted rows, used to pass processed data to parent for export
+    //export let allRows: TableMetaRowData[] = [];
+
 
   $: selfRow =
     data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
