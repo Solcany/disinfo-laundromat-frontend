@@ -4,9 +4,11 @@
   import {
     SortDirection,
     TableHeaderItemType,
-    type TableFingerprintData,
+    type TableMetaData,
     type IndicatorData,
+    type IndicatorDataItem,
     type TieredIndicator,
+    type MatchDataItem,
     type IndicatorsSummary,
     type TableHeaderItemData,
     type TableMetaRowData
@@ -17,7 +19,7 @@
   import Tooltip from '$components/Tooltip.svelte';
 
   export let headerData: TableHeaderItemData[];
-  export let data: TableFingerprintData;
+  export let data: TableMetaData;
 
   let className: string | undefined = undefined;
   export { className as class };
@@ -29,10 +31,6 @@
   export let sortedRows: TableMetaRowData[] = [];
 
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
-
-    // self row + sorted rows, used to pass processed data to parent for export
-    //export let allRows: TableMetaRowData[] = [];
-
 
   $: selfRow =
     data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
@@ -48,18 +46,6 @@
   }
 
   //$: allRows = selfRow ? [selfRow, ...sortedRows.slice()] : [];
-
-  type IndicatorDataItem = {
-    domain_name: string;
-    indicator_content: string | string[];
-    indicator_type: string;
-  };
-
-  type MatchDataItem = {
-    domain_name_y: string;
-    match_type: string;
-    match_value: string;
-  };
 
   function getSelfRow(data: IndicatorDataItem[]): TableMetaRowData {
     const result: TableMetaRowData = {

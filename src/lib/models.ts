@@ -45,10 +45,35 @@ export interface ApiFingerprintData {
   matches_summary: Record<string, number>;
 }
 
-export type TableFingerprintData = Pick<
-  ApiFingerprintData,
+export type TableMetaData = Pick<ApiFingerprintData,
   'indicators' | 'matches' | 'indicator_metadata'
 >;
+export type IndicatorDataItem = {
+  domain_name: string;
+  indicator_content: string | string[];
+  indicator_type: string;
+};
+
+export type MatchDataItem = {
+  domain_name_y: string;
+  match_type: string;
+  match_value: string;
+};
+
+export type IndicatorData = {
+  type: string;
+  value: string[];
+};
+
+export type TieredIndicator = {
+  tier: number;
+  data: IndicatorData[];
+};
+
+export type IndicatorsSummary = {
+  [tier: string]: number;
+};
+
 
 //export interface ApiAppConfigData {
 //  [key: string]: {
@@ -110,20 +135,6 @@ export interface ApiIndicatorsData {
   };
   unique_types: Array<string>;
 }
-
-export type IndicatorData = {
-  type: string;
-  value: string[];
-};
-
-export type TieredIndicator = {
-  tier: number;
-  data: IndicatorData[];
-};
-
-export type IndicatorsSummary = {
-  [tier: string]: number;
-};
 
 export enum TableHeaderItemType {
   Number = 'number',
