@@ -29,12 +29,16 @@
   let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
   export let sortedRows: TableMetaRowData[] = [];
-
+  let indicatorsMax: IndicatorsSummary;
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
 
   $: selfRow =
     data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
+
   $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
+
+  $: indicatorsMax = getIndicatorsMax(rows);
+  $: console.log(indicatorsMax);
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
@@ -137,6 +141,7 @@
           };
         })
         .sort((a, b) => a.tier - b.tier); // Sort indicators by tier.
+      console.log(domainGroup.indicators_summary);
       // Return the structured domain data, including the indicators and their summary.
       return {
         domain: domainGroup.domain,
@@ -147,6 +152,22 @@
 
     return rows;
   }
+
+
+  function getIndicatorsMax(rows: TableMetaRowData[]): IndicatorsSummary {
+    return rows.reduce((max, row) => {
+      if (row.indicators_summary) {
+        max.tier1 = Math.max(max.tier1, row.indicators_summary.tier1 ?? 0);
+        max.tier2 = Math.max(max.tier2, row.indicators_summary.tier2 ?? 0);
+        max.tier3 = Math.max(max.tier3, row.indicators_summary.tier3 ?? 0);
+      }
+      return max;
+    }, { tier1: 0, tier2: 0, tier3: 0 });
+  }
+
+    
+
+  
 
   function sortRows(
     rows: TableMetaRowData[],

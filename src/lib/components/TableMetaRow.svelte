@@ -1,6 +1,6 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { TableMetaRowData, IndicatorMetadata } from '$models';
+  import type { TableMetaRowData, IndicatorMetadata, IndicatorsSummary } from '$models';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
   import Rect from '$components/Rect.svelte';
@@ -10,8 +10,8 @@
 
   export let data: TableMetaRowData;
   export let metadata: IndicatorMetadata;
-
-  let className: string = '';
+  export let indicatorsMax: IndicatorsSummary | undefined = undefined;
+  let className: string | undefined = undefined;
   export { className as class };
 
   let domainAssociations = (
@@ -49,7 +49,7 @@
 
   <!-- the indicator sums column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
-    {#if data.indicators_summary}
+    {#if data.indicators_summary && indicatorsMax}
       {@const rxy = 1}
       {@const h = 5}
       <div class="my-1">
@@ -58,7 +58,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier1}
-              value_max={10}
+              value_max={indicatorsMax.tier1 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
@@ -76,7 +76,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier2}
-              value_max={10}
+              value_max={indicatorsMax.tier2 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
@@ -94,7 +94,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier3}
-              value_max={10}
+              value_max={indicatorsMax.tier3 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
