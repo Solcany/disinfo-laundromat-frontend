@@ -14,7 +14,7 @@
 </script>
 
 <nav class={cn('', className)}>
-  <ul class="flex list-none">
+  <ul class="flex justify-center md:justify-start list-none">
     {#each UI_NAV as { label, path }}
       <li class="px-3 first:pl-0 last:px-0 last:pl-3">
         <a

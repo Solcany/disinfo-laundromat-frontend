@@ -9,8 +9,8 @@
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
-  <Header class="bg-white px-3 md:px-8 dark:bg-gray6">
-    <h1><a class="font-sans font-light text-xl dark:text-white text-black"href="/">{APP_TITLE}</a></h1>
+  <Header class="flex justify-center md:justify-between px-3 md:px-8 dark:bg-gray6">
+    <h1 class="w-100 md:w-auto text-center md:text-left" ><a class="font-sans font-light text-xl dark:text-white text-black"href="/">{APP_TITLE}</a></h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
   <ProgressBar class="absolute left-0 top-0" />
