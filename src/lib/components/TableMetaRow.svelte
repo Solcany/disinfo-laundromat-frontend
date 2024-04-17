@@ -9,8 +9,8 @@
   import H4 from '$components/H4.svelte';
 
   export let data: TableMetaRowData;
-  export let metadata: IndicatorMetadata;
-  export let indicatorsMax: IndicatorsSummary | undefined = undefined;
+  export let indicatorsMetadata: IndicatorMetadata;
+  export let indicatorsCount: IndicatorsSummary | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -49,7 +49,7 @@
 
   <!-- the indicator sums column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
-    {#if data.indicators_summary && indicatorsMax}
+    {#if data.indicators_summary && indicatorsCount}
       {@const rxy = 1}
       {@const h = 5}
       <div class="my-1">
@@ -58,7 +58,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier1}
-              value_max={indicatorsMax.tier1 ?? 0}
+              value_max={indicatorsCount.tier1 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
@@ -76,7 +76,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier2}
-              value_max={indicatorsMax.tier2 ?? 0}
+              value_max={indicatorsCount.tier2 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
@@ -94,7 +94,7 @@
             <Rect height_px={h} class="relative fill-gray6" rx={rxy} ry={rxy} />
             <RectMapped
               value={data.indicators_summary.tier3}
-              value_max={indicatorsMax.tier3 ?? 0}
+              value_max={indicatorsCount.tier3 ?? 0}
               rx={rxy}
               ry={rxy}
               height_px={h}
@@ -147,7 +147,7 @@
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
                             <svelte:fragment slot="content"
-                              >{metadata[entry.tier + '-' + indicator.type]
+                              >{indicatorsMetadata[entry.tier + '-' + indicator.type]
                                 .description}</svelte:fragment
                             >
                           </Tooltip>
@@ -178,7 +178,7 @@
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
                             <svelte:fragment slot="content"
-                              >{metadata[entry.tier + '-' + indicator.type]
+                              >{indicatorsMetadata[entry.tier + '-' + indicator.type]
                                 .description}</svelte:fragment
                             >
                           </Tooltip>
@@ -207,7 +207,7 @@
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
                             <svelte:fragment slot="content"
-                              >{metadata[entry.tier + '-' + indicator.type]
+                              >{indicatorsMetadata[entry.tier + '-' + indicator.type]
                                 .description}</svelte:fragment
                             >
                           </Tooltip>

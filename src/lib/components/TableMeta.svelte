@@ -17,7 +17,7 @@
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
-
+  
   export let headerData: TableHeaderItemData[];
   export let data: TableMetaData;
 
@@ -29,7 +29,8 @@
   let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
   export let sortedRows: TableMetaRowData[] = [];
-  let indicatorsMax: IndicatorsSummary;
+  let indicatorsCount: IndicatorsSummary | undefined = undefined;
+
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
 
   $: selfRow =
@@ -37,19 +38,15 @@
 
   $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
 
-  $: indicatorsMax = getIndicatorsMax(rows);
-  $: console.log(indicatorsMax);
+  $: indicatorsCount = data.indicator_metadata ? countIndicatorTiers(data.indicator_metadata) : undefined;
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
       sortedRows = sortRows(rows, headerData, sortColumnIndex, sortDirection);
-      console.log(sortedRows);
     } else {
       sortedRows = rows;
     }
   }
-
-  //$: allRows = selfRow ? [selfRow, ...sortedRows.slice()] : [];
 
   function getSelfRow(data: IndicatorDataItem[]): TableMetaRowData {
     const result: TableMetaRowData = {
@@ -153,23 +150,21 @@
     return rows;
   }
 
+function countIndicatorTiers(data: Record<string, any>): IndicatorsSummary {
+  const result: IndicatorsSummary = { tier1: 0, tier2: 0, tier3: 0 };
+  Object.keys(data).forEach(key => {
+    if (key.startsWith("1-")) {
+      result.tier1 += 1;
+    } else if (key.startsWith("2-")) {
+      result.tier2 += 1;
+    } else if (key.startsWith("3-")) {
+      result.tier3 += 1;
+    }
+  });
+  return result;
+}
 
-  function getIndicatorsMax(rows: TableMetaRowData[]): IndicatorsSummary {
-    return rows.reduce((max, row) => {
-      if (row.indicators_summary) {
-        max.tier1 = Math.max(max.tier1, row.indicators_summary.tier1 ?? 0);
-        max.tier2 = Math.max(max.tier2, row.indicators_summary.tier2 ?? 0);
-        max.tier3 = Math.max(max.tier3, row.indicators_summary.tier3 ?? 0);
-      }
-      return max;
-    }, { tier1: 0, tier2: 0, tier3: 0 });
-  }
-
-    
-
-  
-
-  function sortRows(
+function sortRows(
     rows: TableMetaRowData[],
     header: TableHeaderItemData[],
     columnIndex: number,
@@ -263,10 +258,10 @@
     </thead>
     <tbody>
       {#if selfRow}
-        <TableMetaRow data={selfRow} metadata={data.indicator_metadata} />
+        <TableMetaRow data={selfRow} indicatorsMetadata={data.indicator_metadata} />
       {/if}
       {#each sortedRows as row, i (row)}
-        <TableMetaRow data={row} metadata={data.indicator_metadata} />
+        <TableMetaRow data={row} indicatorsMetadata={data.indicator_metadata} indicatorsCount={indicatorsCount}/>
       {/each}
     </tbody>
   </table>
