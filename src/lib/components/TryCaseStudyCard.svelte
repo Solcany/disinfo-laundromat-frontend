@@ -2,13 +2,12 @@
   import type { Writable } from 'svelte/store'; 
   import Button from '$components/Button.svelte';
   export let formDataStore: Writable<FormData>;
-
-  //$: formConfig = data.contentAdvancedFormConfig;
-
   export let formData: FormData;
+  export let onButtonClick: (() => void) | undefined = undefined;
 
   function handleClick() {
     formDataStore.set(formData);
+    if(onButtonClick) onButtonClick();
   }
 </script>
 

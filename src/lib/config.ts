@@ -195,7 +195,7 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   }
 ];
 
-export const USE_CASE1_FORM_DATA : Record<string, string | string[] | number | boolean> = {
+export const USE_CASE1_FORM_DATA = {
   contentToSearch: 'https://www.rt.com/news/594935-us-uk-ukraine-moscow-terrorism/',
   country: 'us',
   language: 'en',

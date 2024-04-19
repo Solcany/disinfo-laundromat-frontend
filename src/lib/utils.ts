@@ -151,7 +151,7 @@ export function consolidateEnginesFormEntries(formData: FormData): FormData {
   return formData;
 }
 
-export function objectToFormData(object: Record<string, number | string | string[] | boolean>): FormData {
+export function objectToFormData(object: Record<string, number | number[] | string | string[] | boolean | boolean[]>): FormData {
   let formData = new FormData();
   Object.entries(object).forEach(([key, value]) => {
     formData.append(key, String(value)); 
