@@ -17,7 +17,7 @@
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
-  
+
   export let headerData: TableHeaderItemData[];
   export let data: TableMetaData;
 
@@ -38,7 +38,9 @@
 
   $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
 
-  $: indicatorsCount = data.indicator_metadata ? countIndicatorTiers(data.indicator_metadata) : undefined;
+  $: indicatorsCount = data.indicator_metadata
+    ? countIndicatorTiers(data.indicator_metadata)
+    : undefined;
 
   $: {
     if (sortColumnIndex !== -1 && sortDirection !== SortDirection.None) {
@@ -150,21 +152,21 @@
     return rows;
   }
 
-function countIndicatorTiers(data: Record<string, any>): IndicatorsSummary {
-  const result: IndicatorsSummary = { tier1: 0, tier2: 0, tier3: 0 };
-  Object.keys(data).forEach(key => {
-    if (key.startsWith("1-")) {
-      result.tier1 += 1;
-    } else if (key.startsWith("2-")) {
-      result.tier2 += 1;
-    } else if (key.startsWith("3-")) {
-      result.tier3 += 1;
-    }
-  });
-  return result;
-}
+  function countIndicatorTiers(data: Record<string, any>): IndicatorsSummary {
+    const result: IndicatorsSummary = { tier1: 0, tier2: 0, tier3: 0 };
+    Object.keys(data).forEach((key) => {
+      if (key.startsWith('1-')) {
+        result.tier1 += 1;
+      } else if (key.startsWith('2-')) {
+        result.tier2 += 1;
+      } else if (key.startsWith('3-')) {
+        result.tier3 += 1;
+      }
+    });
+    return result;
+  }
 
-function sortRows(
+  function sortRows(
     rows: TableMetaRowData[],
     header: TableHeaderItemData[],
     columnIndex: number,
@@ -261,7 +263,7 @@ function sortRows(
         <TableMetaRow data={selfRow} indicatorsMetadata={data.indicator_metadata} />
       {/if}
       {#each sortedRows as row, i (row)}
-        <TableMetaRow data={row} indicatorsMetadata={data.indicator_metadata} indicatorsCount={indicatorsCount}/>
+        <TableMetaRow data={row} indicatorsMetadata={data.indicator_metadata} {indicatorsCount} />
       {/each}
     </tbody>
   </table>

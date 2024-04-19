@@ -15,7 +15,9 @@
   <th class={cn('', className)} role="columnheader" scope="col" />
 {:else}
   <th class={cn('', className)} role="columnheader" scope="col">
-    <div class="flex items-center py-2 font-sans text-sm md:text-lg font-light text-black dark:text-white">
+    <div
+      class="flex items-center py-2 font-sans text-sm font-light text-black md:text-lg dark:text-white"
+    >
       {data.label}
       <button
         aria-label="sort by column"

@@ -45,7 +45,8 @@ export interface ApiFingerprintData {
   matches_summary: Record<string, number>;
 }
 
-export type TableMetaData = Pick<ApiFingerprintData,
+export type TableMetaData = Pick<
+  ApiFingerprintData,
   'indicators' | 'matches' | 'indicator_metadata'
 >;
 export type IndicatorDataItem = {
@@ -73,7 +74,6 @@ export type TieredIndicator = {
 export type IndicatorsSummary = {
   [tier: string]: number;
 };
-
 
 //export interface ApiAppConfigData {
 //  [key: string]: {
@@ -139,7 +139,7 @@ export interface ApiIndicatorsData {
 export enum TableHeaderItemType {
   Number = 'number',
   String = 'string',
-  NumberArray ='numberArray',
+  NumberArray = 'numberArray',
   StringArray = 'stringArray',
   IndicatorsSummary = 'IndicatorsSummary',
   MatchScore = 'MatchScore',

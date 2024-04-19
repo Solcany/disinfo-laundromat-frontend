@@ -34,7 +34,7 @@
     {/if}
 
     <Separator />
-    <DownloadResult data={tableData}/> 
+    <DownloadResult data={tableData} />
     <Separator />
     <P>
       Unsure where to start? <Link href="/#use-case-list">Explore the use cases</Link> or <Link
@@ -42,7 +42,7 @@
       ></P
     >
 
-    <P class="pt-2 pb-6">
+    <P class="pb-6 pt-2">
       Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link
       > to see what’s possible</P
     >
@@ -95,7 +95,7 @@
 
     <div class="flex flex-1">
       {#if contentSearchData}
-        <TableContent data={contentSearchData} bind:sortedData={tableData} class="flex-1"/>
+        <TableContent data={contentSearchData} bind:sortedData={tableData} class="flex-1" />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

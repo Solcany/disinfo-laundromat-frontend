@@ -16,17 +16,20 @@ export const TABLE_CONTENT_SEARCH_MAIN_ROW: TableHeaderItemData[] = [
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
 ];
-export const TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS: string[] = TABLE_CONTENT_SEARCH_MAIN_ROW.map(item =>item.key); 
+export const TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS: string[] = TABLE_CONTENT_SEARCH_MAIN_ROW.map(
+  (item) => item.key
+);
 
-export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW: TableHeaderItemData[] =[
+export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW: TableHeaderItemData[] = [
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String },
   { label: 'Content Title', key: 'title', tooltip: '', type: TableHeaderItemType.String },
-  {label: 'Domain count', key: 'domain_count', tooltip: '', type: TableHeaderItemType.Number },
-  {label: 'Link count', key: 'link_count', tooltip: '', type: TableHeaderItemType.String },
-  {label: 'Search engines', key: 'engines', type: TableHeaderItemType.String },
-  {label: 'Content URL', key: 'url', type: TableHeaderItemType.Url },
+  { label: 'Domain count', key: 'domain_count', tooltip: '', type: TableHeaderItemType.Number },
+  { label: 'Link count', key: 'link_count', tooltip: '', type: TableHeaderItemType.String },
+  { label: 'Search engines', key: 'engines', type: TableHeaderItemType.String },
+  { label: 'Content URL', key: 'url', type: TableHeaderItemType.Url }
 ];
-export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS: string[] = TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW.map(item =>item.key); 
+export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS: string[] =
+  TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW.map((item) => item.key);
 
 export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
@@ -111,21 +114,6 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
       endpoint: Endpoint.Content
     }
   },
-  // {
-  //   type: InputType.Text,
-  //   name: 'titleQuery',
-  //   label: 'Title',
-  //   placeholder: 'Add title',
-  //   required: false
-  // },
-  // {
-  //   type: InputType.Checkbox,
-  //   name: 'combineOperator',
-  //   value: 'AND',
-  //   label: 'Results must contain both paragraph and title',
-  //   required: true,
-  //   checked: false
-  // },
   {
     type: InputType.Dropdown,
     name: 'language',
@@ -162,63 +150,6 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     value: true
   }
 ];
-
-//export const CONTENT_PAGE_FORM_CONFIG: InputConfig[] = [
-//  {
-//    type: InputType.Text,
-//    name: 'titleQuery',
-//    label: 'Title',
-//    placeholder: 'Add title',
-//    required: true
-//  },
-//  {
-//    type: InputType.Text,
-//    name: 'contentQuery',
-//    label: 'Content',
-//    placeholder: 'Add content',
-//    required: true,
-//    submitQuery: {
-//      type: QueryType.Post,
-//      endpoint: Endpoint.Content
-//    }
-//  },
-//  {
-//    type: InputType.Checkbox,
-//    name: 'combineOperator',
-//    value: 'AND',
-//    label: 'Results must contain both paragraph and title',
-//    required: true,
-//    checked: false
-//  },
-//  {
-//    type: InputType.Dropdown,
-//    name: 'country',
-//    label: 'Country',
-//    placeholder: 'Select region',
-//    required: true,
-//    data: undefined,
-//    requiresRemoteData: RemoteConfigFlag.Countries
-//  },
-//  {
-//    type: InputType.Dropdown,
-//    name: 'language',
-//    label: 'Language',
-//    placeholder: 'Select Language',
-//    required: true,
-//    data: undefined,
-//    requiresRemoteData: RemoteConfigFlag.Languages
-//  },
-//  {
-//    type: InputType.CheckboxGroup,
-//    name: 'search_engines',
-//    label: 'Search engines',
-//    placeholder: 'Select search engines',
-//    required: true,
-//    data: undefined,
-//    requiresRemoteData: RemoteConfigFlag.Engines
-//  },
-//
-//];
 
 export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
@@ -263,3 +194,12 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
       'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
   }
 ];
+
+export const USE_CASE1_FORM_DATA : Record<string, string | string[] | number | boolean> = {
+  contentToSearch: 'https://www.rt.com/news/594935-us-uk-ukraine-moscow-terrorism/',
+  country: 'us',
+  language: 'en',
+  search_engines: ['google'],
+}
+
+

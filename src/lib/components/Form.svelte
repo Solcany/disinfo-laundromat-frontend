@@ -28,7 +28,7 @@
     {#if item.type === InputType.Text}
       {@const id = item.name + '_input'}
       <div class="pb-2 {item.submitQuery ? 'flex items-end' : ''}">
-        <div class="w-full mr-2">
+        <div class="mr-2 w-full">
           <Label for={id} class="block py-1">{item.label}</Label>
           <InputText
             {id}
@@ -57,7 +57,7 @@
             <div class="flex items-center">
               <InputTextArea
                 {id}
-                class="outline outline-1 mr-2"
+                class="mr-2 outline outline-1"
                 value={formData?.has(item.name) ? String(formData.get(item.name)) : item.value}
                 name={item.name}
                 required={item.required}

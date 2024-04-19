@@ -29,7 +29,7 @@
   aria-label="click to expand row"
   role="button"
   class="w-full border-gray6 hover:bg-black {isExpanded
-    ? 'border-b-0 hover:cursor-n-resize bg-black'
+    ? 'border-b-0 bg-black hover:cursor-n-resize'
     : 'border-b-[1px] hover:cursor-s-resize'}"
 >
   <!-- the domain column -->

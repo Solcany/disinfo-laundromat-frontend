@@ -12,14 +12,14 @@
   import P from '$components/P.svelte';
   import Separator from '$components/Separator.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { FormOrientation, type TableMetaRowData} from '$models';
+  import { FormOrientation, type TableMetaRowData } from '$models';
   import { handleApiSubmit } from '$form';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
 
   // layout & page data
   export let data;
-  
+
   // variable bound to TableMeta components's sorted data
   // used for exporting the Table data to files
   let tableData: TableMetaRowData[] = [];
@@ -45,14 +45,14 @@
     {/if}
 
     <Separator />
-    <DownloadMetaResult data={tableData}/> 
+    <DownloadMetaResult data={tableData} />
     <Separator />
 
     <P
       ><Link href="/indicators">How to interpret results?</Link>
       <Link href="/indicators/#full-indicators-list">Need more information about indicators?</Link>
     </P>
-    <P class="pt-2 pb-6">
+    <P class="pb-6 pt-2">
       Need to analyse a bigger dataset? <Link href="https://github.com/pbenzoni">Contact Peter</Link
       > to see what’s possible</P
     >
@@ -104,11 +104,12 @@
     </div>
     <div class="flex flex-1">
       {#if metadataSearchData}
-        <TableMeta 
-          class="flex-1" 
-          data={metadataSearchData} 
+        <TableMeta
+          class="flex-1"
+          data={metadataSearchData}
           bind:sortedRows={tableData}
-          headerData={TABLE_METADATA_HEADER} />
+          headerData={TABLE_METADATA_HEADER}
+        />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

@@ -15,12 +15,13 @@ data-[state=active]:shadow-mini h-10 flex-1 border-b-[1px] border-r-[1px] border
   <ul class="col-span-3 flex w-full">
     {#each UI_SEARCH_NAV as { label, path }}
       <li
-        class="{activePath === path
-          ? 'dark:bg-gray7'
-          : 'border-b-[1px]'} 
+        class="{activePath === path ? 'dark:bg-gray7' : 'border-b-[1px]'} 
           flex flex-1 justify-center border-r-[1px] border-gray5 py-2"
       >
-        <a class="dark:text-white text-black font-light text-center text-sm md:text-base" href={path}>{label}</a>
+        <a
+          class="text-center text-sm font-light text-black md:text-base dark:text-white"
+          href={path}>{label}</a
+        >
       </li>
     {/each}
   </ul>

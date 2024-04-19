@@ -1,12 +1,12 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
-  import { TABLE_CONTENT_SEARCH_HEADER  } from '$config';
+  import { TABLE_CONTENT_SEARCH_HEADER } from '$config';
   import {
     SortDirection,
     TableHeaderItemType,
     type ContentDataResult,
-    type TableHeaderItemData,
+    type TableHeaderItemData
   } from '$models';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import TableContentRow from '$components/TableContentRow.svelte';
@@ -20,7 +20,7 @@
   export let sortedData: ContentDataResult[] = [];
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortStatus: Record<string, SortDirection> = {};
-  let sorter : TableHeaderItemData | undefined = undefined;
+  let sorter: TableHeaderItemData | undefined = undefined;
 
   $: {
     if (sorter && sortDirection !== SortDirection.None) {
@@ -60,7 +60,7 @@
   }
 
   function handleHeaderItemClick(item: TableHeaderItemData) {
-    sorter = item 
+    sorter = item;
     updateSortStatus(item.key);
   }
 

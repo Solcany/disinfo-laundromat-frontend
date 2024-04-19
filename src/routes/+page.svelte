@@ -8,6 +8,8 @@
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
+  import Link from '$components/Link.svelte';
+  import TryCaseStudyCard from '$components/TryCaseStudyCard.svelte';
   import {
     Endpoint,
     QueryType,
@@ -16,6 +18,10 @@
     type ApiContentData,
     type ApiFingerprintData
   } from '$models';
+  import {
+    USE_CASE1_FORM_DATA,
+  } from '$config';
+  import { objectToFormData } from '$utils'; 
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
@@ -102,8 +108,7 @@
           launders Russian state media content into mainstream media. A sample of articles from
           problematic outlets, criticizing Ukrainian President Zelensky, was run through the
           Laundromat’s content search. The tool revealed that all the articles in the sample were
-          lifted from Ria Novosti, an outlet belonging to the Russian? Segodnya group. Read the
-          repor
+          lifted from Ria Novosti, an outlet belonging to the Russian? Segodnya group.
         </P>
       </li>
       <li class="pt-6 md:pt-0">
@@ -130,6 +135,49 @@
       </li>
     </ul>
   </div>
+</section>
+
+<section class="bg-gray7 px-3 py-32 md:px-8">
+  <H2 class="mb-5">Case Studies</H2>
+  <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
+    <li class="">
+      <H2 class="pb-4">Investigate the laundering of Russian content and narratives</H2>
+      <P>
+        This search shows how the Laundromat can be used to identify sites that are laundering
+        content from Russian state media. It lists sample of articles from with a high degree of
+        similarity, sharing much of their content with the original article. The report below digs
+        into this phenomenon at scale and provides a detailed analysis of the network of sites that
+        are laundering content from Russian state media.
+      </P>
+      <div>
+        <Link
+          href="https://securingdemocracy.gmfus.org/from-russia-with-spin-how-content-from-russian-state-media-is-laundered-by-polish-blogs/"
+          >Read the report</Link
+        >
+        <TryCaseStudyCard formDataStore={contentFormDataStore} formData={objectToFormData(USE_CASE1_FORM_DATA)}/>
+      </div>
+    </li>
+    <li class="pt-6 md:pt-0">
+      <H2 class="pb-4">Explore RT's network of mirror websites </H2>
+      <P>
+         Researchers from the Instute for Strategic Dialoguee have uncovered several domain names that explicitly mirror (including branding, code, etc) a network of mirror websites of several RT websites. The Laundromat's Metadata Similarity feature can be used to iodentify the shared characteristics of the network of websites.
+      </P>
+      <div>
+        <Link
+          href="https://www.isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/>Read the report"
+        >Read the report</Link>
+      </div>
+    </li>
+    <li class="pt-6 md:pt-0">
+      <H2 class="pb-4">Generate OSINT leads and intelligence</H2>
+      <P>
+        In addition to identifying sites that are laundering content from Russian state media, the
+        Laundromat can be used to generate leads and intelligence about how sites are made, who's
+        advertising on them, their associated social media accounts, and more.
+      </P>
+      <div></div>
+    </li>
+  </ul>
 </section>
 
 <footer class="w-full bg-white">
