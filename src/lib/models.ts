@@ -212,75 +212,60 @@ export type ApiQuery = {
   endpoint: Endpoint;
   route?: string;
 };
-interface InputTextConfig {
-  type: InputType.Text;
+
+interface InputBase {
+  type: InputType;
   name: string;
   label: string;
-  placeholder: string;
   required: boolean;
-  value?: string;
-  submitQuery?: ApiQuery;
-  tooltip?: string;
+
+}
+interface InputTextConfig extends InputBase {
+  placeholder: string;
+  value: string;
+  submitQuery: ApiQuery;
+  tooltip: string;
 }
 
-interface InputTextAreaConfig {
-  type: InputType.TextArea;
-  name: string;
-  label: string;
+interface InputTextAreaConfig extends InputBase {
   placeholder: string;
-  required: boolean;
-  value?: string;
-  submitQuery?: ApiQuery;
-  tooltip?: string;
+  value: string;
+  submitQuery: ApiQuery;
+  tooltip: string;
 }
 
-interface InputDropdownConfig {
-  type: InputType.Dropdown;
-  name: string;
-  label: string;
+interface InputDropdownConfig extends InputBase {
   placeholder: string;
-  required: boolean;
   data: undefined | LabeledValue[];
-  requiresRemoteData?: RemoteConfigFlag;
-  value?: LabeledValue;
-  submitQuery?: ApiQuery;
-  tooltip?: string;
+  requiresRemoteData: RemoteConfigFlag;
+  value: LabeledValue;
+  submitQuery: ApiQuery;
+  tooltip: string;
 }
 
-interface InputCheckboxConfig {
-  type: InputType.Checkbox;
-  name: string;
-  label: string;
-  required: boolean;
+interface InputCheckboxConfig extends InputBase {
   checked: boolean;
   value: string;
-  submitQuery?: ApiQuery;
-  tooltip?: string;
+  submitQuery: ApiQuery;
+  tooltip: string;
 }
 
-interface InputCheckboxGroupConfig {
-  type: InputType.CheckboxGroup;
-  name: string;
-  label: string;
+interface InputCheckboxGroupConfig extends InputBase {
   placeholder: string;
-  required: boolean;
   data: undefined | LabeledValue[];
-  checked?: string[] | LabeledValue[];
+  checked: string[] | LabeledValue[];
   requiresRemoteData?: RemoteConfigFlag;
-  variant?: 'horizontal' | 'vertical';
-  value?: LabeledValue;
-  submitQuery?: ApiQuery;
-  tooltip?: string;
+  variant: 'horizontal' | 'vertical';
+  value: LabeledValue;
+  tooltip: string;
 }
 
-interface InputHiddenConfig {
-  type: InputType.Hidden;
-  name: string;
+interface InputHiddenConfig extends InputBase{
   requiresRemoteData?: RemoteConfigFlag;
-  value?: string | number | boolean;
+  value: string | number | boolean;
   // WIP this should be removed for the this type
   // but for some reason TS complains about its absence in the Form comp
-  submitQuery?: ApiQuery;
+  // submitQuery?: ApiQuery;
 }
 
 export type InputConfig =

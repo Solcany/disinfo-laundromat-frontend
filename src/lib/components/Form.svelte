@@ -39,7 +39,7 @@
             placeholder={item.placeholder}
           />
         </div>
-        {#if item.submitQuery}
+        {#if item.type === InputType.Text && item.submitQuery}
           <Button
             type="submit"
             ariaLabel="Submit form"
@@ -50,7 +50,7 @@
       </div>
     {:else if item.type === InputType.TextArea}
       {@const id = item.name + '_input'}
-      <div class="w-fulll pb-2 pr-2 {item.submitQuery ? 'flex items-end' : ''}">
+      <div class="w-full pb-2 pr-2 {item.submitQuery ? 'flex items-end' : ''}">
           <div class="w-full pr-2">
             <Label for={id} class="block py-1">{item.label}</Label>
             <div class="flex items-center">
@@ -74,6 +74,7 @@
             </div>
           </div>
       </div>
+        
     {:else if item.type === InputType.Dropdown}
       {#if item.data}
         {@const id = item.name + '_input'}
