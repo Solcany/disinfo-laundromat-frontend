@@ -1,15 +1,16 @@
 <script lang="ts">
+  import type { Writable } from 'svelte/store'; 
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
+  import Button from '$components/Button.svelte';
   import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
-  import TryCaseStudyCard from '$components/TryCaseStudyCard.svelte';
   import {
     Endpoint,
     QueryType,
@@ -27,10 +28,46 @@
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
-  export let data;
+  type TabKind = "content similarity" | "technical similarity";
 
+  export let data;
+  let activeTab : TabKind = "content similarity";
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
+
+  function setActiveTab(tab: TabKind) {
+    activeTab = tab;
+    console.log(activeTab);
+  }
+
+  $: console.log(activeTab);
+
+  function setFormDataStore(store: Writable<FormData>, data: FormData ) {
+    store.set(data); 
+
+  }
+  function scrollToTop() {
+      const duration = 300;
+      const start = window.scrollY; 
+      const end = 0; 
+      const stepTime = 10;
+      const steps = Math.round(duration / stepTime);
+      const stepDistance = (start - end) / steps;
+
+      let currentStep = 0;
+
+      function step() {
+        if (currentStep < steps) {
+          window.scrollTo(0, start - stepDistance * currentStep);
+          currentStep += 1;
+          setTimeout(step, stepTime); 
+        } else {
+          window.scrollTo(0, end);
+        }
+      }
+      step(); 
+}
+
 </script>
 
 <section class="grid grid-rows-2 px-3 md:px-8">
@@ -52,10 +89,10 @@
     </div>
     <div class="flex w-full items-center justify-center">
       <Tabs
-        value="content similarity"
+        bind:value={activeTab}
+        autoSet={false}
         class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-3/4 lg:min-w-[600px]"
-        let:C
-      >
+        let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity</C.Trigger>
           <C.Trigger value="technical similarity" class="rounded-tr-md"
@@ -154,7 +191,16 @@
           href="https://securingdemocracy.gmfus.org/from-russia-with-spin-how-content-from-russian-state-media-is-laundered-by-polish-blogs/"
           >Read the report</Link
         >
-        <TryCaseStudyCard formDataStore={contentFormDataStore} formData={objectToFormData(USE_CASE1_FORM_DATA)}/>
+        <div>
+          <Button
+          ariaLabel="set form data"
+          on:click={() => { 
+            setFormDataStore(contentFormDataStore, objectToFormData(USE_CASE1_FORM_DATA));
+            setActiveTab("technical similarity");
+            scrollToTop()}}>
+            Try Search
+          </Button>
+        </div>
       </div>
     </li>
     <li class="pt-6 md:pt-0">
