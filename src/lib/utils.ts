@@ -72,16 +72,54 @@ export function domainToUrl(domain: string) {
     return null;
   }
 }
-
-export function easeInOutQuad(t: number): number {
-  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-}
-
 export function getElementYOffset(element: HTMLElement): number {
     const elementRect = element.getBoundingClientRect();
     const pageYOffset = window.pageYOffset || document.documentElement.scrollTop;
     return pageYOffset + elementRect.top;
 }
+
+export function scrollToElement (element: HTMLElement, duration: number): void {
+  const startingY = window.pageYOffset || document.documentElement.scrollTop;
+  const elementY = getElementYOffset(element);
+  const bodyScrollHeight = document.body.scrollHeight;
+  const windowHeight = window.innerHeight;
+
+  const targetY =
+    bodyScrollHeight - elementY < windowHeight
+      ? bodyScrollHeight - windowHeight
+      : elementY;
+
+  const diff = targetY - startingY;
+
+  const easing = (t: number): number => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1);
+
+  if (diff === 0) {
+    return;
+  }
+
+  let start: number;
+
+  function step(timestamp: number): void {
+    if (start === undefined) {
+      start = timestamp;
+    }
+
+    const elapsed = timestamp - start;
+    const percent = Math.min(elapsed / duration, 1);
+    const easedPercent = easing(percent);
+
+    window.scrollTo(0, startingY + diff * easedPercent);
+
+    if (elapsed < duration) {
+      window.requestAnimationFrame(step);
+    }
+  }
+
+  window.requestAnimationFrame(step);
+}
+
+
+
 
 import { cubicOut} from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';

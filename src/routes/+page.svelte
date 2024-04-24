@@ -1,5 +1,4 @@
 <script lang="ts">
-  import  { onMount } from 'svelte'; 
   import type { Writable } from 'svelte/store'; 
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
@@ -23,7 +22,7 @@
   import {
     USE_CASE1_FORM_DATA,
   } from '$config';
-  import { objectToFormData, getElementYOffset} from '$utils'; 
+  import { objectToFormData, scrollToElement} from '$utils'; 
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
@@ -46,11 +45,6 @@
   function setFormDataStore(store: Writable<FormData>, data: FormData ) {
     store.set(data); 
   }
-
-  onMount(()=> {
-    console.log(getElementYOffset(tabsContainerElement));
-  })
-
 </script>
 
 <section class="grid grid-rows-2 px-3 md:px-8">
@@ -179,7 +173,8 @@
           ariaLabel="set form data"
           on:click={() => { 
             setFormDataStore(contentFormDataStore, objectToFormData(USE_CASE1_FORM_DATA));
-            setActiveTab("technical similarity");
+            setActiveTab("technical similarity")
+            scrollToElement(tabsContainerElement, 500);;
             }}>
             Try Search
           </Button>
