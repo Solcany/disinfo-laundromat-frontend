@@ -74,30 +74,14 @@ export function domainToUrl(domain: string) {
 }
 
 export function easeInOutQuad(t: number): number {
-  // Quadratic easing function
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
-export function scrollWindowToTop(duration: number): void {
-    const start: number = window.scrollY;
-    const end: number = 0; 
-    const totalDistance: number = start - end;
-    const startTime: number = performance.now();
-
-    function step(timestamp: number): void {
-      const elapsedTime: number = timestamp - startTime;
-      const progress: number = Math.min(elapsedTime / duration, 1);
-      const easedProgress: number = easeInOutQuad(progress);
-      const newY: number = start - easedProgress * totalDistance;
-      window.scrollTo(0, newY);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        window.scrollTo(0, end);
-      }
-    }
-    requestAnimationFrame(step); 
-  }
+export function getElementYOffset(element: HTMLElement): number {
+    const elementRect = element.getBoundingClientRect();
+    const pageYOffset = window.pageYOffset || document.documentElement.scrollTop;
+    return pageYOffset + elementRect.top;
+}
 
 import { cubicOut} from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';

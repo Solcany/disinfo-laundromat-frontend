@@ -1,4 +1,5 @@
 <script lang="ts">
+  import  { onMount } from 'svelte'; 
   import type { Writable } from 'svelte/store'; 
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
@@ -22,51 +23,33 @@
   import {
     USE_CASE1_FORM_DATA,
   } from '$config';
-  import { objectToFormData } from '$utils'; 
+  import { objectToFormData, getElementYOffset} from '$utils'; 
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
+
   type TabKind = "content similarity" | "technical similarity";
 
   export let data;
   let activeTab : TabKind = "content similarity";
+  let tabsContainerElement: HTMLElement;
+
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
 
   function setActiveTab(tab: TabKind) {
     activeTab = tab;
-    console.log(activeTab);
   }
-
-  $: console.log(activeTab);
 
   function setFormDataStore(store: Writable<FormData>, data: FormData ) {
     store.set(data); 
-
   }
-  function scrollToTop() {
-      const duration = 300;
-      const start = window.scrollY; 
-      const end = 0; 
-      const stepTime = 10;
-      const steps = Math.round(duration / stepTime);
-      const stepDistance = (start - end) / steps;
 
-      let currentStep = 0;
-
-      function step() {
-        if (currentStep < steps) {
-          window.scrollTo(0, start - stepDistance * currentStep);
-          currentStep += 1;
-          setTimeout(step, stepTime); 
-        } else {
-          window.scrollTo(0, end);
-        }
-      }
-      step(); 
-}
+  onMount(()=> {
+    console.log(getElementYOffset(tabsContainerElement));
+  })
 
 </script>
 
@@ -74,7 +57,7 @@
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
-        <H1 class="w-full text-4xl md:w-[500px] md:text-5xl">
+        <H1  class="w-full text-4xl md:w-[500px] md:text-5xl">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
           online.
         </H1>
@@ -87,7 +70,7 @@
         <p></p>
       </div>
     </div>
-    <div class="flex w-full items-center justify-center">
+    <div bind:this={tabsContainerElement} class="flex w-full items-center justify-center" >
       <Tabs
         bind:value={activeTab}
         autoSet={false}
@@ -197,7 +180,7 @@
           on:click={() => { 
             setFormDataStore(contentFormDataStore, objectToFormData(USE_CASE1_FORM_DATA));
             setActiveTab("technical similarity");
-            scrollToTop()}}>
+            }}>
             Try Search
           </Button>
         </div>
