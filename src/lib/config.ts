@@ -214,6 +214,9 @@ export const USE_CASE3_FORM_DATA = {
 
 
 export const CANVAS_PARTICLES_CONFIG = {
+    fullScreen: {
+      enable: false,
+    },
     particles: {
         color: {
             value: '#000'
@@ -226,7 +229,7 @@ export const CANVAS_PARTICLES_CONFIG = {
             enable: true
         },
         number: {
-            value: 100
+            value: 20 
         }
     }
 };

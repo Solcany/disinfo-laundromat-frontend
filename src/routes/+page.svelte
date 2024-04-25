@@ -63,8 +63,8 @@
 
 </script>
 
-<CanvasParticles/>
-<section class="grid grid-rows-2 px-3 md:px-8">
+<section class="grid grid-rows-2 px-3 md:px-8 relative">
+  <CanvasParticles class="absolute top-0 left-0 w-[200px] h-[200px]"/>
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>

@@ -11,7 +11,6 @@
     void particlesInit(async (engine: any) => {
         if (!$isParticlesEngineLoadedStore ) {
             await loadSlim(engine);
-            console.log("engine loaded!");
             isParticlesEngineLoadedStore.set(true);
         }
     });
