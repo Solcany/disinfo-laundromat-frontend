@@ -78,16 +78,20 @@ export function getElementYOffset(element: HTMLElement): number {
     return pageYOffset + elementRect.top;
 }
 
-export function scrollToElement (element: HTMLElement, duration: number): void {
-  const startingY = window.pageYOffset || document.documentElement.scrollTop;
-  const elementY = getElementYOffset(element);
-  const bodyScrollHeight = document.body.scrollHeight;
+export function scrollToElementYCenter(element: HTMLElement, duration: number): void {
+  const startingY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+  const elementY = getElementYOffset(element); 
   const windowHeight = window.innerHeight;
 
-  const targetY =
-    bodyScrollHeight - elementY < windowHeight
-      ? bodyScrollHeight - windowHeight
-      : elementY;
+  // Adjust targetY to position the element at the center of the viewport
+  let targetY = elementY - windowHeight / 2;  const bodyScrollHeight = document.body.scrollHeight;
+
+  // Ensure targetY doesn't scroll past the top or bottom of the document
+  if (targetY < 0) {
+    targetY = 0; // Ensure it doesn't scroll above the top
+  } else if (targetY + windowHeight > bodyScrollHeight) {
+    targetY = bodyScrollHeight - windowHeight; // Ensure it doesn't scroll past the bottom
+  }
 
   const diff = targetY - startingY;
 
@@ -117,8 +121,6 @@ export function scrollToElement (element: HTMLElement, duration: number): void {
 
   window.requestAnimationFrame(step);
 }
-
-
 
 
 import { cubicOut} from 'svelte/easing';

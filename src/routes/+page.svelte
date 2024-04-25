@@ -22,7 +22,7 @@
   import {
     USE_CASE1_FORM_DATA,
   } from '$config';
-  import { objectToFormData, scrollToElement} from '$utils'; 
+  import { objectToFormData, scrollToElementYCenter} from '$utils'; 
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
@@ -34,6 +34,7 @@
   export let data;
   let activeTab : TabKind = "content similarity";
   let tabsContainerElement: HTMLElement;
+  let areTabsHighlighted: boolean = false;
 
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
@@ -45,6 +46,18 @@
   function setFormDataStore(store: Writable<FormData>, data: FormData ) {
     store.set(data); 
   }
+
+  function highlightTabs() {
+    areTabsHighlighted = true;
+  }
+
+  function handleCaseStudySearch(store: Writable<FormData>, formData: FormData, tab: TabKind) {
+        setFormDataStore(store, formData);
+        setActiveTab(tab);
+        highlightTabs();
+        scrollToElementYCenter(tabsContainerElement, 500);
+  }
+
 </script>
 
 <section class="grid grid-rows-2 px-3 md:px-8">
@@ -64,11 +77,12 @@
         <p></p>
       </div>
     </div>
-    <div bind:this={tabsContainerElement} class="flex w-full items-center justify-center" >
+
+    <div bind:this={tabsContainerElement} class="flex w-full items-center justify-center z-10" >
       <Tabs
         bind:value={activeTab}
         autoSet={false}
-        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-3/4 lg:min-w-[600px]"
+        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-3/4 lg:min-w-[600px] relative {areTabsHighlighted ? 'gradient-border' : ''}"
         let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity</C.Trigger>
@@ -166,16 +180,15 @@
       <div>
         <Link
           href="https://securingdemocracy.gmfus.org/from-russia-with-spin-how-content-from-russian-state-media-is-laundered-by-polish-blogs/"
+          class="block mt-2"
           >Read the report</Link
         >
-        <div>
+        <div class="mt-4">
           <Button
           ariaLabel="set form data"
-          on:click={() => { 
-            setFormDataStore(contentFormDataStore, objectToFormData(USE_CASE1_FORM_DATA));
-            setActiveTab("technical similarity")
-            scrollToElement(tabsContainerElement, 500);;
-            }}>
+          on:click={() => handleCaseStudySearch(contentFormDataStore, 
+                                                objectToFormData(USE_CASE1_FORM_DATA), 
+                                                "content similarity")}>
             Try Search
           </Button>
         </div>
