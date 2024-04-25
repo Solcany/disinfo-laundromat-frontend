@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {onMount} from 'svelte';
   import type { Writable } from 'svelte/store'; 
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
@@ -38,6 +39,7 @@
   let activeTab : TabKind = "content similarity";
   let tabsContainerElement: HTMLElement;
   let areTabsHighlighted: boolean = false;
+  let isMounted: boolean = false;
 
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
@@ -61,10 +63,16 @@
         scrollToElementYCenter(tabsContainerElement, 500);
   }
 
+  onMount(() => {
+    isMounted=true;
+  })
+
 </script>
 
 <section class="grid grid-rows-2 px-3 md:px-8 relative">
-  <CanvasParticles class="absolute top-0 left-0 w-[200px] h-[200px]"/>
+  {#if isMounted}
+    <CanvasParticles class="absolute top-0 left-0 w-[200px] h-[200px]"/>
+  {/if}
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
