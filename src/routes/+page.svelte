@@ -5,7 +5,7 @@
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
   import Button from '$components/Button.svelte';
-  import BackgroundParticles from '$components/BackgroundParticles.svelte';
+  import CanvasParticles from '$components/CanvasParticles.svelte';
   import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
   import H3 from '$components/H3.svelte';
@@ -63,7 +63,7 @@
 
 </script>
 
-<BackgroundParticles/>
+<CanvasParticles/>
 <section class="grid grid-rows-2 px-3 md:px-8">
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">

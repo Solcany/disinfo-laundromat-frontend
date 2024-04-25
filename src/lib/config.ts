@@ -213,4 +213,20 @@ export const USE_CASE3_FORM_DATA = {
 }
 
 
-
+export const CANVAS_PARTICLES_CONFIG = {
+    particles: {
+        color: {
+            value: '#000'
+        },
+        links: {
+            enable: true,
+            color: '#000'
+        },
+        move: {
+            enable: true
+        },
+        number: {
+            value: 100
+        }
+    }
+};
