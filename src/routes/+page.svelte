@@ -5,6 +5,7 @@
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
   import Button from '$components/Button.svelte';
+  import BackgroundParticles from '$components/BackgroundParticles.svelte';
   import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
   import H3 from '$components/H3.svelte';
@@ -21,6 +22,8 @@
   } from '$models';
   import {
     USE_CASE1_FORM_DATA,
+    USE_CASE2_FORM_DATA,
+    USE_CASE3_FORM_DATA,
   } from '$config';
   import { objectToFormData, scrollToElementYCenter} from '$utils'; 
   import { queryApi } from '$api';
@@ -60,6 +63,7 @@
 
 </script>
 
+<BackgroundParticles/>
 <section class="grid grid-rows-2 px-3 md:px-8">
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
@@ -202,7 +206,17 @@
       <div>
         <Link
           href="https://www.isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/>Read the report"
+          class="block mt-2"
         >Read the report</Link>
+        <div class="mt-4">
+          <Button
+          ariaLabel="set form data"
+          on:click={() => handleCaseStudySearch(metadataFormDataStore, 
+                                                objectToFormData(USE_CASE2_FORM_DATA), 
+                                                "technical similarity")}>
+            Try Search
+          </Button>
+        </div>
       </div>
     </li>
     <li class="pt-6 md:pt-0">
@@ -212,7 +226,18 @@
         Laundromat can be used to generate leads and intelligence about how sites are made, who's
         advertising on them, their associated social media accounts, and more.
       </P>
-      <div></div>
+      <div>
+        <div class="mt-4">
+          <Button
+          ariaLabel="set form data"
+          on:click={() => handleCaseStudySearch(metadataFormDataStore, 
+                                                objectToFormData(USE_CASE3_FORM_DATA), 
+                                                "technical similarity")}>
+            Try Search
+          </Button>
+        </div>
+      </div>
+
     </li>
   </ul>
 </section>

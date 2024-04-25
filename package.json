@@ -38,6 +38,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@tsparticles/slim": "^3.3.0",
+    "@tsparticles/svelte": "^3.0.0",
     "bits-ui": "^0.19.6",
     "clsx": "^2.1.0",
     "d3-array": "^3.2.4",

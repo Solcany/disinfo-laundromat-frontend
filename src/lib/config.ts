@@ -202,4 +202,15 @@ export const USE_CASE1_FORM_DATA = {
   search_engines: ['google'],
 }
 
+export const USE_CASE2_FORM_DATA = {
+  url: 'https://actualidad.rt.com,https://actualidad-rt.com,https://esrt.online,https://esrt.press',
+  run_urlscan: '1',
+}
+
+export const USE_CASE3_FORM_DATA = {
+  url: 'https://globalresearch.ca/',
+  run_urlscan: '1',
+}
+
+
 
