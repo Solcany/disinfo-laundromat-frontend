@@ -7,6 +7,9 @@
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
 </script>
+<svelte:head>
+  <meta name="title" content="Information Laundromat - About"/>
+</svelte:head>
 
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">
   <H1 id="about">About</H1>

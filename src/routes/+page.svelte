@@ -69,6 +69,10 @@
 
 </script>
 
+<svelte:head>
+  <meta name="title" content="Information Laundromat"/>
+</svelte:head>
+
 <section class="grid grid-rows-2 px-3 md:px-8 relative">
   {#if isMounted}
     <CanvasParticles class="absolute top-0 left-0 w-[200px] h-[200px]"/>

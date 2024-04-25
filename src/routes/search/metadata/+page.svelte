@@ -33,6 +33,10 @@
     : null;
 </script>
 
+<svelte:head>
+  <meta name="title" content="Information Laundromat - Technical Similarity Search"/>
+</svelte:head>
+
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if data.metadataAdvancedFormConfig}

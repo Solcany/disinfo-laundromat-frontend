@@ -12,6 +12,10 @@
   $: indicatorMetadata = data.indicatorMetadata;
 </script>
 
+<svelte:head>
+  <meta name="title" content="Information Laundromat - Indicators"/>
+</svelte:head>
+
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">
   <H1 id="about-the-indicator-tier-system-and-interpreting-results">
     About the Indicator Tier System and Interpreting Results
