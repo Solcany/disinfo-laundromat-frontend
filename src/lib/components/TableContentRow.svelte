@@ -21,8 +21,8 @@
 
   let dataMain: [string, number | string | number[] | string[]][] = [];
   let dataComplementary: [string, number | string | number[] | string[]][] = [];
-  let showComplementaryData: boolean = false;
   let domainAssociations: DomainAssociation[] = [];
+  let showComplementaryData: boolean = false;
 
   $: setRows(data);
   $: setDomainAssociations(data);
@@ -76,7 +76,7 @@
       <td class="h-10 pr-6 text-sm text-black first:pl-4 dark:text-white">
         <div class="w-0 flex items-center min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
           {#if key === 'domain'}
-            <Link href={domainToUrl(String(value))}>{value}</Link>
+            <Link href={domainToUrl(String(value))} on:click={(e)=>{e.stopPropagation()}}>{value}</Link>
             {#each domainAssociations as association}
               <div class="mx-2 inline-block">
                 <Tooltip variant="rectangle">
