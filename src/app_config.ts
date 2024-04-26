@@ -4,7 +4,7 @@ import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
 import { InputType, TableHeaderItemType } from '$models';
 
 export const APP_TITLE: string = 'The Information Laundromat';
-export const API_URL: string = 'https://www.disinfo.id/api/'; //'http://20.55.107.60/api/';
+export const API_URL: string = 'https://www.informationlaundromat.com/api/';
 
 export const TABLE_CONTENT_SEARCH_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
