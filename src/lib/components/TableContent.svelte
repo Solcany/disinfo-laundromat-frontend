@@ -79,9 +79,9 @@
 <div class={cn('', className)}>
   <table class="w-full max-w-full border-spacing-0">
     <colgroup>
+      <col style="width: 30%" />
       <col style="width: 20%" />
-      <col style="width: 20%" />
-      <col style="width: 55%" />
+      <col style="width: 45%" />
       <col style="width: 5%" />
     </colgroup>
     <thead class="box-shadow-border-bottom sticky top-0 dark:bg-gray7">
