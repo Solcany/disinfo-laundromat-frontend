@@ -1,11 +1,12 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { ContentDataResult } from '$models';
+  import type { ContentDataResult, DomainAssociation } from '$models';
   import {
     TABLE_CONTENT_SEARCH_MAIN_ROW,
     TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
     TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW,
-    TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS
+    TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS,
+    DOMAIN_ASSOCIATIONS,
   } from '$config';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
@@ -21,12 +22,12 @@
   let dataMain: [string, number | string | number[] | string[]][] = [];
   let dataComplementary: [string, number | string | number[] | string[]][] = [];
   let showComplementaryData: boolean = false;
-  let domainAssociations: string[] = [];
+  let domainAssociations: DomainAssociation[] = [];
 
   $: setRows(data);
   $: setDomainAssociations(data);
 
-  function setRows(data: ContentDataResult) {
+  function setRows(data: ContentDataResult): void  {
     Object.entries(data).forEach(([key, value]) => {
       if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
         dataMain.push([key, value]);
@@ -36,11 +37,25 @@
     });
   }
 
-  function setDomainAssociations(data: ContentDataResult) {
-    domainAssociations = data.hasOwnProperty('source') ? data.source : [];
+  function setDomainAssociations(data: ContentDataResult): void {
+    if(!data.source) {
+      return;
+    }
+    const keys : string[] = data.source
+    const associations : DomainAssociation[] = [];
+
+    keys.forEach(key => {
+      for (const association of DOMAIN_ASSOCIATIONS) {
+        if (key === association.value) {
+          associations.push(association);
+          break;         
+          }
+      }
+    });
+    domainAssociations = associations;
   }
 
-  function handleClick() {
+  function handleClick(): void {
     showComplementaryData = !showComplementaryData;
   }
 </script>
@@ -57,14 +72,14 @@
     <!-- row data -->
     {#each dataMain as [key, value]}
       <td class="h-10 pr-6 text-sm text-black first:pl-4 dark:text-white">
-        <div class="w-0 min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+        <div class="w-0 flex items-center min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
           {#if key === 'domain'}
             <Link href={domainToUrl(String(value))}>{value}</Link>
             {#each domainAssociations as association}
-              <div class="mr-2 inline-block">
-                <Tooltip>
-                  <svelte:fragment slot="icon">i</svelte:fragment>
-                  <svelte:fragment slot="content">{association}</svelte:fragment>
+              <div class="mx-2 inline-block">
+                <Tooltip variant="rectangle">
+                  <svelte:fragment slot="icon">{association.glyph.toUpperCase()}</svelte:fragment>
+                  <svelte:fragment slot="content">{association.label}</svelte:fragment>
                 </Tooltip>
               </div>
             {/each}

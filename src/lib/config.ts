@@ -236,6 +236,6 @@ export const CANVAS_PARTICLES_CONFIG = {
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
   {value: "EUvsDisinfo", label: "What is Eu VS Disinfo?", glyph: "EU"}, 
-  {value: "statemedia", label: "What is statemedia?", glyph: "GOV"},
+  {value: "statemedia", label: "What is statemedia?", glyph: "gov"},
 
 ]
