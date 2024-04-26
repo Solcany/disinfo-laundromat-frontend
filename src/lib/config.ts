@@ -219,17 +219,28 @@ export const CANVAS_PARTICLES_CONFIG = {
     },
     particles: {
         color: {
-            value: '#000'
+            value: ['#666600', '#666666', '#660000']
+        },
+        modes: {
+          trail: {
+            delay: 1,
+            pauseOnStop: false,
+            quantity: 1
+          },
         },
         links: {
             enable: true,
-            color: '#000'
+            //maxDistance: 500,
+            color: ['#666600', '#666666', '#660000']
+
+
         },
         move: {
-            enable: true
+            enable: true,
+            maxSpeed: 0.2,
         },
         number: {
-            value: 20 
+            value: 80 
         }
     }
 };
