@@ -297,3 +297,7 @@ export enum FormOrientation {
   Horizontal = 'horizontal',
   Vertical = 'vertical'
 }
+
+export interface DomainAssociation extends LabeledValue {
+  glyph: string;
+}

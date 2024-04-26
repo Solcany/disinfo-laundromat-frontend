@@ -1,4 +1,4 @@
-import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig } from '$models';
+import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig, DomainAssociation} from '$models';
 import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
 
 import { InputType, TableHeaderItemType } from '$models';
@@ -233,3 +233,9 @@ export const CANVAS_PARTICLES_CONFIG = {
         }
     }
 };
+
+export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
+  {value: "EUvsDisinfo", label: "What is Eu VS Disinfo?", glyph: "EU"}, 
+  {value: "statemedia", label: "What is statemedia?", glyph: "GOV"},
+
+]
