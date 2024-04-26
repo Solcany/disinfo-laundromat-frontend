@@ -29,9 +29,11 @@
 
   function setRows(data: ContentDataResult): void  {
     Object.entries(data).forEach(([key, value]) => {
+      // check each config individually in case an entry is to be shown in both main and complementary rows
       if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
         dataMain.push([key, value]);
-      } else if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
+      }
+      if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
         dataComplementary.push([key, value]);
       }
     });
@@ -117,9 +119,8 @@
       </div>
     </td>
   </tr>
-
   <!-- expanded row inner table -->
-  {#if showComplementaryData && dataComplementary.length > 0}
+  {#if showComplementaryData && dataComplementary}
     <tr class="border-b-[1px] border-gray3 bg-black">
       <td colSpan={dataMain.length + 1}>
         <div class="w-full py-4">
