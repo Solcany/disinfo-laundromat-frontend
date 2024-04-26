@@ -64,6 +64,7 @@
   }
 
   onMount(() => {
+    // particles engine load func sometimes breaks if document isn't ready
     isMounted=true;
   })
 
@@ -75,9 +76,9 @@
 
 <section class="grid grid-rows-2 px-3 md:px-8 relative">
   {#if isMounted}
-    <CanvasParticles class="absolute top-0 left-0 w-[200px] h-[200px]"/>
+    <CanvasParticles class="absolute top-0 left-0 bottom-0 right-0 "/>
   {/if}
-  <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
+  <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20 z-10">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1  class="w-full text-4xl md:w-[500px] md:text-5xl">
@@ -142,7 +143,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="mt-10 md:mt-32">
+  <div class="mt-10 md:mt-32 z-10">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>

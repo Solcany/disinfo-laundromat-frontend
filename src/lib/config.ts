@@ -233,6 +233,13 @@ export const CANVAS_PARTICLES_CONFIG = {
         }
     }
 };
+        // Particles.init({
+        //     selector: '.background',
+        //     color: ['#666600', '#666666', '#660000'],
+        //     connectParticles: true,
+        //     speed: 0.3,
+        //     minDistance: 130,
+        // });
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
   {value: "EUvsDisinfo", label: "What is Eu VS Disinfo?", glyph: "EU"}, 
