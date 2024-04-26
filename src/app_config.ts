@@ -38,14 +38,14 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
   { label: '', key: '', type: TableHeaderItemType.Empty }
 ];
 
-export const UI_NAV: NavItemData[] = [
+export const NAV: NavItemData[] = [
   { label: 'Workspace', path: '/search/content' },
   { label: 'About', path: '/about' },
-  { label: 'Indicators', path: '/indicators' }
+  { label: 'Documentation', path: '/documentation' }
   //{ label: 'Log in | Sign up', path: '/login' }
 ];
 
-export const UI_SEARCH_NAV: NavItemData[] = [
+export const SEARCH_NAV: NavItemData[] = [
   { label: 'Content Similarity', path: '/search/content' },
   { label: 'Technical Similarity', path: '/search/metadata' }
 ];

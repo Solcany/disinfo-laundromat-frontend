@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { UI_NAV } from '$config';
+  import { NAV } from '$config';
   import { onMount } from 'svelte';
   import { cn, getPathRoot } from '$utils';
   import { page } from '$app/stores';
@@ -15,7 +15,7 @@
 
 <nav class={cn('', className)}>
   <ul class="flex list-none justify-center md:justify-start">
-    {#each UI_NAV as { label, path }}
+    {#each NAV as { label, path }}
       <li class="px-3 first:pl-0 last:px-0 last:pl-3">
         <a
           class="font-sans text-white {activePath === getPathRoot(path)
