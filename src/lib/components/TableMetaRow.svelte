@@ -3,6 +3,7 @@
   import type { TableMetaRowData, IndicatorMetadata, IndicatorsSummary } from '$models';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
+  import Link from '$components/Link.svelte';
   import Rect from '$components/Rect.svelte';
   import RectMapped from '$components/RectMapped.svelte';
   import H3 from '$components/H3.svelte';
@@ -35,8 +36,8 @@
   <!-- the domain column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
-      <a href={domainToUrl(data.domain)} class="underline">{data.domain}</a>
-      {#if data.domainAssociations && data.domainAssociations.length > 0}
+      <Link href={domainToUrl(String(data.domain))} on:click={(e)=>{e.stopPropagation()}}>{data.domain}</Link>
+      {#if data.domainAssociations}
         {#each domainAssociations as association}
           <Tooltip>
             <svelte:fragment slot="icon">i</svelte:fragment>
