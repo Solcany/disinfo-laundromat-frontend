@@ -33,7 +33,7 @@
   wrap="soft"
   on:input={handleInputChange}
   class={cn(
-    ' h-12 w-full resize-none truncate whitespace-pre-wrap rounded-input border bg-white px-2 font-sans text-sm text-black transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black',
+    ' h-20 w-full resize-none truncate whitespace-pre-wrap rounded-input border bg-white px-2 font-sans text-sm text-black transition-colors duration-200 placeholder:text-gray5 hover:cursor-pointer hover:bg-gray1 focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-1 focus:ring-offset-black',
     className
   )}
 />
