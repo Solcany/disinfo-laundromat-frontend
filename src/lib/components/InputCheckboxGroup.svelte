@@ -74,18 +74,6 @@
           ? 'pr-2 '
           : ''}"
       >
-        <!--
-<InputCheckbox
-name={item.value}
-label={item.label}
-value={item.value.toString()}
-checked={checked[index]}
-required={false}
-onCheckedChange={handleCheckedChange}
-class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-input border transition-all duration-150 ease-in-out">
-</InputCheckbox>
--->
-
         <Checkbox.Root
           name={'search_engines'}
           value={item.value.toString()}
@@ -93,7 +81,7 @@ class="border-muted bg-white active:scale-98 data-[state=unchecked]:border-borde
           onCheckedChange={(change) => handleCheckedChange(index, change)}
           id="terms"
           aria-labelledby="terms-label"
-          class="border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-input border bg-white transition-all duration-150 ease-in-out"
+          class="shrink-0 border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-input border bg-white transition-all duration-150 ease-in-out"
         >
           <Checkbox.Indicator
             let:isChecked

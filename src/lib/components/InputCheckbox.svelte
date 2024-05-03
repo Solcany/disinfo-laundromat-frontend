@@ -18,7 +18,7 @@
     {id}
     {name}
     aria-labelledby={label_id}
-    class="border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border bg-white transition-all duration-150 ease-in-out"
+    class="border-muted shrink-0  active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-md border bg-white transition-all duration-150 ease-in-out"
     {...$$restProps}
   >
     <Checkbox.Indicator
