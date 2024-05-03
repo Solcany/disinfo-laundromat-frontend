@@ -4,9 +4,11 @@
   let className: string | undefined = undefined;
   export { className as class };
 
-  export let variant: 'glyph' | 'text' = 'text';
+  type Variant = 'glyph' | 'text';
 
-  function variantClasses(variant: string): string {
+  export let variant: Variant = 'text';
+
+  function variantClasses(variant: Variant): string {
     switch (variant) {
       case 'glyph':
         return 'h-input w-[35px] rounded-full shrink-0';

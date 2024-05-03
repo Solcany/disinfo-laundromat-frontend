@@ -209,7 +209,7 @@ export enum Endpoint {
 
 export type ApiQuery = {
   type: QueryType;
-  endpoint: Endpoint;
+  endpoint: Endpoint;  
   route?: string;
 };
 interface InputTextConfig {

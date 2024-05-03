@@ -1,6 +1,5 @@
 import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig, DomainAssociation} from '$models';
 import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
-
 import { InputType, TableHeaderItemType } from '$models';
 
 export const APP_TITLE: string = 'The Information Laundromat';
@@ -66,7 +65,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Content,
-      route: '/search/content/'
+      route: '/search/content/',
     }
   },
   {
@@ -111,7 +110,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: false,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Content
+      endpoint: Endpoint.Content,
     }
   },
   {
@@ -161,7 +160,7 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Fingerprint,
-      route: '/search/metadata/'
+      route: '/search/metadata/',
     }
   },
   {
@@ -180,7 +179,7 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Fingerprint
+      endpoint: Endpoint.Fingerprint,
     }
   },
   {

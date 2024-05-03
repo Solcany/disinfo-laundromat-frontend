@@ -1,22 +1,48 @@
 <script lang="ts">
+import { onMount } from 'svelte';
 import Dialog from "$components/Dialog.svelte";
-import H3 from "$components/H3.svelte";
+import H2 from "$components/H2.svelte";
 import H4 from "$components/H4.svelte";
 import P from "$components/P.svelte";
+import Button from "$components/Button.svelte";
+import { X } from 'phosphor-svelte';
+  
+type Consent = 'accepted' | 'rejected';
+let showGDPRModal = true;
+
+function handleConsent(consent: Consent) {
+  //localStorage.setItem('gdprConsent', consent);
+  closeDialog();
+}
+
+function closeDialog() {
+  showGDPRModal = false;
+}
+
+
+onMount(() => {
+  const consent = localStorage.getItem('gdprConsent');
+  if (consent) {
+    showGDPRModal = false;
+  }
+});
 </script>
 
-<Dialog let:C open={true}>
+<Dialog let:C open={showGDPRModal}>
   <C.Portal>
     <C.Overlay />
-    <C.Content>
-      <C.Title>GDPR Compliance Notice</C.Title>
+    <C.Content class="rounded-input border-gray4 dark:bg-gray7">
+      <div class="flex items-center justify-center">
+      <C.Title><H2>GDPR Compliance Notice</H2></C.Title>
+      <Button ariaLabel="close GDPR modal" on:click={closeDialog}> <X size={26} color="#ffffff" weight="bold"/></Button>
+      </div>
       <C.Description>
       <P> 
       The Information Laundromat tool is committed to protecting and respecting your privacy in compliance with the General Data Protection Regulation (GDPR). This disclaimer outlines the nature of the data processing activities conducted by our tool. Selecting 'Accept' consents to the data collection
       </P>
-      <H3>
+      <H4>
       Data Collection and Use
-      </H3>
+      </H4>
       <P>
       The Information Laundromat tool collects data through two forms, as part of its functions: Content Similarity Search and Domain Forensics Matching.
       </P>
@@ -44,7 +70,15 @@ import P from "$components/P.svelte";
       The form data and results are collected and are solely used for the purpose of usage analytics and potential corpus expansion.
       </P>
       </C.Description>
-      <C.Close>X</C.Close>
+      <div class="flex pt-3">
+        <Button 
+          class="mr-3"
+          ariaLabel="accept GDPR" 
+          on:click={() => handleConsent('accepted')}> Accept </Button>
+        <Button 
+          ariaLabel="reject GDPR" 
+          on:click={() => handleConsent('rejected')}> Reject </Button>
+      </div>
     </C.Content>
   </C.Portal>
 </Dialog>
