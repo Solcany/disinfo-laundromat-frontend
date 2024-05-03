@@ -56,6 +56,10 @@
     areTabsHighlighted = true;
   }
 
+  function removeHighlightTabs() {
+    areTabsHighlighted = false;
+  }
+
   function handleCaseStudySearch(store: Writable<FormData>, formData: FormData, tab: TabKind) {
         setFormDataStore(store, formData);
         setActiveTab(tab);
@@ -69,7 +73,6 @@
   })
 
 </script>
-
 <svelte:head>
   <meta name="title" content="Information Laundromat"/>
 </svelte:head>

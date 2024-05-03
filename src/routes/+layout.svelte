@@ -6,6 +6,7 @@
   import Nav from '$components/Nav.svelte';
   import Footer from '$components/Footer.svelte';
   import ProgressBar from '$components/ProgressBar.svelte';
+  import DialogGDPR from '$components/DialogGDPR.svelte';
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
@@ -15,6 +16,7 @@
     </h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
+  <DialogGDPR/>
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
   <Footer />
