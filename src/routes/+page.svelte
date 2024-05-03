@@ -74,11 +74,11 @@
   <meta name="title" content="Information Laundromat"/>
 </svelte:head>
 
-<section class="grid grid-rows-2 px-3 md:px-8 relative">
+<section class="px-3 md:px-8 relative">
   {#if isMounted}
   <!-- <CanvasParticles class="absolute top-0 left-0 bottom-0 right-0 "/> --> 
   {/if}
-  <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20 z-10">
+  <div class="w-full grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20 z-10">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1  class="w-full text-4xl lg:w-[500px] lg:text-5xl">
@@ -143,7 +143,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="mt-10 md:mt-32 z-10">
+  <div class="py-8 lg:py-24 z-10">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
@@ -182,7 +182,7 @@
   </div>
 </section>
 
-<section class="bg-gray7 px-3 py-32 md:px-8">
+<section class="bg-gray7 px-3 md:px-8 py-8 lg:py-24">
   <H2 class="mb-5">Case Studies</H2>
   <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
     <li class="">
