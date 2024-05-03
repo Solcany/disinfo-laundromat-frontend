@@ -76,12 +76,12 @@
 
 <section class="grid grid-rows-2 px-3 md:px-8 relative">
   {#if isMounted}
-    <CanvasParticles class="absolute top-0 left-0 bottom-0 right-0 "/>
+  <!-- <CanvasParticles class="absolute top-0 left-0 bottom-0 right-0 "/> --> 
   {/if}
   <div class="grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20 z-10">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
-        <H1  class="w-full text-4xl md:w-[500px] md:text-5xl">
+        <H1  class="w-full text-4xl lg:w-[500px] lg:text-5xl">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
           online.
         </H1>
@@ -99,7 +99,7 @@
       <Tabs
         bind:value={activeTab}
         autoSet={false}
-        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-3/4 lg:min-w-[600px] relative {areTabsHighlighted ? 'gradient-border' : ''}"
+        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-100 lg:min-w-[600px] relative {areTabsHighlighted ? 'gradient-border' : ''}"
         let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity</C.Trigger>
