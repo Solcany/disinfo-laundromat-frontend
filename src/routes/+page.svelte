@@ -99,7 +99,7 @@
       <Tabs
         bind:value={activeTab}
         autoSet={false}
-        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 md:w-100 lg:min-w-[600px] relative {areTabsHighlighted ? 'gradient-border' : ''}"
+        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 w-full lg:w-3/4 relative {areTabsHighlighted ? 'gradient-border' : ''}"
         let:C>
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity</C.Trigger>
