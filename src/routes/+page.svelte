@@ -75,7 +75,9 @@
 
 <section class="relative px-3 md:px-8">
   {#if isMounted}
+  <!-- 
     <CanvasParticles class="absolute bottom-0 left-0 right-0 top-0 " />
+  -->
   {/if}
   <div class="z-10 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">

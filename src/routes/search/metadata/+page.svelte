@@ -24,8 +24,6 @@
   // used for exporting the Table data to files
   let tableData: TableMetaRowData[] = [];
 
-  $: console.log($metadataStore);
-
   $: metadataSearchData = $metadataStore
     ? {
         indicators: $metadataStore.indicators,

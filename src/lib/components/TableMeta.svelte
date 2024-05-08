@@ -128,9 +128,11 @@
       const domainGroup = grouped[domainKey];
       const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators)
         .map((tierKey) => {
-          const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(
-            ([type, values]) => ({
+          const data: IndicatorData[] = Object.entries(domaingroup.indicators[tierKey]).map(
+            ([type, name, values]) => ({
               type,
+              name, // WIP: continue here on friday
+              // figure out why name prop is missing in domainGroup indicators
               value: values
             })
           );

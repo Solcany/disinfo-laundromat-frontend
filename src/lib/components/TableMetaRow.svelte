@@ -14,6 +14,9 @@
   export let indicatorsCount: IndicatorsSummary | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
+  
+
+  $: console.log(indicatorsMetadata);
 
   let domainAssociations = (
     data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []
@@ -146,7 +149,7 @@
               {#if entry.data && entry.data.length > 0}
                 <div class="grid w-full grid-cols-3 gap-4 pt-2">
                   {#each entry.data as indicator}
-                    {#if indicator.type && indicator.value && indicator.value.length > 0}
+                    {#if indicator.name && indicator.value && indicator.value.length > 0}
                       <div>
                         <div class="flex items-center">
                           <H4 class="pr-2">{indicator.type}</H4>

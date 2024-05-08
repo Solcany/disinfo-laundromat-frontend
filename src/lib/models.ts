@@ -63,6 +63,7 @@ export type MatchDataItem = {
 
 export type IndicatorData = {
   type: string;
+  name: string;
   value: string[];
 };
 
