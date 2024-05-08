@@ -73,18 +73,19 @@ export function domainToUrl(domain: string) {
   }
 }
 export function getElementYOffset(element: HTMLElement): number {
-    const elementRect = element.getBoundingClientRect();
-    const pageYOffset = window.pageYOffset || document.documentElement.scrollTop;
-    return pageYOffset + elementRect.top;
+  const elementRect = element.getBoundingClientRect();
+  const pageYOffset = window.pageYOffset || document.documentElement.scrollTop;
+  return pageYOffset + elementRect.top;
 }
 
 export function scrollToElementYCenter(element: HTMLElement, duration: number): void {
   const startingY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-  const elementY = getElementYOffset(element); 
+  const elementY = getElementYOffset(element);
   const windowHeight = window.innerHeight;
 
   // Adjust targetY to position the element at the center of the viewport
-  let targetY = elementY - windowHeight / 2;  const bodyScrollHeight = document.body.scrollHeight;
+  let targetY = elementY - windowHeight / 2;
+  const bodyScrollHeight = document.body.scrollHeight;
 
   // Ensure targetY doesn't scroll past the top or bottom of the document
   if (targetY < 0) {
@@ -95,7 +96,8 @@ export function scrollToElementYCenter(element: HTMLElement, duration: number): 
 
   const diff = targetY - startingY;
 
-  const easing = (t: number): number => (t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1);
+  const easing = (t: number): number =>
+    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
 
   if (diff === 0) {
     return;
@@ -122,8 +124,7 @@ export function scrollToElementYCenter(element: HTMLElement, duration: number): 
   window.requestAnimationFrame(step);
 }
 
-
-import { cubicOut} from 'svelte/easing';
+import { cubicOut } from 'svelte/easing';
 import type { TransitionConfig } from 'svelte/transition';
 
 type FlyAndScaleParams = {
@@ -201,10 +202,12 @@ export function consolidateEnginesFormEntries(formData: FormData): FormData {
   return formData;
 }
 
-export function objectToFormData(object: Record<string, number | number[] | string | string[] | boolean | boolean[]>): FormData {
+export function objectToFormData(
+  object: Record<string, number | number[] | string | string[] | boolean | boolean[]>
+): FormData {
   let formData = new FormData();
   Object.entries(object).forEach(([key, value]) => {
-    formData.append(key, String(value)); 
+    formData.append(key, String(value));
   });
   return formData;
 }

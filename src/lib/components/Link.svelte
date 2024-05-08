@@ -4,4 +4,6 @@
   export { className as class };
 </script>
 
-<a on:click class={cn('text-black underline dark:text-white', className)} {...$$restProps}> <slot /></a>
+<a on:click class={cn('text-black underline dark:text-white', className)} {...$$restProps}>
+  <slot /></a
+>

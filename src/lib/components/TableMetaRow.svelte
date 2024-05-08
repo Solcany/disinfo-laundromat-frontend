@@ -36,7 +36,12 @@
   <!-- the domain column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
-      <Link href={domainToUrl(String(data.domain))} on:click={(e)=>{e.stopPropagation()}}>{data.domain}</Link>
+      <Link
+        href={domainToUrl(String(data.domain))}
+        on:click={(e) => {
+          e.stopPropagation();
+        }}>{data.domain}</Link
+      >
       {#if data.domainAssociations}
         {#each domainAssociations as association}
           <Tooltip>

@@ -6,7 +6,7 @@
     TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
     TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW,
     TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS,
-    DOMAIN_ASSOCIATIONS,
+    DOMAIN_ASSOCIATIONS
   } from '$config';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
@@ -27,7 +27,7 @@
   $: setRows(data);
   $: setDomainAssociations(data);
 
-  function setRows(data: ContentDataResult): void  {
+  function setRows(data: ContentDataResult): void {
     Object.entries(data).forEach(([key, value]) => {
       // check each config individually in case an entry is to be shown in both main and complementary rows
       if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
@@ -40,18 +40,18 @@
   }
 
   function setDomainAssociations(data: ContentDataResult): void {
-    if(!data.source) {
+    if (!data.source) {
       return;
     }
-    const keys : string[] = data.source
-    const associations : DomainAssociation[] = [];
+    const keys: string[] = data.source;
+    const associations: DomainAssociation[] = [];
 
-    keys.forEach(key => {
+    keys.forEach((key) => {
       for (const association of DOMAIN_ASSOCIATIONS) {
         if (key === association.value) {
           associations.push(association);
-          break;         
-          }
+          break;
+        }
       }
     });
     domainAssociations = associations;
@@ -74,9 +74,16 @@
     <!-- row data -->
     {#each dataMain as [key, value]}
       <td class="h-10 pr-6 text-sm text-black first:pl-4 dark:text-white">
-        <div class="w-0 flex items-center min-w-full overflow-hidden text-ellipsis whitespace-nowrap">
+        <div
+          class="flex w-0 min-w-full items-center overflow-hidden text-ellipsis whitespace-nowrap"
+        >
           {#if key === 'domain'}
-            <Link href={domainToUrl(String(value))} on:click={(e)=>{e.stopPropagation()}}>{value}</Link>
+            <Link
+              href={domainToUrl(String(value))}
+              on:click={(e) => {
+                e.stopPropagation();
+              }}>{value}</Link
+            >
             {#each domainAssociations as association}
               <div class="mx-2 inline-block">
                 <Tooltip variant="rectangle">

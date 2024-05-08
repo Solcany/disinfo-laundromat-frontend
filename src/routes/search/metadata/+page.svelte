@@ -36,7 +36,7 @@
 </script>
 
 <svelte:head>
-  <meta name="title" content="Information Laundromat - Technical Similarity Search"/>
+  <meta name="title" content="Information Laundromat - Technical Similarity Search" />
 </svelte:head>
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">

@@ -81,7 +81,7 @@
           onCheckedChange={(change) => handleCheckedChange(index, change)}
           id="terms"
           aria-labelledby="terms-label"
-          class="shrink-0 border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] items-center justify-center rounded-input border bg-white transition-all duration-150 ease-in-out"
+          class="border-muted active:scale-98 data-[state=unchecked]:border-border-input data-[state=unchecked]:bg-background data-[state=unchecked]:hover:border-dark-40 peer inline-flex size-[25px] shrink-0 items-center justify-center rounded-input border bg-white transition-all duration-150 ease-in-out"
         >
           <Checkbox.Indicator
             let:isChecked

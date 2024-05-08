@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-  <meta name="title" content="Information Laundromat - Documentation"/>
+  <meta name="title" content="Information Laundromat - Documentation" />
 </svelte:head>
 
 <div class="my-6 w-full px-3 md:w-1/3 md:px-8">

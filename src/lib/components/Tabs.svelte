@@ -16,9 +16,8 @@
     Trigger,
     Content
   };
-
 </script>
 
-<Tabs.Root bind:value={value} class={cn('w-100', className)} {...restProps}>
+<Tabs.Root bind:value class={cn('w-100', className)} {...restProps}>
   <slot {C} />
 </Tabs.Root>

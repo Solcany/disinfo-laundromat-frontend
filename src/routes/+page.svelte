@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {onMount} from 'svelte';
-  import type { Writable } from 'svelte/store'; 
+  import { onMount } from 'svelte';
+  import type { Writable } from 'svelte/store';
   import { goto } from '$app/navigation';
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
@@ -21,22 +21,18 @@
     type ApiContentData,
     type ApiFingerprintData
   } from '$models';
-  import {
-    USE_CASE1_FORM_DATA,
-    USE_CASE2_FORM_DATA,
-    USE_CASE3_FORM_DATA,
-  } from '$config';
-  import { objectToFormData, scrollToElementYCenter} from '$utils'; 
+  import { USE_CASE1_FORM_DATA, USE_CASE2_FORM_DATA, USE_CASE3_FORM_DATA } from '$config';
+  import { objectToFormData, scrollToElementYCenter } from '$utils';
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
   import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
 
-  type TabKind = "content similarity" | "technical similarity";
+  type TabKind = 'content similarity' | 'technical similarity';
 
   export let data;
-  let activeTab : TabKind = "content similarity";
+  let activeTab: TabKind = 'content similarity';
   let tabsContainerElement: HTMLElement;
   let areTabsHighlighted: boolean = false;
   let isMounted: boolean = false;
@@ -48,8 +44,8 @@
     activeTab = tab;
   }
 
-  function setFormDataStore(store: Writable<FormData>, data: FormData ) {
-    store.set(data); 
+  function setFormDataStore(store: Writable<FormData>, data: FormData) {
+    store.set(data);
   }
 
   function highlightTabs() {
@@ -61,30 +57,30 @@
   }
 
   function handleCaseStudySearch(store: Writable<FormData>, formData: FormData, tab: TabKind) {
-        setFormDataStore(store, formData);
-        setActiveTab(tab);
-        highlightTabs();
-        scrollToElementYCenter(tabsContainerElement, 500);
+    setFormDataStore(store, formData);
+    setActiveTab(tab);
+    highlightTabs();
+    scrollToElementYCenter(tabsContainerElement, 500);
   }
 
   onMount(() => {
     // particles engine load func sometimes breaks if document isn't ready
-    isMounted=true;
-  })
-
+    isMounted = true;
+  });
 </script>
+
 <svelte:head>
-  <meta name="title" content="Information Laundromat"/>
+  <meta name="title" content="Information Laundromat" />
 </svelte:head>
 
-<section class="px-3 md:px-8 relative">
+<section class="relative px-3 md:px-8">
   {#if isMounted}
-  <!-- <CanvasParticles class="absolute top-0 left-0 bottom-0 right-0 "/> --> 
+    <CanvasParticles class="absolute bottom-0 left-0 right-0 top-0 " />
   {/if}
-  <div class="w-full grid grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20 z-10">
+  <div class="z-10 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
-        <H1  class="w-full text-4xl lg:w-[500px] lg:text-5xl">
+        <H1 class="w-full text-4xl lg:w-[500px] lg:text-5xl">
           Uncover mirror websites. Understand content laundering. Safeguard content authenticity
           online.
         </H1>
@@ -98,12 +94,15 @@
       </div>
     </div>
 
-    <div bind:this={tabsContainerElement} class="flex w-full items-center justify-center z-10" >
+    <div bind:this={tabsContainerElement} class="z-10 flex w-full items-center justify-center">
       <Tabs
         bind:value={activeTab}
         autoSet={false}
-        class="w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 w-full lg:w-3/4 relative {areTabsHighlighted ? 'gradient-border' : ''}"
-        let:C>
+        class="relative w-full w-full self-start rounded-input shadow-xl outline outline-[1px] outline-gray5 lg:w-3/4 {areTabsHighlighted
+          ? 'gradient-border'
+          : ''}"
+        let:C
+      >
         <C.List>
           <C.Trigger value="content similarity" class="rounded-tl-md">Content Similarity</C.Trigger>
           <C.Trigger value="technical similarity" class="rounded-tr-md"
@@ -146,7 +145,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="py-8 lg:py-24 z-10">
+  <div class="z-10 py-8 lg:py-24">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
@@ -185,7 +184,7 @@
   </div>
 </section>
 
-<section class="bg-gray7 px-3 md:px-8 py-8 lg:py-24">
+<section class="bg-gray7 px-3 py-8 md:px-8 lg:py-24">
   <H2 class="mb-5">Case Studies</H2>
   <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
     <li class="">
@@ -200,36 +199,46 @@
       <div>
         <Link
           href="https://securingdemocracy.gmfus.org/from-russia-with-spin-how-content-from-russian-state-media-is-laundered-by-polish-blogs/"
-          class="block mt-2"
-          >Read the report</Link
+          class="mt-2 block">Read the report</Link
         >
         <div class="mt-4">
           <Button
-          ariaLabel="set form data"
-          on:click={() => handleCaseStudySearch(contentFormDataStore, 
-                                                objectToFormData(USE_CASE1_FORM_DATA), 
-                                                "content similarity")}>
+            ariaLabel="set form data"
+            on:click={() =>
+              handleCaseStudySearch(
+                contentFormDataStore,
+                objectToFormData(USE_CASE1_FORM_DATA),
+                'content similarity'
+              )}
+          >
             Try Search
           </Button>
         </div>
       </div>
     </li>
     <li class="pt-6 md:pt-0">
-      <H2 class="pb-4">Explore RT's network of mirror websites </H2>
+      <H2 class="pb-4">Explore RT's network of mirror websites</H2>
       <P>
-         Researchers from the Instute for Strategic Dialoguee have uncovered several domain names that explicitly mirror (including branding, code, etc) a network of mirror websites of several RT websites. The Laundromat's Metadata Similarity feature can be used to iodentify the shared characteristics of the network of websites.
+        Researchers from the Instute for Strategic Dialoguee have uncovered several domain names
+        that explicitly mirror (including branding, code, etc) a network of mirror websites of
+        several RT websites. The Laundromat's Metadata Similarity feature can be used to iodentify
+        the shared characteristics of the network of websites.
       </P>
       <div>
         <Link
           href="https://www.isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/>Read the report"
-          class="block mt-2"
-        >Read the report</Link>
+          class="mt-2 block">Read the report</Link
+        >
         <div class="mt-4">
           <Button
-          ariaLabel="set form data"
-          on:click={() => handleCaseStudySearch(metadataFormDataStore, 
-                                                objectToFormData(USE_CASE2_FORM_DATA), 
-                                                "technical similarity")}>
+            ariaLabel="set form data"
+            on:click={() =>
+              handleCaseStudySearch(
+                metadataFormDataStore,
+                objectToFormData(USE_CASE2_FORM_DATA),
+                'technical similarity'
+              )}
+          >
             Try Search
           </Button>
         </div>
@@ -245,15 +254,18 @@
       <div>
         <div class="mt-4">
           <Button
-          ariaLabel="set form data"
-          on:click={() => handleCaseStudySearch(metadataFormDataStore, 
-                                                objectToFormData(USE_CASE3_FORM_DATA), 
-                                                "technical similarity")}>
+            ariaLabel="set form data"
+            on:click={() =>
+              handleCaseStudySearch(
+                metadataFormDataStore,
+                objectToFormData(USE_CASE3_FORM_DATA),
+                'technical similarity'
+              )}
+          >
             Try Search
           </Button>
         </div>
       </div>
-
     </li>
   </ul>
 </section>

@@ -1,4 +1,10 @@
-import type { TableHeaderItemData, NavItemData, LabeledValue, InputConfig, DomainAssociation} from '$models';
+import type {
+  TableHeaderItemData,
+  NavItemData,
+  LabeledValue,
+  InputConfig,
+  DomainAssociation
+} from '$models';
 import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
 import { InputType, TableHeaderItemType } from '$models';
 
@@ -65,7 +71,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Content,
-      route: '/search/content/',
+      route: '/search/content/'
     }
   },
   {
@@ -110,7 +116,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: false,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Content,
+      endpoint: Endpoint.Content
     }
   },
   {
@@ -160,7 +166,7 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Fingerprint,
-      route: '/search/metadata/',
+      route: '/search/metadata/'
     }
   },
   {
@@ -179,7 +185,7 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     required: true,
     submitQuery: {
       type: QueryType.Post,
-      endpoint: Endpoint.Fingerprint,
+      endpoint: Endpoint.Fingerprint
     }
   },
   {
@@ -198,61 +204,57 @@ export const USE_CASE1_FORM_DATA = {
   contentToSearch: 'https://www.rt.com/news/594935-us-uk-ukraine-moscow-terrorism/',
   country: 'us',
   language: 'en',
-  search_engines: ['google'],
-}
+  search_engines: ['google']
+};
 
 export const USE_CASE2_FORM_DATA = {
   url: 'https://actualidad.rt.com,https://actualidad-rt.com,https://esrt.online,https://esrt.press',
-  run_urlscan: '1',
-}
+  run_urlscan: '1'
+};
 
 export const USE_CASE3_FORM_DATA = {
   url: 'https://globalresearch.ca/',
-  run_urlscan: '1',
-}
-
+  run_urlscan: '1'
+};
 
 export const CANVAS_PARTICLES_CONFIG = {
-    fullScreen: {
-      enable: false,
+  fullScreen: {
+    enable: false
+  },
+  particles: {
+    color: {
+      value: ['#666600', '#666666', '#660000']
     },
-    particles: {
-        color: {
-            value: ['#666600', '#666666', '#660000']
-        },
-        modes: {
-          trail: {
-            delay: 1,
-            pauseOnStop: false,
-            quantity: 1
-          },
-        },
-        links: {
-            enable: true,
-            //maxDistance: 500,
-            color: ['#666600', '#666666', '#660000']
-
-
-        },
-        move: {
-            enable: true,
-            maxSpeed: 0.2,
-        },
-        number: {
-            value: 80 
-        }
+    modes: {
+      trail: {
+        delay: 1,
+        pauseOnStop: false,
+        quantity: 1
+      }
+    },
+    links: {
+      enable: true,
+      //maxDistance: 500,
+      color: ['#666600', '#666666', '#660000']
+    },
+    move: {
+      enable: true,
+      maxSpeed: 0.2
+    },
+    number: {
+      value: 80
     }
+  }
 };
-        // Particles.init({
-        //     selector: '.background',
-        //     color: ['#666600', '#666666', '#660000'],
-        //     connectParticles: true,
-        //     speed: 0.3,
-        //     minDistance: 130,
-        // });
+// Particles.init({
+//     selector: '.background',
+//     color: ['#666600', '#666666', '#660000'],
+//     connectParticles: true,
+//     speed: 0.3,
+//     minDistance: 130,
+// });
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
-  {value: "EUvsDisinfo", label: "What is Eu VS Disinfo?", glyph: "EU"}, 
-  {value: "statemedia", label: "What is statemedia?", glyph: "gov"},
-
-]
+  { value: 'EUvsDisinfo', label: 'What is Eu VS Disinfo?', glyph: 'EU' },
+  { value: 'statemedia', label: 'What is statemedia?', glyph: 'gov' }
+];
