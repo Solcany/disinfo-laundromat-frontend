@@ -14,17 +14,14 @@
   export let indicatorsCount: IndicatorsSummary | undefined = undefined;
   let className: string | undefined = undefined;
   export { className as class };
-  
-
-  $: console.log("indicators meta:" ,indicatorsMetadata);
 
   let domainAssociations = (
     data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []
   ) as string[];
-  let isExpanded = false;
+  let showExpandedRow = false;
 
   function handleClick() {
-    isExpanded = !isExpanded;
+    showExpandedRow = !showExpandedRow;
   }
 </script>
 
@@ -32,7 +29,7 @@
   on:click={handleClick}
   aria-label="click to expand row"
   role="button"
-  class="w-full border-gray6 hover:bg-black {isExpanded
+  class="w-full border-gray6 hover:bg-black {showExpandedRow
     ? 'border-b-0 bg-black hover:cursor-n-resize'
     : 'border-b-[1px] hover:cursor-s-resize'}"
 >
@@ -122,7 +119,7 @@
   <!-- expand row glyph -->
   <td class="align-middle">
     <div class="flex w-full justify-end pr-3">
-      {#if isExpanded}
+      {#if showExpandedRow}
         <span class="shrink-0">
           <CaretUp class="fill-black dark:fill-white" weight="bold" size={20} />
         </span>
@@ -136,7 +133,7 @@
 </tr>
 
 <!-- expanded row -->
-{#if isExpanded && data.indicators}
+{#if showExpandedRow && data.indicators}
   <tr class="border-b-[1px] border-gray3 bg-black">
     <td colSpan={3}>
       {#each data.indicators as entry}

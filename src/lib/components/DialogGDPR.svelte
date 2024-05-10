@@ -18,8 +18,6 @@
   function closeDialog() {
     showGDPRModal = false;
   }
-
-  onMount(() => {
     const consent = localStorage.getItem('gdprConsent');
     if (consent) {
       showGDPRModal = false;
@@ -73,9 +71,12 @@
         </P>
       </C.Description>
       <div class="flex pt-3">
-        <Button class="mr-3" ariaLabel="accept GDPR" on:click={() => handleConsent('accepted')}>
-          Accept
-        </Button>
+
+        <form method="POST" action="?/gdpr">
+          <Button class="mr-3" type="submit" ariaLabel="accept GDPR">
+            Accept
+          </Button>
+        </form>
         <Button ariaLabel="reject GDPR" on:click={() => handleConsent('rejected')}>Reject</Button>
       </div>
     </C.Content>

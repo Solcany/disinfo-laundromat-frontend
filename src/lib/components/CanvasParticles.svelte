@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Particles, { particlesInit } from '@tsparticles/svelte';
+  import Particles, { particlesInit } from "@tsparticles/svelte";
   import { loadSlim } from '@tsparticles/slim';
   import { cn } from '$utils';
   import { CANVAS_PARTICLES_CONFIG } from '$config';
