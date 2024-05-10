@@ -31,7 +31,6 @@ export const load: LayoutLoad = async () => {
     }
   }
   if (response.data) {
-    console.log(response.data);
     return {
       contentBasicFormConfig: enhanceFormConfig(
         CONTENT_SIMILARITY_BASIC_FORM_CONFIG,

@@ -16,7 +16,7 @@
   export { className as class };
   
 
-  $: console.log(indicatorsMetadata);
+  $: console.log("indicators meta:" ,indicatorsMetadata);
 
   let domainAssociations = (
     data.hasOwnProperty('domainAssociations') ? data.domainAssociations : []
@@ -136,7 +136,7 @@
 </tr>
 
 <!-- expanded row -->
-{#if isExpanded && data.indicators && data.indicators.length > 0}
+{#if isExpanded && data.indicators}
   <tr class="border-b-[1px] border-gray3 bg-black">
     <td colSpan={3}>
       {#each data.indicators as entry}
@@ -149,10 +149,11 @@
               {#if entry.data && entry.data.length > 0}
                 <div class="grid w-full grid-cols-3 gap-4 pt-2">
                   {#each entry.data as indicator}
-                    {#if indicator.name && indicator.value && indicator.value.length > 0}
+                    {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
                         <div class="flex items-center">
-                          <H4 class="pr-2">{indicator.type}</H4>
+                          <H4 class="pr-2">{indicatorsMetadata[entry.tier + '-' + indicator.type]
+                                .name}</H4>
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
                             <svelte:fragment slot="content"

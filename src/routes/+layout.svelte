@@ -16,7 +16,7 @@
     </h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
-  <DialogGDPR />
+  <!-- <DialogGDPR /> -->
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
   <Footer />

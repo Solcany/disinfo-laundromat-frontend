@@ -34,9 +34,9 @@
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
 
   $: selfRow =
-    data.indicators && data.indicators.length > 0 ? getSelfRow(data.indicators) : undefined;
+    data.indicators ? getSelfRow(data.indicators) : undefined;
 
-  $: rows = data.matches && data.matches.length > 0 ? getRows(data.matches) : [];
+  $: rows = data.matches ? getRows(data.matches) : [];
 
   $: indicatorsCount = data.indicator_metadata
     ? countIndicatorTiers(data.indicator_metadata)
@@ -97,6 +97,9 @@
         indicators_summary: IndicatorsSummary;
       }
     > = {};
+    
+
+    console.log("meta data:", data);
 
     data.forEach(({ domain_name_y, match_type, match_value }) => {
       // extract tier and type from indicator string
@@ -128,10 +131,9 @@
       const domainGroup = grouped[domainKey];
       const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators)
         .map((tierKey) => {
-          const data: IndicatorData[] = Object.entries(domaingroup.indicators[tierKey]).map(
-            ([type, name, values]) => ({
+          const data: IndicatorData[] = Object.entries(domainGroup.indicators[tierKey]).map(
+            ([type, values]) => ({
               type,
-              name, // WIP: continue here on friday
               // figure out why name prop is missing in domainGroup indicators
               value: values
             })
