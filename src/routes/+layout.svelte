@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import type { LayoutData } from './$types';
   import '../styles/app.pcss';
   import '../styles/fonts.css';
   import { APP_TITLE } from '$config';
@@ -6,7 +7,10 @@
   import Nav from '$components/Nav.svelte';
   import Footer from '$components/Footer.svelte';
   import ProgressBar from '$components/ProgressBar.svelte';
-  import DialogGDPR from '$components/DialogGDPR.svelte';
+  import DialogGDPR from '$components/DialogGDPR.svelte';	
+	export let data: LayoutData;
+  //console.log("layout data", data);
+  //$: showGDPR = data.consent && data.consent === 'accepted' ? true : false;
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
@@ -16,7 +20,7 @@
     </h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
-  <DialogGDPR />
+  <DialogGDPR open={true}/>
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
   <Footer />

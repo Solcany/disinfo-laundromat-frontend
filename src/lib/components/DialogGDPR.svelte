@@ -1,30 +1,20 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { enhance } from '$app/forms';
   import Dialog from '$components/Dialog.svelte';
   import H2 from '$components/H2.svelte';
   import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
   import Button from '$components/Button.svelte';
   import { X } from 'phosphor-svelte';
-
-  type Consent = 'accepted' | 'rejected';
-  let showGDPRModal = true;
-
-  function handleConsent(consent: Consent) {
-    //localStorage.setItem('gdprConsent', consent);
-    closeDialog();
-  }
+  export let open : boolean  = false;
 
   function closeDialog() {
-    showGDPRModal = false;
+    open = false;
   }
- // const consent = localStorage.getItem('gdprConsent');
- // if (consent) {
- //   showGDPRModal = false;
- // }
 </script>
 
-<Dialog let:C open={showGDPRModal}>
+<Dialog let:C open={open}>
   <C.Portal>
     <C.Overlay />
     <C.Content class="rounded-input border-gray4 dark:bg-gray7">
@@ -71,12 +61,25 @@
       </C.Description>
       <div class="flex pt-3">
 
-        <form method="POST" action="/gdpr">
-          <Button class="mr-3" type="submit" ariaLabel="accept GDPR">
+      <form method="POST" action="/gdpr" on:submit={closeDialog} use:enhance>
+        <Button 
+            type="submit" 
+            name="consent" 
+            value="accepted" 
+            class="mr-3" 
+            ariaLabel="Accept GDPR">
             Accept
           </Button>
-        </form>
-        <Button ariaLabel="reject GDPR" on:click={() => handleConsent('rejected')}>Reject</Button>
+          <Button 
+            type="submit" 
+            name="consent" 
+            value="rejected" 
+            class="mr-3" 
+            ariaLabel="Reject GDPR">
+            Reject
+          </Button>
+      </form>
+
       </div>
     </C.Content>
   </C.Portal>

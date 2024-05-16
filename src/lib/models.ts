@@ -212,6 +212,7 @@ export type ApiQuery = {
   endpoint: Endpoint;
   route?: string;
 };
+
 interface InputTextConfig {
   type: InputType.Text;
   name: string;
