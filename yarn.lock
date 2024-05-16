@@ -447,7 +447,12 @@
     "@tsparticles/updater-out-modes" "^3.3.0"
     "@tsparticles/updater-size" "^3.3.0"
 
-"@tsparticles/engine@^3.0.2", "@tsparticles/engine@^3.3.0":
+"@tsparticles/engine@^3.0.2":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@tsparticles/engine/-/engine-3.4.0.tgz#0c07d454bd14823a808c822b57f0b82a2416f972"
+  integrity sha512-OqoMZYJCoiihNnexnnSmInEMNXr0Z8CmE1HSiFVeifgK1qUlonTFe2G09KdvNT8ZdvmIC513yTpFJNDbnMZYRQ==
+
+"@tsparticles/engine@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@tsparticles/engine/-/engine-3.3.0.tgz#9e293b186d735efee31d740ee269aa70c6f52650"
   integrity sha512-Sr24epYquTelGrUbMaknXTscib8IMQJrbmShJnEemU+wpZNIPtAh09sQgGtq1pUxrGQRUSQIgaybYuXcNgk8rg==
@@ -2360,9 +2365,9 @@ svelte-preprocess@^5.1.3:
     strip-indent "^3.0.0"
 
 svelte@^4.2.7:
-  version "4.2.16"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-4.2.16.tgz#f94f3f3ea13f98292ce54f596786d0ce0872ee8b"
-  integrity sha512-mQwHpqHD2PmFcCyHaZ7XiTqposaLvJ75WpYcyY5/ce3qxbYtwQpZ+M7ZKP+2CG5U6kfnBZBpPLyofhlE6ROrnQ==
+  version "4.2.17"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-4.2.17.tgz#e8f4d70be8cac6bf4dbfa89ca2fcb1a99445933f"
+  integrity sha512-N7m1YnoXtRf5wya5Gyx3TWuTddI4nAyayyIWFojiWV5IayDYNV5i2mRp/7qNGol4DtxEYxljmrbgp1HM6hUbmQ==
   dependencies:
     "@ampproject/remapping" "^2.2.1"
     "@jridgewell/sourcemap-codec" "^1.4.15"

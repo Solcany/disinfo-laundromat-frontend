@@ -18,11 +18,10 @@
   function closeDialog() {
     showGDPRModal = false;
   }
-    const consent = localStorage.getItem('gdprConsent');
-    if (consent) {
-      showGDPRModal = false;
-    }
-  });
+ // const consent = localStorage.getItem('gdprConsent');
+ // if (consent) {
+ //   showGDPRModal = false;
+ // }
 </script>
 
 <Dialog let:C open={showGDPRModal}>
@@ -72,7 +71,7 @@
       </C.Description>
       <div class="flex pt-3">
 
-        <form method="POST" action="?/gdpr">
+        <form method="POST" action="/gdpr">
           <Button class="mr-3" type="submit" ariaLabel="accept GDPR">
             Accept
           </Button>

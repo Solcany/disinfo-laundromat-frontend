@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { Writable } from 'svelte/store';
   import { goto } from '$app/navigation';
-  import { browser as svelteBrowser } from '$app/env' 
+  //import { browser as svelteBrowser } from '$app/env' 
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
@@ -65,10 +65,10 @@
   }
 
 
-  onMount(() => {
-    console.log(svelteBrowser);
+ // onMount(() => {
+ //   console.log(svelteBrowser);
 
-  })
+ // })
 
 </script>
 
