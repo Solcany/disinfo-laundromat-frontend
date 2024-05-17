@@ -20,8 +20,11 @@
     <C.Content class="rounded-input border-gray4 dark:bg-gray7">
       <div class="flex items-center justify-center">
         <C.Title><H2>GDPR Compliance Notice</H2></C.Title>
-        <Button ariaLabel="close GDPR modal" on:click={closeDialog}>
-          <X size={26} color="#ffffff" weight="bold" /></Button
+        <Button 
+          ariaLabel="close GDPR modal"
+          variant="glyph"
+          on:click={closeDialog}>
+          <X size={16} color="#000" weight="bold" /></Button
         >
       </div>
       <C.Description>

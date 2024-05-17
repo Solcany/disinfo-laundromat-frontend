@@ -7,7 +7,7 @@
   import Nav from '$components/Nav.svelte';
   import Footer from '$components/Footer.svelte';
   import ProgressBar from '$components/ProgressBar.svelte';
-  import DialogGDPR from '$components/DialogGDPR.svelte';	
+  import GDPRDialog from '$components/GDPRDialog.svelte';	
 	export let data: LayoutData;
   $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected';
 </script>
@@ -19,7 +19,7 @@
     </h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
-  <DialogGDPR open={showGDPR}/>
+  <GDPRDialog open={showGDPR}/>
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
   <Footer />

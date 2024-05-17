@@ -24,7 +24,7 @@
   on:click
   aria-label={ariaLabel}
   class={cn(
-    'flex items-center justify-center bg-black font-sans text-sm font-light shadow-lg dark:bg-white',
+    'flex items-center justify-center bg-black font-sans text-base font-base shadow-lg dark:bg-white',
     variantClasses(variant),
     className
   )}
