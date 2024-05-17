@@ -17,8 +17,8 @@
 <Dialog let:C open={open}>
   <C.Portal>
     <C.Overlay />
-    <C.Content class="rounded-input border-gray4 dark:bg-gray7">
-      <div class="flex items-center justify-center">
+    <C.Content class="rounded-input border-gray4 dark:bg-gray7 py-6 px-8">
+      <div class="flex items-center justify-center pb-6">
         <C.Title><H2>GDPR Compliance Notice</H2></C.Title>
         <Button 
           ariaLabel="close GDPR modal"
@@ -62,31 +62,32 @@
           analytics and potential corpus expansion.
         </P>
       </C.Description>
-      <div class="flex pt-3">
-
-      <form method="POST" action="/api/gdpr"  use:enhance={() => {
-          closeDialog();
-      }}>
-        <Button 
-            type="submit" 
-            name="consent" 
-            value="accepted" 
-            class="mr-3" 
-            ariaLabel="Accept GDPR"
-            >
-            Accept
-          </Button>
+      <div class="flex pt-6">
+        <form method="POST" 
+            action="/api/gdpr"  
+            use:enhance={() => {
+              closeDialog();
+            }}
+            class="flex">
           <Button 
-            type="submit" 
-            name="consent" 
-            value="rejected" 
-            class="mr-3" 
-            ariaLabel="Reject GDPR"
-            >
-            Reject
-          </Button>
-      </form>
-
+              type="submit" 
+              name="consent" 
+              value="accepted" 
+              class="mr-3" 
+              ariaLabel="Accept GDPR"
+              >
+              Accept
+            </Button>
+            <Button 
+              type="submit" 
+              name="consent" 
+              value="rejected" 
+              class="mr-3" 
+              ariaLabel="Reject GDPR"
+              >
+              Reject
+            </Button>
+        </form>
       </div>
     </C.Content>
   </C.Portal>
