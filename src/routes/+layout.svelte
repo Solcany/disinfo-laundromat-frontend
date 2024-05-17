@@ -9,8 +9,7 @@
   import ProgressBar from '$components/ProgressBar.svelte';
   import DialogGDPR from '$components/DialogGDPR.svelte';	
 	export let data: LayoutData;
-  //console.log("layout data", data);
-  //$: showGDPR = data.consent && data.consent === 'accepted' ? true : false;
+  $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected';
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
@@ -20,7 +19,7 @@
     </h1>
     <Nav class="pt-3 md:pt-0" />
   </Header>
-  <DialogGDPR open={true}/>
+  <DialogGDPR open={showGDPR}/>
   <ProgressBar class="absolute left-0 top-0" />
   <slot />
   <Footer />

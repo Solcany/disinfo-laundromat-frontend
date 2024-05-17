@@ -2,7 +2,7 @@ import { API_URL } from '$config';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { json } from '@sveltejs/kit';
-
+import type { GDPRConsent } from '$models';
 export const POST: RequestHandler = async ({ request }) => {
   const formData = await request.formData();
   const endpoint = new URL('parse-url', API_URL);

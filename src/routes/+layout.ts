@@ -18,7 +18,7 @@ import {
 } from '$config';
 import { queryApi } from '$api';
 
-export const load: LayoutLoad = async () => {
+export const load: LayoutLoad = async ({data}) => {
   let response: ApiResponse<any> = await queryApi(QueryType.Get, Endpoint.AppConfig);
 
   if (response.error) {
@@ -48,7 +48,9 @@ export const load: LayoutLoad = async () => {
         METADATA_SIMILARITY_ADVANCED_FORM_CONFIG,
         response.data
       ),
-      indicatorMetadata: response.data.indicator_metadata
+      indicatorMetadata: response.data.indicator_metadata,
+      // server data is passed from +layout.server.ts
+      gdpr_consent: data.gdpr_consent,
     };
   }
 

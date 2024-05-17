@@ -10,7 +10,7 @@
   export let open : boolean  = false;
 
   function closeDialog() {
-    open = false;
+    open = false; 
   }
 </script>
 
@@ -61,13 +61,16 @@
       </C.Description>
       <div class="flex pt-3">
 
-      <form method="POST" action="/gdpr" on:submit={closeDialog} use:enhance>
+      <form method="POST" action="/api/gdpr"  use:enhance={() => {
+          closeDialog();
+      }}>
         <Button 
             type="submit" 
             name="consent" 
             value="accepted" 
             class="mr-3" 
-            ariaLabel="Accept GDPR">
+            ariaLabel="Accept GDPR"
+            >
             Accept
           </Button>
           <Button 
@@ -75,7 +78,8 @@
             name="consent" 
             value="rejected" 
             class="mr-3" 
-            ariaLabel="Reject GDPR">
+            ariaLabel="Reject GDPR"
+            >
             Reject
           </Button>
       </form>

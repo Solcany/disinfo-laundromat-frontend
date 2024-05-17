@@ -302,3 +302,5 @@ export enum FormOrientation {
 export interface DomainAssociation extends LabeledValue {
   glyph: string;
 }
+
+export type GDPRConsent = 'accepted' | 'rejected' | undefined;
