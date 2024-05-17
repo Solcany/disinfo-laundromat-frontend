@@ -24,8 +24,7 @@
           ariaLabel="close GDPR modal"
           variant="glyph"
           on:click={closeDialog}>
-          <X size={16} color="#000" weight="bold" /></Button
-        >
+          <X size={16} color="#000" weight="bold" /></Button>
       </div>
       <C.Description>
         <P>
