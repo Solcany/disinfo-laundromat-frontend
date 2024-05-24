@@ -6,13 +6,13 @@
   import { type LabeledValue, FormOrientation } from '$models';
   import { cn } from '$utils';
 
-
   let className: string = '';
   export { className as class };
   export let label: string;
   export let data: LabeledValue[];
   export let orientation: FormOrientation = FormOrientation.Vertical;
   export let checked: string[] | LabeledValue[] | undefined = undefined;
+  export let required: boolean = false;
   let checkedItems: boolean[] = [];
 
   if (checked && checked.length > 0) {
@@ -33,17 +33,20 @@
 
   function handleCheckedChange(i: number, checked: boolean | 'indeterminate') {
     if (checked === 'indeterminate') {
-      // Decide how to handle the 'indeterminate' state if necessary
-      return; // For now, do nothing
+      return; 
     }
     checkedItems[i] = checked;
-    // Ensure there's always at least one item checked
     if (!checkedItems.some(Boolean)) {
-      checkedItems[i] = true; // Revert if this was the last one being unchecked
+      checkedItems[i] = true; 
     }
   }
 
-  $: allUnchecked = checkedItems.every(item => !item);
+  $: {
+    if (required && checkedItems.every(item => !item)) {
+      checkedItems[0] = true;
+    }
+  }
+
 </script>
 
 <div class={cn('', className)}>

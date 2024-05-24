@@ -127,6 +127,7 @@
             : item.checked
               ? item.checked
               : []}
+          required={item.required}
           {orientation}
         />
       </div>

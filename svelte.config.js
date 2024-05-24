@@ -20,7 +20,7 @@ const config = {
       $form: 'src/lib/form.ts',
       $utils: 'src/lib/utils.ts',
       $models: 'src/lib/models.ts',
-      $config: 'src/app_config.ts',
+      $config: 'src/appConfig.ts',
       $stores: 'src/lib/stores',
       $dummy_data: 'src/lib/dummy_data.ts'
     }

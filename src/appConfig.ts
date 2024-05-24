@@ -246,13 +246,6 @@ export const CANVAS_PARTICLES_CONFIG = {
     }
   }
 };
-// Particles.init({
-//     selector: '.background',
-//     color: ['#666600', '#666666', '#660000'],
-//     connectParticles: true,
-//     speed: 0.3,
-//     minDistance: 130,
-// });
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
     { value: 'EuVsDisinfo', label: '', glyph: 'EUD' },
