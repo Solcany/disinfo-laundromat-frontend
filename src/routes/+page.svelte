@@ -37,6 +37,8 @@
   let tabsContainerElement: HTMLElement;
   let areTabsHighlighted: boolean = false;
   let isMounted: boolean = false;
+  let contentFormData = new FormData();
+  let metadataFormData = new FormData();
 
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
@@ -49,6 +51,13 @@
     store.set(data);
   }
 
+  function setFormData(data: FormData, newData: FormData) {
+    data = newData
+    console.log(contentFormData);
+    console.log(metadataFormData);
+
+  }
+
   function highlightTabs() {
     areTabsHighlighted = true;
   }
@@ -57,19 +66,20 @@
     areTabsHighlighted = false;
   }
 
+  function handleCaseStudySearch_(formData: FormData, newFormData: FormData, tab: TabKind) {
+    // WIP: continue here, setFormData should update the local var formData however it doesnt for some reason.
+    setFormData(formData, newFormData);
+    setActiveTab(tab);
+    highlightTabs();
+    scrollToElementYCenter(tabsContainerElement, 500);
+  }
+
   function handleCaseStudySearch(store: Writable<FormData>, formData: FormData, tab: TabKind) {
     setFormDataStore(store, formData);
     setActiveTab(tab);
     highlightTabs();
     scrollToElementYCenter(tabsContainerElement, 500);
   }
-
-
- // onMount(() => {
- //   console.log(svelteBrowser);
-
- // })
-
 </script>
 
 
@@ -121,7 +131,7 @@
           {#if contentBasicFormConfig}
             <Form
               config={contentBasicFormConfig}
-              formData={$contentFormDataStore}
+              formData={contentFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
@@ -139,7 +149,7 @@
           {#if metadataBasicFormConfig}
             <Form
               config={metadataBasicFormConfig}
-              formData={$metadataFormDataStore}
+              formData={metadataFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
@@ -208,8 +218,8 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch(
-                contentFormDataStore,
+              handleCaseStudySearch_(
+                contentFormData,
                 objectToFormData(USE_CASE1_FORM_DATA),
                 'content similarity'
               )}
@@ -236,8 +246,8 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch(
-                metadataFormDataStore,
+              handleCaseStudySearch_(
+                metadataFormData,
                 objectToFormData(USE_CASE2_FORM_DATA),
                 'technical similarity'
               )}
@@ -259,8 +269,8 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch(
-                metadataFormDataStore,
+              handleCaseStudySearch_(
+                metadataFormData,
                 objectToFormData(USE_CASE3_FORM_DATA),
                 'technical similarity'
               )}
