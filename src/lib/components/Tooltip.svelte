@@ -23,7 +23,7 @@
   >
     <slot name="icon" />
   </Tooltip.Trigger>
-  <Tooltip.Content class="rounded-input bg-black font-sans dark:bg-white" sideOffset={6}>
+  <Tooltip.Content class="z-50 rounded-input bg-black font-sans dark:bg-white" sideOffset={6}>
     <div class="bg-white">
       <Tooltip.Arrow class="border-dark-10 rounded-[2px] border-l border-t" />
     </div>

@@ -172,7 +172,12 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Hidden,
     name: 'run_urlscan',
-    value: false
+    value: '0' 
+  },
+  {
+    type: InputType.Hidden,
+    name: 'internal_only',
+    value: '0',
   }
 ];
 
@@ -192,11 +197,21 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     type: InputType.Checkbox,
     name: 'run_urlscan',
     label: 'Run Url scan',
+    required: true,
+    checked: false,
+    value: '1',
+    tooltip:
+      'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
+  },
+  {
+    type: InputType.Checkbox,
+    name: 'internal_only',
+    label: 'Ingroup matching',
     value: '1',
     required: true,
     checked: false,
     tooltip:
-      'UrlScan is a service that scans and analyzes websites to assess their safety, content, and behavior, providing detailed reports on the results.'
+      'Match within a provided list of multiple URLS'
   }
 ];
 
