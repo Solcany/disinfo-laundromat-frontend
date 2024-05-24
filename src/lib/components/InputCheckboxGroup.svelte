@@ -8,6 +8,7 @@
 
   let className: string = '';
   export { className as class };
+  export let name: string;
   export let label: string;
   export let data: LabeledValue[];
   export let orientation: FormOrientation = FormOrientation.Vertical;
@@ -57,7 +58,7 @@
     {#each data as item, index}
       <li class="flex items-center space-x-1 pb-1 {orientation === FormOrientation.Horizontal ? 'pr-2' : ''}">
         <Checkbox.Root
-          name="search_engines"
+          name={name}
           value={item.value.toString()}
           checked={checkedItems[index]}
           onCheckedChange={(change) => handleCheckedChange(index, change)}

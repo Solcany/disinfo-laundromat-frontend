@@ -120,6 +120,7 @@
     {:else if item.type === InputType.CheckboxGroup && item.data}
       <div class="inline-block pb-2">
         <InputCheckboxGroup
+          name={item.name}
           label={item.label}
           data={item.data}
           checked={formData?.has(item.name)
