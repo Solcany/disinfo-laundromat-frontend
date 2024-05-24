@@ -255,6 +255,16 @@ export const CANVAS_PARTICLES_CONFIG = {
 // });
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
-  { value: 'EUvsDisinfo', label: 'What is Eu VS Disinfo?', glyph: 'EU' },
-  { value: 'statemedia', label: 'What is statemedia?', glyph: 'gov' }
+    { value: 'EuVsDisinfo', label: '', glyph: 'EUD' },
+    { value: 'Pink Slime', label: '', glyph: 'PS' },
+    { value: 'Newsguard AI', label: '', glyph: 'NGAI' },
+    { value: 'Intel/Suspected', label: '', glyph: 'IS' },
+    { value: 'RT Mirror/Repost', label: '', glyph: 'RT' },
+    { value: 'Viginum (Portal Kombat)', label: '', glyph: 'V' },
+    { value: 'Wikipedia Fake News', label: '', glyph: 'WFN' },
+    { value: 'Wikidata All News', label: '', glyph: 'WAN' }
 ];
+
+
+
+
