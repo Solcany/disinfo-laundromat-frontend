@@ -88,8 +88,8 @@
 </svelte:head>
 
 <section class="relative px-3 md:px-8">
-  <CanvasParticles class="absolute bottom-0 left-0 right-0 top-0" />
-  <div class="z-10 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
+  <CanvasParticles class="z-0 absolute bottom-0 left-0 right-0 top-0" />
+  <div class="z-50 relative grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1 class="w-full text-4xl lg:w-[500px] lg:text-5xl">
@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <div bind:this={tabsContainerElement} class="z-10 flex w-full items-center justify-center">
+    <div bind:this={tabsContainerElement} class="z-50 relative flex w-full items-center justify-center">
       <Tabs
         bind:value={activeTab}
         autoSet={false}
@@ -157,7 +157,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="z-10 py-8 lg:py-24">
+  <div class="z-50 relative py-8 lg:py-24">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
