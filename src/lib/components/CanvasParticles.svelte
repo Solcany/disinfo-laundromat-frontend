@@ -11,21 +11,10 @@
 
   void particlesInit(async (engine: any) => {
     if (!$isParticlesEngineLoadedStore) {
-      console.log("attempting to load");
       await loadSlim(engine);
       isParticlesEngineLoadedStore.set(true);
     }
   });
-
-
- // onMount(() => {
- //   void particlesInit(async (engine: any) => {
- //     if (!$isParticlesEngineLoadedStore) {
- //       await loadSlim(engine);
- //       isParticlesEngineLoadedStore.set(true);
- //     }
- //   });
- // })
 </script>
 
 <Particles class={cn('', className)} options={CANVAS_PARTICLES_CONFIG} />

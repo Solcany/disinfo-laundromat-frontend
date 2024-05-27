@@ -30,7 +30,6 @@ export async function queryApi<T>(
     if (!response.ok) {
       const errorText = await response.text();
       const status = response.status;
-
       if (status === 400) {
         return { error: 'Bad request', status };
       } else if (status === 401) {
@@ -38,12 +37,11 @@ export async function queryApi<T>(
       } else if (status === 403) {
         return { error: 'Forbidden', status };
       } else {
-        console.error('Failed to fetch data:', response.statusText);
+        console.error('Failed to fetch data', response.statusText);
         return { error: errorText, status };
       }
     }
-
-    const responseData: T = await response.json();
+    const responseData = await response.json();
 
     return { data: responseData, status: response.status };
   } catch (error) {
