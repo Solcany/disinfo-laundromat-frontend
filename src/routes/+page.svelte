@@ -51,11 +51,11 @@
   }
 
   function setContentFormData(newData: FormData) {
-    contentFormData = newData
+    contentFormData = newData;
   }
 
   function setMetadataFormData(newData: FormData) {
-    metadataFormData = newData
+    metadataFormData = newData;
   }
 
   function highlightTabs() {
@@ -66,10 +66,10 @@
     areTabsHighlighted = false;
   }
 
-  function setUpCaseStudy(formData: FormData, tab: TabKind, ) {
-    if(tab === "content similarity") {
+  function setUpCaseStudy(formData: FormData, tab: TabKind) {
+    if (tab === 'content similarity') {
       setContentFormData(formData);
-    } else if ( tab === "technical similarity") {
+    } else if (tab === 'technical similarity') {
       setMetadataFormData(formData);
     }
     setActiveTab(tab);
@@ -79,18 +79,16 @@
 
   onDestroy(() => {
     unsetLoading();
-  })
+  });
 </script>
-
-
 
 <svelte:head>
   <meta name="title" content="Information Laundromat" />
 </svelte:head>
 
 <section class="relative px-3 md:px-8">
-  <CanvasParticles class="z-0 absolute bottom-0 left-0 right-0 top-0" />
-  <div class="z-50 relative grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
+  <CanvasParticles class="absolute bottom-0 left-0 right-0 top-0 z-0" />
+  <div class="relative z-50 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1 class="w-full text-4xl lg:w-[500px] lg:text-5xl">
@@ -107,7 +105,10 @@
       </div>
     </div>
 
-    <div bind:this={tabsContainerElement} class="z-50 relative flex w-full items-center justify-center">
+    <div
+      bind:this={tabsContainerElement}
+      class="relative z-50 flex w-full items-center justify-center"
+    >
       <Tabs
         bind:value={activeTab}
         autoSet={false}
@@ -158,7 +159,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="z-50 relative py-8 lg:py-24">
+  <div class="relative z-50 py-8 lg:py-24">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>
@@ -218,10 +219,7 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              setUpCaseStudy(
-                objectToFormData(USE_CASE1_FORM_DATA),
-                'content similarity'
-              )}
+              setUpCaseStudy(objectToFormData(USE_CASE1_FORM_DATA), 'content similarity')}
           >
             Try Search
           </Button>
@@ -239,15 +237,13 @@
       <div>
         <Link
           href="https://www.isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/>Read the report"
-          class="mt-2 block">Read the report</Link>
+          class="mt-2 block">Read the report</Link
+        >
         <div class="mt-4">
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              setUpCaseStudy(
-                objectToFormData(USE_CASE2_FORM_DATA),
-                'technical similarity'
-              )}
+              setUpCaseStudy(objectToFormData(USE_CASE2_FORM_DATA), 'technical similarity')}
           >
             Try Search
           </Button>
@@ -266,10 +262,7 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              setUpCaseStudy(
-                objectToFormData(USE_CASE3_FORM_DATA),
-                'technical similarity'
-              )}
+              setUpCaseStudy(objectToFormData(USE_CASE3_FORM_DATA), 'technical similarity')}
           >
             Try Search
           </Button>

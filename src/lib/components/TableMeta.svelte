@@ -33,8 +33,7 @@
 
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
 
-  $: selfRow =
-    data.indicators ? getSelfRow(data.indicators) : undefined;
+  $: selfRow = data.indicators ? getSelfRow(data.indicators) : undefined;
 
   $: rows = data.matches ? getRows(data.matches) : [];
 
@@ -97,9 +96,6 @@
         indicators_summary: IndicatorsSummary;
       }
     > = {};
-    
-
-    console.log("meta data:", data);
 
     data.forEach(({ domain_name_y, match_type, match_value }) => {
       // extract tier and type from indicator string
@@ -264,7 +260,11 @@
     </thead>
     <tbody>
       {#if selfRow}
-        <TableMetaRow data={selfRow} indicatorsMetadata={data.indicator_metadata} />
+        <TableMetaRow
+          data={selfRow}
+          indicatorsMetadata={data.indicator_metadata}
+          isSelfRow={true}
+        />
       {/if}
       {#each sortedRows as row, i (row)}
         <TableMetaRow data={row} indicatorsMetadata={data.indicator_metadata} {indicatorsCount} />

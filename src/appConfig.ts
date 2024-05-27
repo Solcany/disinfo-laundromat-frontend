@@ -172,12 +172,12 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Hidden,
     name: 'run_urlscan',
-    value: '0' 
+    value: '0'
   },
   {
     type: InputType.Hidden,
     name: 'internal_only',
-    value: '0',
+    value: '0'
   }
 ];
 
@@ -210,8 +210,7 @@ export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
     value: '1',
     required: true,
     checked: false,
-    tooltip:
-      'Match within a provided list of multiple URLS'
+    tooltip: 'Match within a provided list of multiple URLS'
   }
 ];
 
@@ -225,9 +224,7 @@ export const USE_CASE1_FORM_DATA = {
 export const USE_CASE2_FORM_DATA = {
   url: 'https://actualidad.rt.com,https://actualidad-rt.com,https://esrt.online,https://esrt.press',
   run_urlscan: '1',
-  internal_only: '1',
-
-
+  internal_only: '1'
 };
 
 export const USE_CASE3_FORM_DATA = {
@@ -266,16 +263,12 @@ export const CANVAS_PARTICLES_CONFIG = {
 };
 
 export const DOMAIN_ASSOCIATIONS: DomainAssociation[] = [
-    { value: 'EuVsDisinfo', label: '', glyph: 'EUD' },
-    { value: 'Pink Slime', label: '', glyph: 'PS' },
-    { value: 'Newsguard AI', label: '', glyph: 'NGAI' },
-    { value: 'Intel/Suspected', label: '', glyph: 'IS' },
-    { value: 'RT Mirror/Repost', label: '', glyph: 'RT' },
-    { value: 'Viginum (Portal Kombat)', label: '', glyph: 'V' },
-    { value: 'Wikipedia Fake News', label: '', glyph: 'WFN' },
-    { value: 'Wikidata All News', label: '', glyph: 'WAN' }
+  { value: 'EuVsDisinfo', label: '', glyph: 'EUD' },
+  { value: 'Pink Slime', label: '', glyph: 'PS' },
+  { value: 'Newsguard AI', label: '', glyph: 'NGAI' },
+  { value: 'Intel/Suspected', label: '', glyph: 'IS' },
+  { value: 'RT Mirror/Repost', label: '', glyph: 'RT' },
+  { value: 'Viginum (Portal Kombat)', label: '', glyph: 'V' },
+  { value: 'Wikipedia Fake News', label: '', glyph: 'WFN' },
+  { value: 'Wikidata All News', label: '', glyph: 'WAN' }
 ];
-
-
-
-

@@ -7,6 +7,6 @@ export default defineConfig({
     exclude: ['phosphor-svelte, ']
   },
   ssr: {
-      noExternal: ['tsparticles', '@tsparticles/slim', '@tsparticles/engine', '@tsparticles/svelte'] // add all tsparticles libraries here, they're not made for SSR, they're client only
+    noExternal: ['tsparticles', '@tsparticles/slim', '@tsparticles/engine', '@tsparticles/svelte'] // add all tsparticles libraries here, they're not made for SSR, they're client only
   }
 });

@@ -21,7 +21,7 @@ const config = {
       $utils: 'src/lib/utils.ts',
       $models: 'src/lib/models.ts',
       $config: 'src/appConfig.ts',
-      $stores: 'src/lib/stores',
+      $stores: 'src/lib/stores'
     }
   }
 };

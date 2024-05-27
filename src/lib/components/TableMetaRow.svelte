@@ -12,6 +12,7 @@
   export let data: TableMetaRowData;
   export let indicatorsMetadata: IndicatorMetadata;
   export let indicatorsCount: IndicatorsSummary | undefined = undefined;
+  export let isSelfRow: boolean = false;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -36,12 +37,27 @@
   <!-- the domain column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
-      <Link
-        href={domainToUrl(String(data.domain))}
-        on:click={(e) => {
-          e.stopPropagation();
-        }}>{data.domain}</Link
-      >
+
+      {#if isSelfRow}
+        <div class="inline-block">
+          <Link
+            id={"link_" + data.domain}
+            href={domainToUrl(String(data.domain))}
+            on:click={(e) => {
+              e.stopPropagation();
+            }}>{data.domain}</Link
+          >
+          <label for={"link_" + data.domain} class="font-sans text-xs text-gray2"> (searched url) </label>
+        </div>
+      {:else}
+        <Link
+          href={domainToUrl(String(data.domain))}
+          on:click={(e) => {
+            e.stopPropagation();
+          }}>{data.domain}</Link
+        >
+      {/if}
+
       {#if data.domainAssociations}
         {#each domainAssociations as association}
           <Tooltip>
@@ -149,8 +165,9 @@
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
                         <div class="flex items-center">
-                          <H4 class="pr-2">{indicatorsMetadata[entry.tier + '-' + indicator.type]
-                                .name}</H4>
+                          <H4 class="pr-2"
+                            >{indicatorsMetadata[entry.tier + '-' + indicator.type].name}</H4
+                          >
                           <Tooltip>
                             <svelte:fragment slot="icon">i</svelte:fragment>
                             <svelte:fragment slot="content"

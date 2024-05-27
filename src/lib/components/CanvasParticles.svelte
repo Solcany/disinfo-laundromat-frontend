@@ -1,6 +1,6 @@
 <script lang="ts">
-  import {onMount} from 'svelte';
-  import Particles, { particlesInit } from "@tsparticles/svelte";
+  import { onMount } from 'svelte';
+  import Particles, { particlesInit } from '@tsparticles/svelte';
   import { loadSlim } from '@tsparticles/slim';
   import { cn } from '$utils';
   import { CANVAS_PARTICLES_CONFIG } from '$config';
@@ -18,4 +18,3 @@
 </script>
 
 <Particles class={cn('', className)} options={CANVAS_PARTICLES_CONFIG} />
-

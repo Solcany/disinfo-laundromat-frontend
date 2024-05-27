@@ -7,24 +7,22 @@
   import P from '$components/P.svelte';
   import Button from '$components/Button.svelte';
   import { X } from 'phosphor-svelte';
-  export let open : boolean  = false;
+  export let open: boolean = false;
 
   function closeDialog() {
-    open = false; 
+    open = false;
   }
 </script>
 
-<Dialog let:C open={open}>
+<Dialog let:C {open}>
   <C.Portal>
     <C.Overlay />
-    <C.Content class="rounded-input border-gray4 dark:bg-gray7 py-6 px-8">
+    <C.Content class="rounded-input border-gray4 px-8 py-6 dark:bg-gray7">
       <div class="flex items-center justify-center pb-6">
         <C.Title><H2>GDPR Compliance Notice</H2></C.Title>
-        <Button 
-          ariaLabel="close GDPR modal"
-          variant="glyph"
-          on:click={closeDialog}>
-          <X size={16} color="#000" weight="bold" /></Button>
+        <Button ariaLabel="close GDPR modal" variant="glyph" on:click={closeDialog}>
+          <X size={16} color="#000" weight="bold" /></Button
+        >
       </div>
       <C.Description>
         <P>
@@ -62,30 +60,32 @@
         </P>
       </C.Description>
       <div class="flex pt-6">
-        <form method="POST" 
-            action="/api/gdpr"  
-            use:enhance={() => {
-              closeDialog();
-            }}
-            class="flex">
-          <Button 
-              type="submit" 
-              name="consent" 
-              value="accepted" 
-              class="mr-3" 
-              ariaLabel="Accept GDPR"
-              >
-              Accept
-            </Button>
-            <Button 
-              type="submit" 
-              name="consent" 
-              value="rejected" 
-              class="mr-3" 
-              ariaLabel="Reject GDPR"
-              >
-              Reject
-            </Button>
+        <form
+          method="POST"
+          action="/api/gdpr"
+          use:enhance={() => {
+            closeDialog();
+          }}
+          class="flex"
+        >
+          <Button
+            type="submit"
+            name="consent"
+            value="accepted"
+            class="mr-3"
+            ariaLabel="Accept GDPR"
+          >
+            Accept
+          </Button>
+          <Button
+            type="submit"
+            name="consent"
+            value="rejected"
+            class="mr-3"
+            ariaLabel="Reject GDPR"
+          >
+            Reject
+          </Button>
         </form>
       </div>
     </C.Content>

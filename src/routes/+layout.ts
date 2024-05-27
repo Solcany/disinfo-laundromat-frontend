@@ -18,7 +18,7 @@ import {
 } from '$config';
 import { queryApi } from '$api';
 
-export const load: LayoutLoad = async ({data}) => {
+export const load: LayoutLoad = async ({ data }) => {
   let response: ApiResponse<any> = await queryApi(QueryType.Get, Endpoint.AppConfig);
 
   if (response.error) {
@@ -50,7 +50,7 @@ export const load: LayoutLoad = async ({data}) => {
       ),
       indicatorMetadata: response.data.indicator_metadata,
       // server data is passed from +layout.server.ts
-      gdpr_consent: data.gdpr_consent,
+      gdpr_consent: data.gdpr_consent
     };
   }
 
