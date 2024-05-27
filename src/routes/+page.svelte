@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy } from 'svelte';
   import type { Writable } from 'svelte/store';
   import { goto } from '$app/navigation';
+  import { unsetLoading } from '$stores/loading.ts';
   import Tabs from '$components/Tabs.svelte';
   import Form from '$components/Form.svelte';
   import Label from '$components/Label.svelte';
@@ -26,7 +27,6 @@
   import { queryApi } from '$api';
   import { handleApiSubmit } from '$form';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
-  import { loadingStore } from '$stores/loading';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
 
   type TabKind = 'content similarity' | 'technical similarity';
@@ -50,11 +50,12 @@
     store.set(data);
   }
 
-  function setFormData(data: FormData, newData: FormData) {
-    data = newData
-    console.log(contentFormData);
-    console.log(metadataFormData);
+  function setContentFormData(newData: FormData) {
+    contentFormData = newData
+  }
 
+  function setMetadataFormData(newData: FormData) {
+    metadataFormData = newData
   }
 
   function highlightTabs() {
@@ -65,20 +66,20 @@
     areTabsHighlighted = false;
   }
 
-  function handleCaseStudySearch_(formData: FormData, newFormData: FormData, tab: TabKind) {
-    // WIP: continue here, setFormData should update the local var formData however it doesnt for some reason.
-    setFormData(formData, newFormData);
+  function setUpCaseStudy(formData: FormData, tab: TabKind, ) {
+    if(tab === "content similarity") {
+      setContentFormData(formData);
+    } else if ( tab === "technical similarity") {
+      setMetadataFormData(formData);
+    }
     setActiveTab(tab);
     highlightTabs();
     scrollToElementYCenter(tabsContainerElement, 500);
   }
 
-  function handleCaseStudySearch(store: Writable<FormData>, formData: FormData, tab: TabKind) {
-    setFormDataStore(store, formData);
-    setActiveTab(tab);
-    highlightTabs();
-    scrollToElementYCenter(tabsContainerElement, 500);
-  }
+  onDestroy(() => {
+    unsetLoading();
+  })
 </script>
 
 
@@ -217,8 +218,7 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch_(
-                contentFormData,
+              setUpCaseStudy(
                 objectToFormData(USE_CASE1_FORM_DATA),
                 'content similarity'
               )}
@@ -239,14 +239,12 @@
       <div>
         <Link
           href="https://www.isdglobal.org/digital_dispatches/rt-articles-are-finding-their-way-to-european-audiences-but-how/>Read the report"
-          class="mt-2 block">Read the report</Link
-        >
+          class="mt-2 block">Read the report</Link>
         <div class="mt-4">
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch_(
-                metadataFormData,
+              setUpCaseStudy(
                 objectToFormData(USE_CASE2_FORM_DATA),
                 'technical similarity'
               )}
@@ -268,8 +266,7 @@
           <Button
             ariaLabel="set form data"
             on:click={() =>
-              handleCaseStudySearch_(
-                metadataFormData,
+              setUpCaseStudy(
                 objectToFormData(USE_CASE3_FORM_DATA),
                 'technical similarity'
               )}

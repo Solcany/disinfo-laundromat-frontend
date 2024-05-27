@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { unsetLoading } from '$stores/loading.ts'; 
   import DownloadResult from '$components/DownloadResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
@@ -25,6 +27,9 @@
 
   $: formConfig = data.contentAdvancedFormConfig;
   $: contentSearchData = $contentStore ? $contentStore.results : null;
+  onDestroy(() => {
+    unsetLoading();
+  })
 </script>
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">

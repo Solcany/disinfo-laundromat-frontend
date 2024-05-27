@@ -10,6 +10,7 @@ export async function queryApi<T>(
   try {
     const url = new URL(endpoint, API_URL);
     const finalHeaders = headers || {};
+    console.log(body);
     const finalBody = body || new FormData();
 
     let response;

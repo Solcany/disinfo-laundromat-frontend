@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { unsetLoading } from '$stores/loading.ts'; 
   import H1 from '$components/H1.svelte';
   import H2 from '$components/H2.svelte';
   import H3 from '$components/H3.svelte';
@@ -6,6 +8,9 @@
   import H5 from '$components/H5.svelte';
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
+  onDestroy(() => {
+    unsetLoading();
+  })
 </script>
 
 <svelte:head>

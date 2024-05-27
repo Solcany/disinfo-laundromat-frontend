@@ -11,28 +11,9 @@
   let className: string = '';
   export { className as class };
 
-  let unsubscribe = loadingStore.subscribe((value: boolean) => {
-    if (value) {
-      isLoading = true;
-      //timer = setTimeout(() => {
-      //	console.log('timeout');
-      //	progressValue = 100;
-      //}, 1000);
-    } else {
-      isLoading = false;
-      //clearTimeout(timer);
-    }
-  });
-
-  onMount(() => {
-    return () => {
-      //clearTimeout(timer);
-      unsubscribe();
-    };
-  });
 </script>
 
-{#if isLoading}
+{#if $loadingStore}
   <Progress.Root
     value={progressValue}
     max={100}

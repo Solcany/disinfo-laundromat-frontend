@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { unsetLoading } from '$stores/loading.ts'; 
   import DownloadMetaResult from '$components/DownloadMetaResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
@@ -31,6 +33,9 @@
         indicator_metadata: $metadataStore.indicator_metadata
       }
     : null;
+  onDestroy(() => {
+    unsetLoading();
+  })
 </script>
 
 <svelte:head>

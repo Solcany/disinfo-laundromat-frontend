@@ -224,7 +224,10 @@ export const USE_CASE1_FORM_DATA = {
 
 export const USE_CASE2_FORM_DATA = {
   url: 'https://actualidad.rt.com,https://actualidad-rt.com,https://esrt.online,https://esrt.press',
-  run_urlscan: '1'
+  run_urlscan: '1',
+  internal_only: '1',
+
+
 };
 
 export const USE_CASE3_FORM_DATA = {
