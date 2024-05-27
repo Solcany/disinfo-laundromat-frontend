@@ -8,11 +8,10 @@
   import RectMapped from '$components/RectMapped.svelte';
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
-
   export let data: TableMetaRowData;
   export let indicatorsMetadata: IndicatorMetadata;
   export let indicatorsCount: IndicatorsSummary | undefined = undefined;
-  export let isSelfRow: boolean = false;
+  export let isUserInputRow: boolean = false;
   let className: string | undefined = undefined;
   export { className as class };
 
@@ -38,7 +37,7 @@
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
 
-      {#if isSelfRow}
+      {#if isUserInputRow}
         <div class="inline-block">
           <Link
             id={"link_" + data.domain}

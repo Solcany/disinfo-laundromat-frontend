@@ -33,7 +33,7 @@
 
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
 
-  $: selfRow = data.indicators ? getSelfRow(data.indicators) : undefined;
+  $: userInputRow = data.indicators ? getUserInputRow(data.indicators) : undefined;
 
   $: rows = data.matches ? getRows(data.matches) : [];
 
@@ -49,7 +49,7 @@
     }
   }
 
-  function getSelfRow(data: IndicatorDataItem[]): TableMetaRowData {
+  function getUserInputRow(data: IndicatorDataItem[]): TableMetaRowData {
     const result: TableMetaRowData = {
       domain: '',
       indicators: []
@@ -259,11 +259,11 @@
       {/each}
     </thead>
     <tbody>
-      {#if selfRow}
+      {#if userInputRow}
         <TableMetaRow
-          data={selfRow}
+          data={userInputRow}
           indicatorsMetadata={data.indicator_metadata}
-          isSelfRow={true}
+          isUserInputRow={true}
         />
       {/if}
       {#each sortedRows as row, i (row)}
