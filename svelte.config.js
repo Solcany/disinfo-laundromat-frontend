@@ -22,7 +22,6 @@ const config = {
       $models: 'src/lib/models.ts',
       $config: 'src/appConfig.ts',
       $stores: 'src/lib/stores',
-      $dummy_data: 'src/lib/dummy_data.ts'
     }
   }
 };

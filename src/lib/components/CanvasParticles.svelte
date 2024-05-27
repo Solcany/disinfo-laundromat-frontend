@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {onMount} from 'svelte';
   import Particles, { particlesInit } from "@tsparticles/svelte";
   import { loadSlim } from '@tsparticles/slim';
   import { cn } from '$utils';
@@ -10,10 +11,22 @@
 
   void particlesInit(async (engine: any) => {
     if (!$isParticlesEngineLoadedStore) {
+      console.log("attempting to load");
       await loadSlim(engine);
       isParticlesEngineLoadedStore.set(true);
     }
   });
+
+
+ // onMount(() => {
+ //   void particlesInit(async (engine: any) => {
+ //     if (!$isParticlesEngineLoadedStore) {
+ //       await loadSlim(engine);
+ //       isParticlesEngineLoadedStore.set(true);
+ //     }
+ //   });
+ // })
 </script>
 
 <Particles class={cn('', className)} options={CANVAS_PARTICLES_CONFIG} />
+
