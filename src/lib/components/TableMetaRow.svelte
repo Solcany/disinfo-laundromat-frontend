@@ -31,8 +31,7 @@
   role="button"
   class="w-full border-gray6 hover:bg-black {showExpandedRow
     ? 'border-b-0 bg-black hover:cursor-n-resize'
-    : 'border-b-[1px] hover:cursor-s-resize'}"
->
+    : 'border-b-[1px] hover:cursor-s-resize'}">
   <!-- the domain column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
@@ -163,6 +162,7 @@
                   {#each entry.data as indicator}
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
+                        {#if indicatorsMetadata[entry.tier + '-' + indicator.type]}
                         <div class="flex items-center">
                           <H4 class="pr-2"
                             >{indicatorsMetadata[entry.tier + '-' + indicator.type].name}</H4
@@ -175,6 +175,7 @@
                             >
                           </Tooltip>
                         </div>
+                        {/if}
                         <ul>
                           {#each indicator.value as value}
                             <li class="py-1 text-sm text-black dark:text-white">{value}</li>

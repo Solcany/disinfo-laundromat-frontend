@@ -28,7 +28,7 @@
   let sortColumnIndex: number = -1;
   let selfRow: TableMetaRowData | undefined = undefined;
   let rows: TableMetaRowData[] = [];
-  export let sortedRows: TableMetaRowData[] = [];
+  export let sortedRows: TableMetaRowData[]  = [];
   let indicatorsCount: IndicatorsSummary | undefined = undefined;
 
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
@@ -49,15 +49,15 @@
     }
   }
 
-  function getUserInputRow(data: IndicatorDataItem[]): TableMetaRowData {
+  function getUserInputRow(data: IndicatorDataItem[]): TableMetaRowData | undefined {
+    if (data.length === 0) return undefined;
+
     const result: TableMetaRowData = {
       domain: '',
       indicators: []
     };
-
-    if (data.length === 0) return result;
-
     result.domain = data[0].domain_name;
+
     const indicators: Record<string, Record<string, string[]>> = {};
 
     data.forEach(({ indicator_type, indicator_content }) => {
@@ -87,6 +87,7 @@
   }
 
   function getRows(data: MatchDataItem[]): TableMetaRowData[] {
+    if (data.length === 0) return [];
     // group match data by indicator tiers
     const grouped: Record<
       string,
@@ -140,7 +141,6 @@
           };
         })
         .sort((a, b) => a.tier - b.tier); // Sort indicators by tier.
-      console.log(domainGroup.indicators_summary);
       // Return the structured domain data, including the indicators and their summary.
       return {
         domain: domainGroup.domain,
@@ -148,7 +148,6 @@
         indicators_summary: domainGroup.indicators_summary
       };
     });
-
     return rows;
   }
 

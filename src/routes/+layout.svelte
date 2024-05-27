@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
   import type { LayoutData } from './$types';
   import '../styles/app.pcss';
   import '../styles/fonts.css';
   import { APP_TITLE } from '$config';
-  import { loadingStore } from '$stores/loading.ts';
   import Header from '$components/Header.svelte';
   import Nav from '$components/Nav.svelte';
   import Footer from '$components/Footer.svelte';
@@ -13,11 +11,6 @@
   export let data: LayoutData;
 
   $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected';
-
-  onDestroy(() => {
-    console.log('destroying layout');
-    loadingStore.set(false);
-  });
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
