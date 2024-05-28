@@ -88,7 +88,7 @@
 
 <section class="relative px-3 md:px-8">
   <CanvasParticles class="absolute bottom-0 left-0 right-0 top-0 z-0" />
-  <div class="relative z-50 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
+  <div class="relative z-10 grid w-full grid-cols-1 gap-4 pt-5 md:grid-cols-2 md:pt-20">
     <div class="w-100 flex items-center justify-center py-8 md:py-0">
       <div>
         <H1 class="w-full text-4xl lg:w-[500px] lg:text-5xl">
@@ -107,7 +107,7 @@
 
     <div
       bind:this={tabsContainerElement}
-      class="relative z-50 flex w-full items-center justify-center"
+      class="relative z-10 flex w-full items-center justify-center"
     >
       <Tabs
         bind:value={activeTab}
@@ -159,7 +159,7 @@
       </Tabs>
     </div>
   </div>
-  <div class="relative z-50 py-8 lg:py-24">
+  <div class="relative z-10 py-8 lg:py-24">
     <ul id="use-case-list" class="grid grid-cols-1 gap-x-10 md:grid-cols-3">
       <li class="">
         <H2 class="pb-4">Prove content laundering from state-owned outlets</H2>

@@ -14,7 +14,7 @@
   }
 </script>
 
-<Dialog let:C {open}>
+<Dialog let:C {open} class="z-50 relative">
   <C.Portal>
     <C.Overlay />
     <C.Content class="rounded-input border-gray4 px-8 py-6 dark:bg-gray7">

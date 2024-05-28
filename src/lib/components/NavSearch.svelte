@@ -8,9 +8,7 @@
   }
 </script>
 
-<!--
-data-[state=active]:shadow-mini h-10 flex-1 border-b-[1px] border-r-[1px] border-gray5 py-2 last:border-r-0 data-[state=active]:border-b-0 data-[state=active]:bg-gray7 dark:bg-gray6 dark:text-gray2 data-[state=active]:dark:text-white
--->
+
 <nav class="z-50 grid w-full grid-cols-1 border-t-[1px] border-gray5 md:grid-cols-12">
   <ul class="col-span-3 flex w-full">
     {#each SEARCH_NAV as { label, path }}
