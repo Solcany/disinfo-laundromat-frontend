@@ -7,17 +7,17 @@
   export { className as class };
 
   let value: number = 0;
-  let frameId: number | null = null;  // Use null initially for the frame ID
+  let frameId: number | null = null; 
   let running: boolean = false;
   let updater: ReturnType<typeof setInterval> | null = null;
   let completed = false;
-  let intervalTime = 300;
+  let intervalTime = 600;
   let maximum = 0.9;
-  let stepSizes = [0, 0.005, 0.01, 0.02];
-  let defaultSettleTime = 7000000;
+  let stepSizes = [0.01, 0.02];
+  let hideAfterCompleteTime = 300;
+  let resetAfterCompleteTime = 1000
   
   let width: number = 0;
-  //import { afterNavigate, beforeNavigate } from "$app/navigation";
 
   function getIncrement(n: number)  {
     if (n >= 0 && n < 0.2) return 0.1;
@@ -56,13 +56,6 @@
     }, intervalTime);
   };
 
-  function stop() {
-    if (updater) {
-      clearInterval(updater);
-    }
-  };
-
-
   function complete() {
     if (updater) {
       clearInterval(updater);
@@ -71,12 +64,14 @@
     width = 1;
     running = false;
     setTimeout(() => {
+        // hide timer
         completed = true;
         setTimeout(() => {
+            // reset the timer
             completed = false;
             width = 0;
-            }, 1000);
-        }, 5000);
+            }, resetAfterCompleteTime);
+        }, hideAfterCompleteTime);
   };
 
   $: if(!running && $loadingStore) {
@@ -84,19 +79,16 @@
   } else if(running && !$loadingStore) {
     complete();
   } 
-
 </script>
 
-{#if true}  <!-- This condition can be removed, as it's always true -->
+{#if !completed}  
   <Progress.Root
     value={value}
     max={100}
-    class={cn('absolute left-0 top-0 w-full h-[5px] overflow-hidden', className)}
+    class={cn('absolute left-0 top-0 w-full h-[10px] overflow-hidden', className)}
   >
     <div
       class="absolute h-full bg-blue-500 transition-all duration-300"
       style={`width: ${width * 100}%;`}      />
   </Progress.Root>
-  <button on:click={() => loadingStore.set(true)}>Start Loading</button>
-  <button on:click={() => loadingStore.set(false)}>Finish Loading</button>
 {/if}
