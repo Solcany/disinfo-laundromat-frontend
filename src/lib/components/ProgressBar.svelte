@@ -8,21 +8,21 @@
   let running: boolean = false;
   let updater: ReturnType<typeof setInterval> | null = null;
   let completed = false;
-  let intervalTime = 600;
-  let maximum = 0.9;
-  let stepSizes = [0.01, 0.02];
+  let intervalTime = 20;
+  let intervalStep = 0.005;
+  let maximum = 0.95;
   let hideAfterCompleteTime = 300;
   let resetAfterCompleteTime = 1000;
   
   let width: number = 0;
 
-  function getIncrement(n: number)  {
-    if (n >= 0 && n < 0.2) return 0.1;
-    else if (n >= 0.2 && n < 0.5) return 0.04;
-    else if (n >= 0.5 && n < 0.8) return 0.02;
-    else if (n >= 0.8 && n < 0.99) return 0.005;
-    return 0;
-  };
+ // function getIncrement(n: number)  {
+ //   if (n >= 0 && n < 0.2) return 0.1;
+ //   else if (n >= 0.2 && n < 0.5) return 0.04;
+ //   else if (n >= 0.5 && n < 0.8) return 0.02;
+ //   else if (n >= 0.8 && n < 0.99) return 0.005;
+ //   return 0;
+ // };
 
   function reset ()  {
     width = 0.08;
@@ -40,9 +40,9 @@
     }
     running = true;
     updater = setInterval(() => {
-      const step = getIncrement(width) ;
+      //const step = getIncrement(width) ;
       if (width < maximum) {
-        width = width + step;
+        width = width + intervalStep;
       }
       if (width > maximum) {
         width = maximum;
@@ -78,7 +78,7 @@
   $: if(!running && $loadingStore) {
     start()
   } else if(running && !$loadingStore) {
-    //complete();
+    complete();
   } 
 </script>
 
@@ -86,7 +86,7 @@
   <Progress.Root
     value={width}
     max={100}
-    class={cn('absolute left-0 top-0 w-full h-[10px] overflow-hidden', className)}
+    class={cn('absolute left-0 top-0 w-full h-[7px] overflow-hidden', className)}
   >
     <div
       class="absolute h-full bg-blue-500 transition-all duration-300"
