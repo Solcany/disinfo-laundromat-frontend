@@ -13,7 +13,7 @@
   import Separator from '$components/Separator.svelte';
   import P from '$components/P.svelte';
   import H4 from '$components/H4.svelte';
-  import { handleApiSubmit } from '$form';
+  import { handleApiSubmit } from '$api';
   import { contentStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
   import { type ContentDataResult } from '$models';

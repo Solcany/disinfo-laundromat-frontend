@@ -24,8 +24,7 @@
   } from '$models';
   import { USE_CASE1_FORM_DATA, USE_CASE2_FORM_DATA, USE_CASE3_FORM_DATA } from '$config';
   import { objectToFormData, scrollToElementYCenter } from '$utils';
-  import { queryApi } from '$api';
-  import { handleApiSubmit } from '$form';
+  import { handleApiSubmit } from '$api';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
   import { contentStore, metadataStore } from '$stores/apiData.ts';
 

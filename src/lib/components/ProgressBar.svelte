@@ -1,13 +1,10 @@
 <script lang="ts">
   import { cn } from '$utils';
   import { loadingStore } from '$stores/loading.ts';
-  import { onMount } from 'svelte';
   import { Progress } from "bits-ui";
   let className: string = '';
   export { className as class };
 
-  let value: number = 0;
-  let frameId: number | null = null; 
   let running: boolean = false;
   let updater: ReturnType<typeof setInterval> | null = null;
   let completed = false;
@@ -15,7 +12,7 @@
   let maximum = 0.9;
   let stepSizes = [0.01, 0.02];
   let hideAfterCompleteTime = 300;
-  let resetAfterCompleteTime = 1000
+  let resetAfterCompleteTime = 1000;
   
   let width: number = 0;
 
@@ -43,9 +40,7 @@
     }
     running = true;
     updater = setInterval(() => {
-      const randomStep =
-        stepSizes[Math.floor(Math.random() * stepSizes.length)] ?? 0;
-      const step = getIncrement(width) + randomStep;
+      const step = getIncrement(width) ;
       if (width < maximum) {
         width = width + step;
       }
@@ -54,6 +49,12 @@
         stop();
       }
     }, intervalTime);
+  };
+
+  function stop(){
+    if (updater) {
+      clearInterval(updater);
+    }
   };
 
   function complete() {
@@ -77,13 +78,13 @@
   $: if(!running && $loadingStore) {
     start()
   } else if(running && !$loadingStore) {
-    complete();
+    //complete();
   } 
 </script>
 
 {#if !completed}  
   <Progress.Root
-    value={value}
+    value={width}
     max={100}
     class={cn('absolute left-0 top-0 w-full h-[10px] overflow-hidden', className)}
   >

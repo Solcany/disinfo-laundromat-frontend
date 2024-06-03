@@ -15,7 +15,7 @@
   import Separator from '$components/Separator.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
   import { FormOrientation, type TableMetaRowData } from '$models';
-  import { handleApiSubmit } from '$form';
+  import { handleApiSubmit } from '$api';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
 
