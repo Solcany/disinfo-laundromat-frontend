@@ -1,5 +1,4 @@
 import type { LayoutLoad } from './$types';
-import type { LabeledValue, ApiResponse } from '$models';
 import { error, type NumericRange } from '@sveltejs/kit';
 import {
   QueryType,
@@ -7,16 +6,21 @@ import {
   RemoteConfigFlag,
   RemoteConfigFlagData,
   InputType,
+  type LabeledValue,
   type InputConfig,
   type InputTypeWithData
 } from '$models';
+
+import {
+  type ApiResponse,
+  queryApi } from '$api';
+
 import {
   CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
   CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
   METADATA_SIMILARITY_BASIC_FORM_CONFIG,
   METADATA_SIMILARITY_ADVANCED_FORM_CONFIG
 } from '$config';
-import { queryApi } from '$api';
 
 export const load: LayoutLoad = async ({ data }) => {
   let response: ApiResponse<any> = await queryApi(QueryType.Get, Endpoint.AppConfig);

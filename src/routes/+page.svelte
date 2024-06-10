@@ -15,12 +15,7 @@
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
   import {
-    Endpoint,
-    QueryType,
     FormOrientation,
-    type ApiResponse,
-    type ApiContentData,
-    type ApiFingerprintData
   } from '$models';
   import { USE_CASE1_FORM_DATA, USE_CASE2_FORM_DATA, USE_CASE3_FORM_DATA } from '$config';
   import { objectToFormData, scrollToElementYCenter } from '$utils';

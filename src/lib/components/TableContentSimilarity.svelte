@@ -5,19 +5,21 @@
   import {
     SortDirection,
     TableHeaderItemType,
-    type ContentDataResult,
     type TableHeaderItemData
   } from '$models';
+  import {
+    type ContentSearchResult 
+  } from '$api';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
-  import TableContentRow from '$components/TableContentRow.svelte';
+  import TableContentSimilarityRow from '$components/TableContentSimilarityRow.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
-  export let data: ContentDataResult[];
+  export let data: ContentSearchResult[];
   let className: string | undefined = undefined;
   export { className as class };
 
-  export let sortedData: ContentDataResult[] = [];
+  export let sortedData: ContentSearchResult[] = [];
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortStatus: Record<string, SortDirection> = {};
   let sorter: TableHeaderItemData | undefined = undefined;
@@ -31,11 +33,11 @@
   }
 
   function sortData(
-    data: ContentDataResult[],
+    data: ContentSearchResult[],
     sorter: TableHeaderItemData,
 
     direction: SortDirection
-  ): ContentDataResult[] {
+  ): ContentSearchResult[] {
     return data.sort((a, b) => {
       const aValue = a[sorter.key];
       const bValue = b[sorter.key];
@@ -98,7 +100,7 @@
     </thead>
     <tbody>
       {#each sortedData as item, i (item)}
-        <TableContentRow data={item} />
+        <TableContentSimilarityRow data={item} />
       {/each}
     </tbody>
   </table>

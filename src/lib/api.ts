@@ -2,19 +2,83 @@ import { API_URL } from '$config';
 import {
   QueryType,
   Endpoint,
-  type ApiQuery,
-  type ApiContentData,
-  type ApiFingerprintData,
-  type ApiResponse
 } from '$models';
-import { loadingStore } from '$stores/loading.ts';
+import { setLoading, unsetLoading } from '$stores/loading.ts';
 import { metadataStore, contentStore } from '$stores/apiData.ts';
 import { contentFormDataStore, metadataFormDataStore } from '$stores/input.ts';
 import { goto } from '$app/navigation';
 
+export type ApiQuery = {
+  type: QueryType;
+  endpoint: Endpoint;
+  route?: string;
+};
+
+export type ApiResponse<T> = {
+  data?: T;
+  error?: string;
+  status: number;
+}
+
+export type IndicatorMetadata = {
+  [key: string]: {
+    description: string;
+    interpretation: string;
+    name: string;
+  };
+};
+
+export type ApiFingerprintResponseData = {
+  countries: Record<string, string>;
+  indicator_metadata: IndicatorMetadata;
+  indicator_summary: Record<string, number>;
+  indicators: Array<{
+    domain_name: string;
+    indicator_content: string | string[];
+    indicator_type: string;
+  }>;
+  languages: Record<string, string>;
+  matches: Array<{
+    domain_name_x: string;
+    domain_name_y: string;
+    match_type: string;
+    match_value: string;
+  }>;
+  matches_summary: Record<string, number>;
+}
+
+export type ApiContentSearchResponseData = {
+  countries: Record<string, string>;
+  csv_data: string;
+  indicator_metadata: {
+    [key: string]: {
+      description: string;
+      interpretation: string;
+      name: string;
+    };
+  };
+  languages: Record<string, string>;
+  results: ContentSearchResult[];
+}
+
+export type ContentSearchResult = {
+  [key: string]: number | string | string[] | number[];
+  domain: string;
+  domain_count: number;
+  engines: string[];
+  link_count: number;
+  score: number;
+  snippet: string;
+  source: string[];
+  title: string;
+  url: string;
+}
+
+
+
 export async function handleApiSubmit(event: Event, query: ApiQuery) {
   event.preventDefault();
-  loadingStore.set(true);
+  setLoading();
   const target = event.target as HTMLFormElement;
   let formData = new FormData(target);
 
@@ -23,30 +87,30 @@ export async function handleApiSubmit(event: Event, query: ApiQuery) {
   } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
     formData.set('run_urlscan', '0');
   }
-  const response: ApiResponse<ApiContentData | ApiFingerprintData> = await queryApi(
+  const response: ApiResponse<ApiParseUrlResponseData | ApiFingerprintResponseData> = await queryApi(
     query.type,
     query.endpoint,
     formData
   );
   if (response.error) {
-
+  // wip handle error
   } else {
     if (response.data) {
       if (query.endpoint === Endpoint.Content) {
         contentFormDataStore.set(formData);
-        loadingStore.set(false);
-        contentStore.set(response.data as ApiContentData);
+        unsetLoading();
+        contentStore.set(response.data as ApiParseUrlResponseData);
         if (query.route) goto(query.route);
       } else if (query.endpoint === Endpoint.Fingerprint) {
         metadataFormDataStore.set(formData);
-        loadingStore.set(false);
-        metadataStore.set(response.data as ApiFingerprintData);
+        unsetLoading();
+        metadataStore.set(response.data as ApiFingerprintResponseData);
         if (query.route) goto(query.route);
       } else {
-        loadingStore.set(false);
+        unsetLoading();
       }
     } else {
-      loadingStore.set(false);
+      unsetLoading();
     }
   }
 }

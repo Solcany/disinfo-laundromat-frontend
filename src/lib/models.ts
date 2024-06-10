@@ -3,52 +3,17 @@ export interface LabeledValue {
   value: any;
 }
 
-export interface ContentApiInput {
-  region: LabeledValue;
-  language: LabeledValue;
-  browser: LabeledValue;
-  operator: LabeledValue;
-  content: string;
-  [index: string]: string | LabeledValue;
-}
+//export interface ContentApiInput {
+//  region: LabeledValue;
+//  language: LabeledValue;
+//  browser: LabeledValue;
+//  operator: LabeledValue;
+//  content: string;
+//  [index: string]: string | LabeledValue;
+//}
 
-export interface ApiResponse<T> {
-  data?: T;
-  error?: string;
-  status: number;
-}
 
-export type IndicatorMetadata = {
-  [key: string]: {
-    description: string;
-    interpretation: string;
-    name: string;
-  };
-};
 
-export interface ApiFingerprintData {
-  countries: Record<string, string>;
-  indicator_metadata: IndicatorMetadata;
-  indicator_summary: Record<string, number>;
-  indicators: Array<{
-    domain_name: string;
-    indicator_content: string | string[];
-    indicator_type: string;
-  }>;
-  languages: Record<string, string>;
-  matches: Array<{
-    domain_name_x: string;
-    domain_name_y: string;
-    match_type: string;
-    match_value: string;
-  }>;
-  matches_summary: Record<string, number>;
-}
-
-export type TableMetaData = Pick<
-  ApiFingerprintData,
-  'indicators' | 'matches' | 'indicator_metadata'
->;
 export type IndicatorDataItem = {
   domain_name: string;
   indicator_content: string | string[];
@@ -97,32 +62,7 @@ export type IndicatorsSummary = {
 //  }
 //}
 
-export interface ContentDataResult {
-  [key: string]: number | string | string[] | number[];
-  domain: string;
-  domain_count: number;
-  engines: string[];
-  link_count: number;
-  score: number;
-  snippet: string;
-  source: string[];
-  title: string;
-  url: string;
-}
 
-export interface ApiContentData {
-  countries: Record<string, string>;
-  csv_data: string;
-  indicator_metadata: {
-    [key: string]: {
-      description: string;
-      interpretation: string;
-      name: string;
-    };
-  };
-  languages: Record<string, string>;
-  results: ContentDataResult[];
-}
 
 export interface ApiIndicatorsData {
   data: Array<any>;
@@ -207,11 +147,7 @@ export enum Endpoint {
   Content = 'content-search'
 }
 
-export type ApiQuery = {
-  type: QueryType;
-  endpoint: Endpoint;
-  route?: string;
-};
+
 
 interface InputTextConfig {
   type: InputType.Text;

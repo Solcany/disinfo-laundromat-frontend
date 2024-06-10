@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
+  import { type ContentSearchResult } from '$api';
   import { unsetLoading } from '$stores/loading.ts';
+  import { handleApiSubmit } from '$api';
+  import { contentStore } from '$stores/apiData.ts';
+  import { contentFormDataStore } from '$stores/input.ts';
   import DownloadResult from '$components/DownloadResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
@@ -8,22 +12,19 @@
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
   import Form from '$components/Form.svelte';
-  import TableContent from '$components/TableContent.svelte';
+  import TableContentSimilarity from '$components/TableContentSimilarity.svelte';
   import Link from '$components/Link.svelte';
   import Separator from '$components/Separator.svelte';
   import P from '$components/P.svelte';
   import H4 from '$components/H4.svelte';
-  import { handleApiSubmit } from '$api';
-  import { contentStore } from '$stores/apiData.ts';
-  import { contentFormDataStore } from '$stores/input.ts';
-  import { type ContentDataResult } from '$models';
+
 
   // layout & page data
   export let data;
 
   // variable bound to TableContent components's sorted data
   // used for exporting the Table data to files
-  let tableData: ContentDataResult[] = [];
+  let tableData: ContentSearchResult[] = [];
 
   $: formConfig = data.contentAdvancedFormConfig;
   $: contentSearchData = $contentStore ? $contentStore.results : null;
@@ -100,7 +101,7 @@
 
     <div class="flex flex-1">
       {#if contentSearchData}
-        <TableContent data={contentSearchData} bind:sortedData={tableData} class="flex-1" />
+        <TableContentSimilarity data={contentSearchData} bind:sortedData={tableData} class="flex-1" />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

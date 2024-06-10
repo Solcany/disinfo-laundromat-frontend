@@ -1,5 +1,8 @@
 import { writable } from 'svelte/store';
-import type { ApiContentData, ApiFingerprintData } from '$models';
+import { 
+  type ApiContentData, 
+  type ApiFingerprintResponseData, 
+} from '$api';
 
 export const contentStore = writable<ApiContentData | undefined>(undefined);
-export const metadataStore = writable<ApiFingerprintData | undefined>(undefined);
+export const metadataStore = writable<ApiFingerprintResponseData | undefined>(undefined);

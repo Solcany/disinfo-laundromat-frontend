@@ -5,27 +5,21 @@
   let className: string = '';
   export { className as class };
 
-  let running: boolean = false;
+  const timeUntilMaximum = 20000;
+  const  intervalTime = 20;
+  const  numberOfSteps = timeUntilMaximum / intervalTime;
+  const  maximum = 0.95;
+  const  intervalStep = maximum / numberOfSteps;
+  const  hideAfterCompleteTime = 300;
+  const  resetAfterCompleteTime = 1000;
+ 
   let updater: ReturnType<typeof setInterval> | null = null;
+  let running: boolean = false;
   let completed = false;
-  let intervalTime = 20;
-  let intervalStep = 0.005;
-  let maximum = 0.95;
-  let hideAfterCompleteTime = 300;
-  let resetAfterCompleteTime = 1000;
-  
-  let width: number = 0;
-
- // function getIncrement(n: number)  {
- //   if (n >= 0 && n < 0.2) return 0.1;
- //   else if (n >= 0.2 && n < 0.5) return 0.04;
- //   else if (n >= 0.5 && n < 0.8) return 0.02;
- //   else if (n >= 0.8 && n < 0.99) return 0.005;
- //   return 0;
- // };
+  let width: number = 0.0;
 
   function reset ()  {
-    width = 0.08;
+    width = 0.0;
     running = true;
   };
 
@@ -40,9 +34,8 @@
     }
     running = true;
     updater = setInterval(() => {
-      //const step = getIncrement(width) ;
       if (width < maximum) {
-        width = width + intervalStep;
+        width += intervalStep;
       }
       if (width > maximum) {
         width = maximum;
@@ -89,7 +82,7 @@
     class={cn('absolute left-0 top-0 w-full h-[7px] overflow-hidden', className)}
   >
     <div
-      class="absolute h-full bg-blue-500 transition-all duration-300"
+      class="absolute h-full bg-blue-500"
       style={`width: ${width * 100}%;`}      />
   </Progress.Root>
 {/if}

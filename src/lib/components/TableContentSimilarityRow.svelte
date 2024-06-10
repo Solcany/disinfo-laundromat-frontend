@@ -1,6 +1,7 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { ContentDataResult, DomainAssociation } from '$models';
+  import type { DomainAssociation } from '$models';
+  import { type ContentSearchResult } from "$api";
   import {
     TABLE_CONTENT_SEARCH_MAIN_ROW,
     TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
@@ -15,7 +16,7 @@
   import RectMapped from '$components/RectMapped.svelte';
   import H4 from '$components/H4.svelte';
 
-  export let data: ContentDataResult;
+  export let data: ContentSearchResult;
   let className: string = '';
   export { className as class };
 
@@ -27,7 +28,7 @@
   $: setRows(data);
   $: setDomainAssociations(data);
 
-  function setRows(data: ContentDataResult): void {
+  function setRows(data: ContentSearchResult): void {
     Object.entries(data).forEach(([key, value]) => {
       // check each config individually in case an entry is to be shown in both main and complementary rows
       if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
@@ -39,7 +40,7 @@
     });
   }
 
-  function setDomainAssociations(data: ContentDataResult): void {
+  function setDomainAssociations(data: ContentSearchResult): void {
     if (!data.source) {
       return;
     }

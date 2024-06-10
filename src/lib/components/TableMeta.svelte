@@ -1,10 +1,19 @@
+<script context="module" lang="ts">
+  import {
+    type ApiFingerprintResponseData,
+  } from '$api';
+
+  export type TableMetaData = Pick<
+  ApiFingerprintResponseData,
+    'indicators' | 'matches' | 'indicator_metadata'>;
+</script>
+
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
   import {
     SortDirection,
     TableHeaderItemType,
-    type TableMetaData,
     type IndicatorData,
     type IndicatorDataItem,
     type TieredIndicator,
@@ -13,11 +22,12 @@
     type TableHeaderItemData,
     type TableMetaRowData
   } from '$models';
+
+
   import TableMetaRow from '$components/TableMetaRow.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
-
   export let headerData: TableHeaderItemData[];
   export let data: TableMetaData;
 
