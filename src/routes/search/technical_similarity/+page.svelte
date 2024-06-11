@@ -27,6 +27,7 @@
   // used for exporting the Table data to files
   let tableData: TableRowTechnicalSimilarityData[] = [];
 
+  $: formConfig = data.technicalSimilarityAdvancedFormConfig;
   $: technicalSimilarityData = $technicalSimilarityStore
     ? {
         indicators: $technicalSimilarityStore.indicators,
@@ -45,9 +46,9 @@
 
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
-    {#if data.metadataAdvancedFormConfig}
+    {#if formConfig}
       <Form
-        config={data.metadataAdvancedFormConfig}
+        config={formConfig}
         formData={$technicalSimilarityFormDataStore}
         onSubmit={handleApiSubmit}
         orientation={FormOrientation.Vertical}

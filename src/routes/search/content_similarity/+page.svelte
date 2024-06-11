@@ -25,7 +25,7 @@
   // used for exporting the Table data to files
   let tableData: ContentSearchResult[] = [];
 
-  $: formConfig = data.contentAdvancedFormConfig;
+  $: formConfig = data.contentSimilarityAdvancedFormConfig;
   $: contentSimilarityData = $contentSimilarityStore ? $contentSimilarityStore.results : null;
   onDestroy(() => {
     unsetLoading();

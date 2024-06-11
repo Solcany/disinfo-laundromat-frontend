@@ -31,19 +31,19 @@ export const load: LayoutLoad = async ({ data }) => {
   }
   if (response.data) {
     return {
-      contentBasicFormConfig: enhanceFormConfig(
+      contentSimilarityBasicFormConfig: enhanceFormConfig(
         CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
         response.data
       ),
-      contentAdvancedFormConfig: enhanceFormConfig(
+      contentSimilarityAdvancedFormConfig: enhanceFormConfig(
         CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
         response.data
       ),
-      metadataBasicFormConfig: enhanceFormConfig(
+      technicalSimilarityBasicFormConfig: enhanceFormConfig(
         TECHNICAL_SIMILARITY_BASIC_FORM_CONFIG,
         response.data
       ),
-      metadataAdvancedFormConfig: enhanceFormConfig(
+      technicalSimilarityAdvancedFormConfig: enhanceFormConfig(
         TECHNICAL_SIMILARITY_ADVANCED_FORM_CONFIG,
         response.data
       ),

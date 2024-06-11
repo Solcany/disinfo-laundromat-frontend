@@ -29,8 +29,8 @@
   let contentSimilarityFormData = new FormData();
   let technicalSimilarityFormData = new FormData();
 
-  $: contentBasicFormConfig = data.contentBasicFormConfig;
-  $: metadataBasicFormConfig = data.metadataBasicFormConfig;
+  $: contentSimilarityBasicFormConfig = data.contentSimilarityBasicFormConfig;
+  $: technicalSimilarityBasicFormConfig = data.technicalSimilarityBasicFormConfig;
 
   function setActiveTab(tab: TabKind) {
     activeTab = tab;
@@ -119,9 +119,9 @@
             text to analyse content similarity. Check the search engines you want to use to power
             the search results.
           </P>
-          {#if contentBasicFormConfig}
+          {#if contentSimilarityBasicFormConfig}
             <Form
-              config={contentBasicFormConfig}
+              config={contentSimilarityBasicFormConfig}
               formData={contentSimilarityFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
@@ -137,9 +137,9 @@
             This tool is particularly helpful to detect affiliate networks, sister sites,
             advertising collaborations, or DNS ban circumvention practices.
           </P>
-          {#if metadataBasicFormConfig}
+          {#if technicalSimilarityBasicFormConfig}
             <Form
-              config={metadataBasicFormConfig}
+              config={technicalSimilarityBasicFormConfig}
               formData={technicalSimilarityFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
