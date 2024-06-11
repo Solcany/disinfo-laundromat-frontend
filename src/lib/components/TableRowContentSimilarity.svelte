@@ -2,10 +2,10 @@
   import { type DomainAssociation } from '$types';
   import { type ContentSearchResult } from '$api';
   import {
-    TABLE_CONTENT_SEARCH_MAIN_ROW,
-    TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
-    TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW,
-    TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS,
+    TABLE_CONTENT_SIMILARITY_MAIN_ROW,
+    TABLE_CONTENT_SIMILARITY_MAIN_ROW_KEYS,
+    TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW,
+    TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW_KEYS,
     DOMAIN_ASSOCIATIONS
   } from '$config';
   import { cn, domainToUrl } from '$utils';
@@ -31,10 +31,10 @@
   function setRows(data: ContentSearchResult): void {
     Object.entries(data).forEach(([key, value]) => {
       // check each config individually in case an entry is to be shown in both main and complementary rows
-      if (TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS.includes(key)) {
+      if (TABLE_CONTENT_SIMILARITY_MAIN_ROW_KEYS.includes(key)) {
         dataMain.push([key, value]);
       }
-      if (TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS.includes(key)) {
+      if (TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW_KEYS.includes(key)) {
         dataComplementary.push([key, value]);
       }
     });

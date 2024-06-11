@@ -1,8 +1,9 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import { 
-    type TableRowTechnicalSimilarityData, 
-    type IndicatorsSummary } from '$components/TableTechnicalSimilarity.svelte';
+  import {
+    type TableRowTechnicalSimilarityData,
+    type IndicatorsSummary
+  } from '$components/TableTechnicalSimilarity.svelte';
   import { type IndicatorMetadata } from '$api';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';

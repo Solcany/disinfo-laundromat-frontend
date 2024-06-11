@@ -1,30 +1,20 @@
 import type { LayoutLoad } from './$types';
 import { error, type NumericRange } from '@sveltejs/kit';
+import { Endpoint } from '$config';
+import { QueryType } from '$types';
+import { type ApiResponse, queryApi } from '$api';
 
-import {
-  QueryType,
-  Endpoint,
-  type ApiResponse, 
-  queryApi,
-} from '$api';
+import { InputType, type InputConfig, type InputTypeWithData } from '$components/Form.svelte';
 
-import {
-  InputType,
-  type InputConfig,
-  type InputTypeWithData,
-} from '$components/Form.svelte';
-
-import {
-  type LabeledValue,
-} from '$types';
+import { type LabeledValue } from '$types';
 
 import {
   RemoteConfigFlag,
   RemoteConfigFlagData,
   CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
   CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
-  METADATA_SIMILARITY_BASIC_FORM_CONFIG,
-  METADATA_SIMILARITY_ADVANCED_FORM_CONFIG
+  TECHNICAL_SIMILARITY_BASIC_FORM_CONFIG,
+  TECHNICAL_SIMILARITY_ADVANCED_FORM_CONFIG
 } from '$config';
 
 export const load: LayoutLoad = async ({ data }) => {
@@ -50,11 +40,11 @@ export const load: LayoutLoad = async ({ data }) => {
         response.data
       ),
       metadataBasicFormConfig: enhanceFormConfig(
-        METADATA_SIMILARITY_BASIC_FORM_CONFIG,
+        TECHNICAL_SIMILARITY_BASIC_FORM_CONFIG,
         response.data
       ),
       metadataAdvancedFormConfig: enhanceFormConfig(
-        METADATA_SIMILARITY_ADVANCED_FORM_CONFIG,
+        TECHNICAL_SIMILARITY_ADVANCED_FORM_CONFIG,
         response.data
       ),
       indicatorMetadata: response.data.indicator_metadata,

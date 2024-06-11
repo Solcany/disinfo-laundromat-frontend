@@ -26,7 +26,7 @@
     value?: string;
     submitQuery?: ApiQuery;
     tooltip?: string;
-  }
+  };
 
   type InputTextAreaConfig = {
     type: InputType.TextArea;
@@ -37,7 +37,7 @@
     value?: string;
     submitQuery?: ApiQuery;
     tooltip?: string;
-  }
+  };
 
   type InputDropdownConfig = {
     type: InputType.Dropdown;
@@ -50,7 +50,7 @@
     value?: LabeledValue;
     submitQuery?: ApiQuery;
     tooltip?: string;
-  }
+  };
 
   type InputCheckboxConfig = {
     type: InputType.Checkbox;
@@ -61,7 +61,7 @@
     value: string;
     submitQuery?: ApiQuery;
     tooltip?: string;
-  }
+  };
 
   type InputCheckboxGroupConfig = {
     type: InputType.CheckboxGroup;
@@ -76,7 +76,7 @@
     value?: LabeledValue;
     submitQuery?: ApiQuery;
     tooltip?: string;
-  }
+  };
 
   type InputHiddenConfig = {
     type: InputType.Hidden;
@@ -86,7 +86,7 @@
     // WIP this should be removed for the this type
     // but for some reason TS complains about its absence in the Form comp
     submitQuery?: ApiQuery;
-  }
+  };
 
   export type InputConfig =
     | InputTextConfig
@@ -109,7 +109,8 @@
   import InputCheckbox from '$components/InputCheckbox.svelte';
   import InputCheckboxGroup from '$components/InputCheckboxGroup.svelte';
   import { ArrowRight } from 'phosphor-svelte';
-  import { Endpoint, QueryType } from '$api';
+  import { Endpoint } from '$config';
+  import { QueryType } from '$types';
   export let config: InputConfig[];
   export let onSubmit: (event: Event, query: { type: QueryType; endpoint: Endpoint }) => void;
   export let orientation: FormOrientation = FormOrientation.Vertical;
@@ -237,6 +238,4 @@
       <input name={item.name} value={item.value} class="hidden" aria-hidden="true" />
     {/if}
   {/each}
-
-  <!-- <InputCheckboxGroup/> -->
 </form>

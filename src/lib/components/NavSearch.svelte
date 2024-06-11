@@ -10,14 +10,14 @@
 
 <nav class="z-50 grid w-full grid-cols-1 border-t-[1px] border-gray5 md:grid-cols-12">
   <ul class="col-span-3 flex w-full">
-    {#each SEARCH_NAV as { label, path }}
+    {#each SEARCH_NAV as { label, value }}
       <li
-        class="{activePath === path ? 'dark:bg-gray7' : 'border-b-[1px]'} 
+        class="{activePath === value ? 'dark:bg-gray7' : 'border-b-[1px]'} 
           flex flex-1 justify-center border-r-[1px] border-gray5 py-2"
       >
         <a
           class="text-center text-sm font-light text-black md:text-base dark:text-white"
-          href={path}>{label}</a
+          href={value}>{label}</a
         >
       </li>
     {/each}

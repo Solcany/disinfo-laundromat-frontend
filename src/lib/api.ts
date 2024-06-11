@@ -1,21 +1,21 @@
 import { goto } from '$app/navigation';
-import { API_URL } from '$config';
-import { setLoading, unsetLoading } from '$stores/loading.ts';
-import { metadataStore, contentStore } from '$stores/apiData.ts';
-import { contentFormDataStore, metadataFormDataStore } from '$stores/input.ts';
-
-export enum QueryType {
-  Post = 'POST',
-  Get = 'GET'
-}
-
-export enum Endpoint {
-  AppConfig = '',
-  Indicators = 'indicators',
-  ParseUrl = 'parse-url',
-  Fingerprint = 'fingerprint',
-  Content = 'content-search'
-}
+import { 
+  API_URL, 
+  Endpoint 
+} from '$config';
+import { QueryType } from '$types';
+import { 
+  setLoading, 
+  unsetLoading 
+} from '$stores/loading.ts';
+import { 
+  metadataStore, 
+  contentStore
+} from '$stores/apiData.ts';
+import { 
+  contentFormDataStore, 
+  metadataFormDataStore
+} from '$stores/input.ts';
 
 export type ApiQuery = {
   type: QueryType;

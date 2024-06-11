@@ -3,7 +3,7 @@
   import InputCheckbox from '$components/InputCheckbox.svelte';
   import Label from '$components/Label.svelte';
   import { Minus, Check } from 'phosphor-svelte';
-  import { type LabeledValue }  from '$types';
+  import { type LabeledValue } from '$types';
   import { FormOrientation } from '$components/Form.svelte';
   import { cn } from '$utils';
 

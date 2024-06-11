@@ -15,13 +15,13 @@
 
 <nav class={cn('', className)}>
   <ul class="flex list-none justify-center md:justify-start">
-    {#each NAV as { label, path }}
+    {#each NAV as { label, value }}
       <li class="px-3 first:pl-0 last:px-0 last:pl-3">
         <a
-          class="font-sans text-white {activePath === getPathRoot(path)
+          class="font-sans text-white {activePath === getPathRoot(value)
             ? 'font-bold'
             : 'font-base '}"
-          href={path}>{label}</a
+          href={value}>{label}</a
         >
       </li>
     {/each}

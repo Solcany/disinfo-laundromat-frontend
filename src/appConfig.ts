@@ -1,23 +1,22 @@
-import {
-  type TableHeaderItemData,
-  TableHeaderItemType,
-  type NavItemData,
-  type LabeledValue,
-  type DomainAssociation,
-} from '$types';
+import { type LabeledValue, type DomainAssociation } from '$types';
 
-import {
-  QueryType,
-  Endpoint,
-} from '$types';
+import { type TableHeaderItemData, TableHeaderItemType } from '$components/TableHeaderItem.svelte';
 
-import { 
-  InputType,
-  type InputConfig,
-} from '$components/Form.svelte';
+
+import { QueryType } from '$types';
+
+import { InputType, type InputConfig } from '$components/Form.svelte';
 
 export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.informationlaundromat.com/api/';
+
+export enum Endpoint {
+  AppConfig = '',
+  Indicators = 'indicators',
+  ParseUrl = 'parse-url',
+  Fingerprint = 'fingerprint',
+  Content = 'content-search'
+}
 
 export enum RemoteConfigFlag {
   Countries = 'countries',
@@ -33,21 +32,21 @@ export const RemoteConfigFlagData = {
   [RemoteConfigFlag.Engines]: { key: 'engines', defaultKey: 'engine' }
 } as const;
 
-export const TABLE_CONTENT_SEARCH_HEADER: TableHeaderItemData[] = [
+export const TABLE_CONTENT_SIMILARITY_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
 ];
-export const TABLE_CONTENT_SEARCH_MAIN_ROW: TableHeaderItemData[] = [
+export const TABLE_CONTENT_SIMILARITY_MAIN_ROW: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
 ];
-export const TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS: string[] = TABLE_CONTENT_SEARCH_MAIN_ROW.map(
+export const TABLE_CONTENT_SIMILARITY_MAIN_ROW_KEYS: string[] = TABLE_CONTENT_SIMILARITY_MAIN_ROW.map(
   (item) => item.key
 );
 
-export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW: TableHeaderItemData[] = [
+export const TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW: TableHeaderItemData[] = [
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String },
   { label: 'Content Title', key: 'title', tooltip: '', type: TableHeaderItemType.String },
   { label: 'Domain count', key: 'domain_count', tooltip: '', type: TableHeaderItemType.Number },
@@ -55,32 +54,26 @@ export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW: TableHeaderItemData[] = [
   { label: 'Search engines', key: 'engines', type: TableHeaderItemType.String },
   { label: 'Content URL', key: 'url', type: TableHeaderItemType.Url }
 ];
-export const TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW_KEYS: string[] =
-  TABLE_CONTENT_SEARCH_COMPLEMENTARY_ROW.map((item) => item.key);
+export const TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW_KEYS: string[] =
+  TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW.map((item) => item.key);
 
-export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
+export const TABLE_TECHNICAL_SIMILARITY_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
   { label: 'Indicators', key: 'indicators_summary', type: TableHeaderItemType.IndicatorsSummary },
 
   { label: '', key: '', type: TableHeaderItemType.Empty }
 ];
 
-export const NAV: NavItemData[] = [
-  { label: 'Workspace', path: '/search/content_similarity' },
-  { label: 'About', path: '/about' },
-  { label: 'Documentation', path: '/documentation' }
+export const NAV: LabeledValue[] = [
+  { label: 'Workspace', value: '/search/content_similarity' },
+  { label: 'About', value: '/about' },
+  { label: 'Documentation', value: '/documentation' }
   //{ label: 'Log in | Sign up', path: '/login' }
 ];
 
-export const SEARCH_NAV: NavItemData[] = [
-  { label: 'Content Similarity', path: '/search/content_similarity' },
-  { label: 'Technical Similarity', path: '/search/technical_similarity' }
-];
-
-// WIP this should be hardcoded in the Combine component
-export const operator_data: LabeledValue[] = [
-  { label: 'AND', value: 'AND' },
-  { label: 'OR', value: 'OR' }
+export const SEARCH_NAV: LabeledValue[] = [
+  { label: 'Content Similarity', value: '/search/content_similarity' },
+  { label: 'Technical Similarity', value: '/search/technical_similarity' }
 ];
 
 export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
@@ -178,7 +171,7 @@ export const CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   }
 ];
 
-export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
+export const TECHNICAL_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',
@@ -203,7 +196,7 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
   }
 ];
 
-export const METADATA_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
+export const TECHNICAL_SIMILARITY_ADVANCED_FORM_CONFIG: InputConfig[] = [
   {
     type: InputType.Text,
     name: 'url',

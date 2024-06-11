@@ -1,27 +1,38 @@
 <script context="module" lang="ts">
   import { type ApiFingerprintResponseData } from '$api';
 
-  export type TieredIndicator = {
+  type TieredIndicator = {
     tier: number;
     data: IndicatorData[];
+  };
+
+  type IndicatorData = {
+    type: string;
+    value: string[];
+  };
+
+  type IndicatorDataItem = {
+    domain_name: string;
+    indicator_content: string | string[];
+    indicator_type: string;
+  };
+
+  type MatchDataItem = {
+    domain_name_y: string;
+    match_type: string;
+    match_value: string;
   };
 
   export type IndicatorsSummary = {
     [tier: string]: number;
   };
-
-  export type IndicatorData = {
-    type: string;
-    value: string[];
-  };
-
   export type TableRowTechnicalSimilarityData = {
     [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
     domain: string;
     indicators: TieredIndicator[];
     indicators_summary?: IndicatorsSummary;
     domainAssociations?: string[];
-  }
+  };
 
   export type TableMetaData = Pick<
     ApiFingerprintResponseData,
@@ -32,14 +43,11 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
+  import { SortDirection } from '$types';
   import {
-    SortDirection,
     TableHeaderItemType,
-    type IndicatorDataItem,
-    type MatchDataItem,
-    type TableHeaderItemData,
-  } from '$types';
-
+    type TableHeaderItemData
+  } from '$components/TableHeaderItem.svelte';
   import TableRowTechnicalSimilarity from '$components/TableRowTechnicalSimilarity.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';

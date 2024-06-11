@@ -1,6 +1,26 @@
+<script context="module" lang="ts">
+  export enum TableHeaderItemType {
+    Number = 'number',
+    String = 'string',
+    NumberArray = 'numberArray',
+    StringArray = 'stringArray',
+    IndicatorsSummary = 'IndicatorsSummary',
+    MatchScore = 'MatchScore',
+    Url = 'url',
+    Empty = 'empty'
+  }
+
+  export interface TableHeaderItemData {
+    label: string;
+    key: string;
+    type: TableHeaderItemType;
+    tooltip?: string;
+  }
+</script>
+
 <script lang="ts">
   import { ArrowUp, ArrowDown } from 'phosphor-svelte';
-  import { type TableHeaderItemData, TableHeaderItemType, SortDirection } from '$types';
+  import { SortDirection } from '$types';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';

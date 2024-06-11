@@ -1,8 +1,13 @@
 <script lang="ts">
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
-  import { TABLE_CONTENT_SEARCH_HEADER } from '$config';
-  import { SortDirection, TableHeaderItemType, type TableHeaderItemData } from '$types';
+  import { TABLE_CONTENT_SIMILARITY_HEADER } from '$config';
+
+  import {
+    TableHeaderItemType,
+    type TableHeaderItemData
+  } from '$components/TableHeaderItem.svelte';
+  import { SortDirection } from '$types';
   import { type ContentSearchResult } from '$api';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import TableRowContentSimilarity from '$components/TableRowContentSimilarity.svelte';
@@ -61,7 +66,7 @@
   }
 
   function updateSortStatus(key: string): void {
-    TABLE_CONTENT_SEARCH_HEADER.forEach((item: TableHeaderItemData) => {
+    TABLE_CONTENT_SIMILARITY_HEADER.forEach((item: TableHeaderItemData) => {
       sortStatus[item.key] = SortDirection.None;
     });
 
@@ -81,7 +86,7 @@
       <col style="width: 5%" />
     </colgroup>
     <thead class="box-shadow-border-bottom sticky top-0 dark:bg-gray7">
-      {#each TABLE_CONTENT_SEARCH_HEADER as item (item)}
+      {#each TABLE_CONTENT_SIMILARITY_HEADER as item (item)}
         <TableHeaderItem
           data={item}
           sortStatus={sortStatus[item.key]}
