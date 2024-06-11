@@ -10,7 +10,7 @@ import { type LabeledValue } from '$types';
 
 import {
   RemoteConfigFlag,
-  RemoteConfigFlagData,
+  REMOTE_CONFIG_FLAG_DATA,
   CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
   CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
   TECHNICAL_SIMILARITY_BASIC_FORM_CONFIG,
@@ -62,7 +62,7 @@ function enhanceFormConfig(
 ) {
   return config.map((item) => {
     if (doesInputRequireRemoteData(item)) {
-      const { key, defaultKey } = RemoteConfigFlagData[item.requiresRemoteData as RemoteConfigFlag];
+      const { key, defaultKey } = REMOTE_CONFIG_FLAG_DATA[item.requiresRemoteData as RemoteConfigFlag];
 
       if (key && apiConfigData[key]) {
         const newData = configToLabeledValues(apiConfigData[key]);

@@ -25,7 +25,7 @@ export enum RemoteConfigFlag {
   Engines = 'engines'
 }
 
-export const RemoteConfigFlagData = {
+export const REMOTE_CONFIG_FLAG_DATA = {
   [RemoteConfigFlag.Countries]: { key: 'countries', defaultKey: 'country' },
   [RemoteConfigFlag.Languages]: { key: 'languages', defaultKey: 'language' },
   [RemoteConfigFlag.Indicators]: { key: 'Indicators', defaultKey: 'indicator' },
