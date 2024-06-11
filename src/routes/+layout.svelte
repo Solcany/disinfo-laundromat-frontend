@@ -10,12 +10,12 @@
   import ProgressBar from '$components/ProgressBar.svelte';
   import GDPRDialog from '$components/GDPRDialog.svelte';
   export let data: LayoutData;
-  let mounted = false; 
+  let isMounted = false; 
 
-  $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected' && mounted;
+  $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected' && isMounted;
 
   onMount(() => {
-    mounted = true;
+    isMounted = true;
   })
 </script>
 
