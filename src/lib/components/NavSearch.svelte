@@ -8,7 +8,6 @@
   }
 </script>
 
-
 <nav class="z-50 grid w-full grid-cols-1 border-t-[1px] border-gray5 md:grid-cols-12">
   <ul class="col-span-3 flex w-full">
     {#each SEARCH_NAV as { label, path }}

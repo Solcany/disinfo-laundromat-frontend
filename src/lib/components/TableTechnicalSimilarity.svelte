@@ -1,11 +1,32 @@
 <script context="module" lang="ts">
-  import {
-    type ApiFingerprintResponseData,
-  } from '$api';
+  import { type ApiFingerprintResponseData } from '$api';
+
+  export type TieredIndicator = {
+    tier: number;
+    data: IndicatorData[];
+  };
+
+  export type IndicatorsSummary = {
+    [tier: string]: number;
+  };
+
+  export type IndicatorData = {
+    type: string;
+    value: string[];
+  };
+
+  export type TableRowTechnicalSimilarityData = {
+    [key: string]: string | TieredIndicator[] | IndicatorsSummary | string[] | undefined;
+    domain: string;
+    indicators: TieredIndicator[];
+    indicators_summary?: IndicatorsSummary;
+    domainAssociations?: string[];
+  }
 
   export type TableMetaData = Pick<
-  ApiFingerprintResponseData,
-    'indicators' | 'matches' | 'indicator_metadata'>;
+    ApiFingerprintResponseData,
+    'indicators' | 'matches' | 'indicator_metadata'
+  >;
 </script>
 
 <script lang="ts">
@@ -14,17 +35,12 @@
   import {
     SortDirection,
     TableHeaderItemType,
-    type IndicatorData,
     type IndicatorDataItem,
-    type TieredIndicator,
     type MatchDataItem,
-    type IndicatorsSummary,
     type TableHeaderItemData,
-    type TableMetaRowData
-  } from '$models';
+  } from '$types';
 
-
-  import TableMetaRow from '$components/TableMetaRow.svelte';
+  import TableRowTechnicalSimilarity from '$components/TableRowTechnicalSimilarity.svelte';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
@@ -36,9 +52,9 @@
   let sortStatus: Record<string, SortDirection> = {};
   let sortDirection: SortDirection = SortDirection.Ascending;
   let sortColumnIndex: number = -1;
-  let selfRow: TableMetaRowData | undefined = undefined;
-  let rows: TableMetaRowData[] = [];
-  export let sortedRows: TableMetaRowData[]  = [];
+  let selfRow: TableRowTechnicalSimilarityData | undefined = undefined;
+  let rows: TableRowTechnicalSimilarityData[] = [];
+  export let sortedRows: TableRowTechnicalSimilarityData[] = [];
   let indicatorsCount: IndicatorsSummary | undefined = undefined;
 
   // WIP: TableMeta should be merged into TableContent ( eventually just Table ), however currently there's a need to transform back end data on the client side to prepare it for front end rendering, thus two Table components for now.
@@ -59,10 +75,10 @@
     }
   }
 
-  function getUserInputRow(data: IndicatorDataItem[]): TableMetaRowData | undefined {
+  function getUserInputRow(data: IndicatorDataItem[]): TableRowTechnicalSimilarityData | undefined {
     if (data.length === 0) return undefined;
 
-    const result: TableMetaRowData = {
+    const result: TableRowTechnicalSimilarityData = {
       domain: '',
       indicators: []
     };
@@ -96,7 +112,7 @@
     return result;
   }
 
-  function getRows(data: MatchDataItem[]): TableMetaRowData[] {
+  function getRows(data: MatchDataItem[]): TableRowTechnicalSimilarityData[] {
     if (data.length === 0) return [];
     // group match data by indicator tiers
     const grouped: Record<
@@ -134,7 +150,7 @@
     });
 
     // Transform the grouped data into the final structure
-    const rows: TableMetaRowData[] = Object.keys(grouped).map((domainKey) => {
+    const rows: TableRowTechnicalSimilarityData[] = Object.keys(grouped).map((domainKey) => {
       const domainGroup = grouped[domainKey];
       const indicators: TieredIndicator[] = Object.keys(domainGroup.indicators)
         .map((tierKey) => {
@@ -176,11 +192,11 @@
   }
 
   function sortRows(
-    rows: TableMetaRowData[],
+    rows: TableRowTechnicalSimilarityData[],
     header: TableHeaderItemData[],
     columnIndex: number,
     direction: SortDirection
-  ): TableMetaRowData[] {
+  ): TableRowTechnicalSimilarityData[] {
     const { key, type } = header[columnIndex];
 
     return rows.sort((a, b) => {
@@ -269,14 +285,18 @@
     </thead>
     <tbody>
       {#if userInputRow}
-        <TableMetaRow
+        <TableRowTechnicalSimilarity
           data={userInputRow}
           indicatorsMetadata={data.indicator_metadata}
           isUserInputRow={true}
         />
       {/if}
       {#each sortedRows as row, i (row)}
-        <TableMetaRow data={row} indicatorsMetadata={data.indicator_metadata} {indicatorsCount} />
+        <TableRowTechnicalSimilarity
+          data={row}
+          indicatorsMetadata={data.indicator_metadata}
+          {indicatorsCount}
+        />
       {/each}
     </tbody>
   </table>

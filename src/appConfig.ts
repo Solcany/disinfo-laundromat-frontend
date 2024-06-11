@@ -1,15 +1,37 @@
-import type {
-  TableHeaderItemData,
-  NavItemData,
-  LabeledValue,
-  InputConfig,
-  DomainAssociation
-} from '$models';
-import { RemoteConfigFlag, Endpoint, QueryType } from '$models';
-import { InputType, TableHeaderItemType } from '$models';
+import {
+  type TableHeaderItemData,
+  TableHeaderItemType,
+  type NavItemData,
+  type LabeledValue,
+  type DomainAssociation,
+} from '$types';
+
+import {
+  QueryType,
+  Endpoint,
+} from '$types';
+
+import { 
+  InputType,
+  type InputConfig,
+} from '$components/Form.svelte';
 
 export const APP_TITLE: string = 'The Information Laundromat';
 export const API_URL: string = 'https://www.informationlaundromat.com/api/';
+
+export enum RemoteConfigFlag {
+  Countries = 'countries',
+  Languages = 'languages',
+  Indicators = 'indicators',
+  Engines = 'engines'
+}
+
+export const RemoteConfigFlagData = {
+  [RemoteConfigFlag.Countries]: { key: 'countries', defaultKey: 'country' },
+  [RemoteConfigFlag.Languages]: { key: 'languages', defaultKey: 'language' },
+  [RemoteConfigFlag.Indicators]: { key: 'Indicators', defaultKey: 'indicator' },
+  [RemoteConfigFlag.Engines]: { key: 'engines', defaultKey: 'engine' }
+} as const;
 
 export const TABLE_CONTENT_SEARCH_HEADER: TableHeaderItemData[] = [
   { label: 'Content Domain', key: 'domain', type: TableHeaderItemType.String },
@@ -44,15 +66,15 @@ export const TABLE_METADATA_HEADER: TableHeaderItemData[] = [
 ];
 
 export const NAV: NavItemData[] = [
-  { label: 'Workspace', path: '/search/content' },
+  { label: 'Workspace', path: '/search/content_similarity' },
   { label: 'About', path: '/about' },
   { label: 'Documentation', path: '/documentation' }
   //{ label: 'Log in | Sign up', path: '/login' }
 ];
 
 export const SEARCH_NAV: NavItemData[] = [
-  { label: 'Content Similarity', path: '/search/content' },
-  { label: 'Technical Similarity', path: '/search/metadata' }
+  { label: 'Content Similarity', path: '/search/content_similarity' },
+  { label: 'Technical Similarity', path: '/search/technical_similarity' }
 ];
 
 // WIP this should be hardcoded in the Combine component
@@ -71,7 +93,7 @@ export const CONTENT_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Content,
-      route: '/search/content/'
+      route: '/search/content_similarity/'
     }
   },
   {
@@ -166,7 +188,7 @@ export const METADATA_SIMILARITY_BASIC_FORM_CONFIG: InputConfig[] = [
     submitQuery: {
       type: QueryType.Post,
       endpoint: Endpoint.Fingerprint,
-      route: '/search/metadata/'
+      route: '/search/technical_similarity/'
     }
   },
   {

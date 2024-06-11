@@ -18,7 +18,6 @@
   import P from '$components/P.svelte';
   import H4 from '$components/H4.svelte';
 
-
   // layout & page data
   export let data;
 
@@ -101,7 +100,11 @@
 
     <div class="flex flex-1">
       {#if contentSearchData}
-        <TableContentSimilarity data={contentSearchData} bind:sortedData={tableData} class="flex-1" />
+        <TableContentSimilarity
+          data={contentSearchData}
+          bind:sortedData={tableData}
+          class="flex-1"
+        />
       {:else}
         <div class="fence-pattern flex flex-1 items-center justify-center">
           <H4>No data</H4>

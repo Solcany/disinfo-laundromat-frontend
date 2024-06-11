@@ -1,6 +1,9 @@
 <script lang="ts">
   import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { TableMetaRowData, IndicatorMetadata, IndicatorsSummary } from '$models';
+  import { 
+    type TableRowTechnicalSimilarityData, 
+    type IndicatorsSummary } from '$components/TableTechnicalSimilarity.svelte';
+  import { type IndicatorMetadata } from '$api';
   import { cn, domainToUrl } from '$utils';
   import Tooltip from '$components/Tooltip.svelte';
   import Link from '$components/Link.svelte';
@@ -8,7 +11,7 @@
   import RectMapped from '$components/RectMapped.svelte';
   import H3 from '$components/H3.svelte';
   import H4 from '$components/H4.svelte';
-  export let data: TableMetaRowData;
+  export let data: TableRowTechnicalSimilarityData;
   export let indicatorsMetadata: IndicatorMetadata;
   export let indicatorsCount: IndicatorsSummary | undefined = undefined;
   export let isUserInputRow: boolean = false;
@@ -31,21 +34,23 @@
   role="button"
   class="w-full border-gray6 hover:bg-black {showExpandedRow
     ? 'border-b-0 bg-black hover:cursor-n-resize'
-    : 'border-b-[1px] hover:cursor-s-resize'}">
+    : 'border-b-[1px] hover:cursor-s-resize'}"
+>
   <!-- the domain column -->
   <td class="h-10 text-sm text-black first:pl-4 dark:text-white">
     {#if data.domain}
-
       {#if isUserInputRow}
         <div class="inline-block">
           <Link
-            id={"link_" + data.domain}
+            id={'link_' + data.domain}
             href={domainToUrl(String(data.domain))}
             on:click={(e) => {
               e.stopPropagation();
             }}>{data.domain}</Link
           >
-          <label for={"link_" + data.domain} class="font-sans text-xs text-gray2"> (searched url) </label>
+          <label for={'link_' + data.domain} class="font-sans text-xs text-gray2">
+            (searched url)
+          </label>
         </div>
       {:else}
         <Link
@@ -163,18 +168,18 @@
                     {#if indicator.type && indicator.value && indicator.value.length > 0}
                       <div>
                         {#if indicatorsMetadata[entry.tier + '-' + indicator.type]}
-                        <div class="flex items-center">
-                          <H4 class="pr-2"
-                            >{indicatorsMetadata[entry.tier + '-' + indicator.type].name}</H4
-                          >
-                          <Tooltip>
-                            <svelte:fragment slot="icon">i</svelte:fragment>
-                            <svelte:fragment slot="content"
-                              >{indicatorsMetadata[entry.tier + '-' + indicator.type]
-                                .description}</svelte:fragment
+                          <div class="flex items-center">
+                            <H4 class="pr-2"
+                              >{indicatorsMetadata[entry.tier + '-' + indicator.type].name}</H4
                             >
-                          </Tooltip>
-                        </div>
+                            <Tooltip>
+                              <svelte:fragment slot="icon">i</svelte:fragment>
+                              <svelte:fragment slot="content"
+                                >{indicatorsMetadata[entry.tier + '-' + indicator.type]
+                                  .description}</svelte:fragment
+                              >
+                            </Tooltip>
+                          </div>
                         {/if}
                         <ul>
                           {#each indicator.value as value}

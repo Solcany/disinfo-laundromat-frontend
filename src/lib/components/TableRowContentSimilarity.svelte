@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { CaretDown, CaretUp } from 'phosphor-svelte';
-  import type { DomainAssociation } from '$models';
-  import { type ContentSearchResult } from "$api";
+  import { type DomainAssociation } from '$types';
+  import { type ContentSearchResult } from '$api';
   import {
     TABLE_CONTENT_SEARCH_MAIN_ROW,
     TABLE_CONTENT_SEARCH_MAIN_ROW_KEYS,
@@ -10,6 +9,7 @@
     DOMAIN_ASSOCIATIONS
   } from '$config';
   import { cn, domainToUrl } from '$utils';
+  import { CaretDown, CaretUp } from 'phosphor-svelte';
   import Tooltip from '$components/Tooltip.svelte';
   import Link from '$components/Link.svelte';
   import Rect from '$components/Rect.svelte';

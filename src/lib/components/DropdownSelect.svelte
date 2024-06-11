@@ -2,7 +2,7 @@
   import { Select } from 'bits-ui';
   import { CaretDown, CaretUp } from 'phosphor-svelte';
   import { flyAndScale } from '$utils';
-  import type { LabeledValue } from '$models';
+  import type { LabeledValue } from '$types';
   export let id: string;
   export let name: string;
   export let selected: LabeledValue | undefined = undefined;

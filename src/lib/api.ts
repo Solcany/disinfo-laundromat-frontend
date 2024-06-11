@@ -1,12 +1,21 @@
+import { goto } from '$app/navigation';
 import { API_URL } from '$config';
-import {
-  QueryType,
-  Endpoint,
-} from '$models';
 import { setLoading, unsetLoading } from '$stores/loading.ts';
 import { metadataStore, contentStore } from '$stores/apiData.ts';
 import { contentFormDataStore, metadataFormDataStore } from '$stores/input.ts';
-import { goto } from '$app/navigation';
+
+export enum QueryType {
+  Post = 'POST',
+  Get = 'GET'
+}
+
+export enum Endpoint {
+  AppConfig = '',
+  Indicators = 'indicators',
+  ParseUrl = 'parse-url',
+  Fingerprint = 'fingerprint',
+  Content = 'content-search'
+}
 
 export type ApiQuery = {
   type: QueryType;
@@ -18,8 +27,7 @@ export type ApiResponse<T> = {
   data?: T;
   error?: string;
   status: number;
-}
-
+};
 export type IndicatorMetadata = {
   [key: string]: {
     description: string;
@@ -27,7 +35,6 @@ export type IndicatorMetadata = {
     name: string;
   };
 };
-
 export type ApiFingerprintResponseData = {
   countries: Record<string, string>;
   indicator_metadata: IndicatorMetadata;
@@ -45,8 +52,7 @@ export type ApiFingerprintResponseData = {
     match_value: string;
   }>;
   matches_summary: Record<string, number>;
-}
-
+};
 export type ApiContentSearchResponseData = {
   countries: Record<string, string>;
   csv_data: string;
@@ -59,8 +65,7 @@ export type ApiContentSearchResponseData = {
   };
   languages: Record<string, string>;
   results: ContentSearchResult[];
-}
-
+};
 export type ContentSearchResult = {
   [key: string]: number | string | string[] | number[];
   domain: string;
@@ -72,9 +77,7 @@ export type ContentSearchResult = {
   source: string[];
   title: string;
   url: string;
-}
-
-
+};
 
 export async function handleApiSubmit(event: Event, query: ApiQuery) {
   event.preventDefault();
@@ -87,19 +90,16 @@ export async function handleApiSubmit(event: Event, query: ApiQuery) {
   } else if (query.endpoint === Endpoint.Fingerprint && !formData.has('run_urlscan')) {
     formData.set('run_urlscan', '0');
   }
-  const response: ApiResponse<ApiParseUrlResponseData | ApiFingerprintResponseData> = await queryApi(
-    query.type,
-    query.endpoint,
-    formData
-  );
+  const response: ApiResponse<ApiContentSearchResponseData | ApiFingerprintResponseData> =
+    await queryApi(query.type, query.endpoint, formData);
   if (response.error) {
-  // wip handle error
+    // wip handle error
   } else {
     if (response.data) {
       if (query.endpoint === Endpoint.Content) {
         contentFormDataStore.set(formData);
         unsetLoading();
-        contentStore.set(response.data as ApiParseUrlResponseData);
+        contentStore.set(response.data as ApiContentSearchResponseData);
         if (query.route) goto(query.route);
       } else if (query.endpoint === Endpoint.Fingerprint) {
         metadataFormDataStore.set(formData);

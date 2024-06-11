@@ -2,16 +2,10 @@
   import { ascending, descending } from 'd3-array';
   import { cn } from '$utils';
   import { TABLE_CONTENT_SEARCH_HEADER } from '$config';
-  import {
-    SortDirection,
-    TableHeaderItemType,
-    type TableHeaderItemData
-  } from '$models';
-  import {
-    type ContentSearchResult 
-  } from '$api';
+  import { SortDirection, TableHeaderItemType, type TableHeaderItemData } from '$types';
+  import { type ContentSearchResult } from '$api';
   import TableHeaderItem from '$components/TableHeaderItem.svelte';
-  import TableContentSimilarityRow from '$components/TableContentSimilarityRow.svelte';
+  import TableRowContentSimilarity from '$components/TableRowContentSimilarity.svelte';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';
 
@@ -100,7 +94,7 @@
     </thead>
     <tbody>
       {#each sortedData as item, i (item)}
-        <TableContentSimilarityRow data={item} />
+        <TableRowContentSimilarity data={item} />
       {/each}
     </tbody>
   </table>

@@ -1,20 +1,21 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { unsetLoading } from '$stores/loading.ts';
-  import DownloadMetaResult from '$components/DownloadMetaResult.svelte';
+  import {type TableRowTechnicalSimilarityData } from '$components/TableTechnicalSimilarity.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
   import InputFile from '$components/InputFile.svelte';
   import Button from '$components/Button.svelte';
   import Form from '$components/Form.svelte';
-  import TableMeta from '$components/TableMeta.svelte';
+  import TableTechnicalSimilarity from '$components/TableTechnicalSimilarity.svelte';
+  import DownloadTechnicalSimilarityResult from '$components/DownloadTechnicalSimilarityResult.svelte';
   import H4 from '$components/H4.svelte';
   import Link from '$components/Link.svelte';
   import P from '$components/P.svelte';
   import Separator from '$components/Separator.svelte';
   import { TABLE_METADATA_HEADER } from '$config';
-  import { FormOrientation, type TableMetaRowData } from '$models';
+  import { FormOrientation } from '$components/Form.svelte';
   import { handleApiSubmit } from '$api';
   import { metadataStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
@@ -24,7 +25,7 @@
 
   // variable bound to TableMeta components's sorted data
   // used for exporting the Table data to files
-  let tableData: TableMetaRowData[] = [];
+  let tableData: TableRowTechnicalSimilarityData[] = [];
 
   $: metadataSearchData = $metadataStore
     ? {
@@ -54,7 +55,7 @@
     {/if}
 
     <Separator />
-    <DownloadMetaResult data={tableData} />
+    <DownloadTechnicalSimilarityResult data={tableData} />
     <Separator />
 
     <P
@@ -113,7 +114,7 @@
     </div>
     <div class="flex flex-1">
       {#if metadataSearchData}
-        <TableMeta
+        <TableTechnicalSimilarity
           class="flex-1"
           data={metadataSearchData}
           bind:sortedRows={tableData}

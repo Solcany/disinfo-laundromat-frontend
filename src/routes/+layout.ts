@@ -1,21 +1,26 @@
 import type { LayoutLoad } from './$types';
 import { error, type NumericRange } from '@sveltejs/kit';
+
 import {
   QueryType,
   Endpoint,
+  type ApiResponse, 
+  queryApi,
+} from '$api';
+
+import {
+  InputType,
+  type InputConfig,
+  type InputTypeWithData,
+} from '$components/Form.svelte';
+
+import {
+  type LabeledValue,
+} from '$types';
+
+import {
   RemoteConfigFlag,
   RemoteConfigFlagData,
-  InputType,
-  type LabeledValue,
-  type InputConfig,
-  type InputTypeWithData
-} from '$models';
-
-import {
-  type ApiResponse,
-  queryApi } from '$api';
-
-import {
   CONTENT_SIMILARITY_BASIC_FORM_CONFIG,
   CONTENT_SIMILARITY_ADVANCED_FORM_CONFIG,
   METADATA_SIMILARITY_BASIC_FORM_CONFIG,

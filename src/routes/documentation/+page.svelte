@@ -8,7 +8,7 @@
   import H5 from '$components/H5.svelte';
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
-  import type { ApiIndicatorsData } from '$models';
+  import { type ApiIndicatorsData } from '$types';
   export let data;
   let indicatorMetadata: Pick<ApiIndicatorsData, 'indicator_metadata'>;
   $: indicatorMetadata = data.indicatorMetadata;

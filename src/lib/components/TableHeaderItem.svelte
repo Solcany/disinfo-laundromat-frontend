@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ArrowUp, ArrowDown } from 'phosphor-svelte';
-  import { type TableHeaderItemData, TableHeaderItemType, SortDirection } from '$models';
+  import { type TableHeaderItemData, TableHeaderItemType, SortDirection } from '$types';
   import { cn } from '$utils';
   import Button from '$components/Button.svelte';
   import Tooltip from '$components/Tooltip.svelte';

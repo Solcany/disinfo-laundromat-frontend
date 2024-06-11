@@ -1,5 +1,6 @@
 import type { Cookies } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
+export type GDPRConsent = 'accepted' | 'rejected' | undefined;
 
 export const POST = async ({ request, cookies }: { request: Request; cookies: Cookies }) => {
   try {

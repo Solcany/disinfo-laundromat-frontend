@@ -1,3 +1,104 @@
+<script context="module" lang="ts">
+  import { type LabeledValue } from '$types';
+  import { type ApiQuery } from '$api';
+  import { type RemoteConfigFlag } from '$config';
+
+  export enum FormOrientation {
+    Horizontal = 'horizontal',
+    Vertical = 'vertical'
+  }
+
+  export enum InputType {
+    Dropdown,
+    Text,
+    TextArea,
+    Checkbox,
+    CheckboxGroup,
+    Hidden
+  }
+
+  type InputTextConfig = {
+    type: InputType.Text;
+    name: string;
+    label: string;
+    placeholder: string;
+    required: boolean;
+    value?: string;
+    submitQuery?: ApiQuery;
+    tooltip?: string;
+  }
+
+  type InputTextAreaConfig = {
+    type: InputType.TextArea;
+    name: string;
+    label: string;
+    placeholder: string;
+    required: boolean;
+    value?: string;
+    submitQuery?: ApiQuery;
+    tooltip?: string;
+  }
+
+  type InputDropdownConfig = {
+    type: InputType.Dropdown;
+    name: string;
+    label: string;
+    placeholder: string;
+    required: boolean;
+    data: undefined | LabeledValue[];
+    requiresRemoteData?: RemoteConfigFlag;
+    value?: LabeledValue;
+    submitQuery?: ApiQuery;
+    tooltip?: string;
+  }
+
+  type InputCheckboxConfig = {
+    type: InputType.Checkbox;
+    name: string;
+    label: string;
+    required: boolean;
+    checked: boolean;
+    value: string;
+    submitQuery?: ApiQuery;
+    tooltip?: string;
+  }
+
+  type InputCheckboxGroupConfig = {
+    type: InputType.CheckboxGroup;
+    name: string;
+    label: string;
+    placeholder: string;
+    required: boolean;
+    data: undefined | LabeledValue[];
+    checked?: string[] | LabeledValue[];
+    requiresRemoteData?: RemoteConfigFlag;
+    variant?: 'horizontal' | 'vertical';
+    value?: LabeledValue;
+    submitQuery?: ApiQuery;
+    tooltip?: string;
+  }
+
+  type InputHiddenConfig = {
+    type: InputType.Hidden;
+    name: string;
+    requiresRemoteData?: RemoteConfigFlag;
+    value?: string | number | boolean;
+    // WIP this should be removed for the this type
+    // but for some reason TS complains about its absence in the Form comp
+    submitQuery?: ApiQuery;
+  }
+
+  export type InputConfig =
+    | InputTextConfig
+    | InputTextAreaConfig
+    | InputDropdownConfig
+    | InputCheckboxConfig
+    | InputCheckboxGroupConfig
+    | InputHiddenConfig;
+
+  export type InputTypeWithData = InputDropdownConfig | InputHiddenConfig;
+</script>
+
 <script lang="ts">
   import DropdownSelect from '$components/DropdownSelect.svelte';
   import DropdownSelectItem from '$components/DropdownSelectItem.svelte';
@@ -8,7 +109,7 @@
   import InputCheckbox from '$components/InputCheckbox.svelte';
   import InputCheckboxGroup from '$components/InputCheckboxGroup.svelte';
   import { ArrowRight } from 'phosphor-svelte';
-  import { type InputConfig, InputType, FormOrientation, Endpoint, QueryType } from '$models';
+  import { Endpoint, QueryType } from '$api';
   export let config: InputConfig[];
   export let onSubmit: (event: Event, query: { type: QueryType; endpoint: Endpoint }) => void;
   export let orientation: FormOrientation = FormOrientation.Vertical;

@@ -14,9 +14,7 @@
   import H4 from '$components/H4.svelte';
   import P from '$components/P.svelte';
   import Link from '$components/Link.svelte';
-  import {
-    FormOrientation,
-  } from '$models';
+  import { FormOrientation } from '$components/Form.svelte';
   import { USE_CASE1_FORM_DATA, USE_CASE2_FORM_DATA, USE_CASE3_FORM_DATA } from '$config';
   import { objectToFormData, scrollToElementYCenter } from '$utils';
   import { handleApiSubmit } from '$api';

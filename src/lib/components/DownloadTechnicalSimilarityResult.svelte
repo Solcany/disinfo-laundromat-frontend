@@ -1,9 +1,9 @@
 <script lang="ts">
   import Button from '$components/Button.svelte';
-  import { type TableMetaRowData } from '$models';
-  export let data: TableMetaRowData[];
+  import { type TableRowTechnicalSimilarityData } from '$components/TableTechnicalSimilarity.svelte';
+  export let data: TableRowTechnicalSimilarityData[];
 
-  function convertToCSV(data: TableMetaRowData[]): string {
+  function convertToCSV(data: TableRowTechnicalSimilarityData[]): string {
     // Object to hold the mapping from type to column index
     const typeToIndex: { [type: string]: number } = {};
     // The final CSV rows, starting with the headers

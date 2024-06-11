@@ -19,7 +19,7 @@ const config = {
       $api: 'src/lib/api.ts',
       $form: 'src/lib/form.ts',
       $utils: 'src/lib/utils.ts',
-      $models: 'src/lib/models.ts',
+      $types: 'src/lib/types.ts',
       $config: 'src/appConfig.ts',
       $stores: 'src/lib/stores'
     }
