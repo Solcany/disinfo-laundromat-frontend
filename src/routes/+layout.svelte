@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte'; 
   import type { LayoutData } from './$types';
   import '../styles/app.pcss';
   import '../styles/fonts.css';
@@ -9,8 +10,13 @@
   import ProgressBar from '$components/ProgressBar.svelte';
   import GDPRDialog from '$components/GDPRDialog.svelte';
   export let data: LayoutData;
+  let mounted = false; 
 
-  $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected';
+  $: showGDPR = data.gdpr_consent !== 'accepted' && data.gdpr_consent !== 'rejected' && mounted;
+
+  onMount(() => {
+    mounted = true;
+  })
 </script>
 
 <main class="border-box relative flex min-h-screen w-full flex-col bg-white dark:bg-gray6">
