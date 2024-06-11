@@ -3,7 +3,7 @@
   import { type ContentSearchResult } from '$api';
   import { unsetLoading } from '$stores/loading.ts';
   import { handleApiSubmit } from '$api';
-  import { contentStore } from '$stores/apiData.ts';
+  import { contentSimilarityStore } from '$stores/apiData.ts';
   import { contentFormDataStore } from '$stores/input.ts';
   import DownloadResult from '$components/DownloadResult.svelte';
   import Dialog from '$components/Dialog.svelte';
@@ -26,7 +26,7 @@
   let tableData: ContentSearchResult[] = [];
 
   $: formConfig = data.contentAdvancedFormConfig;
-  $: contentSearchData = $contentStore ? $contentStore.results : null;
+  $: contentSimilarityData = $contentSimilarityStore ? $contentSimilarityStore.results : null;
   onDestroy(() => {
     unsetLoading();
   });
@@ -99,9 +99,9 @@
     {/if}
 
     <div class="flex flex-1">
-      {#if contentSearchData}
+      {#if contentSimilarityData}
         <TableContentSimilarity
-          data={contentSearchData}
+          data={contentSimilarityData}
           bind:sortedData={tableData}
           class="flex-1"
         />

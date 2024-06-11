@@ -19,7 +19,6 @@
   import { objectToFormData, scrollToElementYCenter } from '$utils';
   import { handleApiSubmit } from '$api';
   import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
-  import { contentStore, metadataStore } from '$stores/apiData.ts';
 
   type TabKind = 'content similarity' | 'technical similarity';
 

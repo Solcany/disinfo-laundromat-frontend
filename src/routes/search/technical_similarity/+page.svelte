@@ -17,7 +17,7 @@
   import { TABLE_TECHNICAL_SIMILARITY_HEADER } from '$config';
   import { FormOrientation } from '$components/Form.svelte';
   import { handleApiSubmit } from '$api';
-  import { metadataStore } from '$stores/apiData.ts';
+  import { technicalSimilarityStore } from '$stores/apiData.ts';
   import { metadataFormDataStore } from '$stores/input.ts';
 
   // layout & page data
@@ -27,11 +27,11 @@
   // used for exporting the Table data to files
   let tableData: TableRowTechnicalSimilarityData[] = [];
 
-  $: metadataSearchData = $metadataStore
+  $: technicalSimilarityData = $technicalSimilarityStore
     ? {
-        indicators: $metadataStore.indicators,
-        matches: $metadataStore.matches,
-        indicator_metadata: $metadataStore.indicator_metadata
+        indicators: $technicalSimilarityStore.indicators,
+        matches: $technicalSimilarityStore.matches,
+        indicator_metadata: $technicalSimilarityStore.indicator_metadata
       }
     : null;
   onDestroy(() => {
@@ -76,10 +76,10 @@
       {/if}
     </div>
     <div class="flex flex-1">
-      {#if metadataSearchData}
+      {#if technicalSimilarityData}
         <TableTechnicalSimilarity
           class="flex-1"
-          data={metadataSearchData}
+          data={technicalSimilarityData}
           bind:sortedRows={tableData}
           headerData={TABLE_TECHNICAL_SIMILARITY_HEADER}
         />
