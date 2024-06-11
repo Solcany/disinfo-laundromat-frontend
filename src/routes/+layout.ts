@@ -62,7 +62,8 @@ function enhanceFormConfig(
 ) {
   return config.map((item) => {
     if (doesInputRequireRemoteData(item)) {
-      const { key, defaultKey } = REMOTE_CONFIG_FLAG_DATA[item.requiresRemoteData as RemoteConfigFlag];
+      const { key, defaultKey } =
+        REMOTE_CONFIG_FLAG_DATA[item.requiresRemoteData as RemoteConfigFlag];
 
       if (key && apiConfigData[key]) {
         const newData = configToLabeledValues(apiConfigData[key]);

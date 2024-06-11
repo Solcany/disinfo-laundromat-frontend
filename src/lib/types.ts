@@ -1,5 +1,5 @@
 /* 
-  global types
+  Global types
 */
 
 export type LabeledValue = {

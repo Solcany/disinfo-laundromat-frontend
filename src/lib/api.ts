@@ -1,21 +1,9 @@
 import { goto } from '$app/navigation';
-import { 
-  API_URL, 
-  Endpoint 
-} from '$config';
+import { API_URL, Endpoint } from '$config';
 import { QueryType } from '$types';
-import { 
-  setLoading, 
-  unsetLoading 
-} from '$stores/loading.ts';
-import { 
-  technicalSimilarityStore, 
-  contentSimilarityStore 
-} from '$stores/apiData.ts';
-import { 
-  contentSimilarityFormDataStore, 
-  technicalSimilarityFormDataStore
-} from '$stores/input.ts';
+import { setLoading, unsetLoading } from '$stores/loading.ts';
+import { technicalSimilarityStore, contentSimilarityStore } from '$stores/apiData.ts';
+import { contentSimilarityFormDataStore, technicalSimilarityFormDataStore } from '$stores/input.ts';
 
 export type ApiQuery = {
   type: QueryType;

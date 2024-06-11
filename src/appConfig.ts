@@ -2,7 +2,6 @@ import { type LabeledValue, type DomainAssociation } from '$types';
 
 import { type TableHeaderItemData, TableHeaderItemType } from '$components/TableHeaderItem.svelte';
 
-
 import { QueryType } from '$types';
 
 import { InputType, type InputConfig } from '$components/Form.svelte';
@@ -42,9 +41,8 @@ export const TABLE_CONTENT_SIMILARITY_MAIN_ROW: TableHeaderItemData[] = [
   { label: 'Similarity Score', key: 'score', type: TableHeaderItemType.Number },
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String }
 ];
-export const TABLE_CONTENT_SIMILARITY_MAIN_ROW_KEYS: string[] = TABLE_CONTENT_SIMILARITY_MAIN_ROW.map(
-  (item) => item.key
-);
+export const TABLE_CONTENT_SIMILARITY_MAIN_ROW_KEYS: string[] =
+  TABLE_CONTENT_SIMILARITY_MAIN_ROW.map((item) => item.key);
 
 export const TABLE_CONTENT_SIMILARITY_COMPLEMENTARY_ROW: TableHeaderItemData[] = [
   { label: 'Similar Content', key: 'snippet', tooltip: '', type: TableHeaderItemType.String },

@@ -35,7 +35,11 @@
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
-      <Form config={formConfig} formData={$contentSimilarityFormDataStore} onSubmit={handleApiSubmit} />
+      <Form
+        config={formConfig}
+        formData={$contentSimilarityFormDataStore}
+        onSubmit={handleApiSubmit}
+      />
     {/if}
 
     <Separator />

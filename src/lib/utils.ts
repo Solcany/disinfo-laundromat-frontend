@@ -6,13 +6,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
 export function getPathRoot(path: string): string {
   const segments = path.split('/');
   const root = segments[1];
   return '/' + root;
 }
-
 
 export function domainToUrl(domain: string) {
   if (!domain.startsWith('http://') && !domain.startsWith('https://')) {
