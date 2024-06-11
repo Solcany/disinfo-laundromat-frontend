@@ -13,8 +13,8 @@ import {
   contentSimilarityStore 
 } from '$stores/apiData.ts';
 import { 
-  contentFormDataStore, 
-  metadataFormDataStore
+  contentSimilarityFormDataStore, 
+  technicalSimilarityFormDataStore
 } from '$stores/input.ts';
 
 export type ApiQuery = {
@@ -97,12 +97,12 @@ export async function handleApiSubmit(event: Event, query: ApiQuery) {
   } else {
     if (response.data) {
       if (query.endpoint === Endpoint.Content) {
-        contentFormDataStore.set(formData);
+        contentSimilarityFormDataStore.set(formData);
         unsetLoading();
         contentSimilarityStore.set(response.data as ApiContentSearchResponseData);
         if (query.route) goto(query.route);
       } else if (query.endpoint === Endpoint.Fingerprint) {
-        metadataFormDataStore.set(formData);
+        technicalSimilarityFormDataStore.set(formData);
         unsetLoading();
         technicalSimilarityStore.set(response.data as ApiFingerprintResponseData);
         if (query.route) goto(query.route);

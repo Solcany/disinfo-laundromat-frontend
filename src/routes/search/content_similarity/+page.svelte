@@ -4,7 +4,7 @@
   import { unsetLoading } from '$stores/loading.ts';
   import { handleApiSubmit } from '$api';
   import { contentSimilarityStore } from '$stores/apiData.ts';
-  import { contentFormDataStore } from '$stores/input.ts';
+  import { contentSimilarityFormDataStore } from '$stores/input.ts';
   import DownloadResult from '$components/DownloadResult.svelte';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
@@ -35,7 +35,7 @@
 <div class="grid w-full flex-grow grid-cols-1 bg-gray4 md:grid-cols-12 dark:bg-gray7">
   <section class="col-span-3 w-full border-r-[1px] border-gray5 bg-gray7 px-3">
     {#if formConfig}
-      <Form config={formConfig} formData={$contentFormDataStore} onSubmit={handleApiSubmit} />
+      <Form config={formConfig} formData={$contentSimilarityFormDataStore} onSubmit={handleApiSubmit} />
     {/if}
 
     <Separator />
@@ -52,6 +52,9 @@
       > to see what’s possible</P
     >
     <!--
+
+    WIP: Upload CSV 
+
     <Dialog let:C>
       <C.Trigger>Batch parse</C.Trigger>
       <C.Portal>
@@ -80,6 +83,8 @@
 
     <h2>Refine Result</h2>
 
+    WIP: Download result as csv 
+
     <Button on:click={() => {}} ariaLabel="Open select metadata modal">Filter Metadata</Button>
     <div>
       <Label for="filter_result">Filter Result</Label>
@@ -90,10 +95,10 @@
     -->
   </section>
   <section class="col-span-9 col-start-auto flex w-full flex-col border-t-[1px] border-gray5">
-    {#if $contentFormDataStore?.has('contentToSearch')}
+    {#if $contentSimilarityFormDataStore?.has('contentToSearch')}
       <div>
         <span class="block border-b-[1px] border-gray5 py-2 pl-2 text-xs dark:text-white">
-          Results for: {$contentFormDataStore.get('contentToSearch')}</span
+          Results for: {$contentSimilarityFormDataStore.get('contentToSearch')}</span
         >
       </div>
     {/if}

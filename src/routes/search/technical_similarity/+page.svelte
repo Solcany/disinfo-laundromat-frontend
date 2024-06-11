@@ -2,6 +2,11 @@
   import { onDestroy } from 'svelte';
   import { unsetLoading } from '$stores/loading.ts';
   import { type TableRowTechnicalSimilarityData } from '$components/TableTechnicalSimilarity.svelte';
+  import { TABLE_TECHNICAL_SIMILARITY_HEADER } from '$config';
+  import { FormOrientation } from '$components/Form.svelte';
+  import { handleApiSubmit } from '$api';
+  import { technicalSimilarityStore } from '$stores/apiData.ts';
+  import { technicalSimilarityFormDataStore } from '$stores/input.ts';
   import Dialog from '$components/Dialog.svelte';
   import Label from '$components/Label.svelte';
   import InputText from '$components/InputText.svelte';
@@ -14,11 +19,6 @@
   import Link from '$components/Link.svelte';
   import P from '$components/P.svelte';
   import Separator from '$components/Separator.svelte';
-  import { TABLE_TECHNICAL_SIMILARITY_HEADER } from '$config';
-  import { FormOrientation } from '$components/Form.svelte';
-  import { handleApiSubmit } from '$api';
-  import { technicalSimilarityStore } from '$stores/apiData.ts';
-  import { metadataFormDataStore } from '$stores/input.ts';
 
   // layout & page data
   export let data;
@@ -48,7 +48,7 @@
     {#if data.metadataAdvancedFormConfig}
       <Form
         config={data.metadataAdvancedFormConfig}
-        formData={$metadataFormDataStore}
+        formData={$technicalSimilarityFormDataStore}
         onSubmit={handleApiSubmit}
         orientation={FormOrientation.Vertical}
       />
@@ -69,9 +69,9 @@
   </section>
   <section class="col-span-9 col-start-auto flex w-full flex-col border-t-[1px] border-gray5">
     <div>
-      {#if $metadataFormDataStore?.has('url')}
+      {#if $technicalSimilarityFormDataStore?.has('url')}
         <span class="block border-b-[1px] border-gray5 py-2 pl-4 text-xs dark:text-white">
-          Results for: {$metadataFormDataStore.get('url')}</span
+          Results for: {$technicalSimilarityFormDataStore.get('url')}</span
         >
       {/if}
     </div>

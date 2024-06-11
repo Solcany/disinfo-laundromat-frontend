@@ -18,7 +18,6 @@
   import { USE_CASE1_FORM_DATA, USE_CASE2_FORM_DATA, USE_CASE3_FORM_DATA } from '$config';
   import { objectToFormData, scrollToElementYCenter } from '$utils';
   import { handleApiSubmit } from '$api';
-  import { contentFormDataStore, metadataFormDataStore } from '$stores/input';
 
   type TabKind = 'content similarity' | 'technical similarity';
 
@@ -27,8 +26,8 @@
   let tabsContainerElement: HTMLElement;
   let areTabsHighlighted: boolean = false;
   let isMounted: boolean = false;
-  let contentFormData = new FormData();
-  let metadataFormData = new FormData();
+  let contentSimilarityFormData = new FormData();
+  let technicalSimilarityFormData = new FormData();
 
   $: contentBasicFormConfig = data.contentBasicFormConfig;
   $: metadataBasicFormConfig = data.metadataBasicFormConfig;
@@ -41,12 +40,12 @@
     store.set(data);
   }
 
-  function setContentFormData(newData: FormData) {
-    contentFormData = newData;
+  function setContentSimilarityFormData(newData: FormData) {
+    contentSimilarityFormData = newData;
   }
 
-  function setMetadataFormData(newData: FormData) {
-    metadataFormData = newData;
+  function setTechnicalSimilarityFormData(newData: FormData) {
+    technicalSimilarityFormData = newData;
   }
 
   function highlightTabs() {
@@ -59,9 +58,9 @@
 
   function setUpCaseStudy(formData: FormData, tab: TabKind) {
     if (tab === 'content similarity') {
-      setContentFormData(formData);
+      setContentSimilarityFormData(formData);
     } else if (tab === 'technical similarity') {
-      setMetadataFormData(formData);
+      setTechnicalSimilarityFormData(formData);
     }
     setActiveTab(tab);
     highlightTabs();
@@ -123,7 +122,7 @@
           {#if contentBasicFormConfig}
             <Form
               config={contentBasicFormConfig}
-              formData={contentFormData}
+              formData={contentSimilarityFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
@@ -141,7 +140,7 @@
           {#if metadataBasicFormConfig}
             <Form
               config={metadataBasicFormConfig}
-              formData={metadataFormData}
+              formData={technicalSimilarityFormData}
               onSubmit={handleApiSubmit}
               orientation={FormOrientation.Horizontal}
             />
